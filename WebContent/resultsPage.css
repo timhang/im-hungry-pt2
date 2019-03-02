@@ -26,6 +26,10 @@ body {
     height: 150px;
 }
 
+table, th{
+	width: 50%;
+}
+
 tr:nth-child(even) {
     background-color: #C4C4C4;
 }

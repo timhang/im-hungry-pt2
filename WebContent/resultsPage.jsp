@@ -34,8 +34,8 @@
 		<div class="resultsTable" align="center">
 			<table style="width:100%">
 				<tr>
-					<th>Restauraunt</th>
-					<th>Recipe</th>
+					<th style="font-size: 30px;">Restauraunt</th>
+					<th style="font-size: 30px;">Recipe</th>
 				</tr>
 				<tr>
 				    <td>Blaze Pizza</td>
