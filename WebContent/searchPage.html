@@ -24,7 +24,10 @@
 		<script>
 			function myFunction() {
 			  	document.getElementById("demo").innerHTML = String.fromCodePoint(0x1F600);
-				window.location.href = 'resultsPage.jsp';
+			  	var searchText = document.getElementById('searchText').value;
+			  	sessionStorage.setItem('searchText',searchText);
+			  	
+			  	window.location.href = 'resultsPage.jsp';
 			}
 		</script>
 	</body>

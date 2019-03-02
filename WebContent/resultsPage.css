@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: #F5F5F5;
+}
+
+#title {
+	text-align: center;
+}
+
+.resultsTable {
+	align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #C4C4C4;
+}
