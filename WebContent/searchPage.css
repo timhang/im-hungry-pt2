@@ -10,7 +10,9 @@ body {
 }
 
 #feedMeButton {
-	padding: 0;
+	font-size: 35px;
+	letter-spacing: -2px;
+	padding: 20px 0;
 	border: none;
 	background: none;
 	
