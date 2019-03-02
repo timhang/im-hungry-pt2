@@ -10,12 +10,28 @@
 	</head>
 	
 	<body>
+		
+		<div class="boxed">
+			Photo collage
+		</div>
+		<div class="dropdown">
+			<select>
+			  <option></option>
+			  <option value="favorites">Favorites</option>
+			  <option value="toExplore">To Explore</option>
+			  <option value="doNotShow">Do Not Show</option>
+			</select>
+		</div></br>
+		<button onclick="manageList()">Manage List</button></br>
+		<button onclick="returnToSearch()">Return to Search Page</button>
+	
+		
 		<h1 id="title">Results For "<span id="searchText"></span>"</h1>
 		<script type='text/javascript'>
 			document.getElementById('searchText').innerHTML = sessionStorage.getItem('searchText');
 		</script>
 		
-		<div align="center">
+		<div class="resultsTable" align="center">
 			<table style="width:100%">
 				<tr>
 					<th>Restauraunt</th>
@@ -33,14 +49,29 @@
 				    <td>Meat Love</td>
 				    <td>Korean Barbeque</td>
 				</tr>
+				<tr>
+				    <td>Filler</td>
+				    <td>Filler</td>
+				</tr>
+				<tr>
+				    <td>Filler</td>
+				    <td>Filler</td>
+				</tr>
+				<tr>
+				    <td>Filler</td>
+				    <td>Filler</td>
+				</tr>
+				<tr>
+				    <td>Filler</td>
+				    <td>Filler</td>
+				</tr>
+				<tr>
+				    <td>Filler</td>
+				    <td>Filler</td>
+				</tr>
 			</table>
 		
-		</div>
-		
-		
-			<button onclick="manageList()">Manage List</button>
-			<button onclick="returnToSearch()">Return to Search Page</button>
-	
+		</div>	
 	
 		<script>
 			function returnToSearch() {

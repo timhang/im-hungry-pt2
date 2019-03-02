@@ -4,12 +4,26 @@ body {
 	background-color: #F5F5F5;
 }
 
+.boxed {
+	box-sizing: border-box;
+	border: 2px solid black;
+	display: inline-block;
+	width: 60%;
+	height: 200px;
+}
+
+.dropdown {
+	display: inline-block;
+}
+
 #title {
 	text-align: center;
 }
 
 .resultsTable {
-	align: center;
+	overflow:hidden;
+    overflow-y: scroll;
+    height: 150px;
 }
 
 tr:nth-child(even) {
