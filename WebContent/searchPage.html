@@ -13,7 +13,7 @@
 	
 		<div class="userInput"> 
 	    	<input id="searchText" name="searchText" type="text" placeholder="Enter Food" style="width: 150px; height: 20px">	
-	    	<input type="number" title="Number of items to show in results" name="numberType" id="numberType" value="5" min="1" style="width: 30px; height: 20px">
+	    	<input id="integerBox" title="Number of items to show in results" name="numberType" id="numberType" value="5" min="1" style="width: 30px; height: 20px">
 	   	 </div>
 	    
 	    <div class = "wrapper">
@@ -30,6 +30,24 @@
 			  	
 			  	window.location.href = 'resultsPage.jsp';
 			}
+			setInputFilter(document.getElementById("integerBox"), function(value) {
+				  return /^\d*$/.test(value);
+				});
+			function setInputFilter(textbox, inputFilter) {
+				  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+				    textbox.addEventListener(event, function() {
+				      if (inputFilter(this.value)) {
+				        this.oldValue = this.value;
+				        this.oldSelectionStart = this.selectionStart;
+				        this.oldSelectionEnd = this.selectionEnd;
+				      } else if (this.hasOwnProperty("oldValue")) {
+				        this.value = this.oldValue;
+				        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+				      }
+				    });
+				  });
+				}
+			
 		</script>
 		
 	</body>
