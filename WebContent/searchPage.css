@@ -1,6 +1,16 @@
 @charset "ISO-8859-1";
 
-body{
+body {
 	background-color: #F5F5F5;
+}
+
+#feedMeButton {
+	padding: 0;
+	border: none;
+	background: none;
+}
+
+.userInput{
+	text-align: center;
 }
 
