@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Search Page</title>
+		<link rel="stylesheet" type="text/css" href="searchPage.css" />
+	</head>
+	
+	<body>
+		<h1 class="title"> I'm Hungry </h1>
+	
+		<div class="userInput"> 
+	    	<input id="searchText" name="searchText" type="text" placeholder="Enter Food" style="width: 150px; height: 20px">	
+	    	<input type="number" title="Number of items to show in results" name="numberType" id="numberType" value="5" min="1" style="width: 30px; height: 20px">
+	   	 </div>
+	    
+	    <div class = "wrapper">
+	    	<button id="feedMeButton" onclick="myFunction()"><span class="rainbow">Feed Me!</span></button>
+			<p id="demo">
+				&#x2639
+			</p>
+		</div>
+		
+		<script>
+			function myFunction() {
+			  	document.getElementById("demo").innerHTML = String.fromCodePoint(0x1F600);
+				window.location.href = 'resultsPage.jsp';
+			}
+		</script>
+	</body>
+</html>
