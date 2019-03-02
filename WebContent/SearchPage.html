@@ -6,7 +6,31 @@
 </head>
 <body>
 <h1>
-	Hello!
+	I'm Hungry
 </h1>
+
+<div class="col-sm-5 text-left"> 
+      		<input id="searchText" name="searchText" type="text" placeholder="Enter Food"><br/>
+      	</div> 
+      	<div class="col-sm-1 text-left">
+      		<select name="searchType" id="searchType" style="height: 30px">
+			  <option value="1">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+      	</div>
+<button onclick="myFunction()">Search</button>
+
+<p id="demo">
+	&#x1F643
+</p>
+
+<script>
+function myFunction() {
+  document.getElementById("demo").innerHTML = String.fromCodePoint(0x1F600);;
+}
+</script>
 </body>
 </html>
