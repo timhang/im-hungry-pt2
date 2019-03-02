@@ -15,11 +15,15 @@
 	<div class="col-sm-2 text-right">
 		<h2>Recipe</h2>
 	</div>
-	<button onclick="myFunction()">Return to Search Page</button>
+	<button onclick="manageList()">Manage List</button>
+	<button onclick="returnToSearch()">Return to Search Page</button>
 	</div>
 
 <script>
-function myFunction() {
+function returnToSearch() {
+	window.location.href = 'http://localhost:8080/ImHungry/SearchPage.html';
+	}
+function manageList() {
 	window.location.href = 'http://localhost:8080/ImHungry/SearchPage.html';
 	}
 </script>
