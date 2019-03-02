@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Results Page</title>
+		<link rel="stylesheet" href="css/boostrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="resultsPage.css" />
 	</head>
 	
