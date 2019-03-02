@@ -10,7 +10,10 @@ body {
 	background: none;
 }
 
-.userInput{
+.userInput {
 	text-align: center;
 }
 
+.wrapper {
+	text-align: center;
+}
