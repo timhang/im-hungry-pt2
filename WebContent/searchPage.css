@@ -12,10 +12,18 @@ body {
 #feedMeButton {
 	font-size: 35px;
 	letter-spacing: -2px;
-	padding: 20px 0;
+	padding: 60px 20px;
 	border: none;
-	background: none;
+	background: url(images/grumpy.png) no-repeat;
 	
+}
+
+#smiley{
+	font-size: 35px;
+	letter-spacing: -2px;
+	padding: 60px 20px;
+	border: none;
+    background: url(images/smiley.png) no-repeat;
 }
 
 .userInput {
@@ -28,6 +36,7 @@ body {
 }
 
 .rainbow {
+  
   background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
   background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
   color:transparent;

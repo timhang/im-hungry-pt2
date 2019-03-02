@@ -5,7 +5,7 @@
 		<title>Search Page</title>
 		<link rel="stylesheet" href="css/boostrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="searchPage.css" />
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	</head>
 	
 	<body>
@@ -17,20 +17,20 @@
 	   	 </div>
 	    
 	    <div class = "wrapper">
-	    	<button id="feedMeButton" class = "btn btn-primary" onclick="myFunction()"><span class="rainbow">Feed Me!</span></button>
-			<p id="demo">
-				<img src="images/grumpy.png" id = "emoji" class="img-rounded" />
-			</p>
+	    	<button id="feedMeButton" onclick="myFunction()"><span class="rainbow">Feed Me!</span></button>
+			
 		</div>
 		
 		<script>
 			function myFunction() {
-			  	document.getElementById("emoji").src = "images/smiley.png";
+
+			  	document.getElementById('feedMeButton').setAttribute("id", "smiley");
 			  	var searchText = document.getElementById('searchText').value;
 			  	sessionStorage.setItem('searchText',searchText);
 			  	
 			  	window.location.href = 'resultsPage.jsp';
 			}
 		</script>
+		
 	</body>
 </html>
