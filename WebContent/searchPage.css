@@ -2,6 +2,7 @@
 
 body {
 	background-color: #F5F5F5;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
 
 .title {
@@ -42,4 +43,5 @@ body {
   color:transparent;
   -webkit-background-clip: text;
   background-clip: text;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
