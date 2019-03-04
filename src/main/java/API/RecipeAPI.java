@@ -55,9 +55,7 @@ public class RecipeAPI {
 	    con.disconnect();
 	    
 	    System.out.println("Output from Server .... \n");
-	    //System.out.println(output);
 
-		   //System.out.println(recipes.get(0));
 	    JSONArray results =  jsonObj.getJSONArray("results");
 	    String combinedIds = "";
 	    for(int i = 0; i< results.length() ;i ++) {
@@ -69,6 +67,7 @@ public class RecipeAPI {
 	    	}
 	    }
 	    
+	    //Using results for the previous call to get the bulk recipe information
 	    url = baseBulkUrl + combinedIds;
 	    obj = new URL(url);
 	    con = (HttpURLConnection) obj.openConnection();

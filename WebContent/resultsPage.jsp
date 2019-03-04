@@ -62,7 +62,7 @@
 			document.getElementById('searchText').innerHTML = sessionStorage.getItem('searchText');
 		</script>
 		
-		<div class = "resultsTable" align = "center">
+		<%-- <div class = "resultsTable" align = "center">
 			<table style="width:100%">
 				<tr>
 					<th style="font-size: 30px;">Restaurant</th>
@@ -90,9 +90,9 @@
 				}
 		       %>
 	       </table>
-		</div>
+		</div> --%>
 		
-		<!-- <div class="resultsTable" align="center">
+		<div class="resultsTable" align="center">
 			<table style="width:100%">
 				<tr>
 					<th style="font-size: 30px;">Restauraunt</th>
@@ -132,7 +132,7 @@
 				</tr>
 			</table>
 		
-		</div> -->	
+		</div>
 	
 		<script>		 
 			function returnToSearch() {
