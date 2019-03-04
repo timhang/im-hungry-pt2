@@ -8,7 +8,26 @@ import java.util.ArrayList;
 public class ImageAPI {
  private static final String apiKey="AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM";
  private static final String baseImageURL= "https://www.googleapis.com/customsearch/v1?key=AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM&cx=015413150496605702069:vfrlyji0v9m&searchType=image&callback=hndlr&q=";
-
+ private static Boolean state = false;
+ private static ArrayList<String> imageArray;
+ private static String searchTerm;
+ 
+ public static String getSearchTerm() {
+	 return searchTerm;
+ }
+ 
+public static ArrayList<String> getImageArray(){
+	return imageArray;
+}
+ 
+ public static Boolean getState() {
+	 return state;
+ }
+ 
+ public static void setState(Boolean called) {
+	 state = called;
+ }
+ 
  public static ArrayList<String> call_me(String query) throws Exception {
 
 
@@ -32,7 +51,8 @@ public class ImageAPI {
 	        }     
 	    }
 	    conn.disconnect(); 
-
+	    searchTerm = query;
+	    imageArray = arr;
 	    return arr;
     }
  

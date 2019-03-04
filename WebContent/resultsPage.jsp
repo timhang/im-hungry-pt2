@@ -28,9 +28,19 @@
 		</div>
 		<div class = boxed>
 		<%
-    	ArrayList<String> imgArr = ImageAPI.call_me(request.getParameter("searchText"));
-    	System.out.println(request.getParameter("numberType"));
-    	for (int i = 0; i < imgArr.size(); i++) {
+		if(request.getParameter("searchText") != ImageAPI.getSearchTerm()){
+			ImageAPI.setState(false);
+		}
+		ArrayList<String> imgArr;
+		if(ImageAPI.getState() == false){
+	    	imgArr = ImageAPI.call_me(request.getParameter("searchText"));
+	    	System.out.println(request.getParameter("numberType"));
+	    	ImageAPI.setState(true);
+		} else {
+			imgArr = ImageAPI.getImageArray();
+		}
+		
+		for (int i = 0; i < imgArr.size(); i++) {
 			
 			out.println("<img src = "+ imgArr.get(i)+" id = img1>");
     		
