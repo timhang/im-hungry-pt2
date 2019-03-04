@@ -24,16 +24,16 @@
 		<div id = "rightSide">
 			<div>
 				<div class="dropdown">
-					<select>
+					<select id="mySelect">
 					  <option></option>
-					  <option value="favorites">Favorites</option>
-					  <option value="toExplore">To Explore</option>
-					  <option value="doNotShow">Do Not Show</option>
+					  <option value="favorites.jsp">Favorites</option>
+					  <option value="toExplore.jsp">To Explore</option>
+					  <option value="doNotShow.jsp">Do Not Show</option>
 					</select>
 				</div>
 			</div>
 			<div>
-				<button onclick="manageList()">Manage List</button>
+				<button type="button" onclick="manageList()">Manage List</button>
 			</div>
 			<div>
 				<button onclick="returnToSearch()">Return to Search Page</button>
@@ -93,7 +93,16 @@
 				window.location.href = 'searchPage.html';
 			}
 			function manageList() {
-				window.location.href = 'searchPage.html';
+				var link = document.getElementById("mySelect").selectedIndex;
+				if(link == "1"){
+					window.location.href = 'favorites.jsp';
+				}	
+				else if(link == "2"){
+					window.location.href = 'toExplore.jsp';
+				}
+				else if(link == "3"){
+					window.location.href = 'doNotShow.jsp';
+				}
 			}
 		</script>
 	</body>
