@@ -18,11 +18,11 @@
 		  <div class="row">
 		    <div class="col-lg-8" style="background-color:lavender;">
 		    	<p>
-		    	<% 
+		    	<%-- <% 
 		    	out.println("ID: "+ RecipeAPI.getRecipeId().get(0).toString());
 		    	out.println("ID: "+ RecipeAPI.getRecipeId().get(1).toString());
 		    	out.println("</br>");
-		    	%>
+		    	%> --%>
 				</p></br>
 		    	<p>
 		    		Distance
