@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "API.*, java.util.*"%>
+    pageEncoding="UTF-8" import = "API.*, java.util.*, org.json.*, javax.servlet.http.HttpServlet, javax.servlet.http.HttpServletRequest"%>
     
 <!DOCTYPE html>
 <html>
@@ -62,7 +62,37 @@
 			document.getElementById('searchText').innerHTML = sessionStorage.getItem('searchText');
 		</script>
 		
-		<div class="resultsTable" align="center">
+		<div class = "resultsTable" align = "center">
+			<table style="width:100%">
+				<tr>
+					<th style="font-size: 30px;">Restaurant</th>
+					<th style="font-size: 30px;">Recipe</th>
+				</tr>
+				<%
+				
+		    	
+				HashMap<Integer, Recipe> allRecipes = RecipeAPI.call_me("burger",5);
+				
+				
+				ArrayList<Integer> recipeIds = RecipeAPI.getRecipeId();
+				
+		    	System.out.println(allRecipes.size());
+		    	
+		    	for (int i = 0; i < recipeIds.size(); i++) {
+					out.println("<tr>");
+					out.println("<td><a href= restPage.jsp>Blaze Pizza</a></td>");
+					out.println("<td><div>");
+					out.println("Name: " + allRecipes.get(recipeIds.get(i)).getName()+"</br>");
+					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</br>");
+					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"</br>");
+					out.println("</div></td>");
+					out.println("</tr>");
+				}
+		       %>
+	       </table>
+		</div>
+		
+		<!-- <div class="resultsTable" align="center">
 			<table style="width:100%">
 				<tr>
 					<th style="font-size: 30px;">Restauraunt</th>
@@ -102,7 +132,7 @@
 				</tr>
 			</table>
 		
-		</div>	
+		</div> -->	
 	
 		<script>		 
 			function returnToSearch() {

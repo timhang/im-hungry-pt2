@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "API.*, java.util.*, org.json.*, javax.servlet.http.HttpServlet, javax.servlet.http.HttpServletRequest"%>
     
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,11 @@
 		  <div class="row">
 		    <div class="col-lg-8" style="background-color:lavender;">
 		    	<p>
-		    		Title
+		    	<% 
+		    	out.println("ID: "+ RecipeAPI.getRecipeId().get(0).toString());
+		    	out.println("ID: "+ RecipeAPI.getRecipeId().get(1).toString());
+		    	out.println("</br>");
+		    	%>
 				</p></br>
 		    	<p>
 		    		Distance
