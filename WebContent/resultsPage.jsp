@@ -28,8 +28,8 @@
 		</div>
 		<div class = boxed>
 		<%
-    	ArrayList<String> imgArr = ImageAPI.call_me("burger");
-    	System.out.println(imgArr.get(0));
+    	ArrayList<String> imgArr = ImageAPI.call_me(request.getParameter("searchText"));
+    	System.out.println(request.getParameter("numberType"));
     	for (int i = 0; i < imgArr.size(); i++) {
 			
 			out.println("<img src = "+ imgArr.get(i)+" id = img1>");
