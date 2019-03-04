@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -24,6 +25,19 @@ public class RecipeAPI {
 //			e.printStackTrace();
 //		}
 //	}
+	public static void reRank() {
+		for(int i = 0; i < recipes.size(); i++) {
+			for(int j = i; j < recipes.size(); j++) {
+				if(allRecipes.get(recipes.get(j)).getPrepTime() < allRecipes.get(recipes.get(i)).getPrepTime()) {
+					Collections.swap(recipes, i, j);
+				}
+			}
+		}
+		for(int i = 0; i < recipes.size(); i++) {
+			System.out.println(i+". "+allRecipes.get(recipes.get(i)).getPrepTime());
+		}
+	}
+	
 	public static ArrayList<Integer> getRecipeId(){
 		return recipes;
 	}
@@ -161,6 +175,8 @@ public class RecipeAPI {
 	    	
 	    	
 	    }
+	    
+	    reRank();
 	    return allRecipes;
 
 
