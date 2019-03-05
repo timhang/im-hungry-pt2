@@ -71,7 +71,6 @@
 				<script type='text/javascript'>
 					document.getElementById('searchText').innerHTML = sessionStorage.getItem('searchText');
 				</script>
-				
 				<%-- <div class = "resultsTable" align = "center">
 					<table style="width:100%">
 						<tr>
