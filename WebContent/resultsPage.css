@@ -5,6 +5,11 @@ body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
 
+button, select {
+	font-size: 25px;
+	width: 45%;
+    height: 200%;
+}
 
 .boxed {
 	
@@ -13,12 +18,6 @@ body {
 	width: 70%;
 	height: 400px;
 }
-
-#rightSide{
-	
-	display: inline-block;
-}
-
 
 
 #title {

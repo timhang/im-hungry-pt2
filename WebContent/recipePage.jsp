@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Restaurant Page</title>
+		<title>Recipe Page</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -14,20 +14,46 @@
 	</head>
 	<body>
 		<div class="container-fluid">
-		 <h1 id="title">Blaze Pizza</h1></br>
+		 <h1 id="title">Kickin' Turkey Burger with Caramelized Onions and Spicy Sweet Mayo</h1></br>
 		  <div class="row">
 		    <div class="col-lg-8">
 		    	</br>
+		    	<img src="smiley.gif"></br>
 		    	<p>
-		    		3335 S Figueroa St, Los Angeles, CA 90007 
+		    		Prep time:
 				</p></br>
 		    	<p>
-		    		(213) 755 3223 
+		    		Cook time: 
 		    	</p></br>
-		    	<a href="www.blazepizza.com">www.blazepizza.com</a>
-		    	</br>
-
-		    
+		    	<p>
+		    		Ingredients:
+		    	</p></br>
+		    	<div class="row">
+				    <div class="col-lg-2">
+				    	<ul>
+						  <li>Coffee</li>
+						  <li>Tea</li>
+						  <li>Milk</li>
+						</ul>
+				    </div>
+				    <div class="col-lg-2">
+				    	<ul>
+						  <li>Coffee</li>
+						  <li>Tea</li>
+						  <li>Milk</li>
+						</ul>
+				    </div>
+				    <div class="col-lg-8">
+				    	
+				    </div>
+				</div>
+				<p>Instructions: </p>
+					<ol type="1">
+						<li>first</li>
+						<li>second</li>
+						<li>third</li>
+					</ol>
+				
 		    </div>
 		    <div class="col-lg-4">
 		    	<button onclick="printableView()">Printable View</button></br></br>
