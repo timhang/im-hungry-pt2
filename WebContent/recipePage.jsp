@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "API.*, java.util.*, org.json.*, javax.servlet.http.HttpServlet, javax.servlet.http.HttpServletRequest"%>
     
 <!DOCTYPE html>
 <html>
@@ -13,45 +13,79 @@
 	 	
 	</head>
 	<body>
+	<% 
+		int recipeId = Integer.valueOf(request.getParameter("recipeId"));
+		Recipe currRecipe = RecipeAPI.getRecipeMap().get(recipeId);
+		String name = currRecipe.getName();
+		String imageUrl = currRecipe.getImage();
+		int prepTime = 	currRecipe.getPrepTime();
+		int cookTime = 	currRecipe.getCookTime();
+		ArrayList<String> ingredients = currRecipe.getIngredients();
+		ArrayList<String> instructions = currRecipe.getInstructions();
+		
+	
+	%>
 		<div class="container-fluid">
 		 <h1 id="title">Kickin' Turkey Burger with Caramelized Onions and Spicy Sweet Mayo</h1></br>
 		  <div class="row">
 		    <div class="col-lg-8">
 		    	</br>
-		    	<img src="smiley.gif"></br>
+		    	<img src=<%= imageUrl %>></br>
 		    	<p>
-		    		Prep time:
+		    		Prep time: <%= prepTime %>
 				</p></br>
 		    	<p>
-		    		Cook time: 
+		    		Cook time: <%= cookTime %>
 		    	</p></br>
 		    	<p>
 		    		Ingredients:
 		    	</p></br>
-		    	<div class="row">
-				    <div class="col-lg-2">
-				    	<ul>
-						  <li>Coffee</li>
-						  <li>Tea</li>
-						  <li>Milk</li>
+		    	
+		    	
+				<div class="row">
+					<div class="col-lg-2">
+						<ul>
+							<%	
+								//First half of the ingredients list
+						    	for(int i = 0; i < ingredients.size()/2; i++) {
+						    	
+						    %>	    	
+								<li><%= ingredients.get(i) %></li>
+							<%
+		    				}
+							%>
 						</ul>
-				    </div>
-				    <div class="col-lg-2">
-				    	<ul>
-						  <li>Coffee</li>
-						  <li>Tea</li>
-						  <li>Milk</li>
+					</div>
+					<div class="col-lg-2">
+						<ul>
+							<%
+								//Second half of the ingredients list
+						    	for(int i = ingredients.size()/2; i < ingredients.size(); i++) {
+						    	
+						    %>	    	
+								<li><%= ingredients.get(i) %></li>
+							<%
+		    					}
+							%>
 						</ul>
-				    </div>
-				    <div class="col-lg-8">
-				    	
-				    </div>
+					</div>
+					<div class="col-lg-8">
+								    	
+					</div>
 				</div>
+							
+				
+				
 				<p>Instructions: </p>
 					<ol type="1">
-						<li>first</li>
-						<li>second</li>
-						<li>third</li>
+						<%	
+							//Instructions
+						    for(int i = 0; i < instructions.size(); i++) {	
+						%>
+							<li><%= instructions.get(i) %></li>
+						<%
+						 	}
+						%>
 					</ol>
 				
 		    </div>
