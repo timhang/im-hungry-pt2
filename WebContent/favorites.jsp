@@ -26,7 +26,7 @@
 							    	<%-- <% 
 							    	out.println("ID: "+ RecipeAPI.getRecipeId().get(0).toString());
 							    	out.println("ID: "+ RecipeAPI.getRecipeId().get(1).toString());
-							    	out.println("</br>");
+							    	out.println("<br>");
 							    	%> --%>
 								</p>
 							</li>
@@ -37,8 +37,8 @@
 						</ul>
 				  	</div>
 				  	<div class="col-lg-4" style="background-color:lightblue;">
-				  		</br>
-				  		</br>
+				  		<br>
+				  		<br>
 				  		<ul style="list-style-type:none;">
 				  			<li>Price</li>
 			  			</ul>
@@ -52,11 +52,11 @@
 					  <option value="favorites.jsp">Favorites</option>
 					  <option value="toExplore.jsp">To Explore</option>
 					  <option value="doNotShow.jsp">Do Not Show</option>
-					</select></br></br>
+					</select><br><br>
 		
-				<button type="button" onclick="manageList()">Manage List</button></br></br>
-				<button onclick="returnToResults()">Return to Results Page</button></br></br>
-				<button onclick="returnToSearch()">Return to Search Page</button></br>
+				<button type="button" onclick="manageList()">Manage List</button><br><br>
+				<button onclick="returnToResults()">Return to Results Page</button><br><br>
+				<button onclick="returnToSearch()">Return to Search Page</button><br>
 			</div>
 		  </div>
 		</div>

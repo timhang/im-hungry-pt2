@@ -19,16 +19,16 @@
 		    <div class="col-lg-8" style="background-color:lavender;">
 		    	<p>
 		    		Title
-				</p></br>
+				</p><br>
 		    	<p>
 		    		Distance
-		    	</p></br>
+		    	</p><br>
 		    	<p>
 		    		Address
-		    	</p></br>
+		    	</p><br>
 		    	<p>
 		    		Star Rating
-		    	</p></br>
+		    	</p><br>
 		    
 		    </div>
 		    <div class="col-lg-4" style="background-color:lavenderblush;">
@@ -37,11 +37,11 @@
 					  <option value="favorites.jsp">Favorites</option>
 					  <option value="toExplore.jsp">To Explore</option>
 					  <option value="doNotShow.jsp">Do Not Show</option>
-					</select></br></br>
+					</select><br><br>
 		
-				<button type="button" onclick="manageList()">Manage List</button></br></br>
-				<button onclick="returnToResults()">Return to Results Page</button></br></br>
-				<button onclick="returnToSearch()">Return to Search Page</button></br></br>
+				<button type="button" onclick="manageList()">Manage List</button><br><br>
+				<button onclick="returnToResults()">Return to Results Page</button><br><br>
+				<button onclick="returnToSearch()">Return to Search Page</button><br><br>
 			</div>
 		  </div>
 		</div>
