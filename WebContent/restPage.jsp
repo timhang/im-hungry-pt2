@@ -20,16 +20,19 @@
 		String address = currRest.getAddress();
 		String phoneNumber = currRest.getPhoneNumber();
 		String URL = currRest.getURL();
-	
+		String map = "googleMap.html";
+		double lat = currRest.getLatitude();
+		double lng = currRest.getLongitude();
+		map = map + "?lat=" + Double.toString(lat) + "&lng=" + Double.toString(lng);
 	%>
 		<div class="container-fluid">
 		 <h1 id="title"><%= name %></h1><br>
 		  <div class="row">
 		    <div class="col-lg-8">
 		    	<br>
-		    	<p>
+		    	<a href = <%= map %> >
 		    		<%= address %>
-				</p><br>
+				</a><br>
 		    	<p>
 		    		<%= phoneNumber %> 
 		    	</p><br>

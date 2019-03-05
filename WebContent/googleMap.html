@@ -85,12 +85,14 @@
       <br>
       <strong>End:</strong>
       <select id="end">
-         <option value="selected restaurant, ca">Selected Restaurant</option>
+         <option id="restName" value="selected restaurant, ca">Selected Restaurant</option>
       </select>
     </div>
     <div id="right-panel"></div>
     <div id="map"></div>
     <script>
+    	
+
       function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
@@ -110,8 +112,14 @@
       }
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        D_lat = 34.0579;
-        D_lng = -118.4191;
+        /* D_lat = 34.0579;
+        D_lng = -118.4191; */
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        D_lat = parseFloat(url.searchParams.get("lat"));
+        D_lng = parseFloat(url.searchParams.get("lng"));
+        /* var name = url.searchParams.get("name");
+        document.getElementById("name").innerHTML = name.toString(); */
         
         /* var D_lat = parseFloat(sessionStorage.getItem("lat"));
         var D_lng = parseFloat(sessionStorage.getItem("lng")); */
