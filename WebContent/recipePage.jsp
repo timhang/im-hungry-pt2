@@ -26,7 +26,7 @@
 	
 	%>
 		<div class="container-fluid">
-		 <h1 id="title">Kickin' Turkey Burger with Caramelized Onions and Spicy Sweet Mayo</h1></br>
+		 <h1 id="title"><%= name %></h1></br>
 		  <div class="row">
 		    <div class="col-lg-8">
 		    	</br>
