@@ -16,35 +16,46 @@
 		<div class="container-fluid">
 		 <h1 id="title">Favorites</h1>
 		  <div class="row">
+		  	<!-- Column for list of restaurants and recipes -->
 		    <div class="col-lg-8" style="background-color:lavender;">
-		    	<p>
-		    	<%-- <% 
-		    	out.println("ID: "+ RecipeAPI.getRecipeId().get(0).toString());
-		    	out.println("ID: "+ RecipeAPI.getRecipeId().get(1).toString());
-		    	out.println("</br>");
-		    	%> --%>
-				</p></br>
-		    	<p>
-		    		Distance
-		    	</p></br>
-		    	<p>
-		    		Address
-		    	</p></br>
-		    	<p>
-		    		Star Rating
-		    	</p></br>
-		    
+				  <div class="row">
+				  	<div class="col-lg-4" style="background-color:lavenderblush;">
+				  		<ul style="list-style-type:none;">
+				 			<li>
+							  	<p>
+							    	<%-- <% 
+							    	out.println("ID: "+ RecipeAPI.getRecipeId().get(0).toString());
+							    	out.println("ID: "+ RecipeAPI.getRecipeId().get(1).toString());
+							    	out.println("</br>");
+							    	%> --%>
+								</p>
+							</li>
+							<li>Title</li>
+							<li>Distance</li>
+							<li>Address</li>
+							<li>StarRating</li>
+						</ul>
+				  	</div>
+				  	<div class="col-lg-4" style="background-color:lightblue;">
+				  		</br>
+				  		</br>
+				  		<ul style="list-style-type:none;">
+				  			<li>Price</li>
+			  			</ul>
+				  	</div>
+				  </div>    
 		    </div>
+		    <!-- Column for dropwdown and buttons -->
 		    <div class="col-lg-4" style="background-color:lavenderblush;">
 					<select id="mySelect">
 					  <option></option>
 					  <option value="favorites.jsp">Favorites</option>
 					  <option value="toExplore.jsp">To Explore</option>
 					  <option value="doNotShow.jsp">Do Not Show</option>
-					</select></br>
+					</select></br></br>
 		
-				<button type="button" onclick="manageList()">Manage List</button></br>
-				<button onclick="returnToResults()">Return to Results Page</button></br>
+				<button type="button" onclick="manageList()">Manage List</button></br></br>
+				<button onclick="returnToResults()">Return to Results Page</button></br></br>
 				<button onclick="returnToSearch()">Return to Search Page</button></br>
 			</div>
 		  </div>
