@@ -37,10 +37,10 @@
 					  <option value="favorites.jsp">Favorites</option>
 					  <option value="toExplore.jsp">To Explore</option>
 					  <option value="doNotShow.jsp">Do Not Show</option>
-					</select></br>
+					</select></br></br>
 		
-				<button type="button" onclick="manageList()">Manage List</button></br>
-				<button onclick="returnToResults()">Return to Results Page</button></br>
+				<button type="button" onclick="manageList()">Manage List</button></br></br>
+				<button onclick="returnToResults()">Return to Results Page</button></br></br>
 				<button onclick="returnToSearch()">Return to Search Page</button></br>
 			</div>
 		  </div>
