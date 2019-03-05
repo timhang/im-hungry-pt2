@@ -6,14 +6,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RestAPI {
 	private static final String apiKey = "f8d9f9d39a43e6ec63538a5356043b36";
-	private static final String baseURL = "https://developers.zomato.com/api/v2.1/";
+	//private static final String baseURL = "https://developers.zomato.com/api/v2.1/";
 	private static final String bulkURL = "https://developers.zomato.com/api/v2.1/search?entity_id=195071&entity_type=landmark";
 	private static ArrayList<Integer> restIDs = new ArrayList<Integer>();
 	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();

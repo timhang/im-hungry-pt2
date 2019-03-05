@@ -25,7 +25,7 @@
 		<div class="container-fluid">
 		<!-- Row for photo collage and buttons -->
 		  <div class="row">
-		  </br>
+		  <br>
 		  	<!-- Photo collage column -->
 		    <div class="col-lg-8">
 		    	
@@ -62,8 +62,8 @@
 					  <option value="toExplore.jsp">To Explore</option>
 					  <option value="doNotShow.jsp">Do Not Show</option>
 					</select>
-				</div></br>
-				<button type="button" onclick="manageList()">Manage List</button></br></br>
+				</div><br>
+				<button type="button" onclick="manageList()">Manage List</button><br><br>
 				<button onclick="returnToSearch()">Return to Search Page</button>
 		    </div>
 		  </div>
@@ -104,16 +104,16 @@
 		    	for (int i = 0; i < restIDs.size(); i++) {
 					out.println("<tr>");
 					out.println("<td><div>");
-					out.println("Name: " + "<a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a></br>");
-					out.println("Distance: Need to Calculate </br>");
-					out.println("Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</br>");
-					out.println("Stars: " + allRestaurants.get(restIDs.get(i)).getRating()+"</br>");
+					out.println("Name: " + "<a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a><br>");
+					out.println("Distance: Need to Calculate <br>");
+					out.println("Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"<br>");
+					out.println("Stars: " + allRestaurants.get(restIDs.get(i)).getRating()+"<br>");
 					out.println("</div></td>");
 					
 					out.println("<td><div>");
-					out.println("Name: " + "<a href=recipePage.jsp?recipeId=" +recipeIds.get(i) + ">" + allRecipes.get(recipeIds.get(i)).getName()+"</a></br>");
-					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</br>");
-					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"</br>");
+					out.println("Name: " + "<a href=recipePage.jsp?recipeId=" +recipeIds.get(i) + ">" + allRecipes.get(recipeIds.get(i)).getName()+"</a><br>");
+					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"<br>");
+					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"<br>");
 					out.println("</div></td>");
 					out.println("</tr>");
 				}

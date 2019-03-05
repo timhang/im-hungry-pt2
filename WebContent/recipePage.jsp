@@ -26,20 +26,20 @@
 	
 	%>
 		<div class="container-fluid">
-		 <h1 id="title"><%= name %></h1></br>
+		 <h1 id="title"><%= name %></h1><br>
 		  <div class="row">
 		    <div class="col-lg-8">
-		    	</br>
-		    	<img src=<%= imageUrl %>></br>
+		    	<br>
+		    	<img src=<%= imageUrl %>><br>
 		    	<p>
 		    		Prep time: <%= prepTime %>
-				</p></br>
+				</p><br>
 		    	<p>
 		    		Cook time: <%= cookTime %>
-		    	</p></br>
+		    	</p><br>
 		    	<p>
 		    		Ingredients:
-		    	</p></br>
+		    	</p><br>
 		    	
 		    	
 				<div class="row">
@@ -90,8 +90,8 @@
 				
 		    </div>
 		    <div class="col-lg-4">
-		    	<button onclick="printableView()">Printable View</button></br></br>
-		    	<button onclick="backToResults()">Back to Results</button></br></br>
+		    	<button onclick="printableView()">Printable View</button><br><br>
+		    	<button onclick="backToResults()">Back to Results</button><br><br>
 				<div class="dropdown">
 					<select>
 					  <option></option>
@@ -99,8 +99,8 @@
 					  <option value="toExplore">To Explore</option>
 					  <option value="doNotShow">Do Not Show</option>
 					</select>
-					</div></br></br>
-				<button onclick="addToList()">Add to List</button></br>
+					</div><br><br>
+				<button onclick="addToList()">Add to List</button><br>
 		    	
 		    </div>
 		  </div>

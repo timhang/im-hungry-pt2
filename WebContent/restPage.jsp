@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "API.*, java.util.*, org.json.*, javax.servlet.http.HttpServlet, javax.servlet.http.HttpServletRequest"%>
     
 <!DOCTYPE html>
 <html>
@@ -13,25 +13,34 @@
 	 	
 	</head>
 	<body>
+	<% 
+		int restaurantId = Integer.valueOf(request.getParameter("restaurantId"));
+		Restaurant currRest = RestAPI.getRestaurantMap().get(restaurantId);
+		String name = currRest.getName();
+		String address = currRest.getAddress();
+		String phoneNumber = currRest.getPhoneNumber();
+		String URL = currRest.getURL();
+	
+	%>
 		<div class="container-fluid">
-		 <h1 id="title">Blaze Pizza</h1></br>
+		 <h1 id="title"><%= name %></h1><br>
 		  <div class="row">
 		    <div class="col-lg-8">
-		    	</br>
+		    	<br>
 		    	<p>
-		    		3335 S Figueroa St, Los Angeles, CA 90007 
-				</p></br>
+		    		<%= address %>
+				</p><br>
 		    	<p>
-		    		(213) 755 3223 
-		    	</p></br>
-		    	<a href="www.blazepizza.com">www.blazepizza.com</a>
-		    	</br>
+		    		<%= phoneNumber %> 
+		    	</p><br>
+		    	<a href= <%= URL %> ><%= URL %> </a>
+		    	<br>
 
 		    
 		    </div>
 		    <div class="col-lg-4">
-		    	<button onclick="printableView()">Printable View</button></br></br>
-		    	<button onclick="backToResults()">Back to Results</button></br></br>
+		    	<button onclick="printableView()">Printable View</button><br><br>
+		    	<button onclick="backToResults()">Back to Results</button><br><br>
 				<div class="dropdown">
 					<select>
 					  <option></option>
@@ -39,8 +48,8 @@
 					  <option value="toExplore">To Explore</option>
 					  <option value="doNotShow">Do Not Show</option>
 					</select>
-					</div></br></br>
-				<button onclick="addToList()">Add to List</button></br>
+					</div><br><br>
+				<button onclick="addToList()">Add to List</button><br>
 		    	
 		    </div>
 		  </div>

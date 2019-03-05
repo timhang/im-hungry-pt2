@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class ImageAPI {
- private static final String apiKey="AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM";
+ //private static final String apiKey="AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM";
  private static final String baseImageURL= "https://www.googleapis.com/customsearch/v1?key=AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM&cx=015413150496605702069:vfrlyji0v9m&searchType=image&callback=hndlr&q=";
  private static Boolean state = false;
  private static ArrayList<String> imageArray;
