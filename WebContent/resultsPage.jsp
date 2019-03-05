@@ -79,7 +79,6 @@
 					<th style="font-size: 30px;">Recipe</th>
 				</tr>
 				<%
-				
 		    	
 				HashMap<Integer, Restaurant> allRestaurants = RestAPI.call_me("Pizza", 5);
 				ArrayList<Integer> restIDs = RestAPI.getRestIDs();

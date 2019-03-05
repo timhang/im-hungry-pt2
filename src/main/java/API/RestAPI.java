@@ -15,8 +15,8 @@ public class RestAPI {
 	private static final String apiKey = "f8d9f9d39a43e6ec63538a5356043b36";
 	private static final String baseURL = "https://developers.zomato.com/api/v2.1/";
 	private static final String bulkURL = "https://developers.zomato.com/api/v2.1/search?entity_id=195071&entity_type=landmark";
-	private static final ArrayList<Integer> restIDs = new ArrayList<Integer>();
-	private static final HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
+	private static ArrayList<Integer> restIDs = new ArrayList<Integer>();
+	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
 
 //	public static void main (String[] args) {
 //		try {
@@ -31,7 +31,7 @@ public class RestAPI {
 		return restIDs;
 	}
 	
-	private static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
+	public static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
 	    String fullURL = bulkURL+"&q=" + searchTerm + "&count=" + resultLimit;
 	    
 		URL obj = new URL(fullURL);
@@ -59,7 +59,7 @@ public class RestAPI {
 	    System.out.println("result after Reading JSON Response");
 	    
 	    
-	    for (int i =0; i < array.length(); i++) {
+	    for (int i = 0; i < array.length(); i++) {
 	    	JSONObject test = array.getJSONObject(i);
 	    	JSONObject test2 = test.getJSONObject("restaurant");
 	    	JSONObject location = test2.getJSONObject("location");
