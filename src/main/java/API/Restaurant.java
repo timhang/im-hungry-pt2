@@ -1,4 +1,4 @@
-package com;
+package API;
 
 public class Restaurant {
 	public Restaurant(int id) {

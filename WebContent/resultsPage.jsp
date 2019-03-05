@@ -90,10 +90,10 @@
 					out.println("<tr>");
 					out.println("<td><a href= restPage.jsp>Blaze Pizza</a></td>");
 					out.println("<td><div>");
-					out.println("Name: " + allRecipes.get(recipeIds.get(i)).getName()+"</br>");
-					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</br>");
-					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"</br>");
-					out.println("</div></td>");
+					out.println("Name: " + allRestaurants.get(restIDs.get(i)).getName()+"</br>");
+					out.println("Distance: Need to Calculate </br>");
+					out.println("Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</br>");
+					out.println("Stars: " + allRestaurants.get(restIDs.get(i)).getRating()+"</br>");
 					out.println("</tr>");
 				}
 		       %>
