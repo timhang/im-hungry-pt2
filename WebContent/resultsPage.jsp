@@ -104,14 +104,14 @@
 		    	for (int i = 0; i < restIDs.size(); i++) {
 					out.println("<tr>");
 					out.println("<td><div>");
-					out.println("Name: " + allRestaurants.get(restIDs.get(i)).getName()+"</br>");
+					out.println("Name: " + "<a href=restPage.jsp>" + allRestaurants.get(restIDs.get(i)).getName()+ "</a></br>");
 					out.println("Distance: Need to Calculate </br>");
 					out.println("Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</br>");
 					out.println("Stars: " + allRestaurants.get(restIDs.get(i)).getRating()+"</br>");
 					out.println("</div></td>");
 					
 					out.println("<td><div>");
-					out.println("Name: " + allRecipes.get(recipeIds.get(i)).getName()+"</br>");
+					out.println("Name: " + "<a href=recipePage.jsp>" + allRecipes.get(recipeIds.get(i)).getName()+"</a></br>");
 					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</br>");
 					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"</br>");
 					out.println("</div></td>");
