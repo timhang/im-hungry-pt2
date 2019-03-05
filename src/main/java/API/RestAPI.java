@@ -17,7 +17,7 @@ public class RestAPI {
 	private static final String bulkURL = "https://developers.zomato.com/api/v2.1/search?entity_id=195071&entity_type=landmark";
 	private static ArrayList<Integer> restIDs = new ArrayList<Integer>();
 	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
-
+	private static Boolean state = false;
 //	public static void main (String[] args) {
 //		try {
 //			RestAPI.call_me();
@@ -26,13 +26,27 @@ public class RestAPI {
 //			e.printStackTrace();
 //		}
 //	}
+	public static HashMap<Integer, Restaurant> getRestaurantMap(){
+		return allRestaurants;
+	}
+	
+	public static Boolean getState() {
+		return state;
+	}
+	
+	public static void setState(Boolean called) {
+		state = called;
+	}
 	
 	public static ArrayList<Integer> getRestIDs(){
 		return restIDs;
 	}
 	
 	public static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
-	    String fullURL = bulkURL+"&q=" + searchTerm + "&count=" + resultLimit;
+		HashMap<Integer, Restaurant> newRests = new HashMap<Integer, Restaurant>();
+		ArrayList<Integer> newRestIDs = new ArrayList<Integer>();
+		
+		String fullURL = bulkURL+"&q=" + searchTerm + "&count=" + resultLimit;
 	    
 		URL obj = new URL(fullURL);
 		
@@ -74,12 +88,14 @@ public class RestAPI {
 	    	newRest.setRating(userRating.getDouble("aggregate_rating"));
 	    	newRest.setURL(test2.getString("url"));
 	    	
-	    	allRestaurants.put(i, newRest);
-	    	restIDs.add(i);
+	    	newRests.put(i, newRest);
+	    	newRestIDs.add(i);
 	    	
 		    System.out.println(test2.get("name"));
 		    System.out.println("");
 	    }
+	    allRestaurants = newRests;
+	    restIDs = newRestIDs;
 	    
 	    for (int i = 0; i < allRestaurants.size(); i++) {
 	    	Restaurant newRest = allRestaurants.get(i);
@@ -90,6 +106,8 @@ public class RestAPI {
 	    	System.out.println("Rating: " + newRest.getRating());
 	    	System.out.println("URL: " + newRest.getURL());
 	    }
+	    
+	    
 	    
 	    return allRestaurants;
 	}

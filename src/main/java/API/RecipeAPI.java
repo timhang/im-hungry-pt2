@@ -18,6 +18,8 @@ public class RecipeAPI {
 	private static final String baseBulkUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=";
 	private static ArrayList<Integer> recipes = new ArrayList<Integer>();
 	private static HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
+	private static Boolean state = false;
+
 //	public static void main (String[] args) {
 //		try {
 //			RecipeAPI.call_me("burger",3);
@@ -25,6 +27,15 @@ public class RecipeAPI {
 //			e.printStackTrace();
 //		}
 //	}
+	
+	public static Boolean getState() {
+		return state;
+	}
+	
+	public static void setState(Boolean called) {
+		state = called;
+	}
+	
 	public static void reRank() {
 		for(int i = 0; i < recipes.size(); i++) {
 			for(int j = i; j < recipes.size(); j++) {
@@ -46,6 +57,9 @@ public class RecipeAPI {
 		return allRecipes;
 	}
 	public static HashMap<Integer, Recipe> call_me(String searchTerm, int number) throws Exception {
+		HashMap<Integer, Recipe> newRecipes = new HashMap<Integer, Recipe>();
+		ArrayList<Integer> newRecipeIds= new ArrayList<Integer>();
+		
 	    String url = baseRecipeUrl+"query="+searchTerm+"&number="+number;
 	    URL obj = new URL(url);
 	    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -74,8 +88,8 @@ public class RecipeAPI {
 	    String combinedIds = "";
 	    for(int i = 0; i< results.length() ;i ++) {
 	    	JSONObject resultObject = results.getJSONObject(i);
-	    	recipes.add(resultObject.getInt("id"));
-	    	combinedIds = combinedIds + recipes.get(i);
+	    	newRecipeIds.add(resultObject.getInt("id"));
+	    	combinedIds = combinedIds + newRecipeIds.get(i);
 	    	if(i!=results.length()-1) {
 	    		combinedIds = combinedIds + ",";
 	    	}
@@ -100,7 +114,7 @@ public class RecipeAPI {
 	    con.disconnect();
 	    
 	    for(int i = 0; i < bulkObj.length(); i++) {
-	    	Recipe currentRecipe = new Recipe(recipes.get(i));
+	    	Recipe currentRecipe = new Recipe(newRecipeIds.get(i));
 	    	
 	    	//Getting star rating
 	    	float toFloat = bulkObj.getJSONObject(i).getInt("spoonacularScore");
@@ -133,8 +147,10 @@ public class RecipeAPI {
 	    	ArrayList<String> ingredients = new ArrayList<String>();
 	    	ArrayList<String> instructions = new ArrayList<String>();
 	    	JSONArray extendedIngredients = bulkObj.getJSONObject(i).getJSONArray("extendedIngredients");
-	    	JSONArray analyzedInstructions = bulkObj.getJSONObject(i).getJSONArray("analyzedInstructions").getJSONObject(0).getJSONArray("steps");
-	    	
+	    	JSONArray analyzedInstructions = new JSONArray();
+	    	if(bulkObj.getJSONObject(i).getJSONArray("analyzedInstructions").length()!=0) {
+	    		analyzedInstructions = bulkObj.getJSONObject(i).getJSONArray("analyzedInstructions").getJSONObject(0).getJSONArray("steps");
+	    	}
 	    	
 	    	System.out.println("Name: "+ currentRecipe.getName() + "\nStars: " + currentRecipe.getStarRating() + "\nprepTime: " + currentRecipe.getPrepTime()+"\ncookTime: "+ currentRecipe.getCookTime()+ "\nimg: "+currentRecipe.getImage());
 	    	
@@ -171,11 +187,12 @@ public class RecipeAPI {
 	    	currentRecipe.setFavorite(false);
 	    	
 	    	//Adding to map
-	    	allRecipes.put(currentRecipe.getId(), currentRecipe);
+	    	newRecipes.put(currentRecipe.getId(), currentRecipe);
 	    	
 	    	
 	    }
-	    
+	    recipes = newRecipeIds;
+	    allRecipes = newRecipes;
 	    reRank();
 	    return allRecipes;
 

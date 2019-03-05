@@ -29,25 +29,28 @@
 		  	<!-- Photo collage column -->
 		    <div class="col-lg-8">
 		    	
-					<%
-					if(request.getParameter("searchText") != ImageAPI.getSearchTerm()){
-						ImageAPI.setState(false);
-					}
-					ArrayList<String> imgArr;
-					if(ImageAPI.getState() == false){
-				    	imgArr = ImageAPI.call_me(request.getParameter("searchText"));
-				    	System.out.println(request.getParameter("numberType"));
-				    	ImageAPI.setState(true);
-					} else {
-						imgArr = ImageAPI.getImageArray();
-					}
+				<%
+				if(request.getParameter("searchText") != ImageAPI.getSearchTerm() && request.getParameter("numberType")!=null){
+					ImageAPI.setState(false);
+					RestAPI.setState(false);
+					RecipeAPI.setState(false);
+					System.out.println("inside set state 1");
+				}
+				ArrayList<String> imgArr;
+				if(ImageAPI.getState() == false){
+			    	imgArr = ImageAPI.call_me(request.getParameter("searchText"));
+			    	System.out.println(request.getParameter("numberType"));
+			    	ImageAPI.setState(true);
+				} else {
+					imgArr = ImageAPI.getImageArray();
+				}
+				
+				for (int i = 0; i < imgArr.size(); i++) {
 					
-					for (int i = 0; i < imgArr.size(); i++) {
-						
-						out.println("<img src = "+ imgArr.get(i)+" id = img1>");
-			    		
-					}
-			       %>
+					out.println("<img src = "+ imgArr.get(i)+" id = img1>");
+		    		
+				}
+		       %>
 			    
 		    </div>
 		    <!-- Button column -->
@@ -71,37 +74,55 @@
 				<script type='text/javascript'>
 					document.getElementById('searchText').innerHTML = sessionStorage.getItem('searchText');
 				</script>
-				<%-- <div class = "resultsTable" align = "center">
-					<table style="width:100%">
-						<tr>
-							<th style="font-size: 30px;">Restaurant</th>
-							<th style="font-size: 30px;">Recipe</th>
-						</tr>
-						<%
-						
-				    	
-						HashMap<Integer, Recipe> allRecipes = RecipeAPI.call_me("burger",5);
-						
-						
-						ArrayList<Integer> recipeIds = RecipeAPI.getRecipeId();
-						
-				    	System.out.println(allRecipes.size());
-				    	
-				    	for (int i = 0; i < recipeIds.size(); i++) {
-							out.println("<tr>");
-							out.println("<td><a href= restPage.jsp>Blaze Pizza</a></td>");
-							out.println("<td><div>");
-							out.println("Name: " + allRecipes.get(recipeIds.get(i)).getName()+"</br>");
-							out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</br>");
-							out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"</br>");
-							out.println("</div></td>");
-							out.println("</tr>");
-						}
-				       %>
-			       </table>
-				</div> --%>
+				<div class = "resultsTable" align = "center">
+			<table style="width:100%">
+				<tr>
+					<th style="font-size: 30px;">Restaurant</th>
+					<th style="font-size: 30px;">Recipe</th>
+				</tr>
+				<%
+				ArrayList<Integer> restIDs = new ArrayList<Integer>();
+				ArrayList<Integer> recipeIds = new ArrayList<Integer>();
+				HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
+				HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
+				if(RestAPI.getState() == false || RecipeAPI.getState() == false){
 				
-				<div class="resultsTable" align="center">
+					allRestaurants = RestAPI.call_me(request.getParameter("searchText"), Integer.valueOf(request.getParameter("numberType")));
+					restIDs = RestAPI.getRestIDs();
+				
+					allRecipes = RecipeAPI.call_me(request.getParameter("searchText"), Integer.valueOf(request.getParameter("numberType")));
+					recipeIds = RecipeAPI.getRecipeId();
+					RestAPI.setState(true);
+					RecipeAPI.setState(true);
+				} else {
+					allRestaurants = RestAPI.getRestaurantMap();
+					allRecipes = RecipeAPI.getRecipeMap();
+					restIDs = RestAPI.getRestIDs();
+					recipeIds = RecipeAPI.getRecipeId();
+				}
+				
+		    	for (int i = 0; i < restIDs.size(); i++) {
+					out.println("<tr>");
+					out.println("<td><div>");
+					out.println("Name: " + allRestaurants.get(restIDs.get(i)).getName()+"</br>");
+					out.println("Distance: Need to Calculate </br>");
+					out.println("Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</br>");
+					out.println("Stars: " + allRestaurants.get(restIDs.get(i)).getRating()+"</br>");
+					out.println("</div></td>");
+					
+					out.println("<td><div>");
+					out.println("Name: " + allRecipes.get(recipeIds.get(i)).getName()+"</br>");
+					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</br>");
+					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"</br>");
+					out.println("</div></td>");
+					out.println("</tr>");
+				}
+		       %>
+		       
+	       </table>
+		</div>
+				
+				<!-- <div class="resultsTable" align="center">
 					<table style="width:100%">
 						<tr>
 							<th style="font-size: 30px;">Restauraunt</th>
@@ -141,7 +162,7 @@
 						</tr>
 					</table>
 				
-				</div>
+				</div> -->
 		    </div>
 		  </div>
 		</div>

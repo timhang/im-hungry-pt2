@@ -53,7 +53,7 @@ public static ArrayList<String> getImageArray(){
 	    conn.disconnect(); 
 	    searchTerm = query;
 	    imageArray = arr;
-	    return arr;
+	    return imageArray;
     }
  
  
