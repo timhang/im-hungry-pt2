@@ -72,6 +72,35 @@
 			document.getElementById('searchText').innerHTML = sessionStorage.getItem('searchText');
 		</script>
 		
+		<div class = "resultsTable" align = "center">
+			<table style="width:100%">
+				<tr>
+					<th style="font-size: 30px;">Restaurant</th>
+					<th style="font-size: 30px;">Recipe</th>
+				</tr>
+				<%
+				
+		    	
+				HashMap<Integer, Restaurant> allRestaurants = RestAPI.call_me("Pizza", 5);
+				ArrayList<Integer> restIDs = RestAPI.getRestIDs();
+				
+		    	System.out.println(allRestaurants.size());
+		    	
+		    	for (int i = 0; i < restIDs.size(); i++) {
+					out.println("<tr>");
+					out.println("<td><a href= restPage.jsp>Blaze Pizza</a></td>");
+					out.println("<td><div>");
+					out.println("Name: " + allRecipes.get(recipeIds.get(i)).getName()+"</br>");
+					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</br>");
+					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"</br>");
+					out.println("</div></td>");
+					out.println("</tr>");
+				}
+		       %>
+		       
+	       </table>
+		</div>
+		
 		<%-- <div class = "resultsTable" align = "center">
 			<table style="width:100%">
 				<tr>
