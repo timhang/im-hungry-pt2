@@ -93,17 +93,18 @@
 		    	<div id="togglePrint">
 			    	<button onclick="printableView()">Printable View</button><br><br>
 			    	<button onclick="backToResults()">Back to Results</button><br><br>
-            <div class="dropdown">
-              <select>
-                <option></option>
-                <option value="favorites">Favorites</option>
-                <option value="toExplore">To Explore</option>
-                <option value="doNotShow">Do Not Show</option>
-              </select>
-            </div><br><br>
+		            <div class="dropdown">
+		              <select id = "listSelect">
+		                <option></option>
+		                <option value="favorites">Favorites</option>
+		                <option value="toExplore">To Explore</option>
+		                <option value="doNotShow">Do Not Show</option>
+		              </select>
+		            </div><br><br>
 				    <button onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add to List</button><br>
-		    </div>
-		  </div>
+		    	</div>
+		  	</div>
+		</div>
 		</div>
 
 		
@@ -151,10 +152,10 @@
 						xhttp.open("GET", "addToList.jsp?type=recipe&id="+id+"&list=dns", false);
 					}
 					xhttp.send();
-					if(xhttp.responseText.trim().length()>0){
+					/* if(xhttp.responseText.trim().length()>0){
 						return false;
 					}
-					return true;
+					return true; */
 				}
 			}
 			
