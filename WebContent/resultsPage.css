@@ -46,4 +46,5 @@ tr:nth-child(even) {
 
 td {
   padding: 10px 0;
+  vertical-align: text-top;
 }
