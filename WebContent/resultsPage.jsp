@@ -113,7 +113,7 @@
 					out.println("<td><div>");
 					out.println("Name: " + "<a href=recipePage.jsp?recipeId=" +recipeIds.get(i) + ">" + allRecipes.get(recipeIds.get(i)).getName()+"</a><br>");
 					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"<br>");
-					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"<br>");
+					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " mins    Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+" mins<br>");
 					out.println("</div></td>");
 					out.println("</tr>");
 				}

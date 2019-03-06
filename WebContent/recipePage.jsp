@@ -133,7 +133,9 @@
 					 } else {
 					   x.style.display = "none";
 					 }
-			function addToList(var selectedIndex){
+			}
+			
+			function addToList(selectedIndex){
 				if(selectedIndex != "0"){
 					var xhttp = new XMLHttpRequest();
 					var url_string = window.location.href;
