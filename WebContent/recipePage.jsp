@@ -93,21 +93,29 @@
 		    	<div id="togglePrint">
 			    	<button onclick="printableView()">Printable View</button><br><br>
 			    	<button onclick="backToResults()">Back to Results</button><br><br>
-					<div class="dropdown">
-						<select>
-						  <option></option>
-						  <option value="favorites">Favorites</option>
-						  <option value="toExplore">To Explore</option>
-						  <option value="doNotShow">Do Not Show</option>
-						</select>
-						</div><br><br>
-					<button onclick="addToList()">Add to List</button><br>
-		    	</div>
+            <div class="dropdown">
+              <select>
+                <option></option>
+                <option value="favorites">Favorites</option>
+                <option value="toExplore">To Explore</option>
+                <option value="doNotShow">Do Not Show</option>
+              </select>
+            </div><br><br>
+				    <button onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add to List</button><br>
 		    </div>
 		  </div>
 		</div>
-	
+
+		
 		<script>		 
+			function setState(){
+				var xhttp = new XMLHttpRequest();
+				var url_string = window.location.href;
+		        var url = new URL(url_string);
+		        var id = parseFloat(url.searchParams.get("recipeId"));
+				
+			}
+		
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
 			}
@@ -125,6 +133,27 @@
 					 } else {
 					   x.style.display = "none";
 					 }
+			function addToList(var selectedIndex){
+				if(selectedIndex != "0"){
+					var xhttp = new XMLHttpRequest();
+					var url_string = window.location.href;
+			        var url = new URL(url_string);
+			        var id = parseFloat(url.searchParams.get("recipeId"));
+					if(selectedIndex == "1"){
+						xhttp.open("GET", "addToList.jsp?type=recipe&id="+id+"&list=fav", false);
+					}	
+					else if(selectedIndex == "2"){
+						xhttp.open("GET", "addToList.jsp?type=recipe&id="+id+"&list=exp", false);
+					}
+					else if(selectedIndex == "3"){
+						xhttp.open("GET", "addToList.jsp?type=recipe&id="+id+"&list=dns", false);
+					}
+					xhttp.send();
+					if(xhttp.responseText.trim().length()>0){
+						return false;
+					}
+					return true;
+				}
 			}
 			
 		</script>
