@@ -108,14 +108,7 @@
 		</div>
 
 		
-		<script>		 
-			function setState(){
-				var xhttp = new XMLHttpRequest();
-				var url_string = window.location.href;
-		        var url = new URL(url_string);
-		        var id = parseFloat(url.searchParams.get("recipeId"));
-				
-			}
+		<script>
 		
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';

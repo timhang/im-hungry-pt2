@@ -38,6 +38,19 @@ public class Restaurant {
 		this.priceRange = priceRange/2;
 	}
 	
+	public void setDoNotShow(Boolean state) {
+		this.doNotShow = state;
+	}
+	
+	public void setFavorite(Boolean state) {
+		this.favorite = state;
+	}
+	
+	public void setToExplore(Boolean state) {
+		this.toExplore = state;
+	}
+	
+	
 	public int getID(){
 		return this.id;
 	}
@@ -74,6 +87,18 @@ public class Restaurant {
 		return this.priceRange;
 	}
 	
+	public Boolean getDoNotShow() {
+		return doNotShow;
+	}
+	
+	public Boolean getFavorite() {
+		return favorite;
+	}
+	
+	public Boolean getToExplore() {
+		return toExplore;
+	}
+	
 	private int id;
 	private double rating;
 	private double latitude;
@@ -83,4 +108,7 @@ public class Restaurant {
 	private String address;
 	private String url;
 	private String phoneNumber;	
+	private Boolean doNotShow = false; //false is show, true is do not show
+    private Boolean favorite = false; //false is not in favorite, true is in favorite
+    private Boolean toExplore = false;
 }
