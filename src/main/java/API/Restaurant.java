@@ -34,6 +34,10 @@ public class Restaurant {
 		this.longitude = longitude;
 	}
 	
+	public void setPriceRange(Double priceRange) {
+		this.priceRange = priceRange/2;
+	}
+	
 	public int getID(){
 		return this.id;
 	}
@@ -66,10 +70,15 @@ public class Restaurant {
 		return this.longitude;
 	}
 	
+	public double getPriceRange() {
+		return this.priceRange;
+	}
+	
 	private int id;
 	private double rating;
 	private double latitude;
 	private double longitude; 
+	private double priceRange;
 	private String name;
 	private String address;
 	private String url;

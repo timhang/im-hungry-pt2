@@ -86,6 +86,7 @@ public class RestAPI {
 	    	newRest.setLongitude(location.getDouble("longitude"));
 	    	newRest.setRating(userRating.getDouble("aggregate_rating"));
 	    	newRest.setURL(test2.getString("url"));
+	    	newRest.setPriceRange(test2.getDouble("average_cost_for_two"));
 	    	
 	    	newRests.put(i, newRest);
 	    	newRestIDs.add(i);
@@ -104,6 +105,8 @@ public class RestAPI {
 	    	System.out.println("Longitude: " + newRest.getLongitude());
 	    	System.out.println("Rating: " + newRest.getRating());
 	    	System.out.println("URL: " + newRest.getURL());
+	    	System.out.println("TESTINGGGGG");
+	    	System.out.println("$: " + newRest.getPriceRange());
 	    }
 	    
 	    

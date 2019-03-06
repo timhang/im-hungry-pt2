@@ -35,7 +35,9 @@ public class Recipe {
 	public void setFavorite(Boolean state) {
 		this.favorite = state;
 	}
-	
+	public void setToExplore(Boolean state) {
+		this.toExplore = state;
+	}
 	
 	
 	public int getId() {
@@ -68,6 +70,9 @@ public class Recipe {
 	public Boolean getFavorite() {
 		return favorite;
 	}
+	public Boolean getToExplore() {
+		return toExplore;
+	}
 	 private int id;
 	 private String name;
      private String imageSrc;
@@ -79,6 +84,7 @@ public class Recipe {
      private ArrayList<String> instructions; //contains instructions arranged by index
      private Boolean doNotShow = false; //false is show, true is do not show
      private Boolean favorite = false; //false is not in favorite, true is in favorite
+     private Boolean toExplore = false;
      //probably a Integer indicating the rank of the recipe by amount of prep time
      //a bunch of getters and setters
 }

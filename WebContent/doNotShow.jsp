@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "API.*, java.util.*, org.json.*, javax.servlet.http.HttpServlet, javax.servlet.http.HttpServletRequest"%>
     
 <!DOCTYPE html>
 <html>
@@ -13,15 +13,44 @@
 	 	
 	</head>
 	<body>
+	<%
+		ArrayList<Integer> recipeIds = RecipeAPI.getRecipeId();
+		HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
+		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
+		
+		for(int i = 0 ; i < recipeIds.size(); i++){
+			if(recipeMap.get(recipeIds.get(i)).getDoNotShow() == true){
+				recipeInList.add(recipeIds.get(i));
+			}
+		}
+		System.out.println(recipeInList.size());
+	
+	%>
 		<div class="container-fluid">
 		 <h1 id="title">Do Not Show</h1>
 		  <div class="row">
 		    <div class="col-lg-8">
 		    	<div class="listTable">
 			    	<table style="width:100%">
-						<%
+			    		<%
+						
 						// Loop through all of the restauraunts and recipes and display based on true/false boolean
-						  for (int i = 0; i < 3; i++) {
+						  for (int i = 0; i < recipeInList.size(); i++) {
+							  String name = recipeMap.get(recipeIds.get(i)).getName();
+							  float starRating = recipeMap.get(recipeIds.get(i)).getStarRating();
+							  int prepTime = recipeMap.get(recipeIds.get(i)).getPrepTime();
+							  int cookTime = recipeMap.get(recipeIds.get(i)).getCookTime();
+						%>
+							<tr><td><div>
+								Name: <%= name %><br>
+								Stars: <%= starRating %><br>
+								Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
+							</div></td></tr>
+						<%
+						  }
+						%>
+			    	
+						<%
 							// Restauraunt 
 							out.println("<tr>");
 							out.println("<td><div>");
@@ -33,17 +62,6 @@
 							out.println("</div></td>");
 							out.println("</tr>");
 							
-							// Recipe
-							out.println("<tr>");
-							out.println("<td><div>");
-							// TODO Turn the name into <a> tags again that lead to the RECIPE page
-							out.println("Name: <br>");
-							out.println("Stars: <br>");
-							out.println("Prep time: " + " Cook time: <br>");
-							out.println("</div></td>");
-							out.println("</tr>");
-							
-						}
 				       %>
 			       </table>
 		       </div>
