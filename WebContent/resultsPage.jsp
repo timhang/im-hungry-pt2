@@ -11,10 +11,12 @@
 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resultsPage.css" />
 		<style>
-  			#img1{
+  			    #insideImg{
 				width: 150px;
 				height: 150px;
 				}
+
+
 				.image{
 				display: inline-block;
 				}
@@ -47,7 +49,7 @@
 				
 				for (int i = 0; i < imgArr.size(); i++) {
 					
-					out.println("<img src = "+ imgArr.get(i)+" id = img1>");
+					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
 		    		
 				}
 		       %>
@@ -187,8 +189,16 @@
 		<script>
 		var number = Math.floor((Math.random() * 90) - 45);
 		console.log("Number" + number);
-		$("#img1:nth-of-type(n+1)").css("transform", "rotate(" + number + "deg)");
-		
+		$("#img1:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img2:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img3:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img4:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img5:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img6:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img7:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img8:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img9:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img10:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
 		</script>
 	</body>
 </html>
