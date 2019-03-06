@@ -11,10 +11,12 @@
 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resultsPage.css" />
 		<style>
-  			#img1{
-				width: 150px;
-				height: 150px;
+  			    #insideImg{
+				
+				max-width: 150px;
+   				height: auto;
 				}
+
 				.image{
 				display: inline-block;
 				}
@@ -27,7 +29,7 @@
 		  <div class="row">
 		  <br>
 		  	<!-- Photo collage column -->
-		    <div class="col-lg-8">
+		    <div class="col-lg-8 text-center">
 		    	
 				<%
 				if(request.getParameter("searchText") != ImageAPI.getSearchTerm() && request.getParameter("numberType")!=null){
@@ -45,11 +47,19 @@
 					imgArr = ImageAPI.getImageArray();
 				}
 				
-				for (int i = 0; i < imgArr.size(); i++) {
+				out.println("<div class='row'>");
+				out.println("<div class='col-lg-12'>");
+				for (int i = 0; i < 5; i++) {
+					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
+				}
+				out.println("</div></div>");
+				out.println("<div class='row'>");
+				for (int i = 5; i < imgArr.size(); i++) {
 					
-					out.println("<img src = "+ imgArr.get(i)+" id = img1>");
+					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
 		    		
 				}
+				out.println("</div>");
 		       %>
 			    
 		    </div>
@@ -113,7 +123,7 @@
 					out.println("<td><div>");
 					out.println("Name: " + "<a href=recipePage.jsp?recipeId=" +recipeIds.get(i) + ">" + allRecipes.get(recipeIds.get(i)).getName()+"</a><br>");
 					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"<br>");
-					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+"<br>");
+					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " mins    Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+" mins<br>");
 					out.println("</div></td>");
 					out.println("</tr>");
 				}
@@ -183,6 +193,21 @@
 					window.location.href = 'doNotShow.jsp';
 				}
 			}
+		</script>
+		<script>
+		$("#insideImg:nth-of-type(n+1)").css("max-width", window.innerWidth/9 + "px");
+		var number = Math.floor((Math.random() * 90) - 45);
+		console.log("Number" + number);
+		$("#img1:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img2:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img3:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img4:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img5:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img6:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img7:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img8:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img9:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
+		$("#img10:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
 		</script>
 	</body>
 </html>

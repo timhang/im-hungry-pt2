@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "API.*, java.util.*, org.json.*, javax.servlet.http.HttpServlet, javax.servlet.http.HttpServletRequest"%>
     
 <!DOCTYPE html>
 <html>
@@ -13,25 +13,74 @@
 	 	
 	</head>
 	<body>
+	<%
+		ArrayList<Integer> recipeIds = RecipeAPI.getRecipeId();
+		ArrayList<Integer> restIds = RestAPI.getRestIDs();
+		HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
+		HashMap<Integer, Restaurant> restMap = RestAPI.getRestaurantMap();
+		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
+		ArrayList<Integer> restInList = new ArrayList<Integer>();
+		for(int i = 0 ; i < recipeIds.size(); i++){
+			if(recipeMap.get(recipeIds.get(i)).getToExplore() == true){
+				recipeInList.add(recipeIds.get(i));
+			}
+		}
+		for(int i = 0 ; i < restIds.size(); i++){
+			if(restMap.get(restIds.get(i)).getToExplore() == true){
+				restInList.add(restIds.get(i));
+			}
+		}
+		System.out.println(recipeInList.size());
+		System.out.println(restInList.size());
+	
+	%>
 		<div class="container-fluid">
 		 <h1 id="title">To Explore</h1>
 		  <div class="row">
-		    <div class="col-lg-8" style="background-color:lavender;">
-		    	<p>
-		    		Title
-				</p><br>
-		    	<p>
-		    		Distance
-		    	</p><br>
-		    	<p>
-		    		Address
-		    	</p><br>
-		    	<p>
-		    		Star Rating
-		    	</p><br>
-		    
+		    <div class="col-lg-8">
+		    	<div class="listTable">
+			    	<table style="width:100%">
+						
+						<%
+						
+						// Loop through all of the restauraunts and recipes and display based on true/false boolean
+						  for (int i = 0; i < restInList.size(); i++) {
+							  String name = restMap.get(restIds.get(i)).getName();
+							  String address = restMap.get(restIds.get(i)).getAddress();
+							  double rating = restMap.get(restIds.get(i)).getRating();
+						%>
+							<tr><td><div>
+								Name: <%= name %><br>
+								Address: <%= address %><br>
+								Distance: Need to Calculate<br>
+								Stars: <%= rating %><br>
+							</div></td></tr>
+						<%
+						  }
+						%>
+						
+						<%
+						
+						// Loop through all of the restauraunts and recipes and display based on true/false boolean
+						  for (int i = 0; i < recipeInList.size(); i++) {
+							  String name = recipeMap.get(recipeIds.get(i)).getName();
+							  float starRating = recipeMap.get(recipeIds.get(i)).getStarRating();
+							  int prepTime = recipeMap.get(recipeIds.get(i)).getPrepTime();
+							  int cookTime = recipeMap.get(recipeIds.get(i)).getCookTime();
+						%>
+							<tr><td><div>
+								Name: <%= name %><br>
+								Stars: <%= starRating %><br>
+								Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
+							</div></td></tr>
+						<%
+						  }
+						%>
+						
+			       </table>
+		       </div>
 		    </div>
-		    <div class="col-lg-4" style="background-color:lavenderblush;">
+		    <div class="col-lg-4">
 					<select id="mySelect">
 					  <option></option>
 					  <option value="favorites.jsp">Favorites</option>
