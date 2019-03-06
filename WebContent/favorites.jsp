@@ -13,40 +13,63 @@
 	 	
 	</head>
 	<body>
+	<%
+		ArrayList<Integer> recipeIds = RecipeAPI.getRecipeId();
+		HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
+		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
+		
+		for(int i = 0 ; i < recipeIds.size(); i++){
+			if(recipeMap.get(recipeIds.get(i)).getFavorite() == true){
+				recipeInList.add(recipeIds.get(i));
+			}
+		}
+		System.out.println(recipeInList.size());
+	
+	%>
 		<div class="container-fluid">
 		 <h1 id="title">Favorites</h1>
 		  <div class="row">
 		  	<!-- Column for list of restaurants and recipes -->
-		    <div class="col-lg-8" style="background-color:lavender;">
-				  <div class="row">
-				  	<div class="col-lg-4" style="background-color:lavenderblush;">
-				  		<ul style="list-style-type:none;">
-				 			<li>
-							  	<p>
-							    	<%-- <% 
-							    	out.println("ID: "+ RecipeAPI.getRecipeId().get(0).toString());
-							    	out.println("ID: "+ RecipeAPI.getRecipeId().get(1).toString());
-							    	out.println("<br>");
-							    	%> --%>
-								</p>
-							</li>
-							<li>Title</li>
-							<li>Distance</li>
-							<li>Address</li>
-							<li>StarRating</li>
-						</ul>
-				  	</div>
-				  	<div class="col-lg-4" style="background-color:lightblue;">
-				  		<br>
-				  		<br>
-				  		<ul style="list-style-type:none;">
-				  			<li>Price</li>
-			  			</ul>
-				  	</div>
-				  </div>    
+		    <div class="col-lg-8">
+		    	<div class="listTable">
+			    	<table style="width:100%">
+						<%
+						
+						// Loop through all of the restauraunts and recipes and display based on true/false boolean
+						  for (int i = 0; i < recipeInList.size(); i++) {
+							  String name = recipeMap.get(recipeIds.get(i)).getName();
+							  float starRating = recipeMap.get(recipeIds.get(i)).getStarRating();
+							  int prepTime = recipeMap.get(recipeIds.get(i)).getPrepTime();
+							  int cookTime = recipeMap.get(recipeIds.get(i)).getCookTime();
+						%>
+							<tr><td><div>
+								Name: <%= name %><br>
+								Stars: <%= starRating %><br>
+								Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
+							</div></td></tr>
+						<%
+						  }
+						%>
+							
+						<%
+							// Restauraunt 
+							out.println("<tr>");
+							out.println("<td><div>");
+							// TODO Turn the name into <a> tags again that lead to the restauraunt page
+							out.println("Name: " + "<br>");
+							out.println("Distance: <br>");
+							out.println("Address: <br>");
+							out.println("Stars: <br>");
+							out.println("</div></td>");
+							out.println("</tr>");
+							
+						
+				       %>
+			       </table>
+		       </div>
 		    </div>
 		    <!-- Column for dropwdown and buttons -->
-		    <div class="col-lg-4" style="background-color:lavenderblush;">
+		    <div class="col-lg-4">
 					<select id="mySelect">
 					  <option></option>
 					  <option value="favorites.jsp">Favorites</option>
