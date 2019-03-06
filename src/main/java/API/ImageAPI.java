@@ -12,6 +12,10 @@ public class ImageAPI {
  private static ArrayList<String> imageArray;
  private static String searchTerm;
  
+ public static void setSearchTerm(String st) {
+	 searchTerm = st;
+ }
+ 
  public static String getSearchTerm() {
 	 return searchTerm;
  }
