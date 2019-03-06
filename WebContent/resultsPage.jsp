@@ -118,6 +118,7 @@
 					out.println("Distance: Need to Calculate <br>");
 					out.println("Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"<br>");
 					out.println("Stars: " + allRestaurants.get(restIDs.get(i)).getRating()+"<br>");
+					out.println("Price: " + allRestaurants.get(restIDs.get(i)).getPriceRange()+"<br>");
 					out.println("</div></td>");
 					
 					out.println("<td><div>");
