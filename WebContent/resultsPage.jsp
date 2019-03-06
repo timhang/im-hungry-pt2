@@ -12,10 +12,10 @@
 		<link rel="stylesheet" type="text/css" href="resultsPage.css" />
 		<style>
   			    #insideImg{
-				width: 150px;
-				height: 150px;
+				
+				max-width: 150px;
+   				height: auto;
 				}
-
 
 				.image{
 				display: inline-block;
@@ -29,7 +29,7 @@
 		  <div class="row">
 		  <br>
 		  	<!-- Photo collage column -->
-		    <div class="col-lg-8">
+		    <div class="col-lg-8 text-center">
 		    	
 				<%
 				if(request.getParameter("searchText") != ImageAPI.getSearchTerm() && request.getParameter("numberType")!=null){
@@ -47,11 +47,19 @@
 					imgArr = ImageAPI.getImageArray();
 				}
 				
-				for (int i = 0; i < imgArr.size(); i++) {
+				out.println("<div class='row'>");
+				out.println("<div class='col-lg-12'>");
+				for (int i = 0; i < 5; i++) {
+					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
+				}
+				out.println("</div></div>");
+				out.println("<div class='row'>");
+				for (int i = 5; i < imgArr.size(); i++) {
 					
 					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
 		    		
 				}
+				out.println("</div>");
 		       %>
 			    
 		    </div>
