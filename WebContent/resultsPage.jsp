@@ -185,19 +185,10 @@
 			}
 		</script>
 		<script>
-		
-		var determinant = Math.random();
-		var sign = 0;
-		if(determinant < 0.5){
-			sign = -1;
-		}
-		else
-			sign = 1;
-		var number = Math.floor((Math.random() * 45) + 0)*sign;
-		//var number2 = Math.floor((Math.random() * 45) + -5);
+		var number = Math.floor((Math.random() * 90) - 45);
 		console.log("Number" + number);
 		$("#img1:nth-of-type(n+1)").css("transform", "rotate(" + number + "deg)");
-		//$("#img1:nth-of-type(n+2)").css("transform", "rotate(" + number2 + "deg)");
+		
 		</script>
 	</body>
 </html>
