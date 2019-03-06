@@ -15,16 +15,23 @@
 	<body>
 	<%
 		ArrayList<Integer> recipeIds = RecipeAPI.getRecipeId();
+		ArrayList<Integer> restIds = RestAPI.getRestIDs();
 		HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
+		HashMap<Integer, Restaurant> restMap = RestAPI.getRestaurantMap();
 		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
-		
+		ArrayList<Integer> restInList = new ArrayList<Integer>();
 		for(int i = 0 ; i < recipeIds.size(); i++){
 			if(recipeMap.get(recipeIds.get(i)).getFavorite() == true){
 				recipeInList.add(recipeIds.get(i));
 			}
 		}
+		for(int i = 0 ; i < restIds.size(); i++){
+			if(restMap.get(restIds.get(i)).getFavorite() == true){
+				restInList.add(restIds.get(i));
+			}
+		}
 		System.out.println(recipeInList.size());
-	
+		System.out.println(restInList.size());
 	%>
 		<div class="container-fluid">
 		 <h1 id="title">Favorites</h1>
@@ -33,6 +40,26 @@
 		    <div class="col-lg-8">
 		    	<div class="listTable">
 			    	<table style="width:100%">
+			    	
+			    		<%
+						
+						// Loop through all of the restauraunts and recipes and display based on true/false boolean
+						  for (int i = 0; i < restInList.size(); i++) {
+							  String name = restMap.get(restIds.get(i)).getName();
+							  String address = restMap.get(restIds.get(i)).getAddress();
+							  double rating = restMap.get(restIds.get(i)).getRating();
+						%>
+							<tr><td><div>
+								Name: <%= name %><br>
+								Address: <%= address %><br>
+								Distance: Need to Calculate<br>
+								Stars: <%= rating %><br>
+							</div></td></tr>
+						<%
+						  }
+						%>
+			    	
+			    	
 						<%
 						
 						// Loop through all of the restauraunts and recipes and display based on true/false boolean
@@ -50,21 +77,7 @@
 						<%
 						  }
 						%>
-							
-						<%
-							// Restauraunt 
-							out.println("<tr>");
-							out.println("<td><div>");
-							// TODO Turn the name into <a> tags again that lead to the restauraunt page
-							out.println("Name: " + "<br>");
-							out.println("Distance: <br>");
-							out.println("Address: <br>");
-							out.println("Stars: <br>");
-							out.println("</div></td>");
-							out.println("</tr>");
-							
 						
-				       %>
 			       </table>
 		       </div>
 		    </div>
