@@ -105,12 +105,9 @@ public class RestAPI {
 	    	System.out.println("Longitude: " + newRest.getLongitude());
 	    	System.out.println("Rating: " + newRest.getRating());
 	    	System.out.println("URL: " + newRest.getURL());
-	    	System.out.println("TESTINGGGGG");
+	    	//new test below
 	    	System.out.println("$: " + newRest.getPriceRange());
 	    }
-	    
-	    
-	    
 	    return allRestaurants;
 	}
 }
