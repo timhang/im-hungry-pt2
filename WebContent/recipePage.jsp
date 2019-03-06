@@ -90,18 +90,18 @@
 				
 		    </div>
 		    <div class="col-lg-4">
-		    	<button onclick="printableView()">Printable View</button><br><br>
-		    	<button onclick="backToResults()">Back to Results</button><br><br>
-				<div class="dropdown">
-					<select id = "listSelect">
-					  <option></option>
-					  <option value="favorites">Favorites</option>
-					  <option value="toExplore">To Explore</option>
-					  <option value="doNotShow">Do Not Show</option>
-					</select>
-					</div><br><br>
-				<button onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add to List</button><br>
-		    	
+		    	<div id="togglePrint">
+			    	<button onclick="printableView()">Printable View</button><br><br>
+			    	<button onclick="backToResults()">Back to Results</button><br><br>
+            <div class="dropdown">
+              <select>
+                <option></option>
+                <option value="favorites">Favorites</option>
+                <option value="toExplore">To Explore</option>
+                <option value="doNotShow">Do Not Show</option>
+              </select>
+            </div><br><br>
+				    <button onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add to List</button><br>
 		    </div>
 		  </div>
 		</div>
@@ -119,7 +119,23 @@
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
 			}
-			function addToList(var selectedIndex){
+			function printableView() {
+				var x = document.getElementById("togglePrint");
+				 if (x.style.display === "none") {
+				   x.style.display = "block";
+				 } else {
+				   x.style.display = "none";
+				 }
+				 window.print();
+				 
+				 if (x.style.display === "none") {
+					   x.style.display = "block";
+					 } else {
+					   x.style.display = "none";
+					 }
+			}
+			
+			function addToList(selectedIndex){
 				if(selectedIndex != "0"){
 					var xhttp = new XMLHttpRequest();
 					var url_string = window.location.href;
