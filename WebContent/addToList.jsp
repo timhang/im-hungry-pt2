@@ -36,13 +36,16 @@
   } else if (type.equals("restaurant")) {
 	  Restaurant restaurant = RestAPI.getRestaurantMap().get(idInt);
 	  System.out.println(restaurant.getName());
-	  /* if(listName == "fav"){
+	  if(listName.equals("fav")){
 		  restaurant.setFavorite(true);
-	  } else if (listName == "exp"){
-		  recipe.setToExplore(true);
-	  } else if (listName == "dns"){
-		  recipe.setDoNotShow(true);
-	  } */
+		  System.out.println("Added to Favorite List");
+	  } else if (listName.equals("exp")){
+		  restaurant.setToExplore(true);
+		  System.out.println("Added to To Explore List");
+	  } else if (listName.equals("dns")){
+		  restaurant.setDoNotShow(true);
+		  System.out.println("Added to Do No Show List");
+	  }
   }
   
 %>
