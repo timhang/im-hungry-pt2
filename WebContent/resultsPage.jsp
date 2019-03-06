@@ -195,6 +195,7 @@
 			}
 		</script>
 		<script>
+		$("#insideImg:nth-of-type(n+1)").css("max-width", window.innerWidth/9 + "px");
 		var number = Math.floor((Math.random() * 90) - 45);
 		console.log("Number" + number);
 		$("#img1:nth-of-type(n+1)").css("transform", "rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
