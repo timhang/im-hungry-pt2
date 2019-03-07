@@ -50,17 +50,20 @@
 								  String address = restMap.get(restIds.get(i)).getAddress();
 								  double rating = restMap.get(restIds.get(i)).getRating();
 								  String link = "restPage.jsp?restaurantId="+ restIds.get(i);
+								  int travelTime = restMap.get(restIds.get(i)).getTravelTime();
+								  double priceRange = restMap.get(restIds.get(i)).getPriceRange();
 								  int id = restIds.get(i);
 							%>
 								<tr><td>
 									<input type="checkbox" name="checkbox" class="checkbox" id=checkbox1 style="visibility:hidden;">
 									<div>
-										<a href = <%= link %> >
+										<div><a href = <%= link %> >
 								    		<%= name %>
-										</a><br>
-										Address: <%= address %><br>
-										Distance: Need to Calculate<br>
-										Stars: <%= rating %><br>
+										</a></div>
+										<div style="float:left;width:50%;">Address: <%= address %></div>
+										<div style = "float:right;text-align:right;width:50%">$<%= priceRange %></div>
+										<div>Minutes: <%= travelTime %></div>
+										<div>Rating: <%= rating %></div>
 									</div>
 								</td></tr>
 							<%
