@@ -32,11 +32,13 @@
 		    <div class="col-lg-8 text-center">
 		    	
 				<%
-				if(!request.getParameter("searchText").equals(ImageAPI.getSearchTerm()) && request.getParameter("numberType")!=null){
-					ImageAPI.setState(false);
-					RestAPI.setState(false);
-					RecipeAPI.setState(false);
-					System.out.println("inside set state 1");
+				if(request.getParameter("searchText")!=null && request.getParameter("numberType")!=null){
+					if(!request.getParameter("searchText").equals(ImageAPI.getSearchTerm())){
+						ImageAPI.setState(false);
+						RestAPI.setState(false);
+						RecipeAPI.setState(false);
+						System.out.println("inside set state 1");
+					}
 				}
 				ArrayList<String> imgArr;
 				if(ImageAPI.getState() == false){
