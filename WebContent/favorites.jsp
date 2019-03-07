@@ -50,15 +50,19 @@
 								  String address = restMap.get(restIds.get(i)).getAddress();
 								  double rating = restMap.get(restIds.get(i)).getRating();
 								  String link = "restPage.jsp?restaurantId="+ restIds.get(i);
+								  int id = restIds.get(i);
 							%>
-								<tr><td><div>
-									<a href = <%= link %> >
-							    		<%= name %>
-									</a><br>
-									Address: <%= address %><br>
-									Distance: Need to Calculate<br>
-									Stars: <%= rating %><br>
-								</div></td></tr>
+								<tr><td>
+									<input type="checkbox" name="checkbox" class="checkbox" id=checkbox1 style="visibility:hidden;">
+									<div>
+										<a href = <%= link %> >
+								    		<%= name %>
+										</a><br>
+										Address: <%= address %><br>
+										Distance: Need to Calculate<br>
+										Stars: <%= rating %><br>
+									</div>
+								</td></tr>
 							<%
 							  }
 							%>
@@ -74,13 +78,16 @@
 								  int cookTime = recipeMap.get(recipeIds.get(i)).getCookTime();
 								  String link = "recipePage.jsp?recipeId="+ recipeIds.get(i);
 							%>
-								<tr><td><div>
-									<a href = <%= link %> >
-							    		<%= name %>
-									</a><br>
-									Stars: <%= starRating %><br>
-									Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
-								</div></td></tr>
+								<tr><td>
+									<input type="checkbox" name="checkbox" class="checkbox" id=checkbox2 style="visibility:hidden;">
+									<div>
+										<a href = <%= link %> >
+								    		<%= name %>
+										</a><br>
+										Stars: <%= starRating %><br>
+										Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
+									</div>
+								</td></tr>
 							<%
 							  }
 							%>
@@ -103,9 +110,17 @@
 			</div>
 		  </div>
 		  <!-- Row for the edit button -->
-		  <div class="row">
-		  	<input type="button" value="Edit" class="styled-button-2" id="edit">
-			<input type="button" value="Delete" class="styled-button-2" id="deleteButton">
+		  <div class="row text-center">
+		  	<input type="button" value="Edit" class="styled-button-2" id="editButton">
+			<input type="button" value="Delete" class="styled-button-2" id="deleteButton" style="visibility:hidden;">
+			<select id="addDropdown" style="visibility:hidden;">
+			  <option></option>
+			  <option value="favorites.jsp">Favorites</option>
+			  <option value="toExplore.jsp">To Explore</option>
+			  <option value="doNotShow.jsp">Do Not Show</option>
+			</select><br><br>
+			<input type="button" value="Add" class="styled-button-2" id="addButton" style="visibility:hidden;">
+			
 		  
 		  </div>
 		</div>
@@ -131,12 +146,40 @@
 			}
 		</script>
 		<script>
-			var edit = document.getElementById("edit");
-			var delete = document.getElementById("deleteButton");
+			var editButton = document.getElementById("editButton");
+			var deleteButton = document.getElementById("deleteButton");
+			var addDropdown = document.getElementById("addDropdown");
+			var addButton = document.getElementById("addButton");
+			var restCheck = document.getElementById("checkbox1");
+			var recipeCheck = document.getElementById("checkbox2");
+
 	
-			edit.onclick = function() {
-			    deleteButton.style.visibility = "visible";
-	
+			editButton.onclick = function() {
+				 if (deleteButton.style.visibility === "hidden") {
+					   deleteButton.style.visibility = "visible";
+					 } else {
+					   deleteButton.style.visibility = "hidden";
+				}
+				 if (addDropdown.style.visibility === "hidden") {
+					 addDropdown.style.visibility = "visible";
+					 } else {
+						 addDropdown.style.visibility = "hidden";
+				}
+				 if (addButton.style.visibility === "hidden") {
+					 addButton.style.visibility = "visible";
+					 } else {
+						 addButton.style.visibility = "hidden";
+				}
+				 if (restCheck.style.visibility === "hidden") {
+					 restCheck.style.visibility = "visible";
+					 } else {
+						 restCheck.style.visibility = "hidden";
+				}	
+				 if (recipeCheck.style.visibility === "hidden") {
+					 recipeCheck.style.visibility = "visible";
+					 } else {
+						 recipeCheck.style.visibility = "hidden";
+				}	
 			}
 		</script>
 	

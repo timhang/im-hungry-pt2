@@ -15,6 +15,13 @@ button, select {
 #deleteButton {
 	visibility: hidden;
 }
+#addButton {
+	visibility: hidden;
+}
+#addDropdown {
+	visibility: hidden;
+	width: 10%;
+}
 
 .listTable {
 	overflow:hidden;
