@@ -50,6 +50,13 @@ public class Restaurant {
 		this.toExplore = state;
 	}
 	
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	
+	public void setTravelTime(int travelTime) {
+		this.travelTime = travelTime;
+	}
 	
 	public int getID(){
 		return this.id;
@@ -65,6 +72,10 @@ public class Restaurant {
 	
 	public String getURL() {
 		return this.url;
+	}
+	
+	public int getTravelTime() {
+		return this.travelTime;
 	}
 	
 	public double getRating() {
@@ -99,10 +110,16 @@ public class Restaurant {
 		return toExplore;
 	}
 	
+	public double getDistance() {
+		return distance;
+	}
+	
 	private int id;
+	private int travelTime;
 	private double rating;
 	private double latitude;
 	private double longitude; 
+	private double distance;
 	private double priceRange;
 	private String name;
 	private String address;
