@@ -41,6 +41,39 @@ public class RestAPI {
 		return restIDs;
 	}
 	
+	private static int travelTime(double distance) {
+		int travelTime = (int) (distance / 40);
+		return travelTime;
+	}
+	
+    private static double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        if (unit == 'K') {
+          dist = dist * 1.609344;
+        } else if (unit == 'N') {
+          dist = dist * 0.8684;
+          }
+        return (dist);
+      }
+
+      /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+      /*::  This function converts decimal degrees to radians             :*/
+      /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+      private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+      }
+
+      /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+      /*::  This function converts radians to decimal degrees             :*/
+      /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+      private static double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+      }
+	
 	public static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
 		HashMap<Integer, Restaurant> newRests = new HashMap<Integer, Restaurant>();
 		ArrayList<Integer> newRestIDs = new ArrayList<Integer>();
@@ -88,6 +121,12 @@ public class RestAPI {
 	    	newRest.setURL(test2.getString("url"));
 	    	newRest.setPriceRange(test2.getDouble("average_cost_for_two"));
 	    	
+	    	double newDistance = distance(newRest.getLatitude(), newRest.getLongitude(), 34.0224, 118.2851, 'K');
+	    	newRest.setDistance(newDistance);
+	    	
+	    	int newTravelTime = travelTime(newDistance);
+	    	newRest.setTravelTime(newTravelTime);
+	    	
 	    	newRests.put(i, newRest);
 	    	newRestIDs.add(i);
 	    	
@@ -105,12 +144,11 @@ public class RestAPI {
 	    	System.out.println("Longitude: " + newRest.getLongitude());
 	    	System.out.println("Rating: " + newRest.getRating());
 	    	System.out.println("URL: " + newRest.getURL());
-	    	System.out.println("TESTINGGGGG");
+	    	//new test below
+	    	System.out.println("TESTING");
 	    	System.out.println("$: " + newRest.getPriceRange());
+	    	System.out.println("Distance: " + newRest.getTravelTime());
 	    }
-	    
-	    
-	    
 	    return allRestaurants;
 	}
 }
