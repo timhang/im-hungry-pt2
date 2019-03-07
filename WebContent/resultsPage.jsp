@@ -32,7 +32,7 @@
 		    <div class="col-lg-8 text-center">
 		    	
 				<%
-				if(request.getParameter("searchText") != ImageAPI.getSearchTerm() && request.getParameter("numberType")!=null){
+				if(!request.getParameter("searchText").equals(ImageAPI.getSearchTerm()) && request.getParameter("numberType")!=null){
 					ImageAPI.setState(false);
 					RestAPI.setState(false);
 					RecipeAPI.setState(false);
