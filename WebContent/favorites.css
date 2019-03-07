@@ -15,10 +15,10 @@ button, select {
 #deleteButton {
 	visibility: hidden;
 }
-#addButton {
+#moveButton {
 	visibility: hidden;
 }
-#addDropdown {
+#moveDropdown {
 	visibility: hidden;
 	width: 10%;
 }

@@ -112,23 +112,39 @@
 					restIDs = RestAPI.getRestIDs();
 					recipeIds = RecipeAPI.getRecipeId();
 				}
+				int size = Math.max(restIDs.size(),recipeIds.size());
 				
-		    	for (int i = 0; i < restIDs.size(); i++) {
-					out.println("<tr>");
-					out.println("<td><div>");
-					out.println("<div>Name: " + "<a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a></div>");
-					out.println("<div style= float:left;width:50% >Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</div>");
-					out.println("<div style = float:right;text-align:right;width:50% >$" + allRestaurants.get(restIDs.get(i)).getPriceRange()+"</div>");
-					out.println("<div>Rating: " + allRestaurants.get(restIDs.get(i)).getRating()+"</div>");
-					out.println("<div>Minutes: "+ allRestaurants.get(restIDs.get(i)).getTravelTime()+"</div>");
-					out.println("</div></td>");
+		    	for (int i = 0; i < size; i++) {
+		    		if(i<restIDs.size()){
+						out.println("<tr>");
+						out.println("<td><div>");
+						out.println("<div><a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a></div>");
+						out.println("<div style= float:left;width:70% >Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</div>");
+						out.println("<div style = float:right;text-align:right;width:30% >$" + allRestaurants.get(restIDs.get(i)).getPriceRange()+"</div>");
+						out.println("<div>Rating: " + allRestaurants.get(restIDs.get(i)).getRating()+"</div>");
+						out.println("<div>Driving Time: "+ allRestaurants.get(restIDs.get(i)).getTravelTime()+"</div>");
+						out.println("</div></td>");
+		    		} else {
+		    			out.println("<tr>");
+						out.println("<td><div>");
+						out.println("</div></td>");
+		    		}
 					
-					out.println("<td><div>");
-					out.println("Name: " + "<a href=recipePage.jsp?recipeId=" +recipeIds.get(i) + ">" + allRecipes.get(recipeIds.get(i)).getName()+"</a><br>");
-					out.println("Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"<br>");
-					out.println("Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " mins    Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+" mins<br>");
-					out.println("</div></td>");
-					out.println("</tr>");
+		    		if(i<recipeIds.size()){
+						out.println("<td><div>");
+						out.println("<div><a href=recipePage.jsp?recipeId=" +recipeIds.get(i) + ">" + allRecipes.get(recipeIds.get(i)).getName()+"</a></div>");
+						out.println("<div>Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</div>");
+						out.println("<div style = float:left;width:50% >Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " mins");    
+						out.println("<div style = float:right;width:50% >Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+ " mins");
+						out.println("</div></td>");
+						out.println("</tr>");
+		    		} else {
+		    			out.println("<td><div>");
+		    			out.println("</div></td>");
+						out.println("</tr>");
+		    		}
+		    		
+		    		
 				}
 		       %>
 		       

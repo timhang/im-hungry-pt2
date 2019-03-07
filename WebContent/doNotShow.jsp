@@ -14,24 +14,12 @@
 	</head>
 	<body>
 	<%
-		ArrayList<Integer> recipeIds = RecipeAPI.getRecipeId();
-		ArrayList<Integer> restIds = RestAPI.getRestIDs();
-		HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
-		HashMap<Integer, Restaurant> restMap = RestAPI.getRestaurantMap();
-		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
-		ArrayList<Integer> restInList = new ArrayList<Integer>();
-		for(int i = 0 ; i < recipeIds.size(); i++){
-			if(recipeMap.get(recipeIds.get(i)).getDoNotShow() == true){
-				recipeInList.add(recipeIds.get(i));
-			}
-		}
-		for(int i = 0 ; i < restIds.size(); i++){
-			if(restMap.get(restIds.get(i)).getDoNotShow() == true){
-				restInList.add(restIds.get(i));
-			}
-		}
-		System.out.println("Recipes in List: " + recipeInList.size());
-		System.out.println("Restaurants in List: " + restInList.size());
+	HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
+	HashMap<Integer, Restaurant> restMap = RestAPI.getRestaurantMap();
+	//For some reason when the page refresh and deleting item in another page or servlet it doesn't change the values here
+	//When the project just get loaded it will work for a couple of times then it would just stop working
+	ArrayList<Integer> recipeInList = RecipeAPI.getDoNotShows();
+	ArrayList<Integer> restInList = RestAPI.getDoNotShows();
 	
 	%>
 		<div class="container-fluid">
@@ -44,21 +32,23 @@
 						
 						// Loop through all of the restauraunts and recipes and display based on true/false boolean
 						  for (int i = 0; i < restInList.size(); i++) {
-							  String name = restMap.get(restIds.get(i)).getName();
-							  String address = restMap.get(restIds.get(i)).getAddress();
-							  double rating = restMap.get(restIds.get(i)).getRating();
-							  int travelTime = restMap.get(restIds.get(i)).getTravelTime();
-							  double priceRange = restMap.get(restIds.get(i)).getPriceRange();
-							  String link = "restPage.jsp?restaurantId="+ restIds.get(i);
+							  int restId = restInList.get(i);
+							  String name = restMap.get(restId).getName();
+							  String address = restMap.get(restId).getAddress();
+							  double rating = restMap.get(restId).getRating();
+							  String link = "restPage.jsp?restaurantId="+ restId;
+							  String travelTime = restMap.get(restId).getTravelTime();
+							  double priceRange = restMap.get(restId).getPriceRange();
 						%>
 							<tr><td><div>
+								<div><input type="checkbox" name="checkbox" class="checkbox" id="checkboxRest" style="visibility:hidden;" value = <%= restId %>></div>
 								<div><a href = <%= link %> >
 								    <%= name %>
 								</a></div>
-								<div style="float:left;width:50%;">Address: <%= address %></div>
-								<div style = "float:right;text-align:right;width:50%">$<%= priceRange %></div>
+								<div style="float:left;width:70%;">Address: <%= address %></div>
+								<div style = "float:right;text-align:right;width:30%">$<%= priceRange %></div>
 								<div>Rating: <%= rating %></div>
-								<div>Minutes: <%= travelTime %></div>
+								<div>Driving Time: <%= travelTime %></div>
 							</div></td></tr>
 						<%
 						  }
@@ -68,16 +58,24 @@
 						
 						// Loop through all of the restauraunts and recipes and display based on true/false boolean
 						  for (int i = 0; i < recipeInList.size(); i++) {
-							  String name = recipeMap.get(recipeIds.get(i)).getName();
-							  float starRating = recipeMap.get(recipeIds.get(i)).getStarRating();
-							  int prepTime = recipeMap.get(recipeIds.get(i)).getPrepTime();
-							  int cookTime = recipeMap.get(recipeIds.get(i)).getCookTime();
+							  int recipeId = recipeInList.get(i);
+							  String name = recipeMap.get(recipeId).getName();
+							  float starRating = recipeMap.get(recipeId).getStarRating();
+							  int prepTime = recipeMap.get(recipeId).getPrepTime();
+							  int cookTime = recipeMap.get(recipeId).getCookTime();
+							  String link = "recipePage.jsp?recipeId="+ recipeId;
 						%>
-							<tr><td><div>
-								Name: <%= name %><br>
-								Stars: <%= starRating %><br>
-								Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
-							</div></td></tr>
+							<tr><td>
+								<input type="checkbox" name="checkbox" class="checkbox" id=checkboxRecipe style="visibility:hidden;" value = <%= recipeId %> >
+								<div>
+									<div><a href = <%= link %> >
+								    	<%= name %>
+									</a></div>
+									<div>Rating: <%= starRating %></div>
+									<div style="float:left;width:30%;">Prep time: <%= prepTime %> mins</div>
+									<div style="float:right;width:70%;">Cook time: <%= cookTime %> mins</div>
+								</div>
+							</td></tr>
 						<%
 						  }
 						%>
@@ -85,6 +83,7 @@
 			       </table>
 		       </div>
 		    </div>
+		    <!-- Column for dropwdown and buttons -->
 		    <div class="col-lg-4">
 					<select id="mySelect">
 					  <option></option>
@@ -98,8 +97,24 @@
 				<button onclick="returnToSearch()">Return to Search Page</button><br>
 			</div>
 		  </div>
+		  
+		  <!-- Row for the edit button -->
+		  <div class="row text-center">
+		  	<input type="button" value="Edit" class="styled-button-2" id="editButton">
+			<input type="button" value="Delete" class="styled-button-2" id="deleteButton" style="visibility:hidden;">
+			<select id="moveDropdown" style="visibility:hidden;">
+			  <option></option>
+			  <option value="favorites.jsp">Favorites</option>
+			  <option value="toExplore.jsp">To Explore</option>
+			  <option value="doNotShow.jsp">Do Not Show</option>
+			</select><br><br>
+			<input type="button" value="Move" class="styled-button-2" id="moveButton" style="visibility:hidden;">
+			
+		  
+		  </div>
 		</div>
-	
+		
+		
 		<script>		 
 			function returnToSearch() {
 				window.location.href = 'searchPage.html';
@@ -119,6 +134,83 @@
 					window.location.href = 'doNotShow.jsp';
 				}
 			}
+		</script>
+		
+		<script>		 
+		var editButton = document.getElementById("editButton");
+		var deleteButton = document.getElementById("deleteButton");
+		var moveDropdown = document.getElementById("moveDropdown");
+		var moveButton = document.getElementById("moveButton");
+		var restCheck = document.getElementById("checkboxRest");
+		var recipeCheck = document.getElementById("checkboxRecipe");
+		var checkBoxes = document.getElementsByClassName("checkbox");
+
+		editButton.onclick = function() {
+			if (editButton.value ==="Edit") {
+				editButton.value = "Done";
+			}
+		    else {
+		    	editButton.value = "Edit";
+		    }
+			 if (deleteButton.style.visibility === "hidden") {
+				   deleteButton.style.visibility = "visible";
+				 } else {
+				   deleteButton.style.visibility = "hidden";
+			}
+			 if (moveDropdown.style.visibility === "hidden") {
+				 moveDropdown.style.visibility = "visible";
+				 } else {
+					 moveDropdown.style.visibility = "hidden";
+			}
+			 if (moveButton.style.visibility === "hidden") {
+				 moveButton.style.visibility = "visible";
+				 } else {
+					 moveButton.style.visibility = "hidden";
+			}
+			for(i=0; i<checkBoxes.length; i++) {
+				console.log(checkBoxes[i].id);
+				console.log(checkBoxes[i].value);
+				console.log(checkBoxes[i].checked);
+				if (checkBoxes[i].style.visibility === "hidden") {
+					 checkBoxes[i].style.visibility = "visible";
+					 } else {
+						 checkBoxes[i].style.visibility = "hidden";
+				}
+			}	
+		}
+		
+		deleteButton.onclick = function () {
+			var xhttp = new XMLHttpRequest();
+			var linkRest = "1";
+			var linkRecipe = "2";
+			var checked = false;
+			for(i=0; i<checkBoxes.length; i++){
+				if(checkBoxes[i].checked === true){
+					checked = true;
+					if(checkBoxes[i].id === "checkboxRest"){
+						linkRest = linkRest+","+checkBoxes[i].value;
+					}
+					if(checkBoxes[i].id === "checkboxRecipe"){
+						linkRecipe = linkRecipe+","+checkBoxes[i].value;
+					}
+				}
+			}
+			console.log(linkRest);
+			console.log(linkRecipe);
+			xhttp.open("GET", "DeleteItem?restIds=" + linkRest + "&recipeIds=" + linkRecipe + "&list=dns", true);
+			xhttp.onreadystatechange = function() {
+				//window.location.reload(true);
+
+			}
+			xhttp.send();
+			if(checked === true){
+				location.reload();
+				//window.location.href = "deleteItem.jsp?restIds=" + linkRest + "&recipeIds=" + linkRecipe + "&list=fav";
+			}
+		}
+		moveButton.onclick = function() {
+			
+		}
 		</script>
 	
 	</body>

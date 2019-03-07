@@ -35,7 +35,7 @@ public class Restaurant {
 	}
 	
 	public void setPriceRange(Double priceRange) {
-		this.priceRange = priceRange/2;
+		this.priceRange = priceRange;
 	}
 	
 	public void setDoNotShow(Boolean state) {
@@ -44,17 +44,14 @@ public class Restaurant {
 	
 	public void setFavorite(Boolean state) {
 		this.favorite = state;
+		System.out.println("Inside Set Favorite of " + name + " favorite: " + favorite);
 	}
 	
 	public void setToExplore(Boolean state) {
 		this.toExplore = state;
 	}
 	
-	public void setDistance(double distance) {
-		this.distance = distance;
-	}
-	
-	public void setTravelTime(int travelTime) {
+	public void setTravelTime(String travelTime) {
 		this.travelTime = travelTime;
 	}
 	
@@ -74,7 +71,7 @@ public class Restaurant {
 		return this.url;
 	}
 	
-	public int getTravelTime() {
+	public String getTravelTime() {
 		return this.travelTime;
 	}
 	
@@ -110,16 +107,11 @@ public class Restaurant {
 		return toExplore;
 	}
 	
-	public double getDistance() {
-		return distance;
-	}
-	
 	private int id;
-	private int travelTime;
+	private String travelTime;
 	private double rating;
 	private double latitude;
 	private double longitude; 
-	private double distance;
 	private double priceRange;
 	private String name;
 	private String address;
