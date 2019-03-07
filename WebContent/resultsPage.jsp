@@ -116,11 +116,11 @@
 		    	for (int i = 0; i < restIDs.size(); i++) {
 					out.println("<tr>");
 					out.println("<td><div>");
-					out.println("Name: " + "<a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a><br>");
-					out.println("Distance: Function created, just need to implement");
-					out.println("Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"<br>");
-					out.println("Stars: " + allRestaurants.get(restIDs.get(i)).getRating()+"<br>");
-					out.println("Price: $" + allRestaurants.get(restIDs.get(i)).getPriceRange()+"<br>");
+					out.println("<div>Name: " + "<a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a></div>");
+					out.println("<div style= float:left;width:50% >Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</div>");
+					out.println("<div style = float:right;text-align:right;width:50% >$" + allRestaurants.get(restIDs.get(i)).getPriceRange()+"</div>");
+					out.println("<div>Rating: " + allRestaurants.get(restIDs.get(i)).getRating()+"</div>");
+					out.println("<div>Minutes: "+ allRestaurants.get(restIDs.get(i)).getTravelTime()+"</div>");
 					out.println("</div></td>");
 					
 					out.println("<td><div>");

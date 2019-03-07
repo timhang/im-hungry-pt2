@@ -30,8 +30,8 @@
 				restInList.add(restIds.get(i));
 			}
 		}
-		System.out.println(recipeInList.size());
-		System.out.println(restInList.size());
+		System.out.println("Recipes in List: " + recipeInList.size());
+		System.out.println("Restaurants in List: " + restInList.size());
 	
 	%>
 		<div class="container-fluid">
@@ -48,12 +48,18 @@
 							  String name = restMap.get(restIds.get(i)).getName();
 							  String address = restMap.get(restIds.get(i)).getAddress();
 							  double rating = restMap.get(restIds.get(i)).getRating();
+							  int travelTime = restMap.get(restIds.get(i)).getTravelTime();
+							  double priceRange = restMap.get(restIds.get(i)).getPriceRange();
+							  String link = "restPage.jsp?restaurantId="+ restIds.get(i);
 						%>
 							<tr><td><div>
-								Name: <%= name %><br>
-								Address: <%= address %><br>
-								Distance: Need to Calculate<br>
-								Stars: <%= rating %><br>
+								<div><a href = <%= link %> >
+								    <%= name %>
+								</a></div>
+								<div style="float:left;width:50%;">Address: <%= address %></div>
+								<div style = "float:right;text-align:right;width:50%">$<%= priceRange %></div>
+								<div>Rating: <%= rating %></div>
+								<div>Minutes: <%= travelTime %></div>
 							</div></td></tr>
 						<%
 						  }
