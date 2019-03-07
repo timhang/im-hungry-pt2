@@ -212,7 +212,36 @@
 				}
 			}
 			moveButton.onclick = function() {
-				
+				if(moveDropdown.selectedIndex != "0" && moveDropdown.selectedIndex != "1"){
+					
+					var xhttp = new XMLHttpRequest();
+					var linkRest = "1";
+					var linkRecipe = "2";
+					var checked = false;
+					for(i=0; i<checkBoxes.length; i++){
+						if(checkBoxes[i].checked === true){
+							checked = true;
+							if(checkBoxes[i].id === "checkboxRest"){
+								linkRest = linkRest+","+checkBoxes[i].value;
+							}
+							if(checkBoxes[i].id === "checkboxRecipe"){
+								linkRecipe = linkRecipe+","+checkBoxes[i].value;
+							}
+						}
+					}
+					console.log(linkRest);
+					console.log(linkRecipe);
+					xhttp.open("GET", "MoveItem?restIds=" + linkRest + "&recipeIds=" + linkRecipe + "&list=fav&to="+moveDropdown.selectedIndex, true);
+					xhttp.onreadystatechange = function() {
+						//window.location.reload(true);
+	
+					}
+					xhttp.send();
+					if(checked === true){
+						location.reload();
+						//window.location.href = "deleteItem.jsp?restIds=" + linkRest + "&recipeIds=" + linkRecipe + "&list=fav";
+					}
+				}
 			}
 			
 		</script>
