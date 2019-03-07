@@ -40,44 +40,51 @@
 		    <div class="col-lg-8">
 		    	<div class="listTable">
 			    	<table style="width:100%">
-			    	
-			    		<%
-						
-						// Loop through all of the restauraunts and recipes and display based on true/false boolean
-						  for (int i = 0; i < restInList.size(); i++) {
-							  String name = restMap.get(restIds.get(i)).getName();
-							  String address = restMap.get(restIds.get(i)).getAddress();
-							  double rating = restMap.get(restIds.get(i)).getRating();
-						%>
-							<tr><td><div>
-								Name: <%= name %><br>
-								Address: <%= address %><br>
-								Distance: Need to Calculate<br>
-								Stars: <%= rating %><br>
-							</div></td></tr>
-						<%
-						  }
-						%>
-			    	
-			    	
-						<%
-						
-						// Loop through all of the restauraunts and recipes and display based on true/false boolean
-						  for (int i = 0; i < recipeInList.size(); i++) {
-							  String name = recipeMap.get(recipeIds.get(i)).getName();
-							  float starRating = recipeMap.get(recipeIds.get(i)).getStarRating();
-							  int prepTime = recipeMap.get(recipeIds.get(i)).getPrepTime();
-							  int cookTime = recipeMap.get(recipeIds.get(i)).getCookTime();
-						%>
-							<tr><td><div>
-								Name: <%= name %><br>
-								Stars: <%= starRating %><br>
-								Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
-							</div></td></tr>
-						<%
-						  }
-						%>
-						
+			    		<tbody>
+				    	
+				    		<%
+							
+							// Loop through all of the restauraunts and display based on true/false boolean
+							  for (int i = 0; i < restInList.size(); i++) {
+								  String name = restMap.get(restIds.get(i)).getName();
+								  String address = restMap.get(restIds.get(i)).getAddress();
+								  double rating = restMap.get(restIds.get(i)).getRating();
+								  String link = "restPage.jsp?restaurantId="+ restIds.get(i);
+							%>
+								<tr><td><div>
+									<a href = <%= link %> >
+							    		<%= name %>
+									</a><br>
+									Address: <%= address %><br>
+									Distance: Need to Calculate<br>
+									Stars: <%= rating %><br>
+								</div></td></tr>
+							<%
+							  }
+							%>
+				    	
+				    	
+							<%
+							
+							// Loop through all of the recipes and display based on true/false boolean
+							  for (int i = 0; i < recipeInList.size(); i++) {
+								  String name = recipeMap.get(recipeIds.get(i)).getName();
+								  float starRating = recipeMap.get(recipeIds.get(i)).getStarRating();
+								  int prepTime = recipeMap.get(recipeIds.get(i)).getPrepTime();
+								  int cookTime = recipeMap.get(recipeIds.get(i)).getCookTime();
+								  String link = "recipePage.jsp?recipeId="+ recipeIds.get(i);
+							%>
+								<tr><td><div>
+									<a href = <%= link %> >
+							    		<%= name %>
+									</a><br>
+									Stars: <%= starRating %><br>
+									Prep time: <%= prepTime %> mins    Cook time: <%= cookTime %> mins
+								</div></td></tr>
+							<%
+							  }
+							%>
+						</tbody>
 			       </table>
 		       </div>
 		    </div>
@@ -94,6 +101,12 @@
 				<button onclick="returnToResults()">Return to Results Page</button><br><br>
 				<button onclick="returnToSearch()">Return to Search Page</button><br>
 			</div>
+		  </div>
+		  <!-- Row for the edit button -->
+		  <div class="row">
+		  	<input type="button" value="Edit" class="styled-button-2" id="edit">
+			<input type="button" value="Delete" class="styled-button-2" id="deleteButton">
+		  
 		  </div>
 		</div>
 	
@@ -115,6 +128,15 @@
 				else if(link == "3"){
 					window.location.href = 'doNotShow.jsp';
 				}
+			}
+		</script>
+		<script>
+			var edit = document.getElementById("edit");
+			var delete = document.getElementById("deleteButton");
+	
+			edit.onclick = function() {
+			    deleteButton.style.visibility = "visible";
+	
 			}
 		</script>
 	

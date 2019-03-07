@@ -12,6 +12,10 @@ button, select {
     height: 200%;
 }
 
+#deleteButton {
+	visibility: hidden;
+}
+
 .listTable {
 	overflow:hidden;
     overflow-y: scroll;
