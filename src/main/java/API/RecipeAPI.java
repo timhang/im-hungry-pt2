@@ -53,9 +53,48 @@ public class RecipeAPI {
 		return recipes;
 	}
 	
+	public static ArrayList<Integer> getFavorites(){
+		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
+		for(int i = 0 ; i < recipes.size(); i++){
+			if(allRecipes.get(recipes.get(i)).getFavorite().equals(true)){
+				recipeInList.add(recipes.get(i));
+			}
+			System.out.println("recipe: " + allRecipes.get(recipes.get(i)).getFavorite());
+		}
+		
+		System.out.println("Recipes in List: " + recipeInList.size());
+		return recipeInList;
+	}
+	public static ArrayList<Integer> getToExplores(){
+		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
+		for(int i = 0 ; i < recipes.size(); i++){
+			if(allRecipes.get(recipes.get(i)).getToExplore().equals(true)){
+				recipeInList.add(recipes.get(i));
+			}
+			System.out.println("recipe: " + allRecipes.get(recipes.get(i)).getToExplore());
+		}
+		
+		System.out.println("Recipes in List: " + recipeInList.size());
+		return recipeInList;
+	}
+	public static ArrayList<Integer> getDoNotShows(){
+		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
+		for(int i = 0 ; i < recipes.size(); i++){
+			if(allRecipes.get(recipes.get(i)).getDoNotShow().equals(true)){
+				recipeInList.add(recipes.get(i));
+			}
+			System.out.println("recipe: " + allRecipes.get(recipes.get(i)).getDoNotShow());
+		}
+		
+		System.out.println("Recipes in List: " + recipeInList.size());
+		return recipeInList;
+	}
+	
 	public static HashMap<Integer, Recipe> getRecipeMap(){
 		return allRecipes;
 	}
+	
+	
 	public static HashMap<Integer, Recipe> call_me(String searchTerm, int number) throws Exception {
 		HashMap<Integer, Recipe> newRecipes = new HashMap<Integer, Recipe>();
 		ArrayList<Integer> newRecipeIds= new ArrayList<Integer>();

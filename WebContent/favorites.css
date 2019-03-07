@@ -11,3 +11,34 @@ button, select {
 	width: 45%;
     height: 200%;
 }
+
+#deleteButton {
+	visibility: hidden;
+}
+#moveButton {
+	visibility: hidden;
+}
+#moveDropdown {
+	visibility: hidden;
+	width: 10%;
+}
+
+.listTable {
+	overflow:hidden;
+    overflow-y: scroll;
+    height: 50%;
+}
+
+table, th{
+	border-collapse: separate;
+	border-spacing: 10px 0;
+	width: 50%;
+}
+
+tr:nth-child(even) {
+    background-color: #C4C4C4;
+}
+
+td {
+  padding: 10px 0;
+}

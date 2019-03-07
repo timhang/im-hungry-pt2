@@ -19,6 +19,9 @@
 		String name = currRest.getName();
 		String address = currRest.getAddress();
 		String phoneNumber = currRest.getPhoneNumber();
+		if(phoneNumber == null){
+			phoneNumber = "Phone Number Unavailable";
+		}
 		String URL = currRest.getURL();
 		String map = "googleMap.html";
 		double lat = currRest.getLatitude();
@@ -33,6 +36,7 @@
 		    	<a href = <%= map %> >
 		    		<%= address %>
 				</a><br>
+				<br>
 		    	<p>
 		    		<%= phoneNumber %> 
 		    	</p><br>
@@ -42,27 +46,66 @@
 		    
 		    </div>
 		    <div class="col-lg-4">
-		    	<button onclick="printableView()">Printable View</button><br><br>
-		    	<button onclick="backToResults()">Back to Results</button><br><br>
-				<div class="dropdown">
-					<select>
-					  <option></option>
-					  <option value="favorites">Favorites</option>
-					  <option value="toExplore">To Explore</option>
-					  <option value="doNotShow">Do Not Show</option>
-					</select>
-					</div><br><br>
-				<button onclick="addToList()">Add to List</button><br>
-		    	
+		    	<div id="togglePrint">
+			    	<button onclick="printableView()">Printable View</button><br><br>
+			    	<button onclick="backToResults()">Back to Results</button><br><br>
+					<div class="dropdown">
+						<select id = "listSelect">
+						  <option></option>
+						  <option value="favorites">Favorites</option>
+						  <option value="toExplore">To Explore</option>
+						  <option value="doNotShow">Do Not Show</option>
+						</select>
+						</div><br><br>
+					<button onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add to List</button><br>
+		    	</div>
 		    </div>
 		  </div>
 		</div>
 	
-		<script>		 
+		<script>
+		
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
 			}
+			function printableView() {
+				var x = document.getElementById("togglePrint");
+				 if (x.style.display === "none") {
+				   x.style.display = "block";
+				 } else {
+				   x.style.display = "none";
+				 }
+				 window.print();
+				 
+				 if (x.style.display === "none") {
+					   x.style.display = "block";
+					 } else {
+					   x.style.display = "none";
+					 }
+			}
 			
+			function addToList(selectedIndex){
+				if(selectedIndex != "0"){
+					var xhttp = new XMLHttpRequest();
+					var url_string = window.location.href;
+			        var url = new URL(url_string);
+			        var id = parseFloat(url.searchParams.get("restaurantId"));
+					if(selectedIndex == "1"){
+						xhttp.open("GET", "addToList.jsp?type=restaurant&id="+id+"&list=fav", false);
+					}	
+					else if(selectedIndex == "2"){
+						xhttp.open("GET", "addToList.jsp?type=restaurant&id="+id+"&list=exp", false);
+					}
+					else if(selectedIndex == "3"){
+						xhttp.open("GET", "addToList.jsp?type=restaurant&id="+id+"&list=dns", false);
+					}
+					xhttp.send();
+					/* if(xhttp.responseText.trim().length()>0){
+						return false;
+					}
+					return true; */
+				}
+			}
 		</script>
 	
 	</body>
