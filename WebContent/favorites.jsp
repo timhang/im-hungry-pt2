@@ -30,8 +30,8 @@
 				restInList.add(restIds.get(i));
 			}
 		}
-		System.out.println(recipeInList.size());
-		System.out.println(restInList.size());
+		System.out.println("Recipes in List: " + recipeInList.size());
+		System.out.println("Restaurants in List: " + restInList.size());
 	%>
 		<div class="container-fluid">
 		 <h1 id="title">Favorites</h1>
