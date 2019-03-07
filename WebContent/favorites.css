@@ -12,6 +12,17 @@ button, select {
     height: 200%;
 }
 
+#deleteButton {
+	visibility: hidden;
+}
+#addButton {
+	visibility: hidden;
+}
+#addDropdown {
+	visibility: hidden;
+	width: 10%;
+}
+
 .listTable {
 	overflow:hidden;
     overflow-y: scroll;
