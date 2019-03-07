@@ -155,6 +155,12 @@
 
 	
 			editButton.onclick = function() {
+				if (editButton.value ==="Edit") {
+					editButton.value = "Done";
+				}
+			    else {
+			    	editButton.value = "Edit";
+			    }
 				 if (deleteButton.style.visibility === "hidden") {
 					   deleteButton.style.visibility = "visible";
 					 } else {
