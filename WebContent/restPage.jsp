@@ -19,6 +19,9 @@
 		String name = currRest.getName();
 		String address = currRest.getAddress();
 		String phoneNumber = currRest.getPhoneNumber();
+		if(phoneNumber == null){
+			phoneNumber = "Phone Number Unavailable";
+		}
 		String URL = currRest.getURL();
 		String map = "googleMap.html";
 		double lat = currRest.getLatitude();
@@ -33,6 +36,7 @@
 		    	<a href = <%= map %> >
 		    		<%= address %>
 				</a><br>
+				<br>
 		    	<p>
 		    		<%= phoneNumber %> 
 		    	</p><br>
