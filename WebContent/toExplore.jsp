@@ -58,8 +58,8 @@
 								</a></div>
 								<div style="float:left;width:50%;">Address: <%= address %></div>
 								<div style = "float:right;text-align:right;width:50%">$<%= priceRange %></div>
-								<div>Minutes: <%= travelTime %></div>
 								<div>Rating: <%= rating %></div>
+								<div>Minutes: <%= travelTime %></div>
 							</div></td></tr>
 						<%
 						  }

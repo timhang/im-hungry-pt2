@@ -117,10 +117,10 @@
 					out.println("<tr>");
 					out.println("<td><div>");
 					out.println("<div>Name: " + "<a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a></div>");
-					out.println("<div>Minutes: "+ allRestaurants.get(restIDs.get(i)).getTravelTime()+"</div>");
-					out.println("<div style = float:right;text-align:right;width:50% >$" + allRestaurants.get(restIDs.get(i)).getPriceRange()+"</div>");
 					out.println("<div style= float:left;width:50% >Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</div>");
-					out.println("<div>Rating: " + allRestaurants.get(restIDs.get(i)).getRating()+"</div><br>");
+					out.println("<div style = float:right;text-align:right;width:50% >$" + allRestaurants.get(restIDs.get(i)).getPriceRange()+"</div>");
+					out.println("<div>Rating: " + allRestaurants.get(restIDs.get(i)).getRating()+"</div>");
+					out.println("<div>Minutes: "+ allRestaurants.get(restIDs.get(i)).getTravelTime()+"</div>");
 					out.println("</div></td>");
 					
 					out.println("<td><div>");
