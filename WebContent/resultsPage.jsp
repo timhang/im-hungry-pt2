@@ -40,29 +40,30 @@
 						System.out.println("inside set state 1");
 					}
 				}
-				ArrayList<String> imgArr;
-				if(ImageAPI.getState() == false){
+				ArrayList<String> imgArr = ImageAPI.getImagesToDisplay(request.getParameter("searchText"));
+				/* if(ImageAPI.getState() == false){
 			    	imgArr = ImageAPI.call_me(request.getParameter("searchText"));
 			    	System.out.println(request.getParameter("numberType"));
 			    	ImageAPI.setState(true);
 				} else {
 					imgArr = ImageAPI.getImageArray();
-				}
-				
-				out.println("<div class='row'>");
-				out.println("<div class='col-lg-12'>");
-				for (int i = 0; i < imgArr.size()/2; i++) {
-					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
-				}
-				out.println("</div></div>");
-				out.println("<div class='row'>");
-				for (int i = imgArr.size()/2; i < imgArr.size(); i++) {
-					
-					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
-		    		
-				}
-				out.println("</div>");
-		       %>
+				} */
+				%>
+				<div class='row'>
+					<div class='col-lg-12'>
+						<%
+						for (int i = 0; i < imgArr.size()/2; i++) {
+							out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
+						}
+						%>
+				</div></div>
+				<div class='row'>
+					<%
+					for (int i = imgArr.size()/2; i < imgArr.size(); i++) {
+						out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");	
+					}
+			       %>
+		       </div>
 			    
 		    </div>
 		    <!-- Button column -->
@@ -148,50 +149,9 @@
 				}
 		       %>
 		       
-	       </table>
-		</div>
-				
-				<!-- <div class="resultsTable" align="center">
-					<table style="width:100%">
-						<tr>
-							<th style="font-size: 30px;">Restauraunt</th>
-							<th style="font-size: 30px;">Recipe</th>
-						</tr>
-						<tr>
-						    <td><a href="restPage.jsp">Blaze Pizza</a></td>
-						    <td><a href="recipePage.jsp">Margherita Pizza</a></td>
-						</tr>
-						<tr>
-						    <td>Bon Shabu</td>
-						    <td>Hotpot</td>
-						</tr>
-						<tr>
-						    <td>Meat Love</td>
-						    <td>Korean Barbeque</td>
-						</tr>
-						<tr>
-						    <td>Filler</td>
-						    <td>Filler</td>
-						</tr>
-						<tr>
-						    <td>Filler</td>
-						    <td>Filler</td>
-						</tr>
-						<tr>
-						    <td>Filler</td>
-						    <td>Filler</td>
-						</tr>
-						<tr>
-						    <td>Filler</td>
-						    <td>Filler</td>
-						</tr>
-						<tr>
-						    <td>Filler</td>
-						    <td>Filler</td>
-						</tr>
-					</table>
-				
-				</div> -->
+	       	</table>
+			</div>
+
 		    </div>
 		  </div>
 		</div>
