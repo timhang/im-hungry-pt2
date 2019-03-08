@@ -27,7 +27,7 @@ public class RecipeAPITest {
 	}
 
 	@Test
-	public void testGetFavorites() {
+	public void testGetLists() {
 		//test two cases; true and false scenarios
 		ArrayList<Integer> recipes = new ArrayList<Integer>();
 		recipes.add(1);
