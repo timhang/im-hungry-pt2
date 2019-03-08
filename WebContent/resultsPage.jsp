@@ -51,12 +51,12 @@
 				
 				out.println("<div class='row'>");
 				out.println("<div class='col-lg-12'>");
-				for (int i = 0; i < 5; i++) {
+				for (int i = 0; i < imgArr.size()/2; i++) {
 					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
 				}
 				out.println("</div></div>");
 				out.println("<div class='row'>");
-				for (int i = 5; i < imgArr.size(); i++) {
+				for (int i = imgArr.size()/2; i < imgArr.size(); i++) {
 					
 					out.println("<div style = display:inline-block id = img"+(i+1)+"><img id = insideImg src = "+ imgArr.get(i)+"></div>");
 		    		
