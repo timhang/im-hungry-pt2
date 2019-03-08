@@ -11,26 +11,42 @@
 	
 	<body>
 		<h1 class="title"> I'm Hungry </h1>
-		<form method = "POST" action = "resultsPage.jsp">
+		<form method = "POST" onsubmit="return myFunction()" action = "resultsPage.jsp">
 		<div class="userInput"> 
 	    	<input id="searchText" name="searchText" type="text" placeholder="Enter Food" style="width: 150px; height: 20px">	
-	    	<input id="integerBox" title="Number of items to show in results" name="numberType" value="5" min="1" style="width: 30px; height: 20px">
+	    	<input id="integerBox" title="Number of items to show in results" name="numberType" min="1" style="width: 30px; height: 20px">
 	   	 </div>
 	    
 	    <div class = "wrapper">
-	    	<button type = "submit" id="feedMeButton" onclick="myFunction()"><span class="rainbow">Feed Me!</span></button>
+	    	<button type = "submit" id="feedMeButton"><span class="rainbow">Feed Me!</span></button>
 			
 		</div>
 		</form>
 		
 		<script>
 			function myFunction() {
-
+		        var searchText = document.getElementById('searchText').value;
+			  	var intNum = document.getElementById('integerBox').value;
+			  	
+			  	if(searchText === "" || searchText ===null){
+			  		//alert("Please enter dish name");
+			  		return false;
+			  	}
+			  	
+			  	if(intNum === "" || intNum === null){
+			  		document.getElementById('integerBox').value = 5;
+			  	}
+			  	if (intNum === "0" || intNum === 0){
+			  		//alert("Please enter an integer value greater than 0");
+			  		return false;
+			  	}
+			  	
 			  	document.getElementById('feedMeButton').setAttribute("id", "smiley");
-			  	var searchText = document.getElementById('searchText').value;
+			  	
 			  	sessionStorage.setItem('searchText',searchText);
 			  	
-			  	window.location.href = 'resultsPage.jsp';
+			  	//window.location.href = 'resultsPage.jsp';
+			  	return true;
 			}
 			setInputFilter(document.getElementById("integerBox"), function(value) {
 				  return /^\d*$/.test(value);

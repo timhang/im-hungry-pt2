@@ -28,6 +28,12 @@ public static ArrayList<String> getImageArray(){
 	 state = called;
  }
  
+ public static ArrayList<String> getImagesToDisplay(String search, int num) {
+	 if(search.equals("empty_string") && num == Integer.MIN_VALUE){
+		 return imageArray;
+	 }
+ }
+ 
  public static ArrayList<String> call_me(String query) throws Exception {
 
 
