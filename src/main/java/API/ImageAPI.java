@@ -12,6 +12,10 @@ public class ImageAPI {
  private static ArrayList<String> imageArray;
  private static String searchTerm;
  
+ public static void setSearchTerm(String st) {
+	 searchTerm = st;
+ }
+ 
  public static String getSearchTerm() {
 	 return searchTerm;
  }
@@ -28,18 +32,26 @@ public static ArrayList<String> getImageArray(){
 	 state = called;
  }
  
- public static ArrayList<String> getImagesToDisplay(String search, int num) {
-	 if(search.equals("empty_string") && num == Integer.MIN_VALUE){
+ public static ArrayList<String> getImagesToDisplay(String search) throws Exception {
+	 if(search == null){
 		 return imageArray;
+	 } else if (search.equals(searchTerm)){
+		 return imageArray;
+	 } else {
+		 return call_me(search);
 	 }
  }
  
  public static ArrayList<String> call_me(String query) throws Exception {
-
+	 	String[] splitString = query.split(" ");
+		String combinedSearch = "";
+		for(int i = 0; i<splitString.length; i++) {
+			combinedSearch += splitString[i];
+		}
 
 	    ArrayList<String> arr = new ArrayList<String>();
 	    URL url = new URL(
-	    		baseImageURL + query);
+	    		baseImageURL + combinedSearch);
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
 	    conn.setRequestProperty("Accept", "application/json");
