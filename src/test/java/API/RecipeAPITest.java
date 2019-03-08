@@ -64,6 +64,7 @@ public class RecipeAPITest {
 	public void testCall_me() {
 		RecipeAPI recipeAPI = new RecipeAPI();
 		HashMap<Integer, Recipe> myHash = new HashMap<Integer, Recipe>();
+		//non-empty resutls cases
 		try {
 			assertEquals("Checking the size of return recipes", recipeAPI.call_me("burger", 5).size(), 5);
 		} catch (Exception e) {
