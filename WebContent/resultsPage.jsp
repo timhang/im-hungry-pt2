@@ -32,14 +32,14 @@
 		    <div class="col-lg-8 text-center">
 		    	
 				<%
-				if(request.getParameter("searchText")!=null && request.getParameter("numberType")!=null){
+				/* if(request.getParameter("searchText")!=null && request.getParameter("numberType")!=null){
 					if(!request.getParameter("searchText").equals(ImageAPI.getSearchTerm())){
 						ImageAPI.setState(false);
 						RestAPI.setState(false);
 						RecipeAPI.setState(false);
 						System.out.println("inside set state 1");
 					}
-				}
+				} */
 				ArrayList<String> imgArr = ImageAPI.getImagesToDisplay(request.getParameter("searchText"));
 				/* if(ImageAPI.getState() == false){
 			    	imgArr = ImageAPI.call_me(request.getParameter("searchText"));
@@ -94,11 +94,13 @@
 					<th style="font-size: 30px;">Recipe</th>
 				</tr>
 				<%
-				ArrayList<Integer> restIDs = new ArrayList<Integer>();
-				ArrayList<Integer> recipeIds = new ArrayList<Integer>();
-				HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
-				HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
-				if(RestAPI.getState() == false || RecipeAPI.getState() == false){
+				ArrayList<Integer> restIDs = RestAPI.resultsPageList(request.getParameter("searchText"), request.getParameter("numberType"));
+				ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"), request.getParameter("numberType"));
+				HashMap<Integer, Restaurant> allRestaurants = RestAPI.getRestaurantMap();
+				HashMap<Integer, Recipe> allRecipes = RecipeAPI.getRecipeMap();
+				/* HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
+				HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>(); */
+				/* if(RestAPI.getState() == false || RecipeAPI.getState() == false){
 				
 					allRestaurants = RestAPI.call_me(request.getParameter("searchText"), Integer.valueOf(request.getParameter("numberType")));
 					restIDs = RestAPI.getRestIDs();
@@ -112,37 +114,59 @@
 					allRecipes = RecipeAPI.getRecipeMap();
 					restIDs = RestAPI.getRestIDs();
 					recipeIds = RecipeAPI.getRecipeId();
-				}
+				} */
 				int size = Math.max(restIDs.size(),recipeIds.size());
 				
 		    	for (int i = 0; i < size; i++) {
 		    		if(i<restIDs.size()){
-						out.println("<tr>");
-						out.println("<td><div>");
-						out.println("<div><a href=restPage.jsp?restaurantId="+ restIDs.get(i)+ ">" + allRestaurants.get(restIDs.get(i)).getName()+ "</a></div>");
-						out.println("<div style= float:left;width:70% >Address: " + allRestaurants.get(restIDs.get(i)).getAddress()+"</div>");
-						out.println("<div style = float:right;text-align:right;width:30% >$" + allRestaurants.get(restIDs.get(i)).getPriceRange()+"</div>");
-						out.println("<div>Rating: " + allRestaurants.get(restIDs.get(i)).getRating()+"</div>");
-						out.println("<div>Driving Time: "+ allRestaurants.get(restIDs.get(i)).getTravelTime()+"</div>");
-						out.println("</div></td>");
+		    			int restId = restIDs.get(i);
+		    			String name = allRestaurants.get(restId).getName();
+		    			String address = allRestaurants.get(restId).getAddress();
+		    			double priceRange = allRestaurants.get(restId).getPriceRange();
+		    			double rating = allRestaurants.get(restId).getRating();
+		    			String travelTime = allRestaurants.get(restId).getTravelTime();
+		    			String link = "restPage.jsp?restaurantId="+restId;
+		    	%>
+		    	
+						<tr>
+						<td><div>
+							<div><a href=<%= link %> > <%= name %> </a> </div>
+							<div style= "float:left;width:70%;" >Address: <%= address %></div>
+							<div style = "float:right;text-align:right;width:30%;" >$<%= priceRange %></div>
+							<div>Rating: <%= rating %> </div>
+							<div>Driving Time: <%= travelTime %></div>
+						</div></td>
+		    	<%
 		    		} else {
-		    			out.println("<tr>");
-						out.println("<td><div>");
-						out.println("</div></td>");
+		    	%>
+		    			<tr>
+						<td><div>
+						</div></td>
+		    	<%	
 		    		}
 					
 		    		if(i<recipeIds.size()){
-						out.println("<td><div>");
-						out.println("<div><a href=recipePage.jsp?recipeId=" +recipeIds.get(i) + ">" + allRecipes.get(recipeIds.get(i)).getName()+"</a></div>");
-						out.println("<div>Stars: " + allRecipes.get(recipeIds.get(i)).getStarRating()+"</div>");
-						out.println("<div style = float:left;width:50% >Prep time: " + allRecipes.get(recipeIds.get(i)).getPrepTime() + " mins");    
-						out.println("<div style = float:right;width:50% >Cook time: " + allRecipes.get(recipeIds.get(i)).getCookTime()+ " mins");
-						out.println("</div></td>");
-						out.println("</tr>");
+		    			int recipeId = recipeIds.get(i);
+		    			String name = allRecipes.get(recipeId).getName();
+		    			float rating = allRecipes.get(recipeId).getStarRating();
+		    			int prepTime = allRecipes.get(recipeId).getPrepTime();
+		    			int cookTime = allRecipes.get(recipeId).getCookTime();
+		    			String link = "recipePage.jsp?recipeId="+recipeId;
+		    	%>
+						<td><div>
+							<div><a href=<%= link %> > <%= name %></a></div>
+							<div>Rating: <%= rating %></div>
+							<div style = "float:left;width:50%;" >Prep time: <%= prepTime %>  mins</div>    
+						    <div style = "float:right;width:50%" >Cook time: <%= cookTime %> mins</div>
+						</div></td>
+						</tr>
+				<%
 		    		} else {
-		    			out.println("<td><div>");
-		    			out.println("</div></td>");
-						out.println("</tr>");
+		    	%>
+		    			<td><div>
+		    			</div></td>
+						</tr>
+				<%
 		    		}
 		    		
 		    		

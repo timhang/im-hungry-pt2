@@ -55,16 +55,18 @@ public class RestAPI {
   
 	public static ArrayList<Integer> listInclusions(int num){
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
-		for(int i = 0; i<num; i++) {
+		for(int i = 0; i<restIDs.size(); i++) {
 			//First time through, checking putting favorites on top and not showing do not show
+			if(resultsList.size()==num) {break;}
 			if(allRestaurants.get(restIDs.get(i)).getDoNotShow() == false) {
 				if(allRestaurants.get(restIDs.get(i)).getFavorite() == true) {
 					resultsList.add(restIDs.get(i));
 				}
 			}
 		}
-		for(int i = 0; i<num; i++) {
+		for(int i = 0; i<restIDs.size(); i++) {
 			//Adding the rest to list
+			if(resultsList.size()==num) {break;}
 			if(allRestaurants.get(restIDs.get(i)).getDoNotShow() == false && allRestaurants.get(restIDs.get(i)).getFavorite() == false) {
 				resultsList.add(restIDs.get(i));
 			}
