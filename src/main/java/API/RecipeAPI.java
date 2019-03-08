@@ -45,7 +45,6 @@ public class RecipeAPI {
 	
 	public static void reRank() {
 		
-		/*
 		for(int i = 0; i < recipes.size(); i++) {
 			for(int j = i; j < recipes.size(); j++) {
 				System.out.println("1 - " + allRecipes.get(recipes.get(j)).getPrepTime());
@@ -55,7 +54,6 @@ public class RecipeAPI {
 				}
 			}
 		}
-		*/
 		
 		
 		System.out.println("allRecipes size" + allRecipes.size());
@@ -143,6 +141,7 @@ public class RecipeAPI {
 			return listInclusions(numResults);
 		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
 			//Searching for the same term but less number
+			numResults = Integer.valueOf(number);
 			return listInclusions(Integer.valueOf(number));
 			
 		} else {

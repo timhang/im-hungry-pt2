@@ -100,6 +100,7 @@ public class RestAPI {
 			return listInclusions(numResults);
 		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
 			//Searching for the same term but less number
+			numResults = Integer.valueOf(number);
 			return listInclusions(Integer.valueOf(number));
 			
 		} else {
