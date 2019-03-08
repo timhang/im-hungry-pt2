@@ -85,7 +85,7 @@ public class RecipeAPITest {
 	*/
 
 	@Test
-	public void testResultsPageList() {
+	public void testResultsPageList() throws NumberFormatException, Exception {
 		
 		
 		RecipeAPI recipeAPI = new RecipeAPI();
@@ -97,6 +97,47 @@ public class RecipeAPITest {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 5, recipeAPI.getRecipeId().size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 5, recipeAPI.getCurrentRecipeId().size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("Mismatch on results page list - null tests", "burger", recipeAPI.getSearchString());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 5, recipeAPI.getNumResults());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		//input parameters: string query, string number
 		try {
@@ -191,36 +232,65 @@ public class RecipeAPITest {
 		}
 		
 		
+		recipeAPI.getRecipeMap().get(recipeAPI.resultsPageList("burger", "5").get(1)).setFavorite(true);
+		recipeAPI.getRecipeMap().get(recipeAPI.resultsPageList("burger", "5").get(1)).setToExplore(true);
+		recipeAPI.getRecipeMap().get(recipeAPI.resultsPageList("burger", "5").get(2)).setToExplore(true);
+		recipeAPI.getRecipeMap().get(recipeAPI.resultsPageList("burger", "5").get(2)).setFavorite(true);
+		recipeAPI.getRecipeMap().get(recipeAPI.resultsPageList("burger", "5").get(3)).setDoNotShow(true);
+		recipeAPI.getRecipeMap().get(recipeAPI.resultsPageList("burger", "5").get(3)).setFavorite(true);
+		recipeAPI.getRecipeMap().get(recipeAPI.resultsPageList("burger", "5").get(3)).setToExplore(true);
 		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 3, recipeAPI.getFavorites().size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("Mismatch on results page list - null tests", 2, recipeAPI.getToExplores().size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("Mismatch on results page list - null tests", 1, recipeAPI.getDoNotShows().size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 9, recipeAPI.resultsPageList("burger", "10").size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 1, recipeAPI.resultsPageList("burger", "1").size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
-	@Test
-	public void testGetLists() {
-		// test two cases; true and false scenarios
-//		ArrayList<Integer> recipes = new ArrayList<Integer>();
-//		recipes.add(1);
-//		recipes.add(2);
-//		HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
-//		Recipe recipeOne = new Recipe(1);
-//		Recipe recipeTwo = new Recipe(2);
-//		recipeOne.setFavorite(true);
-//		recipeTwo.setFavorite(false);
-//		recipeOne.setDoNotShow(true);
-//		recipeTwo.setDoNotShow(false);
-//		recipeOne.setToExplore(true);
-//		recipeTwo.setToExplore(false);
-//		RecipeAPI testObjA = new RecipeAPI();
-//		allRecipes.put(1, recipeOne);
-//		allRecipes.put(2, recipeTwo);
-//		
-//		testObjA.setRecipeId(recipes);
-//		testObjA.setRecipeMap(allRecipes);
-//		assertEquals("Mismatch on get favorites result", testObjA.getFavorites().size(), 1);
-//		assertEquals("Mismatch on get Do Not Show result", testObjA.getDoNotShows().size(), 1);
-//		assertEquals("Mismatch on get To Explore result", testObjA.getToExplores().size(), 1);
-	}
+
 
 
 	@Test

@@ -278,12 +278,12 @@ public class RestAPI {
 	    }
 	    for(int i = 0; i < toExploreList.size(); i ++) {
 	    	if(newRests.containsKey(toExploreList.get(i))) {
-	    		newRests.get(toExploreList.get(i)).setFavorite(true);
+	    		newRests.get(toExploreList.get(i)).setToExplore(true);
 	    	}
 	    }
 	    for(int i = 0; i < doNotShowList.size(); i ++) {
 	    	if(newRests.containsKey(doNotShowList.get(i))) {
-	    		newRests.get(doNotShowList.get(i)).setFavorite(true);
+	    		newRests.get(doNotShowList.get(i)).setDoNotShow(true);
 	    	}
 	    }
 	    allRestaurants.putAll(newRests);
