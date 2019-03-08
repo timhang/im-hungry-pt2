@@ -18,16 +18,13 @@ public class RestAPI {
 	private static ArrayList<Integer> restIDs = new ArrayList<Integer>();
 	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
 	private static Boolean state = false;
-//	public static void main (String[] args) {
-//		try {
-//			RestAPI.call_me("burger",10);
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+
+	
 	public static HashMap<Integer, Restaurant> getRestaurantMap(){
 		return allRestaurants;
+	}
+	public static void setRestaurantMap(HashMap<Integer, Restaurant> myHash) {
+		allRestaurants = myHash;
 	}
 	
 	public static Boolean getState() {
@@ -40,6 +37,10 @@ public class RestAPI {
 	
 	public static ArrayList<Integer> getRestIDs(){
 		return restIDs;
+	}
+	
+	public static void setRestIDs(ArrayList<Integer> arr) {
+		restIDs = arr;
 	}
 	
 	public static ArrayList<Integer> getFavorites(){
