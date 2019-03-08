@@ -18,8 +18,17 @@ public class RestAPI {
 	private static ArrayList<Integer> restIDs = new ArrayList<Integer>();
 	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
 	private static Boolean state = false;
+	private static String searchString;
+	private static int numResults = 0;
+//	public static void main (String[] args) {
+//		try {
+//			RestAPI.call_me("burger",10);
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-	
 	public static HashMap<Integer, Restaurant> getRestaurantMap(){
 		return allRestaurants;
 	}
@@ -39,8 +48,50 @@ public class RestAPI {
 		return restIDs;
 	}
 	
+
 	public static void setRestIDs(ArrayList<Integer> arr) {
 		restIDs = arr;
+  }
+  
+	public static ArrayList<Integer> listInclusions(int num){
+		ArrayList<Integer> resultsList = new ArrayList<Integer>();
+		for(int i = 0; i<restIDs.size(); i++) {
+			//First time through, checking putting favorites on top and not showing do not show
+			if(resultsList.size()==num) {break;}
+			if(allRestaurants.get(restIDs.get(i)).getDoNotShow() == false) {
+				if(allRestaurants.get(restIDs.get(i)).getFavorite() == true) {
+					resultsList.add(restIDs.get(i));
+				}
+			}
+		}
+		for(int i = 0; i<restIDs.size(); i++) {
+			//Adding the rest to list
+			if(resultsList.size()==num) {break;}
+			if(allRestaurants.get(restIDs.get(i)).getDoNotShow() == false && allRestaurants.get(restIDs.get(i)).getFavorite() == false) {
+				resultsList.add(restIDs.get(i));
+			}
+		}
+		return resultsList;
+	}
+	
+	public static ArrayList<Integer> resultsPageList(String query, String number) throws NumberFormatException, Exception{
+
+		if(query == null || number == null) {
+			//returning from other pages other than searchPage
+			return listInclusions(numResults);
+		} else if (query.equals(searchString) && Integer.valueOf(number) == numResults){
+			//Searching for the same term and and same number
+			return listInclusions(numResults);
+		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
+			//Searching for the same term but less number
+			return listInclusions(Integer.valueOf(number));
+			
+		} else {
+			//Searching for more items or different terms or both
+			call_me(query, Integer.valueOf(number));
+			return listInclusions(numResults);
+		}
+
 	}
 	
 	public static ArrayList<Integer> getFavorites(){
@@ -180,6 +231,8 @@ public class RestAPI {
 		    System.out.println(test2.get("name"));
 		    System.out.println("");
 	    }
+	    searchString = searchTerm;
+	    numResults = resultLimit; 
 	    allRestaurants = newRests;
 	    restIDs = newRestIDs;
 	    reRank();
