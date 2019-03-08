@@ -20,7 +20,6 @@ public class RecipeAPI {
 	private static ArrayList<Integer> recipes = new ArrayList<Integer>();
 	private static ArrayList<Integer> currentRecipeIds = new ArrayList<Integer>();
 	private static HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
-	private static Boolean state = false;
 	private static String searchString;
 	private static int numResults = 0;
 	private static ArrayList<Integer> favoritesList = new ArrayList<Integer>();
@@ -34,13 +33,7 @@ public class RecipeAPI {
 //		}
 //	}
 	
-	public static Boolean getState() {
-		return state;
-	}
-	
-	public static void setState(Boolean called) {
-		state = called;
-	}
+
 	
 	
 	public static void reRank() {
@@ -72,33 +65,33 @@ public class RecipeAPI {
 		}
 	}
 	
-	public static void setRecipeId(ArrayList<Integer> arr){
-		recipes = arr;
-	}
+//	public static void setRecipeId(ArrayList<Integer> arr){
+//		recipes = arr;
+//	}
 	
 	public static ArrayList<Integer> getRecipeId(){
 		return recipes;
 	}
 	
-	public static void setCurrentRecipeId(ArrayList<Integer> arr){
-		currentRecipeIds = arr;
-	}
+//	public static void setCurrentRecipeId(ArrayList<Integer> arr){
+//		currentRecipeIds = arr;
+//	}
 	
 	public static ArrayList<Integer> getCurrentRecipeId(){
 		return currentRecipeIds;
 	}
 	
-	public static void setSearchString(String s) {
-		searchString = s;
-	}
+//	public static void setSearchString(String s) {
+//		searchString = s;
+//	}
 	
 	public static String getSearchString() {
 		return searchString;
 	}
 	
-	public static void setNumResults(int num) {
-		numResults = num;
-	}
+//	public static void setNumResults(int num) {
+//		numResults = num;
+//	}
 	
 	public static int getNumResults() 
 	{
@@ -196,9 +189,9 @@ public class RecipeAPI {
 		return allRecipes;
 	}
 	
-	public static void setRecipeMap(HashMap<Integer, Recipe> mMap) {
-		allRecipes = mMap;
-	}
+//	public static void setRecipeMap(HashMap<Integer, Recipe> mMap) {
+//		allRecipes = mMap;
+//	}
 	
 	
 	public static HashMap<Integer, Recipe> call_me(String searchTerm, int number) throws Exception {
@@ -352,12 +345,12 @@ public class RecipeAPI {
 	    }
 	    for(int i = 0; i < toExploreList.size(); i ++) {
 	    	if(newRecipes.containsKey(toExploreList.get(i))) {
-	    		newRecipes.get(toExploreList.get(i)).setFavorite(true);
+	    		newRecipes.get(toExploreList.get(i)).setToExplore(true);
 	    	}
 	    }
 	    for(int i = 0; i < doNotShowList.size(); i ++) {
 	    	if(newRecipes.containsKey(doNotShowList.get(i))) {
-	    		newRecipes.get(doNotShowList.get(i)).setFavorite(true);
+	    		newRecipes.get(doNotShowList.get(i)).setDoNotShow(true);
 	    	}
 	    }
 	    allRecipes.putAll(newRecipes);

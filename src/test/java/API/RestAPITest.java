@@ -74,7 +74,7 @@ public class RestAPITest {
 	}
 
 	@Test
-	public void testResultsPageList() {
+	public void testResultsPageList() throws NumberFormatException, Exception {
 		
 		RestAPI restAPI = new RestAPI();
 		
@@ -159,8 +159,34 @@ public class RestAPITest {
 			e.printStackTrace();
 		}
 		
+		restAPI.getRestaurantMap().get(restAPI.resultsPageList("burger", "5").get(1)).setFavorite(true);
+		restAPI.getRestaurantMap().get(restAPI.resultsPageList("burger", "5").get(1)).setToExplore(true);
+		restAPI.getRestaurantMap().get(restAPI.resultsPageList("burger", "5").get(2)).setToExplore(true);
+		restAPI.getRestaurantMap().get(restAPI.resultsPageList("burger", "5").get(2)).setFavorite(true);
+		restAPI.getRestaurantMap().get(restAPI.resultsPageList("burger", "5").get(3)).setDoNotShow(true);
+		restAPI.getRestaurantMap().get(restAPI.resultsPageList("burger", "5").get(3)).setFavorite(true);
+		restAPI.getRestaurantMap().get(restAPI.resultsPageList("burger", "5").get(3)).setToExplore(true);
+		
 		try {
-			assertEquals("Mismatch on results page list - null tests", 5, restAPI.resultsPageList(null, "5").size());
+			assertEquals("Mismatch on results page list - null tests", 3, restAPI.getFavorites().size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("Mismatch on results page list - null tests", 2, restAPI.getToExplores().size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("Mismatch on results page list - null tests", 1, restAPI.getDoNotShows().size());
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,7 +196,36 @@ public class RestAPITest {
 		}
 		
 		try {
-			assertEquals("Mismatch on results page list - null tests", 5, restAPI.resultsPageList("burger", null).size());
+			assertEquals("Mismatch on results page list - null tests", 4, restAPI.resultsPageList(null, "5").size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 4, restAPI.resultsPageList("burger", null).size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			assertEquals("Mismatch on results page list - null tests", 9, restAPI.resultsPageList("burger", "10").size());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertEquals("Mismatch on results page list - null tests", 1, restAPI.resultsPageList("burger", "1").size());
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -188,26 +243,26 @@ public class RestAPITest {
 	@Test
 	public void testGetThreeLists() {
 		//test two cases; true and false scenarios
-		ArrayList<Integer> restIDs = new ArrayList<Integer>();
-		restIDs.add(1);
-		restIDs.add(2);
-		HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
-		Restaurant restOne = new Restaurant(1);
-		Restaurant restTwo = new Restaurant(2);
-		restOne.setFavorite(true);
-		restTwo.setFavorite(false);
-		restOne.setDoNotShow(true);
-		restTwo.setDoNotShow(false);
-		restOne.setToExplore(true);
-		restTwo.setToExplore(false);
-		RestAPI restAPI = new RestAPI();
-		restAPI.setRestIDs(restIDs);
-		restAPI.setRestaurantMap(allRestaurants);
-		allRestaurants.put(1, restOne);
-		allRestaurants.put(2, restTwo);
-		assertEquals("Mismatch on get favorites result", restAPI.getFavorites().size(), 1);
-		assertEquals("Mismatch on get Do Not Show result", restAPI.getDoNotShows().size(), 1);
-		assertEquals("Mismatch on get To Explore result", restAPI.getToExplores().size(), 1);
+//		ArrayList<Integer> restIDs = new ArrayList<Integer>();
+//		restIDs.add(1);
+//		restIDs.add(2);
+//		HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
+//		Restaurant restOne = new Restaurant(1);
+//		Restaurant restTwo = new Restaurant(2);
+//		restOne.setFavorite(true);
+//		restTwo.setFavorite(false);
+//		restOne.setDoNotShow(true);
+//		restTwo.setDoNotShow(false);
+//		restOne.setToExplore(true);
+//		restTwo.setToExplore(false);
+//		RestAPI restAPI = new RestAPI();
+//		restAPI.setRestIDs(restIDs);
+//		restAPI.setRestaurantMap(allRestaurants);
+//		allRestaurants.put(1, restOne);
+//		allRestaurants.put(2, restTwo);
+//		assertEquals("Mismatch on get favorites result", restAPI.getFavorites().size(), 1);
+//		assertEquals("Mismatch on get Do Not Show result", restAPI.getDoNotShows().size(), 1);
+//		assertEquals("Mismatch on get To Explore result", restAPI.getToExplores().size(), 1);
 	}
 
 //	@Test
