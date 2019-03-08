@@ -189,9 +189,9 @@ public class RecipeAPI {
 		return allRecipes;
 	}
 	
-//	public static void setRecipeMap(HashMap<Integer, Recipe> mMap) {
-//		allRecipes = mMap;
-//	}
+	public static void setRecipeMap(HashMap<Integer, Recipe> mMap) {
+		allRecipes = mMap;
+	}
 	
 	
 	public static HashMap<Integer, Recipe> call_me(String searchTerm, int number) throws Exception {
