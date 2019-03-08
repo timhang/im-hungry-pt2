@@ -7,12 +7,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
 public class RecipeTest {
-	
+
 	@Test
 	public void testRecipeConstructor() {
-		
+
 		Recipe testObj1 = new Recipe(1);
 		assertEquals("Mismatch on id", testObj1.getId(), 1);
 	}
@@ -40,13 +39,11 @@ public class RecipeTest {
 		assertEquals("Mismatch on recipe prep time", testObj4.getPrepTime(), 10);
 	}
 
-	
-
 	@Test
 	public void testSetStarRating() {
 		Recipe testObj5 = new Recipe(5);
 		testObj5.setStarRating(2.0f);
-		Assert.assertEquals("Mismatch on recipe star rating",testObj5.getStarRating(), 2.0f, 0.0f);
+		Assert.assertEquals("Mismatch on recipe star rating", testObj5.getStarRating(), 2.0f, 0.0f);
 	}
 
 	@Test

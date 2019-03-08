@@ -16,7 +16,6 @@ public class ImageAPITest {
 		assertTrue(test);
 	}
 
-
 	@Test
 	public void testGetImageArray() {
 		ImageAPI testObj = new ImageAPI();
@@ -43,25 +42,28 @@ public class ImageAPITest {
 		ImageAPI testObj = new ImageAPI();
 		String searchTermZero = "";
 		String searchTermTwo = "pizza";
-		
+
 		ArrayList<String> arr = new ArrayList<String>();
 		try {
-		assertEquals("Checking the size of return images from display", 10, testObj.getImagesToDisplay(searchTermTwo).size());
+			assertEquals("Checking the size of return images from display", 10,
+					testObj.getImagesToDisplay(searchTermTwo).size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		ImageAPI.setSearchTerm("pizza");
 		try {
-			assertEquals("Checking the size of return images from display, repearted search term", 10, testObj.getImagesToDisplay(searchTermTwo).size());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			assertEquals("Checking the size of return images from display, repearted search term", 10,
+					testObj.getImagesToDisplay(searchTermTwo).size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		try {
-			assertEquals("Checking the size of return images from display", 10, testObj.getImagesToDisplay(null).size());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
+			assertEquals("Checking the size of return images from display", 10,
+					testObj.getImagesToDisplay(null).size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Test

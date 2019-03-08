@@ -33,10 +33,10 @@ public class RestaurantTest {
 		testObj4.setPhoneNumber("4321");
 		testObj4.setURL("4399.com");
 		testObj4.setRating(5.0);
-		
+
 		assertEquals("Mismatch on phone number", 14, testObj4.getPhoneNumber().length());
 		assertEquals("Mismatch on phone url", testObj4.getURL(), "4399.com");
-		Assert.assertEquals("Mismatch on recipe star rating",testObj4.getRating(), 5.0, 0.0);
+		Assert.assertEquals("Mismatch on recipe star rating", testObj4.getRating(), 5.0, 0.0);
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class RestaurantTest {
 		Restaurant testObj5 = new Restaurant(5);
 		testObj5.setLatitude(1.0);
 		testObj5.setLongitude(2.0);
-		Assert.assertEquals("Mismatch on latitude", testObj5.getLatitude(),1.0, 0.0);
+		Assert.assertEquals("Mismatch on latitude", testObj5.getLatitude(), 1.0, 0.0);
 		Assert.assertEquals("Mismatch on longitude", testObj5.getLongitude(), 2.0, 0.0);
 	}
 
