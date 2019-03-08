@@ -18,6 +18,7 @@ public class RecipeAPI {
 	private static final String baseRecipeUrl= "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?";
 	private static final String baseBulkUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=";
 	private static ArrayList<Integer> recipes = new ArrayList<Integer>();
+	private static ArrayList<Integer> currentRecipeIds = new ArrayList<Integer>();
 	private static HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
 	private static Boolean state = false;
 	private static String searchString;
@@ -49,6 +50,13 @@ public class RecipeAPI {
 				}
 			}
 		}
+		for(int i = 0; i < currentRecipeIds.size(); i++) {
+			for(int j = i; j < currentRecipeIds.size(); j++) {
+				if(allRecipes.get(currentRecipeIds.get(j)).getPrepTime() < allRecipes.get(currentRecipeIds.get(i)).getPrepTime()) {
+					Collections.swap(currentRecipeIds, i, j);
+				}
+			}
+		}
 		for(int i = 0; i < recipes.size(); i++) {
 			System.out.println(i+". "+allRecipes.get(recipes.get(i)).getPrepTime());
 		}
@@ -64,20 +72,22 @@ public class RecipeAPI {
 	
 	public static ArrayList<Integer> listInclusions(int num){
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
-		for(int i = 0; i<recipes.size(); i++) {
+		
+		for(int i = 0; i<currentRecipeIds.size(); i++) {
 			//First time through, checking putting favorites on top and not showing do not show
 			if(resultsList.size()==num) {break;}
-			if(allRecipes.get(recipes.get(i)).getDoNotShow() == false) {
-				if(allRecipes.get(recipes.get(i)).getFavorite() == true) {
-					resultsList.add(recipes.get(i));
+			if(allRecipes.get(currentRecipeIds.get(i)).getDoNotShow() == false) {
+				if(allRecipes.get(currentRecipeIds.get(i)).getFavorite() == true) {
+					resultsList.add(currentRecipeIds.get(i));
 				}
 			}
 		}
-		for(int i = 0; i<num; i++) {
+
+		for(int i = 0; i<currentRecipeIds.size(); i++) {
 			//Adding the rest to list
 			if(resultsList.size()==num) {break;}
-			if(allRecipes.get(recipes.get(i)).getDoNotShow() == false && allRecipes.get(recipes.get(i)).getFavorite() == false) {
-				resultsList.add(recipes.get(i));
+			if(allRecipes.get(currentRecipeIds.get(i)).getDoNotShow() == false && allRecipes.get(currentRecipeIds.get(i)).getFavorite() == false) {
+				resultsList.add(currentRecipeIds.get(i));
 			}
 		}
 		return resultsList;
@@ -295,6 +305,7 @@ public class RecipeAPI {
 	    }
 	    searchString = searchTerm;
 	    numResults = number;
+	    currentRecipeIds = newRecipeIds;
 	    for(int i = 0; i < favoritesList.size(); i ++) {
 	    	if(newRecipes.containsKey(favoritesList.get(i))) {
 	    		newRecipes.get(favoritesList.get(i)).setFavorite(true);

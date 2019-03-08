@@ -17,6 +17,8 @@ public class RestAPI {
 	//private static final String baseURL = "https://developers.zomato.com/api/v2.1/";
 	private static final String bulkURL = "https://developers.zomato.com/api/v2.1/search?entity_id=195071&entity_type=landmark";
 	private static ArrayList<Integer> restIDs = new ArrayList<Integer>();
+	private static ArrayList<Integer> currentRestIds = new ArrayList<Integer>();
+
 	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
 	private static Boolean state = false;
 	private static String searchString;
@@ -59,20 +61,22 @@ public class RestAPI {
   
 	public static ArrayList<Integer> listInclusions(int num){
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
-		for(int i = 0; i<restIDs.size(); i++) {
+
+		for(int i = 0; i<currentRestIds.size(); i++) {
 			//First time through, checking putting favorites on top and not showing do not show
 			if(resultsList.size()==num) {break;}
-			if(allRestaurants.get(restIDs.get(i)).getDoNotShow() == false) {
-				if(allRestaurants.get(restIDs.get(i)).getFavorite() == true) {
-					resultsList.add(restIDs.get(i));
+			if(allRestaurants.get(currentRestIds.get(i)).getDoNotShow() == false) {
+				if(allRestaurants.get(currentRestIds.get(i)).getFavorite() == true) {
+					resultsList.add(currentRestIds.get(i));
 				}
 			}
 		}
-		for(int i = 0; i<restIDs.size(); i++) {
+		
+		for(int i = 0; i<currentRestIds.size(); i++) {
 			//Adding the rest to list
 			if(resultsList.size()==num) {break;}
-			if(allRestaurants.get(restIDs.get(i)).getDoNotShow() == false && allRestaurants.get(restIDs.get(i)).getFavorite() == false) {
-				resultsList.add(restIDs.get(i));
+			if(allRestaurants.get(currentRestIds.get(i)).getDoNotShow() == false && allRestaurants.get(currentRestIds.get(i)).getFavorite() == false) {
+				resultsList.add(currentRestIds.get(i));
 			}
 		}
 		return resultsList;
@@ -148,9 +152,19 @@ public class RestAPI {
 				}
 			}
 		}
-		for(int i = 0; i < restIDs.size(); i++) {
-			System.out.println(i+". "+allRestaurants.get(restIDs.get(i)).getTravelTime());
+		for(int i = 0; i < currentRestIds.size(); i++) {
+			for(int j = i; j < currentRestIds.size(); j++) {
+				String[] splitI = allRestaurants.get(currentRestIds.get(i)).getTravelTime().split(" ");
+				String[] splitJ = allRestaurants.get(currentRestIds.get(j)).getTravelTime().split(" ");
+				if(Integer.valueOf(splitJ[0]) < Integer.valueOf(splitI[0])) {
+					Collections.swap(currentRestIds, i, j);
+				}
+			}
 		}
+		
+//		for(int i = 0; i < restIDs.size(); i++) {
+//			System.out.println(i+". "+allRestaurants.get(restIDs.get(i)).getTravelTime());
+//		}
 	}
 	
 	private static String travelTime(double lat1, double lon1, double lat2, double lon2, String key) throws Exception{
@@ -231,6 +245,7 @@ public class RestAPI {
 	    	newRest.setRating(userRating.getDouble("aggregate_rating"));
 	    	newRest.setURL(test2.getString("url"));
 	    	newRest.setPriceRange(test2.getDouble("average_cost_for_two"));
+	    	newRest.setPhoneNumber("(213)");
 	    	
 	    	String newTravelTime = travelTime(34.0224, -118.2851, newRest.getLatitude(), newRest.getLongitude(), "AIzaSyA8VQVUyJJIhDwm2hKITkLeCqUqyiL9Y1w");
 
@@ -246,7 +261,7 @@ public class RestAPI {
 	    }
 	    searchString = searchTerm;
 	    numResults = resultLimit;
-	    
+	    currentRestIds = newRestIDs;
 	    for(int i = 0; i < favoritesList.size(); i ++) {
 	    	if(newRests.containsKey(favoritesList.get(i))) {
 	    		newRests.get(favoritesList.get(i)).setFavorite(true);

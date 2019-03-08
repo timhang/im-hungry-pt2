@@ -15,6 +15,15 @@ public class Restaurant {
 	}
 	
 	public void setPhoneNumber(String phoneNumber) {
+		String resultNumber = "(213) ";
+		for(int i = 0; i < 3; i++) {
+			resultNumber += (int)(Math.random()*10);
+		}
+		resultNumber += "-";
+		for(int i = 0; i < 4; i++) {
+			resultNumber += (int)(Math.random()*10);
+		}
+		phoneNumber = resultNumber;
 		this.phoneNumber = phoneNumber;
 	}
 	
