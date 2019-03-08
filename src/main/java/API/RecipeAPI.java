@@ -153,10 +153,16 @@ public class RecipeAPI {
 	
 	
 	public static HashMap<Integer, Recipe> call_me(String searchTerm, int number) throws Exception {
+		String[] splitString = searchTerm.split(" ");
+		String combinedSearch = "";
+		for(int i = 0; i<splitString.length; i++) {
+			combinedSearch += splitString[i];
+		}
+		
 		HashMap<Integer, Recipe> newRecipes = new HashMap<Integer, Recipe>();
 		ArrayList<Integer> newRecipeIds= new ArrayList<Integer>();
 		
-	    String url = baseRecipeUrl+"query="+searchTerm+"&number="+number;
+	    String url = baseRecipeUrl+"query="+combinedSearch+"&number="+number;
 	    URL obj = new URL(url);
 	    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	    // optional default is GET
@@ -190,7 +196,7 @@ public class RecipeAPI {
 	    		combinedIds = combinedIds + ",";
 	    	}
 	    }
-	    
+	    if(results.length()>0) {
 	    //Using results for the previous call to get the bulk recipe information
 	    url = baseBulkUrl + combinedIds;
 	    obj = new URL(url);
@@ -314,6 +320,8 @@ public class RecipeAPI {
 //	    recipes = newRecipeIds;
 //	    allRecipes = newRecipes;
 	    reRank();
+	    }
+	    
 	    return allRecipes;
 
 

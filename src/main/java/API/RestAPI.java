@@ -79,7 +79,7 @@ public class RestAPI {
 	}
 	
 	public static ArrayList<Integer> resultsPageList(String query, String number) throws NumberFormatException, Exception{
-
+		
 		if(query == null || number == null) {
 			//returning from other pages other than searchPage
 			return listInclusions(numResults);
@@ -180,10 +180,16 @@ public class RestAPI {
 	}
 	
 	public static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
+		String[] splitString = searchTerm.split(" ");
+		String combinedSearch = "";
+		for(int i = 0; i<splitString.length; i++) {
+			combinedSearch += splitString[i];
+		}
+		
 		HashMap<Integer, Restaurant> newRests = new HashMap<Integer, Restaurant>();
 		ArrayList<Integer> newRestIDs = new ArrayList<Integer>();
 		
-		String fullURL = bulkURL+"&q=" + searchTerm + "&count=" + resultLimit;
+		String fullURL = bulkURL+"&q=" + combinedSearch + "&count=" + resultLimit;
 	    
 		URL obj = new URL(fullURL);
 		
