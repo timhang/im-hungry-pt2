@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Search Page</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="searchPage.css" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	</head>
-	
-	<body>
-		<h1 class="title"> I'm Hungry </h1>
-		<form method = "POST" onsubmit="return myFunction()" action = "resultsPage.jsp">
+<head>
+<meta charset="UTF-8">
+<title>Search Page</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="searchPage.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<h1 class="title">I'm Hungry</h1>
+	<form method="POST" onsubmit="return myFunction()"
+		action="resultsPage.jsp">
 		<!-- User input text and integer boxes -->
-		<div class="userInput"> 
-	    	<input id="searchText" name="searchText" type="text" placeholder="Enter Food" style="width: 150px; height: 20px">	
-	    	<input id="integerBox" title="Number of items to show in results" name="numberType" min="1" style="width: 30px; height: 20px">
-	   	 </div>
-	    
-	    <div class = "wrapper">
-	    	<button type = "submit" id="feedMeButton"><span class="rainbow">Feed Me!</span></button>
-			
+		<div class="userInput">
+			<input id="searchText" name="searchText" type="text"
+				placeholder="Enter Food" style="width: 150px; height: 20px">
+			<input id="integerBox" title="Number of items to show in results"
+				name="numberType" min="1" style="width: 30px; height: 20px">
 		</div>
-		</form>
-		
-		<script>
+
+		<div class="wrapper">
+			<button type="submit" id="feedMeButton">
+				<span class="rainbow">Feed Me!</span>
+			</button>
+
+		</div>
+	</form>
+
+	<script>
 			function myFunction() {
 		        var searchText = document.getElementById('searchText').value;
 			  	var intNum = document.getElementById('integerBox').value;
@@ -68,6 +75,6 @@
 				}
 			
 		</script>
-		
-	</body>
+
+</body>
 </html>
