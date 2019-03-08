@@ -28,6 +28,7 @@
 		double lng = currRest.getLongitude();
 		map = map + "?lat=" + Double.toString(lat) + "&lng=" + Double.toString(lng);
 	%>
+	<!-- Information of Restaurant -->
 		<div class="container-fluid">
 		 <h1 id="title"><%= name %></h1><br>
 		  <div class="row">
@@ -45,6 +46,7 @@
 
 		    
 		    </div>
+		    <!-- Redirection Buttons -->
 		    <div class="col-lg-4">
 		    	<div id="togglePrint">
 			    	<button onclick="printableView()">Printable View</button><br><br>
@@ -64,10 +66,12 @@
 		</div>
 	
 		<script>
-		
+			
+			// Page Redirection
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
 			}
+			// Printable View function displays and hides buttons on page
 			function printableView() {
 				var x = document.getElementById("togglePrint");
 				 if (x.style.display === "none") {

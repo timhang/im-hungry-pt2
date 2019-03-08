@@ -25,6 +25,7 @@
 		
 	
 	%>
+	<!-- Information of Recipe -->
 		<div class="container-fluid">
 		 <h1 id="title"><%= name %></h1><br>
 		  <div class="row">
@@ -41,8 +42,9 @@
 		    		Ingredients:
 		    	</p><br>
 		    	
-		    	
+		    	<!-- Row for ingredients and instructions -->
 				<div class="row">
+				<!-- Two columns of ingredients -->
 					<div class="col-lg-2">
 						<ul>
 							<%	
@@ -75,7 +77,7 @@
 				</div>
 							
 				
-				
+				<!-- List of Instructions -->
 				<p>Instructions: </p>
 					<ol type="1">
 						<%	
@@ -89,6 +91,7 @@
 					</ol>
 				
 		    </div>
+		    <!-- Redirection buttons -->
 		    <div class="col-lg-4">
 		    	<div id="togglePrint">
 			    	<button onclick="printableView()">Printable View</button><br><br>
@@ -109,10 +112,11 @@
 
 		
 		<script>
-		
+			// Page Redirection
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
-			}
+			}			
+			// Printable View function displays and hides buttons on page
 			function printableView() {
 				var x = document.getElementById("togglePrint");
 				 if (x.style.display === "none") {

@@ -41,6 +41,7 @@
 							  double priceRange = restMap.get(restId).getPriceRange();
 						%>
 							<tr><td><div>
+								<!-- Each element in list is a checkbox -->
 								<div><input type="checkbox" name="checkbox" class="checkbox" id="checkboxRest" style="visibility:hidden;" value = <%= restId %>></div>
 								<div><a href = <%= link %> >
 								    <%= name %>
@@ -66,6 +67,7 @@
 							  String link = "recipePage.jsp?recipeId="+ recipeId;
 						%>
 							<tr><td>
+								<!-- Each element in list is a checkbox -->
 								<input type="checkbox" name="checkbox" class="checkbox" id=checkboxRecipe style="visibility:hidden;" value = <%= recipeId %> >
 								<div>
 									<div><a href = <%= link %> >
@@ -115,7 +117,8 @@
 		</div>
 		
 		
-		<script>		 
+		<script>		
+		// Page Redirection
 			function returnToSearch() {
 				window.location.href = 'searchPage.html';
 			}
@@ -136,7 +139,8 @@
 			}
 		</script>
 		
-		<script>		 
+		<script>		
+		// Button toggle (hide/show)
 		var editButton = document.getElementById("editButton");
 		var deleteButton = document.getElementById("deleteButton");
 		var moveDropdown = document.getElementById("moveDropdown");

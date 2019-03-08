@@ -10,12 +10,12 @@
 	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resultsPage.css" />
+		<!-- Image styling for photo collage -->
 		<style>
   			    #insideImg{
-				
-				max-width: 150px;
-   				height: auto;
-				}
+					max-width: 150px;
+	   				height: auto;
+					}
 
 				.image{
 				display: inline-block;
@@ -49,6 +49,7 @@
 					imgArr = ImageAPI.getImageArray();
 				} */
 				%>
+				<!-- First row of images -->
 				<div class='row'>
 					<div class='col-lg-12'>
 						<%
@@ -57,6 +58,7 @@
 						}
 						%>
 				</div></div>
+				<!-- Second row of images -->
 				<div class='row'>
 					<%
 					for (int i = imgArr.size()/2; i < imgArr.size(); i++) {
@@ -180,7 +182,8 @@
 		  </div>
 		</div>
 	
-		<script>		 
+		<script>	
+		// Page redirection for buttons
 			function returnToSearch() {
 				window.location.href = 'searchPage.html';
 			}
