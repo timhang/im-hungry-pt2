@@ -28,8 +28,12 @@ public class RestAPI {
 //			e.printStackTrace();
 //		}
 //	}
+
 	public static HashMap<Integer, Restaurant> getRestaurantMap(){
 		return allRestaurants;
+	}
+	public static void setRestaurantMap(HashMap<Integer, Restaurant> myHash) {
+		allRestaurants = myHash;
 	}
 	
 	public static Boolean getState() {
@@ -44,6 +48,11 @@ public class RestAPI {
 		return restIDs;
 	}
 	
+
+	public static void setRestIDs(ArrayList<Integer> arr) {
+		restIDs = arr;
+  }
+  
 	public static ArrayList<Integer> listInclusions(int num){
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
 		for(int i = 0; i<num; i++) {
@@ -80,7 +89,7 @@ public class RestAPI {
 			call_me(query, Integer.valueOf(number));
 			return listInclusions(numResults);
 		}
-		
+
 	}
 	
 	public static ArrayList<Integer> getFavorites(){

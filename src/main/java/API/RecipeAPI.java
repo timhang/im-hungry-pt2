@@ -49,6 +49,10 @@ public class RecipeAPI {
 		}
 	}
 	
+	public static void setRecipeId(ArrayList<Integer> arr){
+		recipes = arr;
+	}
+	
 	public static ArrayList<Integer> getRecipeId(){
 		return recipes;
 	}
@@ -92,6 +96,10 @@ public class RecipeAPI {
 	
 	public static HashMap<Integer, Recipe> getRecipeMap(){
 		return allRecipes;
+	}
+	
+	public static void setRecipeMap(HashMap<Integer, Recipe> mMap) {
+		allRecipes = mMap;
 	}
 	
 	
