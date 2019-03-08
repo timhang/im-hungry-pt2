@@ -13,25 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/MoveItem")
 public class MoveItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MoveItem() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String restIdsString = request.getParameter("restIds");
-		String recipeIdsString = request.getParameter("recipeIds");
-		String list = request.getParameter("list");
-		String toList = request.getParameter("to");
-		if(toList.equals("1")) {
+    
+    public void move(String restIdsString, String recipeIdsString, String list, String toList) {
+    	if(toList.equals("1")) {
 			toList = "fav";
 		} else if(toList.equals("2")) {
 			toList = "exp";
@@ -131,6 +115,17 @@ public class MoveItem extends HttpServlet {
 				}
 			}
 		}	
+    }
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String restIdsString = request.getParameter("restIds");
+		String recipeIdsString = request.getParameter("recipeIds");
+		String list = request.getParameter("list");
+		String toList = request.getParameter("to");
+		move(restIdsString, recipeIdsString, list, toList);
 	}
 
 }

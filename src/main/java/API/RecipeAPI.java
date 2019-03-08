@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +22,9 @@ public class RecipeAPI {
 	private static Boolean state = false;
 	private static String searchString;
 	private static int numResults = 0;
-
+	private static ArrayList<Integer> favoritesList = new ArrayList<Integer>();
+	private static ArrayList<Integer> toExploreList = new ArrayList<Integer>();
+	private static ArrayList<Integer> doNotShowList = new ArrayList<Integer>();
 //	public static void main (String[] args) {
 //		try {
 //			RecipeAPI.call_me("burger",3);
@@ -110,6 +113,7 @@ public class RecipeAPI {
 		}
 		
 		System.out.println("Recipes in List: " + recipeInList.size());
+		favoritesList = recipeInList;
 		return recipeInList;
 	}
 	public static ArrayList<Integer> getToExplores(){
@@ -122,6 +126,7 @@ public class RecipeAPI {
 		}
 		
 		System.out.println("Recipes in List: " + recipeInList.size());
+		toExploreList = recipeInList;
 		return recipeInList;
 	}
 	public static ArrayList<Integer> getDoNotShows(){
@@ -134,6 +139,7 @@ public class RecipeAPI {
 		}
 		
 		System.out.println("Recipes in List: " + recipeInList.size());
+		doNotShowList = recipeInList;
 		return recipeInList;
 	}
 	
@@ -147,10 +153,16 @@ public class RecipeAPI {
 	
 	
 	public static HashMap<Integer, Recipe> call_me(String searchTerm, int number) throws Exception {
+		String[] splitString = searchTerm.split(" ");
+		String combinedSearch = "";
+		for(int i = 0; i<splitString.length; i++) {
+			combinedSearch += splitString[i];
+		}
+		
 		HashMap<Integer, Recipe> newRecipes = new HashMap<Integer, Recipe>();
 		ArrayList<Integer> newRecipeIds= new ArrayList<Integer>();
 		
-	    String url = baseRecipeUrl+"query="+searchTerm+"&number="+number;
+	    String url = baseRecipeUrl+"query="+combinedSearch+"&number="+number;
 	    URL obj = new URL(url);
 	    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	    // optional default is GET
@@ -184,7 +196,7 @@ public class RecipeAPI {
 	    		combinedIds = combinedIds + ",";
 	    	}
 	    }
-	    
+	    if(results.length()>0) {
 	    //Using results for the previous call to get the bulk recipe information
 	    url = baseBulkUrl + combinedIds;
 	    obj = new URL(url);
@@ -282,10 +294,34 @@ public class RecipeAPI {
 	    	
 	    }
 	    searchString = searchTerm;
-	    numResults = number; 
-	    recipes = newRecipeIds;
-	    allRecipes = newRecipes;
+	    numResults = number;
+	    for(int i = 0; i < favoritesList.size(); i ++) {
+	    	if(newRecipes.containsKey(favoritesList.get(i))) {
+	    		newRecipes.get(favoritesList.get(i)).setFavorite(true);
+	    	}
+	    }
+	    for(int i = 0; i < toExploreList.size(); i ++) {
+	    	if(newRecipes.containsKey(toExploreList.get(i))) {
+	    		newRecipes.get(toExploreList.get(i)).setFavorite(true);
+	    	}
+	    }
+	    for(int i = 0; i < doNotShowList.size(); i ++) {
+	    	if(newRecipes.containsKey(doNotShowList.get(i))) {
+	    		newRecipes.get(doNotShowList.get(i)).setFavorite(true);
+	    	}
+	    }
+	    allRecipes.putAll(newRecipes);
+	    recipes.addAll(newRecipeIds);
+	    HashSet<Integer> hs = new HashSet<Integer>();
+	    hs.addAll(recipes);  // willl not add the duplicate values
+	    recipes.clear();
+	    recipes.addAll(hs);
+	    
+//	    recipes = newRecipeIds;
+//	    allRecipes = newRecipes;
 	    reRank();
+	    }
+	    
 	    return allRecipes;
 
 

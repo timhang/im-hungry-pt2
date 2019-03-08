@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,6 +20,9 @@ public class RestAPI {
 	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
 	private static Boolean state = false;
 	private static String searchString;
+	private static ArrayList<Integer> favoritesList = new ArrayList<Integer>();
+	private static ArrayList<Integer> toExploreList = new ArrayList<Integer>();
+	private static ArrayList<Integer> doNotShowList = new ArrayList<Integer>();
 	private static int numResults = 0;
 //	public static void main (String[] args) {
 //		try {
@@ -75,7 +79,7 @@ public class RestAPI {
 	}
 	
 	public static ArrayList<Integer> resultsPageList(String query, String number) throws NumberFormatException, Exception{
-
+		
 		if(query == null || number == null) {
 			//returning from other pages other than searchPage
 			return listInclusions(numResults);
@@ -104,6 +108,7 @@ public class RestAPI {
 			System.out.println("restaurant: " + allRestaurants.get(restIDs.get(i)).getFavorite());
 		}
 		System.out.println("Restaurants in List: " + restInList.size());
+		favoritesList = restInList;
 		return restInList;
 	}
 	public static ArrayList<Integer> getToExplores(){
@@ -116,6 +121,7 @@ public class RestAPI {
 			System.out.println("restaurant: " + allRestaurants.get(restIDs.get(i)).getToExplore());
 		}
 		System.out.println("Restaurants in List: " + restInList.size());
+		toExploreList = restInList;
 		return restInList;
 	}
 	public static ArrayList<Integer> getDoNotShows(){
@@ -128,6 +134,7 @@ public class RestAPI {
 			System.out.println("restaurant: " + allRestaurants.get(restIDs.get(i)).getDoNotShow());
 		}
 		System.out.println("Restaurants in List: " + restInList.size());
+		doNotShowList = restInList;
 		return restInList;
 	}
 	
@@ -173,10 +180,16 @@ public class RestAPI {
 	}
 	
 	public static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
+		String[] splitString = searchTerm.split(" ");
+		String combinedSearch = "";
+		for(int i = 0; i<splitString.length; i++) {
+			combinedSearch += splitString[i];
+		}
+		
 		HashMap<Integer, Restaurant> newRests = new HashMap<Integer, Restaurant>();
 		ArrayList<Integer> newRestIDs = new ArrayList<Integer>();
 		
-		String fullURL = bulkURL+"&q=" + searchTerm + "&count=" + resultLimit;
+		String fullURL = bulkURL+"&q=" + combinedSearch + "&count=" + resultLimit;
 	    
 		URL obj = new URL(fullURL);
 		
@@ -232,9 +245,31 @@ public class RestAPI {
 		    System.out.println("");
 	    }
 	    searchString = searchTerm;
-	    numResults = resultLimit; 
-	    allRestaurants = newRests;
-	    restIDs = newRestIDs;
+	    numResults = resultLimit;
+	    
+	    for(int i = 0; i < favoritesList.size(); i ++) {
+	    	if(newRests.containsKey(favoritesList.get(i))) {
+	    		newRests.get(favoritesList.get(i)).setFavorite(true);
+	    	}
+	    }
+	    for(int i = 0; i < toExploreList.size(); i ++) {
+	    	if(newRests.containsKey(toExploreList.get(i))) {
+	    		newRests.get(toExploreList.get(i)).setFavorite(true);
+	    	}
+	    }
+	    for(int i = 0; i < doNotShowList.size(); i ++) {
+	    	if(newRests.containsKey(doNotShowList.get(i))) {
+	    		newRests.get(doNotShowList.get(i)).setFavorite(true);
+	    	}
+	    }
+	    allRestaurants.putAll(newRests);
+	    restIDs.addAll(newRestIDs);
+	    HashSet<Integer> hs = new HashSet<Integer>();
+	    hs.addAll(restIDs);  // willl not add the duplicate values
+	    restIDs.clear();
+	    restIDs.addAll(hs);
+//	    allRestaurants = newRests;
+//	    restIDs = newRestIDs;
 	    reRank();
 	    for(int i = 0;i<restIDs.size(); i++) {
 	    	System.out.println(restIDs.get(i));

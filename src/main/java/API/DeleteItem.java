@@ -15,24 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DeleteItem")
 public class DeleteItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteItem() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String restIdsString = request.getParameter("restIds");
-		String recipeIdsString = request.getParameter("recipeIds");
-		String list = request.getParameter("list");
-		System.out.println("RestIds = "+ restIdsString);
+    public void delete(String restIdsString, String recipeIdsString, String list) {
+    	System.out.println("RestIds = "+ restIdsString);
 		System.out.println("RecipeIds = "+ recipeIdsString);
 		String[] restIdsSplit = restIdsString.split(",");
 		String[] recipeIdsSplit = recipeIdsString.split(",");
@@ -70,7 +59,15 @@ public class DeleteItem extends HttpServlet {
 					System.out.println("Recipe " + currRecipe.getName() + " removed from do not show list");
 				}
 			}
-		}		
+		}
+    }
+    
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String restIdsString = request.getParameter("restIds");
+		String recipeIdsString = request.getParameter("recipeIds");
+		String list = request.getParameter("list");
+		delete(restIdsString,recipeIdsString,list);
 		
 	}
 
