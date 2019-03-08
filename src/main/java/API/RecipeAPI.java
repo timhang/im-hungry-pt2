@@ -19,6 +19,8 @@ public class RecipeAPI {
 	private static ArrayList<Integer> recipes = new ArrayList<Integer>();
 	private static HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
 	private static Boolean state = false;
+	private static String searchString;
+	private static int numResults = 0;
 
 //	public static void main (String[] args) {
 //		try {
@@ -55,6 +57,47 @@ public class RecipeAPI {
 	
 	public static ArrayList<Integer> getRecipeId(){
 		return recipes;
+	}
+	
+	public static ArrayList<Integer> listInclusions(int num){
+		ArrayList<Integer> resultsList = new ArrayList<Integer>();
+		for(int i = 0; i<recipes.size(); i++) {
+			//First time through, checking putting favorites on top and not showing do not show
+			if(resultsList.size()==num) {break;}
+			if(allRecipes.get(recipes.get(i)).getDoNotShow() == false) {
+				if(allRecipes.get(recipes.get(i)).getFavorite() == true) {
+					resultsList.add(recipes.get(i));
+				}
+			}
+		}
+		for(int i = 0; i<num; i++) {
+			//Adding the rest to list
+			if(resultsList.size()==num) {break;}
+			if(allRecipes.get(recipes.get(i)).getDoNotShow() == false && allRecipes.get(recipes.get(i)).getFavorite() == false) {
+				resultsList.add(recipes.get(i));
+			}
+		}
+		return resultsList;
+	}
+	
+	public static ArrayList<Integer> resultsPageList(String query, String number) throws NumberFormatException, Exception{
+
+		if(query == null || number == null) {
+			//returning from other pages other than searchPage
+			return listInclusions(numResults);
+		} else if (query.equals(searchString) && Integer.valueOf(number) == numResults){
+			//Searching for the same term and and same number
+			return listInclusions(numResults);
+		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
+			//Searching for the same term but less number
+			return listInclusions(Integer.valueOf(number));
+			
+		} else {
+			//Searching for more items or different terms or both
+			call_me(query, Integer.valueOf(number));
+			return listInclusions(numResults);
+		}
+
 	}
 	
 	public static ArrayList<Integer> getFavorites(){
@@ -238,6 +281,8 @@ public class RecipeAPI {
 	    	
 	    	
 	    }
+	    searchString = searchTerm;
+	    numResults = number; 
 	    recipes = newRecipeIds;
 	    allRecipes = newRecipes;
 	    reRank();
