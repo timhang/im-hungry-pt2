@@ -58,6 +58,14 @@ public class RestAPI {
 	public static void setRestIDs(ArrayList<Integer> arr) {
 		restIDs = arr;
   }
+	
+	public static void setCurrentRestIds(ArrayList<Integer> arr){
+		currentRestIds = arr;
+	}
+	
+	public static ArrayList<Integer> getCurrentRestIds(){
+		return currentRestIds;
+	}
   
 	public static ArrayList<Integer> listInclusions(int num){
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();

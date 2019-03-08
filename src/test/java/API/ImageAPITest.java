@@ -7,22 +7,20 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 public class ImageAPITest {
-	
+
 	@Test
-	public void testSetSearchTerm() {
+	public void testGetSetSearchTerm() {
 		ImageAPI testObj = new ImageAPI();
 		testObj.setSearchTerm("Sushi");
-		boolean test = ( "Sushi".equals(testObj.getSearchTerm()));
+		boolean test = ("Sushi".equals(testObj.getSearchTerm()));
 		assertTrue(test);
 	}
 
+
 	@Test
 	public void testGetImageArray() {
-		
 		ImageAPI testObj = new ImageAPI();
-		//Default set to null
-		assertEquals("Default to be null", null, testObj.getImageArray());
-		//Not default case
+		// Not default case
 		ArrayList<String> arr = new ArrayList<String>();
 		try {
 			arr = testObj.call_me("Sushi");
@@ -34,16 +32,42 @@ public class ImageAPITest {
 	}
 
 	@Test
-	public void testGetState() {
+	public void testGetSetState() {
 		ImageAPI testObj = new ImageAPI();
 		testObj.setState(false);
 		assertEquals("State is wrong", testObj.getState(), false);
 	}
 
 	@Test
+	public void testGetImagesToDisplay() {
+		ImageAPI testObj = new ImageAPI();
+		String searchTermZero = "";
+		String searchTermTwo = "pizza";
+		
+		ArrayList<String> arr = new ArrayList<String>();
+		try {
+		assertEquals("Checking the size of return images from display", 10, testObj.getImagesToDisplay(searchTermTwo).size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ImageAPI.setSearchTerm("pizza");
+		try {
+			assertEquals("Checking the size of return images from display, repearted search term", 10, testObj.getImagesToDisplay(searchTermTwo).size());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		try {
+			assertEquals("Checking the size of return images from display", 10, testObj.getImagesToDisplay(null).size());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+	}
+
+	@Test
 	public void testCall_me() {
 		ImageAPI testObj = new ImageAPI();
-		//return type should be an array list of size 10
+		// return type should be an array list of size 10
 		try {
 			assertEquals("Checking the size of return images", testObj.call_me("burger").size(), 10);
 		} catch (Exception e) {
