@@ -58,6 +58,14 @@ public class RestAPI {
 	public static void setRestIDs(ArrayList<Integer> arr) {
 		restIDs = arr;
   }
+	
+	public static void setCurrentRestIds(ArrayList<Integer> arr){
+		currentRestIds = arr;
+	}
+	
+	public static ArrayList<Integer> getCurrentRestIds(){
+		return currentRestIds;
+	}
   
 	public static ArrayList<Integer> listInclusions(int num){
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
@@ -92,6 +100,7 @@ public class RestAPI {
 			return listInclusions(numResults);
 		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
 			//Searching for the same term but less number
+			numResults = Integer.valueOf(number);
 			return listInclusions(Integer.valueOf(number));
 			
 		} else {

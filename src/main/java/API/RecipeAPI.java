@@ -42,14 +42,24 @@ public class RecipeAPI {
 		state = called;
 	}
 	
+	
 	public static void reRank() {
+		
 		for(int i = 0; i < recipes.size(); i++) {
 			for(int j = i; j < recipes.size(); j++) {
+				System.out.println("1 - " + allRecipes.get(recipes.get(j)).getPrepTime());
+				System.out.println("2 - " + allRecipes.get(recipes.get(i)).getPrepTime());
 				if(allRecipes.get(recipes.get(j)).getPrepTime() < allRecipes.get(recipes.get(i)).getPrepTime()) {
 					Collections.swap(recipes, i, j);
 				}
 			}
 		}
+		
+		
+		System.out.println("allRecipes size" + allRecipes.size());
+		System.out.println("recipes size" + recipes.size());
+		
+		
 		for(int i = 0; i < currentRecipeIds.size(); i++) {
 			for(int j = i; j < currentRecipeIds.size(); j++) {
 				if(allRecipes.get(currentRecipeIds.get(j)).getPrepTime() < allRecipes.get(currentRecipeIds.get(i)).getPrepTime()) {
@@ -70,9 +80,37 @@ public class RecipeAPI {
 		return recipes;
 	}
 	
+	public static void setCurrentRecipeId(ArrayList<Integer> arr){
+		currentRecipeIds = arr;
+	}
+	
+	public static ArrayList<Integer> getCurrentRecipeId(){
+		return currentRecipeIds;
+	}
+	
+	public static void setSearchString(String s) {
+		searchString = s;
+	}
+	
+	public static String getSearchString() {
+		return searchString;
+	}
+	
+	public static void setNumResults(int num) {
+		numResults = num;
+	}
+	
+	public static int getNumResults() 
+	{
+		return numResults;
+	}
+	
+	
 	public static ArrayList<Integer> listInclusions(int num){
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
 		
+		
+		System.out.println("Current Recipe IDs size: " + currentRecipeIds.size());
 		for(int i = 0; i<currentRecipeIds.size(); i++) {
 			//First time through, checking putting favorites on top and not showing do not show
 			if(resultsList.size()==num) {break;}
@@ -103,6 +141,7 @@ public class RecipeAPI {
 			return listInclusions(numResults);
 		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
 			//Searching for the same term but less number
+			numResults = Integer.valueOf(number);
 			return listInclusions(Integer.valueOf(number));
 			
 		} else {
