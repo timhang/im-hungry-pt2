@@ -204,6 +204,8 @@
 		}
 	</script>
 	<script>
+	
+		/* this is the function that generates 10 random angles to rotate teh pictures */
 		$("#insideImg:nth-of-type(n+1)").css("max-width",
 				window.innerWidth / 9 + "px");
 		var number = Math.floor((Math.random() * 90) - 45);

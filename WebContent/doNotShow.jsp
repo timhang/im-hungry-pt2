@@ -17,6 +17,7 @@
 
 </head>
 <body>
+	<!-- this function populates do not show list data -->
 	<%
 		HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
 		HashMap<Integer, Restaurant> restMap = RestAPI.getRestaurantMap();

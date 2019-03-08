@@ -8,6 +8,7 @@
 <title>Adding Item to List</title>
 </head>
 <body>
+	<!-- this function adding elements to the three lists -->
 	<%
 		String type = request.getParameter("type");
 		String id = request.getParameter("id");

@@ -12,6 +12,8 @@
 </head>
 
 <body>
+
+	<!-- structural layout of our search page -->
 	<h1 class="title">I'm Hungry</h1>
 	<form method="POST" onsubmit="return myFunction()"
 		action="resultsPage.jsp">
@@ -32,6 +34,7 @@
 	</form>
 
 	<script>
+			/* function that validates user input in the text bar and integer box */
 			function myFunction() {
 		        var searchText = document.getElementById('searchText').value;
 			  	var intNum = document.getElementById('integerBox').value;
@@ -53,12 +56,12 @@
 			  	
 			  	sessionStorage.setItem('searchText',searchText);
 			  	
-			  	//window.location.href = 'resultsPage.jsp';
 			  	return true;
 			}
 			setInputFilter(document.getElementById("integerBox"), function(value) {
 				  return /^\d*$/.test(value);
 				});
+			/* function that responses to user input */
 			function setInputFilter(textbox, inputFilter) {
 				  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
 				    textbox.addEventListener(event, function() {

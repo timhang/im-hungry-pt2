@@ -17,6 +17,7 @@
 
 </head>
 <body>
+	<!-- this function populates restaurant data -->
 	<% 
 		int restaurantId = Integer.valueOf(request.getParameter("restaurantId"));
 		Restaurant currRest = RestAPI.getRestaurantMap().get(restaurantId);

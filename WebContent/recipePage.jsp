@@ -17,6 +17,7 @@
 
 </head>
 <body>
+	<!-- this function populates recipe data -->
 	<% 
 		int recipeId = Integer.valueOf(request.getParameter("recipeId"));
 		Recipe currRecipe = RecipeAPI.getRecipeMap().get(recipeId);
