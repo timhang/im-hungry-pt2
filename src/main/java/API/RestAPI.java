@@ -14,27 +14,31 @@ import org.json.JSONObject;
 
 public class RestAPI {
 	private static final String apiKey = "f8d9f9d39a43e6ec63538a5356043b36";
-	// private static final String baseURL =
-	// "https://developers.zomato.com/api/v2.1/";
+	
+	//This is the Zomato API we are calling to get restaurant informations
 	private static final String bulkURL = "https://developers.zomato.com/api/v2.1/search?entity_id=195071&entity_type=landmark";
+	
+	//all restaurant (including from past searches) unique Ids stored in an array
 	private static ArrayList<Integer> restIDs = new ArrayList<Integer>();
+	
+	//restaurant unique ids from the current search session
 	private static ArrayList<Integer> currentRestIds = new ArrayList<Integer>();
 
+	//hashMap mapping the unique id of each restaurant to the data object recipe
 	private static HashMap<Integer, Restaurant> allRestaurants = new HashMap<Integer, Restaurant>();
+	
 	private static Boolean state = false;
+	
+	//search query the user last used
 	private static String searchString;
+	
+	//Ids of the recipes in the three lists
 	private static ArrayList<Integer> favoritesList = new ArrayList<Integer>();
 	private static ArrayList<Integer> toExploreList = new ArrayList<Integer>();
 	private static ArrayList<Integer> doNotShowList = new ArrayList<Integer>();
+	
+	//search query the user last used
 	private static int numResults = 0;
-//	public static void main (String[] args) {
-//		try {
-//			RestAPI.call_me("burger",10);
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	public static HashMap<Integer, Restaurant> getRestaurantMap() {
 		return allRestaurants;
@@ -69,11 +73,12 @@ public class RestAPI {
 	}
 
 	public static ArrayList<Integer> listInclusions(int num) {
+		//Items to include in the list to be displayed on resultsPage
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
 
 		for (int i = 0; i < currentRestIds.size(); i++) {
 			// First time through, checking putting favorites on top and not showing do not
-			// show
+			// show. This is for putting favorites on top of results
 			if (resultsList.size() == num) {
 				break;
 			}
@@ -120,6 +125,7 @@ public class RestAPI {
 	}
 
 	public static ArrayList<Integer> getFavorites() {
+		//Get favorites list to display for the favorites page and update the favoritesList array in this class
 		ArrayList<Integer> restInList = new ArrayList<Integer>();
 
 		for (int i = 0; i < restIDs.size(); i++) {
@@ -134,6 +140,7 @@ public class RestAPI {
 	}
 
 	public static ArrayList<Integer> getToExplores() {
+		//Get to explore to display for the to explore page and update the toExploreList array in this class
 		ArrayList<Integer> restInList = new ArrayList<Integer>();
 
 		for (int i = 0; i < restIDs.size(); i++) {
@@ -148,6 +155,7 @@ public class RestAPI {
 	}
 
 	public static ArrayList<Integer> getDoNotShows() {
+		//Get do not show to display for the do not show page and update the doNotShowList array in this class
 		ArrayList<Integer> restInList = new ArrayList<Integer>();
 
 		for (int i = 0; i < restIDs.size(); i++) {
@@ -162,6 +170,7 @@ public class RestAPI {
 	}
 
 	public static void reRank() {
+		//Ranking the restaurants based on driving time from Tommy T
 		for (int i = 0; i < restIDs.size(); i++) {
 			for (int j = i; j < restIDs.size(); j++) {
 				String[] splitI = allRestaurants.get(restIDs.get(i)).getTravelTime().split(" ");
@@ -180,13 +189,11 @@ public class RestAPI {
 				}
 			}
 		}
-
-//		for(int i = 0; i < restIDs.size(); i++) {
-//			System.out.println(i+". "+allRestaurants.get(restIDs.get(i)).getTravelTime());
-//		}
 	}
 
 	private static String travelTime(double lat1, double lon1, double lat2, double lon2, String key) throws Exception {
+		
+		//API call to Google Map to get driving time between two coordinates
 		String link = "https://maps.googleapis.com/maps/api/directions/json?origin=";
 		URL obj = new URL(link + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&key=" + key);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -214,6 +221,9 @@ public class RestAPI {
 	}
 
 	public static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
+		//This is the API call where we search restaurant closest to Tommy Trojan using the search query and 
+		//Display information such as name rating, time, and address etc.
+		//Used second API for gettin driving time between two coordinates
 		String[] splitString = searchTerm.split(" ");
 		String combinedSearch = "";
 		for (int i = 0; i < splitString.length; i++) {
@@ -224,9 +234,9 @@ public class RestAPI {
 		ArrayList<Integer> newRestIDs = new ArrayList<Integer>();
 
 		String fullURL = bulkURL + "&q=" + combinedSearch + "&count=" + resultLimit;
-
+		
 		URL obj = new URL(fullURL);
-
+		//Establishing HTTP Connection with Zomato API
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		con.addRequestProperty("user-key", apiKey);
@@ -244,7 +254,8 @@ public class RestAPI {
 		in.close();
 
 		System.out.println(response.toString());
-
+		
+		//Parsing JSON from the API call
 		JSONObject myResponse = new JSONObject(response.toString());
 		JSONArray array = myResponse.getJSONArray("restaurants");
 		System.out.println("result after Reading JSON Response");
@@ -256,7 +267,8 @@ public class RestAPI {
 			JSONObject userRating = test2.getJSONObject("user_rating");
 
 			Restaurant newRest = new Restaurant(test2.getInt("id"));
-
+			
+			//Setting the data members of the restaurant objects
 			newRest.setName(test2.getString("name"));
 			newRest.setAddress(location.getString("address"));
 			newRest.setLatitude(location.getDouble("latitude"));
@@ -266,11 +278,10 @@ public class RestAPI {
 			newRest.setPriceRange(test2.getDouble("average_cost_for_two"));
 			newRest.setPhoneNumber("(213)");
 
+			//Calling Google Map API to get driving time between two coordinates
 			String newTravelTime = travelTime(34.0224, -118.2851, newRest.getLatitude(), newRest.getLongitude(),
 					"AIzaSyA8VQVUyJJIhDwm2hKITkLeCqUqyiL9Y1w");
 
-			// https://maps.googleapis.com/maps/api/directions/json?origin=34.0224,
-			// -118.2851&destination=34.0166,-118.2816&key=AIzaSyA8VQVUyJJIhDwm2hKITkLeCqUqyiL9Y1w
 
 			newRest.setTravelTime(newTravelTime);
 
@@ -283,6 +294,8 @@ public class RestAPI {
 		searchString = searchTerm;
 		numResults = resultLimit;
 		currentRestIds = newRestIDs;
+		
+		//Checking for membership in the three lists
 		for (int i = 0; i < favoritesList.size(); i++) {
 			if (newRests.containsKey(favoritesList.get(i))) {
 				newRests.get(favoritesList.get(i)).setFavorite(true);
@@ -298,19 +311,22 @@ public class RestAPI {
 				newRests.get(doNotShowList.get(i)).setDoNotShow(true);
 			}
 		}
+		
+		//Adding newly retrieved Restaurants and Ids into the old map and array and overwriting duplicates
 		allRestaurants.putAll(newRests);
 		restIDs.addAll(newRestIDs);
 		HashSet<Integer> hs = new HashSet<Integer>();
 		hs.addAll(restIDs); // willl not add the duplicate values
 		restIDs.clear();
 		restIDs.addAll(hs);
-//	    allRestaurants = newRests;
-//	    restIDs = newRestIDs;
+		
+		//Ranking based on criteria provided in requirements
 		reRank();
 		for (int i = 0; i < restIDs.size(); i++) {
 			System.out.println(restIDs.get(i));
 		}
-
+		
+		//Console printout of results
 		for (int i = 0; i < allRestaurants.size(); i++) {
 			Restaurant newRest = allRestaurants.get(restIDs.get(i));
 			System.out.println("Restaurant Name: " + newRest.getName());

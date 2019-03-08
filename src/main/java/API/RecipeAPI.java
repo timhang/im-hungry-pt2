@@ -14,27 +14,34 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RecipeAPI {
+	//apiKey for the spoonacular API
 	private static final String apiKey = "61f3ebfe96mshef9b8dfa74f18b3p1f7946jsn0ef4f7865ac6";
+	//First API to call
 	private static final String baseRecipeUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?";
+	//Second API to call
 	private static final String baseBulkUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=";
+
+	//all recipes (including from past searches) unique Ids stored in an array
 	private static ArrayList<Integer> recipes = new ArrayList<Integer>();
+	//recipes unique ids from the current search session
 	private static ArrayList<Integer> currentRecipeIds = new ArrayList<Integer>();
+	//hashMap mapping the unique id of each recipe to the data object recipe
 	private static HashMap<Integer, Recipe> allRecipes = new HashMap<Integer, Recipe>();
+	//search query the user last used
 	private static String searchString;
+	//number searched the user last entered
 	private static int numResults = 0;
+	
+	//Ids of the recipes in the three lists
 	private static ArrayList<Integer> favoritesList = new ArrayList<Integer>();
 	private static ArrayList<Integer> toExploreList = new ArrayList<Integer>();
 	private static ArrayList<Integer> doNotShowList = new ArrayList<Integer>();
-//	public static void main (String[] args) {
-//		try {
-//			RecipeAPI.call_me("burger",3);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 
 	public static void reRank() {
-
+		
+		//This is the algorithm that ranks recipes based on prep time from least to most using bubble sort
+		//Called whenever the API is called
 		for (int i = 0; i < recipes.size(); i++) {
 			for (int j = i; j < recipes.size(); j++) {
 				System.out.println("1 - " + allRecipes.get(recipes.get(j)).getPrepTime());
@@ -45,8 +52,6 @@ public class RecipeAPI {
 			}
 		}
 
-		System.out.println("allRecipes size" + allRecipes.size());
-		System.out.println("recipes size" + recipes.size());
 
 		for (int i = 0; i < currentRecipeIds.size(); i++) {
 			for (int j = i; j < currentRecipeIds.size(); j++) {
@@ -61,45 +66,31 @@ public class RecipeAPI {
 		}
 	}
 
-//	public static void setRecipeId(ArrayList<Integer> arr){
-//		recipes = arr;
-//	}
-
 	public static ArrayList<Integer> getRecipeId() {
 		return recipes;
 	}
 
-//	public static void setCurrentRecipeId(ArrayList<Integer> arr){
-//		currentRecipeIds = arr;
-//	}
 
 	public static ArrayList<Integer> getCurrentRecipeId() {
 		return currentRecipeIds;
 	}
 
-//	public static void setSearchString(String s) {
-//		searchString = s;
-//	}
-
 	public static String getSearchString() {
 		return searchString;
 	}
-
-//	public static void setNumResults(int num) {
-//		numResults = num;
-//	}
 
 	public static int getNumResults() {
 		return numResults;
 	}
 
 	public static ArrayList<Integer> listInclusions(int num) {
+		//Items to include in the list to be displayed on resultsPage
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
 
 		System.out.println("Current Recipe IDs size: " + currentRecipeIds.size());
 		for (int i = 0; i < currentRecipeIds.size(); i++) {
 			// First time through, checking putting favorites on top and not showing do not
-			// show
+			// show. This is for putting favorites on top of results
 			if (resultsList.size() == num) {
 				break;
 			}
@@ -146,6 +137,7 @@ public class RecipeAPI {
 	}
 
 	public static ArrayList<Integer> getFavorites() {
+		//Get favorites list to display for the favorites page and update the favoritesList array in this class
 		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
 		for (int i = 0; i < recipes.size(); i++) {
 			if (allRecipes.get(recipes.get(i)).getFavorite().equals(true)) {
@@ -160,6 +152,7 @@ public class RecipeAPI {
 	}
 
 	public static ArrayList<Integer> getToExplores() {
+		//Get to explore to display for the to explore page and update the toExploreList array in this class
 		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
 		for (int i = 0; i < recipes.size(); i++) {
 			if (allRecipes.get(recipes.get(i)).getToExplore().equals(true)) {
@@ -174,6 +167,7 @@ public class RecipeAPI {
 	}
 
 	public static ArrayList<Integer> getDoNotShows() {
+		//Get do not show to display for the do not show page and update the doNotShowList array in this class
 		ArrayList<Integer> recipeInList = new ArrayList<Integer>();
 		for (int i = 0; i < recipes.size(); i++) {
 			if (allRecipes.get(recipes.get(i)).getDoNotShow().equals(true)) {
@@ -192,33 +186,38 @@ public class RecipeAPI {
 	}
 
 	public static void setRecipeMap(HashMap<Integer, Recipe> mMap) {
+		//for testing purposes
 		allRecipes = mMap;
 	}
 
 	public static HashMap<Integer, Recipe> call_me(String searchTerm, int number) throws Exception {
+		//This is the API call the the spoonacular database. It's broken down into two parts.
+		//In the first part, the search terms are used to obtain recipeIds in the database related to 
+		//the search terms. In the second part, the retrieve ids from the first call is used to retrieve
+		//the rest of the data such as prep time, cook time from the API.
+		
+		//Parse the search string
 		String[] splitString = searchTerm.split(" ");
 		String combinedSearch = "";
 		for (int i = 0; i < splitString.length; i++) {
 			combinedSearch += splitString[i];
 		}
-
+		//newRecipes to add the the map and newRecipesIds
 		HashMap<Integer, Recipe> newRecipes = new HashMap<Integer, Recipe>();
 		ArrayList<Integer> newRecipeIds = new ArrayList<Integer>();
-
+		
+		//Establishing HTTP connection with the first API
 		String url = baseRecipeUrl + "query=" + combinedSearch + "&number=" + number;
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		// optional default is GET
 		con.setRequestMethod("GET");
 		con.addRequestProperty("X-RapidAPI-Key", apiKey);
-//	    //add request header
-//	    con.setRequestProperty("User-Agent", "Mozilla/5.0");
+
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'GET' request to URL : " + url);
 		System.out.println("Response Code : " + responseCode);
-//	    BufferedReader in = new BufferedReader(
-//	             new InputStreamReader(con.getInputStream()));
-//		
+		
+		//Get response in JSON
 		BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
 
 		// ArrayList<JSONObject> lines = new ArrayList<JSONObject>();
@@ -227,7 +226,9 @@ public class RecipeAPI {
 		con.disconnect();
 
 		System.out.println("Output from Server .... \n");
-
+		
+		
+		//JSON Parsing
 		JSONArray results = jsonObj.getJSONArray("results");
 		String combinedIds = "";
 		for (int i = 0; i < results.length(); i++) {
@@ -253,7 +254,8 @@ public class RecipeAPI {
 			String bulk = br.readLine();
 			JSONArray bulkObj = new JSONArray(bulk);
 			con.disconnect();
-
+			
+			//Second API JSON Parsing
 			for (int i = 0; i < bulkObj.length(); i++) {
 				Recipe currentRecipe = new Recipe(newRecipeIds.get(i));
 
@@ -332,9 +334,12 @@ public class RecipeAPI {
 				newRecipes.put(currentRecipe.getId(), currentRecipe);
 
 			}
+			//Setting the searchString field to user's last entered search
 			searchString = searchTerm;
 			numResults = number;
 			currentRecipeIds = newRecipeIds;
+			
+			//Check if any of the newly retrieved objects were in any of the three lists, if so, set to true their state in list
 			for (int i = 0; i < favoritesList.size(); i++) {
 				if (newRecipes.containsKey(favoritesList.get(i))) {
 					newRecipes.get(favoritesList.get(i)).setFavorite(true);
@@ -350,15 +355,18 @@ public class RecipeAPI {
 					newRecipes.get(doNotShowList.get(i)).setDoNotShow(true);
 				}
 			}
+			
+			//Combined the newly retrieved recipe maps with the old recipe map, overwriting duplicates
 			allRecipes.putAll(newRecipes);
+			
+			//Combined the newly retrieved recipe ids with the old object ids, overwriting duplicates
 			recipes.addAll(newRecipeIds);
 			HashSet<Integer> hs = new HashSet<Integer>();
 			hs.addAll(recipes); // willl not add the duplicate values
 			recipes.clear();
 			recipes.addAll(hs);
 
-//	    recipes = newRecipeIds;
-//	    allRecipes = newRecipes;
+			//Ranking based on the criteria provided in the requirements
 			reRank();
 		}
 

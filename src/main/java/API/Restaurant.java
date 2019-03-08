@@ -1,6 +1,7 @@
 package API;
 
 public class Restaurant {
+	//Restaurant Data Object with getters and setters for each data member
 	public Restaurant(int id) {
 		this.id = id;
 	}

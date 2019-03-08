@@ -7,43 +7,43 @@ public class Recipe {
 		this.id = id;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) {	//Name of recipe
 		this.name = name;
 	}
 
-	public void setImage(String img) {
+	public void setImage(String img) { 	//Image of recipe
 		this.imageSrc = img;
 	}
 
-	public void setPrepTime(int time) {
+	public void setPrepTime(int time) { //preparation time of recipe
 		this.prepTime = time;
 	}
 
-	public void setCookTime(int time) {
+	public void setCookTime(int time) { //cook time of recipe
 		this.cookTime = time;
 	}
 
-	public void setStarRating(float starRating) {
+	public void setStarRating(float starRating) {// star rating of recipe
 		this.starRating = starRating;
 	}
 
-	public void setIngredients(ArrayList<String> ingredients) {
+	public void setIngredients(ArrayList<String> ingredients) { // list of ingredients
 		this.ingredients = ingredients;
 	}
 
-	public void setInstructions(ArrayList<String> instructions) {
+	public void setInstructions(ArrayList<String> instructions) { // list of instructions
 		this.instructions = instructions;
 	}
 
-	public void setDoNotShow(Boolean state) {
+	public void setDoNotShow(Boolean state) { // if it is in do not show list 
 		this.doNotShow = state;
 	}
 
-	public void setFavorite(Boolean state) {
+	public void setFavorite(Boolean state) { // if it is in favorite list
 		this.favorite = state;
 	}
 
-	public void setToExplore(Boolean state) {
+	public void setToExplore(Boolean state) { // if it is in to explore list
 		this.toExplore = state;
 	}
 
