@@ -1,7 +1,7 @@
 # "I'm Hungry" Web Application Implementation
 
 Description:
-This web application allows the user to search for restaurants and recipes information based on the entered dish name/cuisine type. It also allows the user to add resulting restaurant and recipes to favorites list, to explore list, and do not show list and future search results would be influenced by the items in those lists.
+This web application allows the user to search for restaurants and recipes information based on the entered dish name/cuisine type. It also allows the user to add resulting restaurant and recipes to favorites list, to explore list, and do not show list and future search results would be influenced by the items in those lists. Read the wiki for screenshots and more detailed documentation of its functionalities. 
 
 Contributors:
 - Farrell Hohman
