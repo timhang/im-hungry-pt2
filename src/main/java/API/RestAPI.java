@@ -13,7 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RestAPI {
-	private static final String apiKey = "f8d9f9d39a43e6ec63538a5356043b36";
+	//Register for a free Zomato API key on their website
+	private static final String apiKey = "";
 	
 	//This is the Zomato API we are calling to get restaurant informations
 	private static final String bulkURL = "https://developers.zomato.com/api/v2.1/search?entity_id=195071&entity_type=landmark";
@@ -279,8 +280,9 @@ public class RestAPI {
 			newRest.setPhoneNumber("(213)");
 
 			//Calling Google Map API to get driving time between two coordinates
+			//Use your own google map API key for the key parameter in travelTime()
 			String newTravelTime = travelTime(34.0224, -118.2851, newRest.getLatitude(), newRest.getLongitude(),
-					"AIzaSyA8VQVUyJJIhDwm2hKITkLeCqUqyiL9Y1w");
+					"");
 
 
 			newRest.setTravelTime(newTravelTime);
