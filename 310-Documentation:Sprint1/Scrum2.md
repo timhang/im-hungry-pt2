@@ -1,4 +1,4 @@
-###Date: 3/24/19
+### Date: 3/24/19
 ### Time: 2:30pm
 ### Location: SAL
 ### Participants:
@@ -20,10 +20,10 @@
 
 
 4. What will you accomplish before the next meeting?
-* Farrell
-* Alex
-* Tim
-* Kevin
-* Rahul
+  * Farrell
+  * Alex
+  * Tim
+  * Kevin
+  * Rahul
 
 
