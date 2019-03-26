@@ -1,0 +1,10 @@
+GoogleAPIKey=AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM
+SpoonacularAPIKey=61f3ebfe96mshef9b8dfa74f18b3p1f7946jsn0ef4f7865ac6
+ZomatoAPIKey=f8d9f9d39a43e6ec63538a5356043b36
+GoogleMapAPIKey=AIzaSyA8VQVUyJJIhDwm2hKITkLeCqUqyiL9Y1w
+ServerHostname=localhost
+ServerPort=6789
+DBConnection=jdbc:mysql://localhost/Hangman
+DBUser=root
+DBPassword=1234
+SecretWordFile=hangmanwords.txt
