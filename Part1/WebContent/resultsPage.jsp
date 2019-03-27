@@ -33,6 +33,7 @@
 		<div class="row">
 			<br>
 			<!-- Photo collage column -->
+			<div class="col-lg-1"></div>
 			<div class="col-lg-8 text-center">
 
 				<%
@@ -60,8 +61,9 @@
 				</div>
 
 			</div>
+
 			<!-- Button column -->
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 			<br>
 				<div>
 					<select id="mySelect">

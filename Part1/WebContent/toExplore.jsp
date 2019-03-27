@@ -15,6 +15,13 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="favorites.css" />
 
+<style>
+body {
+	background-color: #FBD786;
+
+}
+</style>
+
 </head>
 <body>
 	<!-- this function populates to explore list data -->
@@ -26,10 +33,12 @@
 		ArrayList<Integer> restInList = RestAPI.getToExplores();
 	%>
 	<div class="container-fluid">
-		<h1 id="title">To Explore</h1>
-		<div class="row">
+		
+		<div class="row" style = "padding: 60px 0px;">
+		<div class="col-lg-1"></div>
 			<!-- Column for list of restaurants and recipes -->
-			<div class="col-lg-8">
+			<div class="col-lg-7">
+			<h2 style = "font-weight: bold;" id="title">To Explore</h2>
 				<div class="listTable">
 					<table style="width: 100%">
 
@@ -52,7 +61,7 @@
 											id="checkboxRest" style="visibility: hidden;"
 											value=<%=restId%>>
 									</div>
-									<div>
+									<div style="font-weight: bold; font-size: 20px;">
 										<a href=<%=link%>> <%=name%>
 										</a>
 									</div>
@@ -89,9 +98,13 @@
 								type="checkbox" name="checkbox" class="checkbox"
 								id=checkboxRecipe style="visibility: hidden;"
 								value=<%=recipeId%>>
-								<div>
+								<div style="font-weight: bold; font-size: 20px;">
 									<a href=<%=link%>> <%=name%>
-									</a><br> Rating:
+									
+									</a>
+									<br>
+									</div>
+									Rating:
 									<%=starRating%><br>
 									<div style="float: left; width: 30%;">
 										Prep time:
@@ -103,7 +116,7 @@
 										<%=cookTime%>
 										mins
 									</div>
-								</div>
+								
 
 							</td>
 						</tr>
@@ -114,8 +127,10 @@
 					</table>
 				</div>
 			</div>
+			<div class="col-lg-1"></div>
 			<!-- Column for dropwdown and buttons -->
-			<div class="col-lg-4">
+			<div class="col-lg-3">
+			<br>
 				<select id="mySelect">
 					<option></option>
 					<option value="favorites.jsp">Favorites</option>
@@ -123,11 +138,11 @@
 					<option value="doNotShow.jsp">Do Not Show</option>
 				</select><br> <br>
 
-				<button type="button" onclick="manageList()">Manage List</button>
+				<button type="button" onclick="manageList()"><div id="ButtonText">Manage List</div></button>
 				<br> <br>
-				<button onclick="returnToResults()">Return to Results Page</button>
+				<button onclick="returnToResults()"><div id="ButtonText">Return to Results Page</div></button>
 				<br> <br>
-				<button onclick="returnToSearch()">Return to Search Page</button>
+				<button onclick="returnToSearch()"><div id="ButtonText">Return to Search Page</div></button>
 				<br> <br>
 			</div>
 		</div>

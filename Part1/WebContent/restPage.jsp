@@ -53,9 +53,10 @@
 				</div>
 				</div>
 			
-			
+			<div class="col-lg-1"></div>
 			<!-- Redirection Buttons -->
-			<div class="col-lg-4">
+			
+			<div class="col-lg-3">
 			
 			
 				<div id="togglePrint">
