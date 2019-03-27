@@ -6,11 +6,15 @@ body {
 	font-size: 20px; 
 }
 
+
+
 button, select {
 	font-size: 25px;
-	width: 45%;
+	width: 60%;
     height: 200%;
 }
+
+
 
 #deleteButton {
 	visibility: hidden;
@@ -31,14 +35,51 @@ button, select {
 
 table, th{
 	border-collapse: separate;
-	border-spacing: 10px 0;
+	border-spacing: 0px 10px;
 	width: 50%;
 }
 
+tr:nth-child(odd){
+	/* background-color: #efd6b1; */
+	/* background-color: #f7797d; */
+	/* background-image: linear-gradient(#efd6b1, #d1b284); */
+	background-image: linear-gradient(to bottom right, #f7797d, #FBD786); */
+	
+}
 tr:nth-child(even) {
-    background-color: #C4C4C4;
+    /* background-color: #d1b284; */
+    /* background-color: #C6FFDD; */
+    background-image: linear-gradient(to bottom right, #C6FFDD, #FBD786);
+    
+}
+td {
+  padding: 0px 20px 20px 20px;
+  border-radius: 8px;
 }
 
-td {
-  padding: 10px 0;
+td:hover{
+	background-color: #d1b284;
+}
+button {
+	border-radius: 8px;
+	background-color: #FBD786;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border: none;
+}
+#ButtonText{
+	font-size: 14px;
+	padding: 4px;
+	font-weight: bold;
+	
+}
+
+#mySelect{
+	border: none;
+	height: 32px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 4px;
+	border-radius: 8px;
+	/* background-image: linear-gradient(to bottom right, #FBD786, #FBD786);  */
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

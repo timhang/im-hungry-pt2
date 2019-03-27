@@ -1,13 +1,22 @@
 @charset "ISO-8859-1";
 
 body {
-	background-color: #efd6b1;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	/* background-color: #efd6b1; */
+	/* background-image: linear-gradient(to bottom right, #efd6b1, #d1b284); */
+	/* background-image: linear-gradient(to bottom right, #ffe259, #ffa751); */
+	/* background-image: linear-gradient(to bottom right, #f12711, #f5af19); */
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	background: #C6FFDD;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background: linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;
 }
 
 button, select {
 	font-size: 25px;
-	width: 45%;
+	width: 60%;
     height: 200%;
 }
 
@@ -33,7 +42,8 @@ button, select {
 }
 
 table {
-	box-shadow: 0 4px 20px 0 rgba(209, 178, 132, 0.2), 0 6px 20px 0 rgba(209,178,132,0.2);
+	/* background-image: linear-gradient(#efd6b1, #d1b284); */
+	/* box-shadow: 0 4px 20px 0 rgba(209, 178, 132, 0.2), 0 6px 20px 0 rgba(209,178,132,0.2); */
 	border-collapse: separate;
 	border-spacing: 30px 10px;
 }
@@ -52,18 +62,27 @@ td {
 	border-radius: 8px;
 }
 td:hover{
-	#d1b284;
+	background-color: #d1b284;
 }
 tr:nth-child(odd){
-	background-color: #efd6b1;
+	/* background-color: #efd6b1; */
+	/* background-color: #f7797d; */
+	/* background-image: linear-gradient(#efd6b1, #d1b284); */
+	background-image: linear-gradient(to bottom right, #f7797d, #FBD786); */
+	
 }
 tr:nth-child(even) {
-    background-color: #d1b284;
+    /* background-color: #d1b284; */
+    /* background-color: #C6FFDD; */
+    background-image: linear-gradient(to bottom right, #C6FFDD, #FBD786);
+    
 }
 div.card {
   width: 90%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #d1b284;
+  /* background-color: #d1b284; */
+  /* background-image: linear-gradient( #f5af19, #f12711); */
+  background-color: #FBD786;
   border-radius: 8px;
   margin: 0 auto;
 }
@@ -73,12 +92,23 @@ td {
   vertical-align: text-top;
 }
 button {
+	border: none;
 	border-radius: 8px;
+	background-image: linear-gradient(to bottom right, #FBD786, #FBD786); 
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #ButtonText{
-	font-size: 16px;
+	font-size: 14px;
+	padding: 4px;
+	font-weight: bold;
+	
 }
 #mySelect{
-	height: 26px;
-	font-size: 16px;
+	border: none;
+	height: 32px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 4px;
+	/* background-image: linear-gradient(to bottom right, #FBD786, #FBD786);  */
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

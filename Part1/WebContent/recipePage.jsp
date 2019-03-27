@@ -32,12 +32,17 @@
 	%>
 	<!-- Information of Recipe -->
 	<div class="container-fluid">
-		<h2 style = "font-weight: bold; padding: 30px 30px;" id="title"><%= name %></h2>
-		<br>
-		<div class="row">
+		
+		<div class="row" style = "padding: 60px 0px;">
+		
 			<div class="col-lg-1"></div>
 			<div class="col-lg-6">
+			<div class="card" style = "font-weight: bold; padding: 0px 12px 12px 12px;">
+				<div id = "InsideCard">
+			<h2 style = "font-weight: bold;" id="title"><%= name %></h2>
+			<br>
 				<br> <img src=<%= imageUrl %>><br>
+				</div></div>
 				<br>
 				<br>
 				<div id = "RecipeContent">
@@ -112,9 +117,9 @@
 
 			</div>
 			
-			<div class="col-lg-1"></div>
+			<div class="col-lg-2"></div>
 			<!-- Redirection buttons -->
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<div id="togglePrint">
 				<br>
 					<button onclick="printableView()"><div id="ButtonText">Printable View</div></button>

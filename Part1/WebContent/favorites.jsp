@@ -15,6 +15,13 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="favorites.css" />
 
+<style>
+body {
+	background-color: #C6FFDD;
+
+}
+</style>
+
 </head>
 <body>
 	<!-- this function populates favorite list data -->
@@ -26,10 +33,12 @@
 		ArrayList<Integer> restInList = RestAPI.getFavorites();
 	%>
 	<div class="container-fluid">
-		<h1 id="title">Favorites</h1>
-		<div class="row">
+		
+		<div class="row" style = "padding: 60px 0px;">
+		<div class="col-lg-1"></div>
 			<!-- Column for list of restaurants and recipes -->
-			<div class="col-lg-8">
+			<div class="col-lg-7">
+			<h2 style = "font-weight: bold;" id="title">Favorites</h2>
 				<div class="listTable">
 					<table style="width: 100%">
 						<tbody>
@@ -54,9 +63,9 @@
 												id="checkboxRest" style="visibility: hidden;"
 												value=<%=restId%>>
 										</div>
-										<div>
-											<a href=<%=link%>> <%=name%>
-											</a>
+										<div style="font-weight: bold; font-size: 20px;">
+											<a href=<%=link%>> <%=name%> </a>
+											
 										</div>
 										<div style="float: left; width: 70%;">
 											Address:
@@ -94,9 +103,9 @@
 									id=checkboxRecipe style="visibility: hidden;"
 									value=<%=recipeId%>>
 									<div>
-										<div>
-											<a href=<%=link%>> <%=name%>
-											</a>
+										<div style="font-weight: bold; font-size: 20px;">
+											<a href=<%=link%>> <%=name%> </a>
+											
 										</div>
 										<div>
 											Rating:
@@ -121,8 +130,10 @@
 					</table>
 				</div>
 			</div>
+			<div class="col-lg-1"></div>
 			<!-- Column for dropwdown and buttons -->
-			<div class="col-lg-4">
+			<div class="col-lg-3">
+			<br>
 				<select id="mySelect">
 					<option></option>
 					<option value="favorites.jsp">Favorites</option>
@@ -131,13 +142,13 @@
 				</select><br>
 				<br>
 
-				<button type="button" onclick="manageList()">Manage List</button>
+				<button type="button" onclick="manageList()"><div id="ButtonText">Manage List</div></button>
 				<br>
 				<br>
-				<button onclick="returnToResults()">Return to Results Page</button>
+				<button onclick="returnToResults()"><div id="ButtonText">Return to Results Page</div></button>
 				<br>
 				<br>
-				<button onclick="returnToSearch()">Return to Search Page</button>
+				<button onclick="returnToSearch()"><div id="ButtonText">Return to Search Page</div></button>
 				<br>
 			</div>
 		</div>
@@ -161,6 +172,13 @@
 	</div>
 
 	<script>
+	
+		jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
+
 		// Page Redirection
 		function returnToSearch() {
 			window.location.href = 'searchPage.html';
