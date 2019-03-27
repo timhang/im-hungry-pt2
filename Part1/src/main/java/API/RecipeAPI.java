@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public class RecipeAPI {
 	//apiKey for the spoonacular API. Go to RapidAPI and register for a free Spoonacular API key
-	private static final String apiKey = "";
+	private static final String apiKey = "61f3ebfe96mshef9b8dfa74f18b3p1f7946jsn0ef4f7865ac6";
 	//First API to call
 	private static final String baseRecipeUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?";
 	//Second API to call
