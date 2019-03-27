@@ -37,6 +37,9 @@
 		<div class="row">
 			<div class="col-lg-8">
 				<br> <img src=<%= imageUrl %>><br>
+				<br>
+				<br>
+				<div class="card">
 				<p>
 					Prep time:
 					<%= prepTime %>
@@ -81,8 +84,10 @@
 					</div>
 					<div class="col-lg-8"></div>
 				</div>
-
-
+				</div>
+				<br>
+				<br>
+				<div class = "card">
 				<!-- List of Instructions -->
 				<p>Instructions:</p>
 				<ol type="1">
@@ -95,6 +100,7 @@
 						 	}
 						%>
 				</ol>
+				</div>
 
 			</div>
 			<!-- Redirection buttons -->
