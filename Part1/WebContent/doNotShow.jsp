@@ -15,6 +15,12 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="favorites.css" />
 
+<style>
+body {
+	background-color: #f7797d;
+
+}
+</style>
 </head>
 <body>
 	<!-- this function populates do not show list data -->
@@ -26,9 +32,11 @@
 		ArrayList<Integer> restInList = RestAPI.getDoNotShows();
 	%>
 	<div class="container-fluid">
-		<h1 id="title">Do Not Show</h1>
-		<div class="row">
-			<div class="col-lg-8">
+		
+		<div class="row"  style = "padding: 60px 0px;">
+		<div class="col-lg-1"></div>
+			<div class="col-lg-7">
+			<h2 style = "font-weight: bold;" id="title">Do Not Show</h2>
 				<div class="listTable">
 					<table style="width: 100%">
 						<%
@@ -50,7 +58,7 @@
 											id="checkboxRest" style="visibility: hidden;"
 											value=<%=restId%>>
 									</div>
-									<div>
+									<div style="font-weight: bold; font-size: 20px;">
 										<a href=<%=link%>> <%=name%>
 										</a>
 									</div>
@@ -88,7 +96,7 @@
 								id=checkboxRecipe style="visibility: hidden;"
 								value=<%=recipeId%>>
 								<div>
-									<div>
+									<div style="font-weight: bold; font-size: 20px;">
 										<a href=<%=link%>> <%=name%>
 										</a>
 									</div>
@@ -115,8 +123,10 @@
 					</table>
 				</div>
 			</div>
+			<div class="col-lg-1"></div>
 			<!-- Column for dropwdown and buttons -->
-			<div class="col-lg-4">
+			<div class="col-lg-3">
+			<br>
 				<select id="mySelect">
 					<option></option>
 					<option value="favorites.jsp">Favorites</option>
@@ -125,13 +135,13 @@
 				</select><br>
 				<br>
 
-				<button type="button" onclick="manageList()">Manage List</button>
+				<button type="button" onclick="manageList()"><div id="ButtonText">Manage List</div></button>
 				<br>
 				<br>
-				<button onclick="returnToResults()">Return to Results Page</button>
+				<button onclick="returnToResults()"><div id="ButtonText">Return to Results Page</div></button>
 				<br>
 				<br>
-				<button onclick="returnToSearch()">Return to Search Page</button>
+				<button onclick="returnToSearch()"><div id="ButtonText">Return to Search Page</div></button>
 				<br>
 			</div>
 		</div>

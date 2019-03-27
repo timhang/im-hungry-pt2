@@ -12,7 +12,8 @@
 </head>
 
 <body>
-
+	<div class="content">
+	
 	<!-- structural layout of our search page -->
 	<h1 class="title">I'm Hungry</h1>
 	<form method="POST" onsubmit="return myFunction()"
@@ -20,11 +21,11 @@
 		<!-- User input text and integer boxes -->
 		<div class="userInput">
 			<input id="searchText" name="searchText" type="text"
-				placeholder="	Enter Food">
+				placeholder="Enter Food">
 			<input id="integerBox" title="Number of items to show in results"
 				name="numberType" min="1">
 		</div>
-
+		<br><br>
 		<div class="wrapper">
 			<button type="submit" id="feedMeButton">
 				<span class="rainbow">Feed Me!</span>
@@ -32,7 +33,8 @@
 
 		</div>
 	</form>
-
+	</div>
+	
 	<script>
 			/* function that validates user input in the text bar and integer box */
 			function myFunction() {
