@@ -81,6 +81,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 id="title">
+				</br>
 					Results For "<span id="searchText"></span>"
 				</h1>
 				<script type='text/javascript'>
@@ -88,7 +89,7 @@
 							.getItem('searchText');
 				</script>
 				<div class="resultsTable" align="center">
-					<table style="width: 100%">
+					<table style="width: 95%">
 						<tr>
 							<th style="font-size: 30px;">Restaurant</th>
 							<th style="font-size: 30px;">Recipe</th>
@@ -115,10 +116,9 @@
 						%>
 
 						<tr>
-							<td><div>
-									<div>
-										<a href=<%=link%>> <%=name%>
-										</a>
+							<td class='clickable-row' data-href=<%=link%>><div>
+									<div style="font-weight: bold; font-size: 17px;">
+										<%=name%>
 									</div>
 									<div style="float: left; width: 70%;">
 										Address:
@@ -150,9 +150,9 @@
 										int cookTime = allRecipes.get(recipeId).getCookTime();
 										String link = "recipePage.jsp?recipeId=" + recipeId;
 							%>
-							<td><div>
-									<div>
-										<a href=<%=link%>> <%=name%></a>
+							<td class='clickable-row' data-href=<%=link%>><div>
+									<div style="font-weight: bold; font-size: 17px;">
+										<%=name%>
 									</div>
 									<div>
 										Rating:
@@ -202,6 +202,12 @@
 				window.location.href = 'doNotShow.jsp';
 			}
 		}
+		
+		jQuery(document).ready(function($) {
+		    $(".clickable-row").click(function() {
+		        window.location = $(this).data("href");
+		    });
+		});
 	</script>
 	<script>
 	

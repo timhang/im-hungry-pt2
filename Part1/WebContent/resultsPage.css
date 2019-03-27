@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 
 body {
-	background-color: #F5F5F5;
+	background-color: #efd6b1;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
 
@@ -22,6 +22,8 @@ button, select {
 
 #title {
 	text-align: center;
+	font-weight: bold;
+	
 }
 
 .resultsTable {
@@ -30,9 +32,14 @@ button, select {
     height: 50%;
 }
 
+table {
+	box-shadow: 0 4px 20px 0 rgba(209, 178, 132, 0.2), 0 6px 20px 0 rgba(209,178,132,0.2);
+	border-collapse: separate;
+	border-spacing: 30px 10px;
+}
+
 table, th{
 	border-collapse: separate;
-	border-spacing: 10px 0;
 	width: 50%;
 }
 
@@ -40,11 +47,21 @@ th{
 	text-align: center;
 }
 
+td {
+	border-radius: 5px;
+}
+td:hover{
+	#d1b284;
+}
+tr:nth-child(odd){
+	background-color: #efd6b1;
+}
 tr:nth-child(even) {
-    background-color: #C4C4C4;
+    background-color: #d1b284;
 }
 
+
 td {
-  padding: 10px 0;
+  padding: 10px 10px;
   vertical-align: text-top;
 }
