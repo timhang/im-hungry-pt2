@@ -18,13 +18,13 @@
 </head>
 <body>
 	<!-- this function populates restaurant data -->
-	<% 
+	<%
 		int restaurantId = Integer.valueOf(request.getParameter("restaurantId"));
 		Restaurant currRest = RestAPI.getRestaurantMap().get(restaurantId);
 		String name = currRest.getName();
 		String address = currRest.getAddress();
 		String phoneNumber = currRest.getPhoneNumber();
-		if(phoneNumber == null){
+		if (phoneNumber == null) {
 			phoneNumber = "Phone Number Unavailable";
 		}
 		String URL = currRest.getURL();
@@ -35,28 +35,29 @@
 	%>
 	<!-- Information of Restaurant -->
 	<div class="container-fluid">
-		<h1 id="title"><%= name %></h1>
-		<br>
+		
 		<div class="row">
-			<div class="col-lg-8">
-				<br> <a href=<%= map %>> <%= address %>
-				</a><br> <br>
-				<p>
-					<%= phoneNumber %>
-				</p>
-				<br> <a href=<%= URL %>><%= URL %> </a> <br>
-
-
-			</div>
+			
+				<div class="col-lg-8">
+				<div class="card">
+					<h1 id="title"><%=name%></h1>
+					<br>
+					<br> <a href=<%=map%>> <%=address%>
+					</a><br> <br>
+					<p>
+						<%=phoneNumber%>
+					</p>
+					<br> <a href=<%=URL%>><%=URL%> </a> <br>
+				</div>
+				</div>
+			
 			<!-- Redirection Buttons -->
 			<div class="col-lg-4">
 				<div id="togglePrint">
 					<button onclick="printableView()">Printable View</button>
-					<br>
-					<br>
+					<br> <br>
 					<button onclick="backToResults()">Back to Results</button>
-					<br>
-					<br>
+					<br> <br>
 					<div class="dropdown">
 						<select id="listSelect">
 							<option></option>
@@ -65,8 +66,7 @@
 							<option value="doNotShow">Do Not Show</option>
 						</select>
 					</div>
-					<br>
-					<br>
+					<br> <br>
 					<button
 						onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add
 						to List</button>
@@ -77,51 +77,51 @@
 	</div>
 
 	<script>
-			
-			// Page Redirection
-			function backToResults() {
-				window.location.href = 'resultsPage.jsp';
+		// Page Redirection
+		function backToResults() {
+			window.location.href = 'resultsPage.jsp';
+		}
+		// Printable View function displays and hides buttons on page
+		function printableView() {
+			var x = document.getElementById("togglePrint");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
 			}
-			// Printable View function displays and hides buttons on page
-			function printableView() {
-				var x = document.getElementById("togglePrint");
-				 if (x.style.display === "none") {
-				   x.style.display = "block";
-				 } else {
-				   x.style.display = "none";
-				 }
-				 window.print();
-				 
-				 if (x.style.display === "none") {
-					   x.style.display = "block";
-					 } else {
-					   x.style.display = "none";
-					 }
+			window.print();
+
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
 			}
-			
-			function addToList(selectedIndex){
-				if(selectedIndex != "0"){
-					var xhttp = new XMLHttpRequest();
-					var url_string = window.location.href;
-			        var url = new URL(url_string);
-			        var id = parseFloat(url.searchParams.get("restaurantId"));
-					if(selectedIndex == "1"){
-						xhttp.open("GET", "addToList.jsp?type=restaurant&id="+id+"&list=fav", false);
-					}	
-					else if(selectedIndex == "2"){
-						xhttp.open("GET", "addToList.jsp?type=restaurant&id="+id+"&list=exp", false);
-					}
-					else if(selectedIndex == "3"){
-						xhttp.open("GET", "addToList.jsp?type=restaurant&id="+id+"&list=dns", false);
-					}
-					xhttp.send();
-					/* if(xhttp.responseText.trim().length()>0){
-						return false;
-					}
-					return true; */
+		}
+
+		function addToList(selectedIndex) {
+			if (selectedIndex != "0") {
+				var xhttp = new XMLHttpRequest();
+				var url_string = window.location.href;
+				var url = new URL(url_string);
+				var id = parseFloat(url.searchParams.get("restaurantId"));
+				if (selectedIndex == "1") {
+					xhttp.open("GET", "addToList.jsp?type=restaurant&id=" + id
+							+ "&list=fav", false);
+				} else if (selectedIndex == "2") {
+					xhttp.open("GET", "addToList.jsp?type=restaurant&id=" + id
+							+ "&list=exp", false);
+				} else if (selectedIndex == "3") {
+					xhttp.open("GET", "addToList.jsp?type=restaurant&id=" + id
+							+ "&list=dns", false);
 				}
+				xhttp.send();
+				/* if(xhttp.responseText.trim().length()>0){
+					return false;
+				}
+				return true; */
 			}
-		</script>
+		}
+	</script>
 
 </body>
 </html>
