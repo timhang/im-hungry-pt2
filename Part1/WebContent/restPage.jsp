@@ -36,12 +36,13 @@
 	<!-- Information of Restaurant -->
 	<div class="container-fluid">
 		
-		<div class="row">
-			
-				<div class="col-lg-8">
-				<div class="card">
-					<h1 id="title"><%=name%></h1>
-					<br>
+		<div class="row" style = "padding: 60px 0px;">
+			<div class="col-lg-1"></div>
+				<div class="col-lg-7">
+				<div class="card"  style = "padding: 0px 24px;">
+				<div id="InsideCard">
+					<h2 style = "font-weight: bold;" id="title"><%=name%></h2>
+					
 					<br> <a href=<%=map%>> <%=address%>
 					</a><br> <br>
 					<p>
@@ -50,26 +51,30 @@
 					<br> <a href=<%=URL%>><%=URL%> </a> <br>
 				</div>
 				</div>
+				</div>
+			
 			
 			<!-- Redirection Buttons -->
 			<div class="col-lg-4">
+			
+			
 				<div id="togglePrint">
-					<button onclick="printableView()">Printable View</button>
+					<button onclick="printableView()"><div id="ButtonText">Printable View</div></button>
 					<br> <br>
-					<button onclick="backToResults()">Back to Results</button>
+					<button onclick="backToResults()"><div id="ButtonText">Back to Results</div></button>
 					<br> <br>
 					<div class="dropdown">
 						<select id="listSelect">
-							<option></option>
+							<option>------ Select List ------</option>
 							<option value="favorites">Favorites</option>
 							<option value="toExplore">To Explore</option>
 							<option value="doNotShow">Do Not Show</option>
 						</select>
 					</div>
-					<br> <br>
+					<br>
 					<button
-						onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add
-						to List</button>
+						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div id="ButtonText">Add
+						to List</div></button>
 					<br>
 				</div>
 			</div>

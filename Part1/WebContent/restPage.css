@@ -13,8 +13,27 @@ button, select {
 }
 
 div.card {
-  width: 700px;
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #d1b284;
-  
+  border-radius: 8px;
+
 }
+
+button {
+	border-radius: 8px;
+}
+
+#InsideCard {
+	padding: 20px;
+}
+#ButtonText{
+	font-size: 16px;
+}
+#listSelect{
+	height: 26px;
+	font-size: 16px;
+}
+/* #RecipeContent{
+	display:inline-block;
+} */

@@ -18,13 +18,13 @@ body {
 #searchText {
 	width: 350px; 
 	height: 40px;
-	border-radius: 5px;
+	border-radius: 8px;
 }
 
 #integerBox{
 	width: 60px; 
 	height: 40px;
-	border-radius: 5px;
+	border-radius: 8px;
 }
 
 #feedMeButton {

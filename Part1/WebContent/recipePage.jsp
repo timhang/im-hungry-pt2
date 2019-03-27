@@ -32,14 +32,17 @@
 	%>
 	<!-- Information of Recipe -->
 	<div class="container-fluid">
-		<h1 id="title"><%= name %></h1>
+		<h2 style = "font-weight: bold; padding: 30px 30px;" id="title"><%= name %></h2>
 		<br>
 		<div class="row">
-			<div class="col-lg-8">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-6">
 				<br> <img src=<%= imageUrl %>><br>
 				<br>
 				<br>
+				<div id = "RecipeContent">
 				<div class="card">
+				<div id = "InsideCard">
 				<p>
 					Prep time:
 					<%= prepTime %>
@@ -50,13 +53,13 @@
 					<%= cookTime %>
 				</p>
 				<br>
-				<p>Ingredients:</p>
+				<p style = "font-weight: bold;">Ingredients:</p>
 				<br>
 
 				<!-- Row for ingredients and instructions -->
 				<div class="row">
 					<!-- Two columns of ingredients -->
-					<div class="col-lg-2">
+					<div class="col-lg-4">
 						<ul>
 							<%	
 								//First half of the ingredients list
@@ -69,7 +72,7 @@
 							%>
 						</ul>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-4">
 						<ul>
 							<%
 								//Second half of the ingredients list
@@ -82,49 +85,57 @@
 							%>
 						</ul>
 					</div>
-					<div class="col-lg-8"></div>
+					<div class="col-lg-4"></div>
+				</div>
 				</div>
 				</div>
 				<br>
 				<br>
+				
 				<div class = "card">
+				<div id = "InsideCard">
 				<!-- List of Instructions -->
-				<p>Instructions:</p>
+				<p style = "font-weight: bold;">Instructions:</p>
 				<ol type="1">
 					<%	
 							//Instructions
 						    for(int i = 0; i < instructions.size(); i++) {	
 						%>
-					<li><%= instructions.get(i) %></li>
+					<li><%= instructions.get(i) %></li><br>
 					<%
 						 	}
 						%>
 				</ol>
 				</div>
+				</div>
+				</div>
 
 			</div>
+			
+			<div class="col-lg-1"></div>
 			<!-- Redirection buttons -->
 			<div class="col-lg-4">
 				<div id="togglePrint">
-					<button onclick="printableView()">Printable View</button>
+				<br>
+					<button onclick="printableView()"><div id="ButtonText">Printable View</div></button>
 					<br>
 					<br>
-					<button onclick="backToResults()">Back to Results</button>
+					<button onclick="backToResults()"><div id="ButtonText">Back to Results</div></button>
 					<br>
 					<br>
 					<div class="dropdown">
 						<select id="listSelect">
-							<option></option>
+							<option>------ Select List ------</option>
 							<option value="favorites">Favorites</option>
 							<option value="toExplore">To Explore</option>
 							<option value="doNotShow">Do Not Show</option>
 						</select>
 					</div>
-					<br>
+					
 					<br>
 					<button
-						onclick="addToList(document.getElementById('listSelect').selectedIndex)">Add
-						to List</button>
+						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div id="ButtonText">Add
+						to List</div></button>
 					<br>
 				</div>
 			</div>

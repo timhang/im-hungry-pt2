@@ -45,10 +45,11 @@ table, th{
 
 th{
 	text-align: center;
+	border-radius: 8px;
 }
 
 td {
-	border-radius: 5px;
+	border-radius: 8px;
 }
 td:hover{
 	#d1b284;
@@ -59,9 +60,25 @@ tr:nth-child(odd){
 tr:nth-child(even) {
     background-color: #d1b284;
 }
-
+div.card {
+  width: 90%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #d1b284;
+  border-radius: 8px;
+  margin: 0 auto;
+}
 
 td {
   padding: 10px 10px;
   vertical-align: text-top;
+}
+button {
+	border-radius: 8px;
+}
+#ButtonText{
+	font-size: 16px;
+}
+#mySelect{
+	height: 26px;
+	font-size: 16px;
 }

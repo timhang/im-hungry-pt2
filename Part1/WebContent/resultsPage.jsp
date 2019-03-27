@@ -62,26 +62,29 @@
 			</div>
 			<!-- Button column -->
 			<div class="col-lg-4">
+			<br>
 				<div>
 					<select id="mySelect">
-						<option></option>
+						<option>------ Select List ------</option>
 						<option value="favorites.jsp">Favorites</option>
 						<option value="toExplore.jsp">To Explore</option>
 						<option value="doNotShow.jsp">Do Not Show</option>
 					</select>
 				</div>
 				<br>
-				<button type="button" onclick="manageList()">Manage List</button>
+				<button type="button" onclick="manageList()"><div id = "ButtonText">Manage List</div></button>
 				<br>
 				<br>
-				<button onclick="returnToSearch()">Return to Search Page</button>
+				<button onclick="returnToSearch()"><div id = "ButtonText">Return to Search Page</div></button>
 			</div>
 		</div>
 		<!-- Row for Restaurant and Recipe table -->
+		<br><br>
 		<div class="row">
 			<div class="col-lg-12">
+			<div class="card">
+			<br>
 				<h1 id="title">
-				</br>
 					Results For "<span id="searchText"></span>"
 				</h1>
 				<script type='text/javascript'>
@@ -182,7 +185,7 @@
 
 					</table>
 				</div>
-
+				</div>
 			</div>
 		</div>
 	</div>
