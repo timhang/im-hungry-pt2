@@ -78,6 +78,15 @@
 				<br>
 				<br>
 				<button onclick="returnToSearch()"><div id = "ButtonText">Return to Search Page</div></button>
+				<br>
+				<br>
+				<select name="quickAccess" id="quickAccess-dropdown"
+					onchange="return quickAccess()">
+					<option>------ Quick Access ------</option>
+					<option value="pizza">Pizza</option>
+					<option value="burger">Burger</option>
+					<option value="salad">Salad</option>
+				</select>
 			</div>
 		</div>
 		<!-- Row for Restaurant and Recipe table -->
@@ -191,6 +200,21 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		function quickAccess() {
+			console.log("in quick access");
+			var searchelement = document.getElementById("quickAccess-dropdown");
+			sessionStorage.setItem('searchText', searchelement.value);
+			
+			
+			/* var xhr = new XMLHttpRequest();
+			xhr.open("POST", "resultsPage.jsp", false);
+			xhr.send("searchText=" + request.getParameter("searchText") + "?" + "integetBox=" + request.getParameter("numberType"));
+			 */
+			
+		}
+	</script>
 
 	<script>
 		// Page redirection for buttons

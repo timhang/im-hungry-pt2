@@ -95,6 +95,18 @@ body {
 	text-align: center;
 }
 
+#quickAccess-dropdown {
+	margin-top: 275px;
+	border: none;
+	height: 32px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 4px;
+	/* background-image: linear-gradient(to bottom right, #FBD786, #FBD786);  */
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
 .rainbow {
   color: #FBD786;
   font-family: font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; ; 
