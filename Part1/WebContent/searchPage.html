@@ -11,6 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
+
 <body>
 	<div class="container-fluid">
 		<div class="row">
@@ -47,25 +48,61 @@
 			
 				<select name="quickAccess" id="quickAccess-dropdown"
 					onchange="return quickAccess()">
-					<option>------ Quick Access ------</option>
+					<!-- <option>------ Quick Access ------</option>
 					<option value="pizza">Pizza</option>
 					<option value="burger">Burger</option>
-					<option value="salad">Salad</option>
+					<option value="salad">Salad</option> -->
 				</select>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
-
 	<script>
+	
+	var obj = JSON.parse('[{ "searchTerm":"pizza", "integer":"1"}, { "searchTerm":"burger", "integer":"2"}, { "searchTerm":"tacos", "integer":"4"}]');
+
+	console.log("obj:" + obj);
+	
+	let dropdown = document.getElementById('quickAccess-dropdown');
+    dropdown.length = 0;
+
+    let defaultOption = document.createElement('option');
+    defaultOption.text = '------ Quick Access ------';
+
+    dropdown.add(defaultOption);
+    dropdown.selectedIndex = 0;
+
+        for (let i = 0; i < obj.length; i++) {
+          option = document.createElement('option');
+          option.text = obj[i].searchTerm + " (" + obj[i].integer + ")";
+          option.value = obj[i].searchTerm;
+          dropdown.add(option);
+        }
+	
 		function quickAccess() {
 			console.log("in quick access");
+			/* grabs the dropdown */
 			var searchelement = document.getElementById("quickAccess-dropdown");
+			/* sets session storage of search term */
 			sessionStorage.setItem('searchText', searchelement.value);
 			document.getElementById("searchText").value = searchelement.value;
-			document.getElementById("integerBox").value = 5;
+			var searchTerm = searchelement.value;
+			console.log(obj);
+			console.log( searchelement.id);
+			for(var i = 0; i < obj.length; i++){
+				if(obj[i].searchTerm == searchelement.value){
+					index = i;
+				}
+			}
+		
+			document.getElementById("integerBox").value = obj[index].integer;
+			
+			var x = document.getElementById("searchText");
+			x.style.color = "red"; 
+			
+			var x = document.getElementById("integerBox");
+			x.style.color = "red"; 
 
 			document.getElementById("feedMeButton").click();
 		}
