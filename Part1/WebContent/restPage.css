@@ -1,13 +1,59 @@
 @charset "ISO-8859-1";
+html, body {min-height: 100%;}
 
 body {
-	background-color: #F5F5F5;
+	background-color: #efd6b1;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-size: 20px; 
+	background: #C6FFDD;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background: linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+  	height:100%;
 }
 
 button, select {
 	font-size: 25px;
-	width: 45%;
+	width: 60%;
     height: 200%;
 }
+
+div.card {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #FBD786;
+  border-radius: 8px;
+
+}
+
+button {
+	border-radius: 8px;
+	background-color: #FBD786;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border: none;
+}
+
+#InsideCard {
+	padding: 20px;
+	
+}
+#ButtonText{
+	font-size: 14px;
+	padding: 4px;
+	font-weight: bold;
+	
+}
+#listSelect{
+	height: 32px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 4px;
+	border-radius: 8px;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
+}
+/* #RecipeContent{
+	display:inline-block;
+} */

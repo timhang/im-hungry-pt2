@@ -33,6 +33,7 @@
 		<div class="row">
 			<br>
 			<!-- Photo collage column -->
+			<div class="col-lg-1"></div>
 			<div class="col-lg-8 text-center">
 
 				<%
@@ -60,26 +61,31 @@
 				</div>
 
 			</div>
+
 			<!-- Button column -->
-			<div class="col-lg-4">
+			<div class="col-lg-3">
+			<br>
 				<div>
 					<select id="mySelect">
-						<option></option>
+						<option>------ Select List ------</option>
 						<option value="favorites.jsp">Favorites</option>
 						<option value="toExplore.jsp">To Explore</option>
 						<option value="doNotShow.jsp">Do Not Show</option>
 					</select>
 				</div>
 				<br>
-				<button type="button" onclick="manageList()">Manage List</button>
+				<button type="button" onclick="manageList()"><div id = "ButtonText">Manage List</div></button>
 				<br>
 				<br>
-				<button onclick="returnToSearch()">Return to Search Page</button>
+				<button onclick="returnToSearch()"><div id = "ButtonText">Return to Search Page</div></button>
 			</div>
 		</div>
 		<!-- Row for Restaurant and Recipe table -->
+		<br><br>
 		<div class="row">
 			<div class="col-lg-12">
+			<div class="card">
+			<br>
 				<h1 id="title">
 					Results For "<span id="searchText"></span>"
 				</h1>
@@ -88,7 +94,7 @@
 							.getItem('searchText');
 				</script>
 				<div class="resultsTable" align="center">
-					<table style="width: 100%">
+					<table style="width: 95%">
 						<tr>
 							<th style="font-size: 30px;">Restaurant</th>
 							<th style="font-size: 30px;">Recipe</th>
@@ -115,10 +121,9 @@
 						%>
 
 						<tr>
-							<td><div>
-									<div>
-										<a href=<%=link%>> <%=name%>
-										</a>
+							<td class='clickable-row' data-href=<%=link%>><div>
+									<div style="font-weight: bold; font-size: 17px;">
+										<%=name%>
 									</div>
 									<div style="float: left; width: 70%;">
 										Address:
@@ -150,9 +155,9 @@
 										int cookTime = allRecipes.get(recipeId).getCookTime();
 										String link = "recipePage.jsp?recipeId=" + recipeId;
 							%>
-							<td><div>
-									<div>
-										<a href=<%=link%>> <%=name%></a>
+							<td class='clickable-row' data-href=<%=link%>><div>
+									<div style="font-weight: bold; font-size: 17px;">
+										<%=name%>
 									</div>
 									<div>
 										Rating:
@@ -182,7 +187,7 @@
 
 					</table>
 				</div>
-
+				</div>
 			</div>
 		</div>
 	</div>
@@ -202,6 +207,12 @@
 				window.location.href = 'doNotShow.jsp';
 			}
 		}
+		
+		jQuery(document).ready(function($) {
+		    $(".clickable-row").click(function() {
+		        window.location = $(this).data("href");
+		    });
+		});
 	</script>
 	<script>
 	
