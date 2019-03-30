@@ -72,7 +72,7 @@
 
     dropdown.add(defaultOption);
     dropdown.selectedIndex = 0;
-
+	/* Populate the dropdown with the searchTerm and integer from JSON object */
         for (let i = 0; i < obj.length; i++) {
           option = document.createElement('option');
           option.text = obj[i].searchTerm + " (" + obj[i].integer + ")";
@@ -82,27 +82,30 @@
 	
 		function quickAccess() {
 			console.log("in quick access");
-			/* grabs the dropdown */
+			/* grabs the dropdown "select" element */
 			var searchelement = document.getElementById("quickAccess-dropdown");
-			/* sets session storage of search term */
-			sessionStorage.setItem('searchText', searchelement.value);
-			document.getElementById("searchText").value = searchelement.value;
+			/* stores the value of the selected option */
 			var searchTerm = searchelement.value;
+			/* sets session storage of search term by grabbing the value of the selected option*/
+			sessionStorage.setItem('searchText', searchTerm);
+			/* sets the input text value in the search bar to the search term */
+			document.getElementById("searchText").value = searchTerm;
 			console.log(obj);
 			console.log( searchelement.id);
+			/* If the searchTerm matches the searchTerm in the JSON object, store the index */
 			for(var i = 0; i < obj.length; i++){
-				if(obj[i].searchTerm == searchelement.value){
+				if(obj[i].searchTerm == searchTerm){
 					index = i;
 				}
 			}
-		
+			/* sets the input text value in the integer bar to the number of search terms */
 			document.getElementById("integerBox").value = obj[index].integer;
 			
 			var x = document.getElementById("searchText");
-			x.style.color = "red"; 
+			x.style.color = "white"; 
 			
 			var x = document.getElementById("integerBox");
-			x.style.color = "red"; 
+			x.style.color = "white"; 
 
 			document.getElementById("feedMeButton").click();
 		}
