@@ -19,6 +19,7 @@ CREATE TABLE Restaurant(
     phoneNumber VARCHAR(30) NOT NULL,
     webURL VARCHAR(250) DEFAULT 'No Web URL',
     stars DOUBLE(5,0) NOT NULL,
+
     price INT(5) NOT NULL,
     FOREIGN KEY (sessionID) REFERENCES Sessions(sessionID)
 );
@@ -35,6 +36,7 @@ CREATE TABLE Recipe(
     imageURL TEXT NOT NULL,
     stars DOUBLE(5,0) NOT NULL,
     ingredients TEXT NOT NULL,
+
     steps TEXT NOT NULL,
     FOREIGN KEY (sessionID) REFERENCES Sessions(sessionID)
 );
