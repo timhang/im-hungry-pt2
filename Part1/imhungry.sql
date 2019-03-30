@@ -9,7 +9,6 @@ CREATE TABLE Sessions(
 
 CREATE TABLE Restaurant(
 	restaurantID INT(11) PRIMARY KEY NOT NULL,
-	placeID VARCHAR(200) NOT NULL,
     sessionID INT(11) NOT NULL,
 	restaurantName VARCHAR(250) NOT NULL,
     favoriteListOrder INT(11) NOT NULL DEFAULT -1,
@@ -26,7 +25,6 @@ CREATE TABLE Restaurant(
 
 CREATE TABLE Recipe(
 	recipeID INT(11) PRIMARY KEY NOT NULL,
-	recipeURL VARCHAR(250) NOT NULL,
     sessionID INT(11) NOT NULL,
 	recipeName VARCHAR(250) NOT NULL,
     favoriteListOrder INT(11) NOT NULL DEFAULT -1,
