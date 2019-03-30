@@ -5,7 +5,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry";
 	static final String USER = "root";
-	static final String PASS = "blackhawk1569";
+	static final String PASS = "1234";
 	
 	public static void insertRecipe(int sessionID, Recipe recipe) {
 		Connection conn = null;
