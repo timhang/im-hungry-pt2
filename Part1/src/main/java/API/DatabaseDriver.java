@@ -51,14 +51,14 @@ public class DatabaseDriver {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
-		    String insertSQL = "INSERT INTO Recipe VALUES ";
+		    String insertSQL = "INSERT INTO Restaurant VALUES ";
 		    insertSQL += "(" + Integer.toString(restaurant.getID()) + "," + 
-		    			 Integer.toString(sessionID) + "," + restaurant.getName()
-		    			 + ",-1,-1,-1," + (restaurant.getAddress()) 
-		    			 + "," + (restaurant.getTravelTime()) + ","
-		    			 + "," + restaurant.getPhoneNumber() + ", " 
+		    			 Integer.toString(sessionID) + ",'" + restaurant.getName()
+		    			 + "',-1,-1,-1,'" + (restaurant.getAddress()) 
+		    			 + "','" + (restaurant.getTravelTime())
+		    			 + "','" + restaurant.getPhoneNumber() + "','" 
 		    			 + restaurant.getURL()
-		    			 + "," + restaurant.getRating() + ","
+		    			 + "'," + restaurant.getRating() + ","
 		    			 + restaurant.getPriceRange() + ")";
 		    stmt.executeUpdate(insertSQL);		    			 
 		    
