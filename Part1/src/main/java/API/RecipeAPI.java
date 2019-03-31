@@ -126,11 +126,13 @@ public class RecipeAPI {
 		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
 			// Searching for the same term but less number
 			numResults = Integer.valueOf(number);
+			DatabaseDriver.createSession(query, numResults);
 			return listInclusions(Integer.valueOf(number));
 
 		} else {
 			// Searching for more items or different terms or both
 			call_me(query, Integer.valueOf(number));
+			DatabaseDriver.createSession(query, numResults);
 			return listInclusions(numResults);
 		}
 
