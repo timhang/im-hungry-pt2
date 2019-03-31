@@ -18,10 +18,9 @@ CREATE TABLE Restaurant(
     driveTime VARCHAR(20) NOT NULL,
     phoneNumber VARCHAR(30) NOT NULL,
     webURL VARCHAR(250) DEFAULT 'No Web URL',
-    stars DOUBLE(5,0) NOT NULL,
+    stars FLOAT(5,0) NOT NULL,
 
-    price INT(5) NOT NULL,
-    FOREIGN KEY (sessionID) REFERENCES Sessions(sessionID)
+    price INT(5) NOT NULL
 );
 
 CREATE TABLE Recipe(
@@ -36,9 +35,8 @@ CREATE TABLE Recipe(
     imageURL TEXT NOT NULL,
     stars DOUBLE(5,0) NOT NULL,
     ingredients TEXT NOT NULL,
-
-    steps TEXT NOT NULL,
-    FOREIGN KEY (sessionID) REFERENCES Sessions(sessionID)
+    instructions TEXT NOT NULL
+    
 );
 
 CREATE TABLE RestaurantRelations(

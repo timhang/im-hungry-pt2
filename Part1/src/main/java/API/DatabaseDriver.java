@@ -3,9 +3,9 @@ import java.sql.*;
 
 public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost/imhungry";
+	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "blackhawk1569";
+	static final String PASS = "password";
 	
 	public static void insertRecipe(int sessionID, Recipe recipe) {
 		Connection conn = null;
@@ -16,12 +16,12 @@ public class DatabaseDriver {
 			stmt = conn.createStatement();
 		    String insertSQL = "INSERT INTO Recipe VALUES ";
 		    insertSQL += "(" + Integer.toString(recipe.getId()) + "," + 
-		    			 Integer.toString(sessionID) + "," + recipe.getName()
-		    			 + ",-1,-1,-1," + Integer.toString(recipe.getPrepTime()) 
-		    			 + "," + Integer.toString(recipe.getCookTime()) + ","
-		    			 + "," + recipe.getImage() + ", " + recipe.getStarRating()
-		    			 + "," + recipe.getIngredients().toString() + ","
-		    			 + recipe.getInstructions().toString() + ")";
+		    			 Integer.toString(sessionID) + ",'" + recipe.getName()
+		    			 + "',-1,-1,-1,'" + Integer.toString(recipe.getPrepTime()) 
+		    			 + "','" + Integer.toString(recipe.getCookTime())
+		    			 + "','" + recipe.getImage() + "','" + recipe.getStarRating()
+		    			 + "','" + String.join(",", recipe.getIngredients()) + "','"
+		    			 + String.join(",", recipe.getInstructions()) + "');";
 		    stmt.executeUpdate(insertSQL);		    			 
 		    
 		} catch(SQLException se){
@@ -51,14 +51,14 @@ public class DatabaseDriver {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
-		    String insertSQL = "INSERT INTO Recipe VALUES ";
+		    String insertSQL = "INSERT INTO Restaurant VALUES ";
 		    insertSQL += "(" + Integer.toString(restaurant.getID()) + "," + 
-		    			 Integer.toString(sessionID) + "," + restaurant.getName()
-		    			 + ",-1,-1,-1," + (restaurant.getAddress()) 
-		    			 + "," + (restaurant.getTravelTime()) + ","
-		    			 + "," + restaurant.getPhoneNumber() + ", " 
+		    			 Integer.toString(sessionID) + ",'" + restaurant.getName()
+		    			 + "',-1,-1,-1,'" + (restaurant.getAddress()) 
+		    			 + "','" + (restaurant.getTravelTime())
+		    			 + "','" + restaurant.getPhoneNumber() + "','" 
 		    			 + restaurant.getURL()
-		    			 + "," + restaurant.getRating() + ","
+		    			 + "'," + restaurant.getRating() + ","
 		    			 + restaurant.getPriceRange() + ")";
 		    stmt.executeUpdate(insertSQL);		    			 
 		    
