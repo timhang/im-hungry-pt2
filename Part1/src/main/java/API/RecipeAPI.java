@@ -329,9 +329,12 @@ public class RecipeAPI {
 				// Setting List States
 				currentRecipe.setDoNotShow(false);
 				currentRecipe.setFavorite(false);
-
+				
 				// Adding to map
 				newRecipes.put(currentRecipe.getId(), currentRecipe);
+				
+				//Adding to database
+				DatabaseDriver.insertRecipe(1, currentRecipe);
 
 			}
 			//Setting the searchString field to user's last entered search
