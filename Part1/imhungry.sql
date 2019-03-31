@@ -4,7 +4,8 @@ USE imhungry;
 
 CREATE TABLE Sessions(
     sessionID INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    searchQuery VARCHAR(200) NOT NULL
+    searchQuery VARCHAR(200) NOT NULL,
+    numberResult INT(11) NOT NULL
 );
 
 CREATE TABLE Restaurant(

@@ -81,5 +81,37 @@ public class DatabaseDriver {
 		      }
 		   }
 	}
+	
+	public static void createSession(String searchTerm, int numResults) {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+		    String insertSQL = "INSERT INTO Sessions VALUES ";
+		    insertSQL += "('" + searchTerm + "'," + 
+		    			 Integer.toString(numResults) + ")";
+		    stmt.executeUpdate(insertSQL);		    			 
+		    
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		         if(stmt!=null)
+		            stmt.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		      }
+		      try {
+		         if(conn!=null)
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+	}
 
 }
