@@ -34,6 +34,16 @@ Then(/^my background color should be "([^"]*)"$/) do |arg1|
 end
 
 
+# Quick Access
+Then(/^the Quickaccess should display "([^"]*)"$/) do |arg1|
+	expect(find('#quickAccess-dropdown')).to have_content arg1
+end
+
+When(/^I select "([^"]*)" from Quickaccess$/) do |arg1|
+	select arg1, :from => "quickAccess-dropdown"
+end
+
+
 # RESULTS PAGE RUBY TESTS
 Given(/^I navigated to the results page$/) do
 	visit "localhost:8080/ImHungry/resultsPage.jsp"
@@ -46,6 +56,7 @@ end
 Then(/^my url should still be "([^"]*)"$/) do |arg1|
 	URI.parse(current_url) == arg1
 end
+
 
 
 # Navigating to manage list pages

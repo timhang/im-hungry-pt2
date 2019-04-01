@@ -6,7 +6,7 @@ Background:
 
 Scenario: S1 - Background color check
 
-	Then my background color should be "rgba(245, 245, 245, 1)"
+	Then my background color should be "rgba(255, 255, 255, 1)"
 
 Scenario: S2 - Search for 7 Burgers
 
@@ -31,4 +31,11 @@ Scenario: S5 - Default page
 
 	When I navigate to "localhost:8080/ImHungry"
 	Then my page title should be "Search Page"
+
+
+
+
+
+
+
 
