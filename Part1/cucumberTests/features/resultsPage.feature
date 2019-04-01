@@ -9,7 +9,7 @@ Background:
 
 Scenario: R1 - Background color check
 
-	Then my background color should be "rgba(245, 245, 245, 1)"
+	Then my background color should be "rgba(0, 0, 0, 0)"
 
 Scenario: R2 - Back to search page
 

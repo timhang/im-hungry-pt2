@@ -105,7 +105,7 @@ When(/^I uncheck the checkbox$/) do
 end
 
 Given(/^I click the link for "([^"]*)"$/) do |arg1|
-	find('a', :text=> arg1).click
+	find('td', :text=> arg1).click
 end
 
 Then(/^page should contain "([^"]*)"$/) do |arg1|
@@ -113,7 +113,7 @@ Then(/^page should contain "([^"]*)"$/) do |arg1|
 end
 
 Then(/^the header should say "([^"]*)"$/) do |arg1|
-	find('h1', :text=> arg1)
+	find('h2', :text=> arg1)
 end
 
 Then(/^page should not contain "([^"]*)"$/) do |arg1|
