@@ -1,5 +1,5 @@
 Given("that I am on the homepage") do
-  visit('localhost:8080/im-hugry-pt2/SearchPage.html')
+  visit('http://localhost:8080/ImHungry/searchPage.html')
 end
 
 When("I enter {string} into the text box labeled: Enter Food") do |string|
@@ -16,5 +16,5 @@ end
 
 Then("I will transition to the Results Page") do
   sleep(2)
-  expect(page).to have_current_path('/im-hungry-pt2/results.html')
+  expect(page).to have_current_path('ImHungry/resultsPage.jsp')
 end
