@@ -249,6 +249,11 @@ public class RecipeAPI {
 			con.setRequestMethod("GET");
 			con.addRequestProperty("X-RapidAPI-Key", apiKey);
 			responseCode = con.getResponseCode();
+			if(responseCode != 200) {
+				//Catching API Errors
+				return allRecipes;
+			}
+			
 			System.out.println("\nSending 'GET' request to URL : " + url);
 			System.out.println("Response Code : " + responseCode);
 			br = new BufferedReader(new InputStreamReader((con.getInputStream())));
@@ -260,10 +265,14 @@ public class RecipeAPI {
 			//Second API JSON Parsing
 			for (int i = 0; i < bulkObj.length(); i++) {
 				Recipe currentRecipe = new Recipe(newRecipeIds.get(i));
-
-				// Getting star rating
-				float toFloat = bulkObj.getJSONObject(i).getInt("spoonacularScore");
-				currentRecipe.setStarRating(toFloat / 20);
+				
+				try {
+					// Getting star rating
+					float toFloat = bulkObj.getJSONObject(i).getInt("spoonacularScore");
+					currentRecipe.setStarRating(toFloat / 20);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 
 				// Getting prep and cook time
 				int prep = -1;
@@ -273,6 +282,7 @@ public class RecipeAPI {
 					cook = bulkObj.getJSONObject(i).getInt("cookingMinutes");
 				} catch (JSONException e) {
 					// handle the exception
+					e.printStackTrace();
 				}
 				if (prep == -1) {
 					prep = bulkObj.getJSONObject(i).getInt("readyInMinutes") / 2;
@@ -283,51 +293,69 @@ public class RecipeAPI {
 				currentRecipe.setPrepTime(prep);
 				currentRecipe.setCookTime(cook);
 
-				// Getting Image URL
-				currentRecipe.setImage(bulkObj.getJSONObject(i).getString("image"));
-
-				// Getting name
-				currentRecipe.setName(bulkObj.getJSONObject(i).getString("title"));
-				ArrayList<String> ingredients = new ArrayList<String>();
-				ArrayList<String> instructions = new ArrayList<String>();
-				JSONArray extendedIngredients = bulkObj.getJSONObject(i).getJSONArray("extendedIngredients");
-				JSONArray analyzedInstructions = new JSONArray();
-				if (bulkObj.getJSONObject(i).getJSONArray("analyzedInstructions").length() != 0) {
-					analyzedInstructions = bulkObj.getJSONObject(i).getJSONArray("analyzedInstructions")
-							.getJSONObject(0).getJSONArray("steps");
+				
+				try {
+					// Getting Image URL
+					currentRecipe.setImage(bulkObj.getJSONObject(i).getString("image"));
+					
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
 
-				System.out.println("Name: " + currentRecipe.getName() + "\nStars: " + currentRecipe.getStarRating()
-						+ "\nprepTime: " + currentRecipe.getPrepTime() + "\ncookTime: " + currentRecipe.getCookTime()
-						+ "\nimg: " + currentRecipe.getImage());
-
-				// Getting ingredients
-				System.out.print("Ingredients: ");
-				for (int j = 0; j < extendedIngredients.length(); j++) {
-					if (j % 3 == 0) {
-						System.out.println("");
+				
+				try {
+					// Getting name
+					currentRecipe.setName(bulkObj.getJSONObject(i).getString("title"));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+				
+				try {
+					ArrayList<String> ingredients = new ArrayList<String>();
+					ArrayList<String> instructions = new ArrayList<String>();
+					JSONArray extendedIngredients = bulkObj.getJSONObject(i).getJSONArray("extendedIngredients");
+					JSONArray analyzedInstructions = new JSONArray();
+					//if (bulkObj.getJSONObject(i).getJSONArray("analyzedInstructions").length() != 0) {
+						analyzedInstructions = bulkObj.getJSONObject(i).getJSONArray("analyzedInstructions")
+								.getJSONObject(0).getJSONArray("steps");
+					//}
+	
+					System.out.println("Name: " + currentRecipe.getName() + "\nStars: " + currentRecipe.getStarRating()
+							+ "\nprepTime: " + currentRecipe.getPrepTime() + "\ncookTime: " + currentRecipe.getCookTime()
+							+ "\nimg: " + currentRecipe.getImage());
+	
+					// Getting ingredients
+					System.out.print("Ingredients: ");
+					for (int j = 0; j < extendedIngredients.length(); j++) {
+						if (j % 3 == 0) {
+							System.out.println("");
+						}
+						ingredients.add(extendedIngredients.getJSONObject(j).getString("name"));
+						System.out.print(ingredients.get(j) + ", ");
 					}
-					ingredients.add(extendedIngredients.getJSONObject(j).getString("name"));
-					System.out.print(ingredients.get(j) + ", ");
+					System.out.println("");
+					currentRecipe.setIngredients(ingredients);
+	
+					// Getting Instructions
+					int numOfInstructions = 0;
+					if (analyzedInstructions.length() > 10) {
+						numOfInstructions = 10;
+					} else {
+						numOfInstructions = analyzedInstructions.length();
+					}
+					System.out.println("Instructions: ");
+					for (int j = 0; j < numOfInstructions; j++) {
+						instructions.add(analyzedInstructions.getJSONObject(j).getString("step"));
+						System.out.println((j + 1) + ". " + instructions.get(j));
+					}
+					System.out.println("");
+					currentRecipe.setInstructions(instructions);
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
-				System.out.println("");
-				currentRecipe.setIngredients(ingredients);
-
-				// Getting Instructions
-				int numOfInstructions = 0;
-				if (analyzedInstructions.length() > 10) {
-					numOfInstructions = 10;
-				} else {
-					numOfInstructions = analyzedInstructions.length();
-				}
-				System.out.println("Instructions: ");
-				for (int j = 0; j < numOfInstructions; j++) {
-					instructions.add(analyzedInstructions.getJSONObject(j).getString("step"));
-					System.out.println((j + 1) + ". " + instructions.get(j));
-				}
-				System.out.println("");
-				currentRecipe.setInstructions(instructions);
-
 				// Setting List States
 				currentRecipe.setDoNotShow(false);
 				currentRecipe.setFavorite(false);
