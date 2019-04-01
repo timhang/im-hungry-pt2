@@ -11,75 +11,153 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<body>
-	<div class="content">
-	
-	<!-- structural layout of our search page -->
-	<h1 class="title">I'm Hungry</h1>
-	<form method="POST" onsubmit="return myFunction()"
-		action="resultsPage.jsp">
-		<!-- User input text and integer boxes -->
-		<div class="userInput">
-			<input id="searchText" name="searchText" type="text"
-				placeholder="Enter Food">
-			<input id="integerBox" title="Number of items to show in results"
-				name="numberType" min="1">
-		</div>
-		<br><br>
-		<div class="wrapper">
-			<button type="submit" id="feedMeButton">
-				<span class="rainbow">Feed Me!</span>
-			</button>
 
-		</div>
-	</form>
-	</div>
-	
-	<script>
-			/* function that validates user input in the text bar and integer box */
-			function myFunction() {
-		        var searchText = document.getElementById('searchText').value;
-			  	var intNum = document.getElementById('integerBox').value;
-			  	
-			  	if(searchText === "" || searchText ===null){
-			  		//alert("Please enter dish name");
-			  		return false;
-			  	}
-			  	
-			  	if(intNum === "" || intNum === null){
-			  		document.getElementById('integerBox').value = 5;
-			  	}
-			  	if (intNum === "0" || intNum === 0){
-			  		//alert("Please enter an integer value greater than 0");
-			  		return false;
-			  	}
-			  	
-			  	document.getElementById('feedMeButton').setAttribute("id", "smiley");
-			  	
-			  	sessionStorage.setItem('searchText',searchText);
-			  	
-			  	return true;
-			}
-			setInputFilter(document.getElementById("integerBox"), function(value) {
-				  return /^\d*$/.test(value);
-				});
-			/* function that responses to user input */
-			function setInputFilter(textbox, inputFilter) {
-				  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-				    textbox.addEventListener(event, function() {
-				      if (inputFilter(this.value)) {
-				        this.oldValue = this.value;
-				        this.oldSelectionStart = this.selectionStart;
-				        this.oldSelectionEnd = this.selectionEnd;
-				      } else if (this.hasOwnProperty("oldValue")) {
-				        this.value = this.oldValue;
-				        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-				      }
-				    });
-				  });
-				}
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col-8">
+				<div class="content">
+					<!-- structural layout of our search page -->
+					<h1 class="title">I'm Hungry</h1>
+					<form method="POST" onsubmit="return myFunction()" action="resultsPage.jsp">
+						<!-- User input text and integer boxes -->
+						<div class="userInput">
+							<input id="searchText" name="searchText" type="text"
+								placeholder="Enter Food"> <input id="integerBox"
+								title="Number of items to show in results" name="numberType"
+								min="1">
+						</div>
+						<br>
+						<br>
+
+						<div class="wrapper">
+							<button type="submit" id="feedMeButton">
+								<span class="rainbow">Feed Me!</span>
+							</button>
+
+						</div>
+					</form>
+
+
+
+				</div>
+			</div>
+			<div class="col">
+				<div class="row justify-content-center align-self">
 			
-		</script>
+				<select name="quickAccess" id="quickAccess-dropdown"
+					onchange="return quickAccess()">
+					<!-- <option>------ Quick Access ------</option>
+					<option value="pizza">Pizza</option>
+					<option value="burger">Burger</option>
+					<option value="salad">Salad</option> -->
+				</select>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	
+	var obj = JSON.parse('[{ "searchTerm":"pizza", "integer":"1"}, { "searchTerm":"burger", "integer":"2"}, { "searchTerm":"tacos", "integer":"4"}]');
+
+	console.log("obj:" + obj);
+	
+	let dropdown = document.getElementById('quickAccess-dropdown');
+    dropdown.length = 0;
+
+    let defaultOption = document.createElement('option');
+    defaultOption.text = '------ Quick Access ------';
+
+    dropdown.add(defaultOption);
+    dropdown.selectedIndex = 0;
+	/* Populate the dropdown with the searchTerm and integer from JSON object */
+        for (let i = 0; i < obj.length; i++) {
+          option = document.createElement('option');
+          option.text = obj[i].searchTerm + " (" + obj[i].integer + ")";
+          option.value = obj[i].searchTerm;
+          dropdown.add(option);
+        }
+	
+		function quickAccess() {
+			console.log("in quick access");
+			/* grabs the dropdown "select" element */
+			var searchelement = document.getElementById("quickAccess-dropdown");
+			/* stores the value of the selected option */
+			var searchTerm = searchelement.value;
+			/* sets session storage of search term by grabbing the value of the selected option*/
+			sessionStorage.setItem('searchText', searchTerm);
+			/* sets the input text value in the search bar to the search term */
+			document.getElementById("searchText").value = searchTerm;
+			console.log(obj);
+			console.log( searchelement.id);
+			/* If the searchTerm matches the searchTerm in the JSON object, store the index */
+			for(var i = 0; i < obj.length; i++){
+				if(obj[i].searchTerm == searchTerm){
+					index = i;
+				}
+			}
+			/* sets the input text value in the integer bar to the number of search terms */
+			document.getElementById("integerBox").value = obj[index].integer;
+			
+			var x = document.getElementById("searchText");
+			x.style.color = "white"; 
+			
+			var x = document.getElementById("integerBox");
+			x.style.color = "white"; 
+
+			document.getElementById("feedMeButton").click();
+		}
+	</script>
+
+	<script>
+		/* function that validates user input in the text bar and integer box */
+		function myFunction() {
+			var searchText = document.getElementById('searchText').value;
+			var intNum = document.getElementById('integerBox').value;
+
+			if (searchText === "" || searchText === null) {
+				//alert("Please enter dish name");
+				return false;
+			}
+
+			if (intNum === "" || intNum === null) {
+				document.getElementById('integerBox').value = 5;
+			}
+			if (intNum === "0" || intNum === 0) {
+				//alert("Please enter an integer value greater than 0");
+				return false;
+			}
+
+			document.getElementById('feedMeButton')
+					.setAttribute("id", "smiley");
+
+			sessionStorage.setItem('searchText', searchText);
+
+			return true;
+		}
+		setInputFilter(document.getElementById("integerBox"), function(value) {
+			return /^\d*$/.test(value);
+		});
+		/* function that responses to user input */
+		function setInputFilter(textbox, inputFilter) {
+			[ "input", "keydown", "keyup", "mousedown", "mouseup", "select",
+					"contextmenu", "drop" ].forEach(function(event) {
+				textbox.addEventListener(event, function() {
+					if (inputFilter(this.value)) {
+						this.oldValue = this.value;
+						this.oldSelectionStart = this.selectionStart;
+						this.oldSelectionEnd = this.selectionEnd;
+					} else if (this.hasOwnProperty("oldValue")) {
+						this.value = this.oldValue;
+						this.setSelectionRange(this.oldSelectionStart,
+								this.oldSelectionEnd);
+					}
+				});
+			});
+		}
+	</script>
 
 </body>
 </html>
