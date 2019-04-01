@@ -191,7 +191,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<script>
 		// Page redirection for buttons
 		function returnToSearch() {

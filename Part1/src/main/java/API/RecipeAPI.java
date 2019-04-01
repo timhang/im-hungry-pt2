@@ -126,11 +126,13 @@ public class RecipeAPI {
 		} else if (query.equals(searchString) && Integer.valueOf(number) < numResults) {
 			// Searching for the same term but less number
 			numResults = Integer.valueOf(number);
+			DatabaseDriver.createSession(query, numResults);
 			return listInclusions(Integer.valueOf(number));
 
 		} else {
 			// Searching for more items or different terms or both
 			call_me(query, Integer.valueOf(number));
+			DatabaseDriver.createSession(query, numResults);
 			return listInclusions(numResults);
 		}
 
@@ -329,9 +331,12 @@ public class RecipeAPI {
 				// Setting List States
 				currentRecipe.setDoNotShow(false);
 				currentRecipe.setFavorite(false);
-
+				
 				// Adding to map
 				newRecipes.put(currentRecipe.getId(), currentRecipe);
+				
+				//Adding to database
+				DatabaseDriver.insertRecipe(1, currentRecipe);
 
 			}
 			//Setting the searchString field to user's last entered search

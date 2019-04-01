@@ -286,9 +286,13 @@ public class RestAPI {
 
 
 			newRest.setTravelTime(newTravelTime);
-
+			
+			//Adding to map
 			newRests.put(test2.getInt("id"), newRest);
 			newRestIDs.add(test2.getInt("id"));
+			
+			//Adding to database
+			DatabaseDriver.insertRestaurant(1, newRest);
 
 			System.out.println(test2.get("name"));
 			System.out.println("");
