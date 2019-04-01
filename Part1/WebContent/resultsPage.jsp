@@ -100,12 +100,14 @@
 							<th style="font-size: 30px;">Recipe</th>
 						</tr>
 						<%
+							ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
+								request.getParameter("numberType"));
 							ArrayList<Integer> restIDs = RestAPI.resultsPageList(request.getParameter("searchText"),
 									request.getParameter("numberType"));
-							ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
-									request.getParameter("numberType"));
-							HashMap<Integer, Restaurant> allRestaurants = RestAPI.getRestaurantMap();
+							
 							HashMap<Integer, Recipe> allRecipes = RecipeAPI.getRecipeMap();
+							HashMap<Integer, Restaurant> allRestaurants = RestAPI.getRestaurantMap();
+							
 
 							int size = Math.max(restIDs.size(), recipeIds.size());
 
