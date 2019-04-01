@@ -41,15 +41,15 @@ CREATE TABLE Recipe(
 );
 
 CREATE TABLE RestaurantRelations(
-	sessionFkID INT (11),
-    restaurantFkID INT (11),
+	sessionFkID INT (11) NOT NULL,
+    restaurantFkID INT (11) NOT NULL,
     FOREIGN KEY (sessionFkID) REFERENCES Sessions(sessionID),
     FOREIGN KEY (restaurantFkID) REFERENCES Restaurant(restaurantID)
 );
 
 CREATE TABLE RecipeRelations(
-	sessionFkID INT (11),
-    recipeFkID INT (11),
+	sessionFkID INT (11) NOT NULL,
+    recipeFkID INT (11) NOT NULL,
     FOREIGN KEY (sessionFkID) REFERENCES Sessions(sessionID),
     FOREIGN KEY (recipeFkID) REFERENCES Recipe(recipeID)
 );

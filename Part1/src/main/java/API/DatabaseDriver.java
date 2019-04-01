@@ -1,9 +1,13 @@
 package API;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -14,7 +18,6 @@ public class DatabaseDriver {
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
 		Connection conn = null;
-		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -41,8 +44,8 @@ public class DatabaseDriver {
 		      e.printStackTrace();
 		   } finally{
 		      try{
-		         if(stmt!=null)
-		            stmt.close();
+		         if(ps!=null)
+		            ps.close();
 		      } catch(SQLException se2){
 		    	// nothing we can do
 		      }
@@ -57,7 +60,6 @@ public class DatabaseDriver {
 	
 	public static void insertRestaurant(int sessionID, Restaurant restaurant) {
 		Connection conn = null;
-		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -85,8 +87,8 @@ public class DatabaseDriver {
 		      e.printStackTrace();
 		   } finally{
 		      try{
-		         if(stmt!=null)
-		            stmt.close();
+		         if(ps!=null)
+		            ps.close();
 		      } catch(SQLException se2){
 		    	// nothing we can do
 		      }
@@ -101,7 +103,6 @@ public class DatabaseDriver {
 	
 	public static void createSession(String searchTerm, int numResults) {
 		Connection conn = null;
-		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -122,8 +123,8 @@ public class DatabaseDriver {
 		      e.printStackTrace();
 		   } finally{
 		      try{
-		         if(stmt!=null)
-		            stmt.close();
+		         if(ps!=null)
+		            ps.close();
 		      } catch(SQLException se2){
 		    	// nothing we can do
 		      }
@@ -138,7 +139,6 @@ public class DatabaseDriver {
 	
 	public static JSONArray getSessions() throws Exception{
 		Connection conn = null;
-		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -174,8 +174,8 @@ public class DatabaseDriver {
 		      e.printStackTrace();
 		   } finally{
 		      try{
-		         if(stmt!=null)
-		            stmt.close();
+		         if(ps!=null)
+		            ps.close();
 		      } catch(SQLException se2){
 		    	// nothing we can do
 		      }
@@ -189,36 +189,24 @@ public class DatabaseDriver {
 		return null;
 	}
 	
-	public static JSONArray getRecipes() throws Exception{
+	public static void sessionRecipes(ArrayList<Integer> recipeIds) throws Exception{
 		Connection conn = null;
-		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
-			ps = conn.prepareStatement("SELECT * FROM Sessions");
-	        rs = ps.executeQuery();
-	        JSONArray newArray = new JSONArray();
-	        if(rs.next()==false) {
-
-				return null;
-				//System.out.println("login state: "+ state);
-			} else {
-				do {
-					//JSONObject;
-					//int count = rs.getInt("count");
-					String searchTerm;
-					int numResults;
-					searchTerm = rs.getString("searchQuery");
-					numResults = rs.getInt("numberResults");
-					JSONObject jsonObj = new JSONObject();
-					jsonObj.put("searchTerm", searchTerm);
-					jsonObj.put("integer", Integer.toString(numResults));
-					newArray.put(jsonObj);
-					
-
-				} while(rs.next());
-				return newArray;
+			ps = conn.prepareStatement("SELECT * FROM Sessions ORDER BY sessionID DESC LIMIT 1");
+			rs = ps.executeQuery();
+			rs.first();
+			int sessionId = rs.getInt("sessionID");
+			
+			for(int i = 0; i<recipeIds.size(); i++) {
+				ps = conn.prepareStatement("INSERT INTO RecipeRelations (sessionFkID, recipeFkID) VALUES (?,?)");
+				ps.setInt(1,sessionId);
+				ps.setInt(2,recipeIds.get(i));
+		        ps.execute();
+	        
 			}
+	        
 	        	    			 
 		    
 		} catch(SQLException se){
@@ -227,8 +215,8 @@ public class DatabaseDriver {
 		      e.printStackTrace();
 		   } finally{
 		      try{
-		         if(stmt!=null)
-		            stmt.close();
+		         if(ps!=null)
+		            ps.close();
 		      } catch(SQLException se2){
 		    	// nothing we can do
 		      }
@@ -239,7 +227,49 @@ public class DatabaseDriver {
 		         se.printStackTrace();
 		      }
 		   }
-		return null;
+
+	}
+	
+	public static void sessionRestaurants(ArrayList<Integer> restaurantIds) throws Exception{
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			//Getting the last session Id
+			ps = conn.prepareStatement("SELECT * FROM Sessions ORDER BY sessionID DESC LIMIT 1");
+			rs = ps.executeQuery();
+			rs.first();
+			int sessionId = rs.getInt("sessionID");
+			
+			for(int i = 0; i<restaurantIds.size(); i++) {
+				ps = conn.prepareStatement("INSERT INTO RestaurantRelations (sessionFkID, restaurantFkID) VALUES (?,?)");
+				ps.setInt(1,sessionId);
+				ps.setInt(2,restaurantIds.get(i));
+		        ps.execute();
+	        
+			}
+	        
+	        	    			 
+		    
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		         if(ps!=null)
+		            ps.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		      }
+		      try {
+		         if(conn!=null)
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+
 	}
 	
 	

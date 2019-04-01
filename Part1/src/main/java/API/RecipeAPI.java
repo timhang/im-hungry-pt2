@@ -127,12 +127,14 @@ public class RecipeAPI {
 			// Searching for the same term but less number
 			numResults = Integer.valueOf(number);
 			DatabaseDriver.createSession(query, numResults);
+			DatabaseDriver.sessionRecipes(currentRecipeIds);
 			return listInclusions(Integer.valueOf(number));
 
 		} else {
 			// Searching for more items or different terms or both
+			DatabaseDriver.createSession(query, Integer.valueOf(number));
 			call_me(query, Integer.valueOf(number));
-			DatabaseDriver.createSession(query, numResults);
+			DatabaseDriver.sessionRecipes(currentRecipeIds);
 			return listInclusions(numResults);
 		}
 
