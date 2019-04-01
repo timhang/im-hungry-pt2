@@ -60,7 +60,11 @@
 
 	<script>
 	
-	var obj = JSON.parse('[{ "searchTerm":"pizza", "integer":"1"}, { "searchTerm":"burger", "integer":"2"}, { "searchTerm":"tacos", "integer":"4"}]');
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "QuickAccess", false);
+	xhttp.send();
+	var obj = JSON.parse(xhttp.responseText);
+	//var obj = JSON.parse('[{ "searchTerm":"pizza", "integer":"1"}, { "searchTerm":"burger", "integer":"2"}, { "searchTerm":"tacos", "integer":"4"}]');
 
 	console.log("obj:" + obj);
 	
