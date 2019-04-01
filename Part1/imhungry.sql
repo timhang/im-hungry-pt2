@@ -4,7 +4,8 @@ USE imhungry;
 
 CREATE TABLE Sessions(
     sessionID INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    searchQuery VARCHAR(200) NOT NULL
+    searchQuery VARCHAR(200) NOT NULL,
+    numberResults INT(11) NOT NULL
 );
 
 CREATE TABLE Restaurant(
@@ -18,9 +19,9 @@ CREATE TABLE Restaurant(
     driveTime VARCHAR(20) NOT NULL,
     phoneNumber VARCHAR(30) NOT NULL,
     webURL VARCHAR(250) DEFAULT 'No Web URL',
-    stars FLOAT(5,0) NOT NULL,
+    stars DOUBLE(5,0) NOT NULL,
 
-    price INT(5) NOT NULL
+    price DOUBLE(5,1) NOT NULL
 );
 
 CREATE TABLE Recipe(
@@ -30,8 +31,8 @@ CREATE TABLE Recipe(
     favoriteListOrder INT(11) NOT NULL DEFAULT -1,
     exploreListOrder INT(11) NOT NULL DEFAULT -1,
     doNotShowListOrder INT(11) NOT NULL DEFAULT -1,
-    prepTime VARCHAR(20) NOT NULL,
-    cookTime VARCHAR(20) NOT NULL,
+    prepTime INT(11) NOT NULL,
+    cookTime INT(11) NOT NULL,
     imageURL TEXT NOT NULL,
     stars DOUBLE(5,0) NOT NULL,
     ingredients TEXT NOT NULL,
