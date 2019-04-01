@@ -1,7 +1,7 @@
 
 # SEARCHPAGE RUBY TESTS
 Given(/^I am on searchPage$/) do
-	visit "localhost:8080/ImHungry/searchPage.html"
+	visit "http://localhost:8080/ImHungry/searchPage.html"
 end
 
 When(/^I enter "([^"]*)" in the search box$/) do |arg1|
