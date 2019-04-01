@@ -33,17 +33,7 @@ public class DatabaseDriver {
 	        ps.setString(12, String.join(",", recipe.getInstructions()));
 
 	        ps.execute();
-			
-//			stmt = conn.createStatement();
-//		    String insertSQL = "INSERT INTO Recipe VALUES ";
-//		    insertSQL += "(" + Integer.toString(recipe.getId()) + "," + 
-//		    			 Integer.toString(sessionID) + ",'" + recipe.getName()
-//		    			 + "',-1,-1,-1,'" + Integer.toString(recipe.getPrepTime()) 
-//		    			 + "','" + Integer.toString(recipe.getCookTime())
-//		    			 + "','" + recipe.getImage() + "','" + recipe.getStarRating()
-//		    			 + "','" + String.join(",", recipe.getIngredients()) + "','"
-//		    			 + String.join(",", recipe.getInstructions()) + "');";
-//		    stmt.executeUpdate(insertSQL);		    			 
+				    			 
 		    
 		} catch(SQLException se){
 		      se.printStackTrace();
@@ -87,18 +77,7 @@ public class DatabaseDriver {
 	        ps.setDouble(12, restaurant.getPriceRange());
 
 	        ps.execute();
-			
-//			stmt = conn.createStatement();
-//		    String insertSQL = "INSERT INTO Restaurant VALUES ";
-//		    insertSQL += "(" + Integer.toString(restaurant.getID()) + "," + 
-//		    			 Integer.toString(sessionID) + ",'" + restaurant.getName()
-//		    			 + "',-1,-1,-1,'" + (restaurant.getAddress()) 
-//		    			 + "','" + (restaurant.getTravelTime())
-//		    			 + "','" + restaurant.getPhoneNumber() + "','" 
-//		    			 + restaurant.getURL()
-//		    			 + "'," + restaurant.getRating() + ","
-//		    			 + restaurant.getPriceRange() + ")";
-//		    stmt.executeUpdate(insertSQL);		    			 
+					 
 		    
 		} catch(SQLException se){
 		      se.printStackTrace();
@@ -187,13 +166,7 @@ public class DatabaseDriver {
 				} while(rs.next());
 				return newArray;
 			}
-	        
-	        
-//			stmt = conn.createStatement();
-//		    String insertSQL = "INSERT INTO Sessions VALUES ";
-//		    insertSQL += "('" + searchTerm + "'," + 
-//		    			 Integer.toString(numResults) + ")";
-//		    stmt.executeUpdate(insertSQL);		    			 
+	        	    			 
 		    
 		} catch(SQLException se){
 		      se.printStackTrace();
@@ -215,5 +188,60 @@ public class DatabaseDriver {
 		   }
 		return null;
 	}
+	
+	public static JSONArray getRecipes() throws Exception{
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			ps = conn.prepareStatement("SELECT * FROM Sessions");
+	        rs = ps.executeQuery();
+	        JSONArray newArray = new JSONArray();
+	        if(rs.next()==false) {
+
+				return null;
+				//System.out.println("login state: "+ state);
+			} else {
+				do {
+					//JSONObject;
+					//int count = rs.getInt("count");
+					String searchTerm;
+					int numResults;
+					searchTerm = rs.getString("searchQuery");
+					numResults = rs.getInt("numberResults");
+					JSONObject jsonObj = new JSONObject();
+					jsonObj.put("searchTerm", searchTerm);
+					jsonObj.put("integer", Integer.toString(numResults));
+					newArray.put(jsonObj);
+					
+
+				} while(rs.next());
+				return newArray;
+			}
+	        	    			 
+		    
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		         if(stmt!=null)
+		            stmt.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		      }
+		      try {
+		         if(conn!=null)
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+		return null;
+	}
+	
+	
 
 }
