@@ -1,5 +1,9 @@
 package API;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.json.*;
 
 public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -7,7 +11,7 @@ public class DatabaseDriver {
 	static final String USER = "root";
 	static final String PASS = "1234";
 	private static PreparedStatement ps = null;
-	
+	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -151,6 +155,65 @@ public class DatabaseDriver {
 		         se.printStackTrace();
 		      }
 		   }
+	}
+	
+	public static JSONArray getSessions() throws Exception{
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			ps = conn.prepareStatement("SELECT * FROM Sessions");
+	        rs = ps.executeQuery();
+	        JSONArray newArray = new JSONArray();
+	        if(rs.next()==false) {
+
+				return null;
+				//System.out.println("login state: "+ state);
+			} else {
+				do {
+					//JSONObject;
+					//int count = rs.getInt("count");
+					String searchTerm;
+					int numResults;
+					searchTerm = rs.getString("searchQuery");
+					numResults = rs.getInt("numberResults");
+					JSONObject jsonObj = new JSONObject();
+					jsonObj.put("searchTerm", searchTerm);
+					jsonObj.put("integer", Integer.toString(numResults));
+					newArray.put(jsonObj);
+					
+
+				} while(rs.next());
+				return newArray;
+			}
+	        
+	        
+//			stmt = conn.createStatement();
+//		    String insertSQL = "INSERT INTO Sessions VALUES ";
+//		    insertSQL += "('" + searchTerm + "'," + 
+//		    			 Integer.toString(numResults) + ")";
+//		    stmt.executeUpdate(insertSQL);		    			 
+		    
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		         if(stmt!=null)
+		            stmt.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		      }
+		      try {
+		         if(conn!=null)
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+		return null;
 	}
 
 }
