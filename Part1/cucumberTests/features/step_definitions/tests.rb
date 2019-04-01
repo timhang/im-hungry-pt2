@@ -35,6 +35,10 @@ end
 
 
 # Quick Access
+Then(/^I should see search results for "([^"]*)"$/) do |arg1|
+	expect(find('#searchText')).to have_content arg1
+end
+
 Then(/^the Quickaccess should display "([^"]*)"$/) do |arg1|
 	expect(find('#quickAccess-dropdown')).to have_content arg1
 end
