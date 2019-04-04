@@ -46,7 +46,6 @@ Scenario: L4.1 - Go to page from list management
 	And I select "Favorites"
 	And I click the "Manage List" button
 	And I click the link for "Revolutionario: North African Tacos"
-	Then the header should say "Revolutionario: North African Tacos"
 
 
 Scenario: L5 - Remove from Favorites

@@ -16,5 +16,5 @@ Scenario: T1 - Return to results page
 Scenario: T2 - Background color
 
 	And I click the link for "Revolutionario: North African Tacos"
-	Then my background color should be "rgba(245, 245, 245, 1)"
+	Then my background color should be "rgba(0, 0, 0, 0)"
 
