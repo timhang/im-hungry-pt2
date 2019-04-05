@@ -153,6 +153,12 @@ Then(/^I should be taken to "([^"]*)" TEST$/) do |arg1|
 	URI.parse(current_url) == arg1
 end
 
+# Security
 
-
+Then(/^test XSS/) do
+	File.readlines("features/xss.txt").each do |line|
+		fill_in "searchText", :with=> line
+		find("#feedMeButton").click
+	end
+end
 
