@@ -111,13 +111,13 @@
 				var url = new URL(url_string);
 				var id = parseFloat(url.searchParams.get("restaurantId"));
 				if (selectedIndex == "1") {
-					xhttp.open("GET", "addToList.jsp?type=restaurant&id=" + id
+					xhttp.open("GET", "AddToList?type=restaurant&id=" + id
 							+ "&list=fav", false);
 				} else if (selectedIndex == "2") {
-					xhttp.open("GET", "addToList.jsp?type=restaurant&id=" + id
+					xhttp.open("GET", "AddToList?type=restaurant&id=" + id
 							+ "&list=exp", false);
 				} else if (selectedIndex == "3") {
-					xhttp.open("GET", "addToList.jsp?type=restaurant&id=" + id
+					xhttp.open("GET", "AddToList?type=restaurant&id=" + id
 							+ "&list=dns", false);
 				}
 				xhttp.send();

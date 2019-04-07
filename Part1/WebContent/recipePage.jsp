@@ -177,13 +177,13 @@
 			        var url = new URL(url_string);
 			        var id = parseFloat(url.searchParams.get("recipeId"));
 					if(selectedIndex == "1"){
-						xhttp.open("GET", "addToList.jsp?type=recipe&id="+id+"&list=fav", false);
+						xhttp.open("GET", "AddToList?type=recipe&id="+id+"&list=fav", false);
 					}	
 					else if(selectedIndex == "2"){
-						xhttp.open("GET", "addToList.jsp?type=recipe&id="+id+"&list=exp", false);
+						xhttp.open("GET", "AddToList?type=recipe&id="+id+"&list=exp", false);
 					}
 					else if(selectedIndex == "3"){
-						xhttp.open("GET", "addToList.jsp?type=recipe&id="+id+"&list=dns", false);
+						xhttp.open("GET", "AddToList?type=recipe&id="+id+"&list=dns", false);
 					}
 					xhttp.send();
 
