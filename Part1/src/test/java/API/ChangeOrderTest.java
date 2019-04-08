@@ -8,10 +8,12 @@ public class ChangeOrderTest {
 	public void setup() {
 		
 		// add items to favorites
-		addItem(3);
-		addItem(5);
-		addItem(9);
+		AddToList addToList = new AddToList();
+		System.out.println("Thewse are the items we have");
 		
+		addToList.add("recipe", 3, "fav");
+		addToList.add("restaurant", 5, "fav");
+
 		// get items
 		JSON json = getFavoriteItems();
 		
