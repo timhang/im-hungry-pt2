@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minimalistic Sortable - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+  <style>
+    #sortable {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #sortable li {
+      margin: 0 3px 3px 3px;
+      padding: 0.9em;
+      font-size: 1.4em;
+      height: 18px;
+      background: #444;
+      color: #eee
+    }
+
+    #sortable li span {
+      position: absolute;
+      margin-left: -1.3em;
+    }
+
+    body {
+      background: #333;
+      font-family: Helvetica
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    /** adapted from https://jqueryui.com/sortable/ by Alex Reyes **/
+    $(function () {
+      $("#sortable").sortable({
+        update: function (event, ui) { }
+      });
+
+      $("#sortable").on("sortupdate", function (event, ui) {
+        e = event;
+        u = ui;
+        console.log($("#" + ui.item.attr("id")).index());
+
+        json = {
+          id: ui.item.attr("id"),
+          index: $("#" + ui.item.attr("id")).index()
+        };
+
+        console.log(json);
+
+      });
+
+      $("#sortable").disableSelection();
+    });  
+  </script>
+
+</head>
+
+<body>
+
+  <ul id="sortable">
+    <li id="item1">Item 1</li>
+    <li id="item2">Item 2</li>
+    <li id="item3">Item 3</li>
+    <li id="item4">Item 4</li>
+  </ul>
+
+
+</body>
+
+</html>

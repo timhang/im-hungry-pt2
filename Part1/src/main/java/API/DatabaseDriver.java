@@ -13,7 +13,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "1234";
+	static final String PASS = "welcometousc";
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
@@ -266,6 +266,15 @@ public class DatabaseDriver {
 
 	}
 	
+	public static void updateRecipeIndices(ArrayList<Integer> recipeIds) throws Exception{
+		/*
+		 if the selected ids in the database is -1, then update all of indices to match the current
+		 what if the -1 -1 -1 -1 -1 1 -1
+		 */
+	}
 	
+	public static void updateRestaurantIndices(ArrayList<Integer> restaurantIds) throws Exception{
+		
+	}
 
 }
