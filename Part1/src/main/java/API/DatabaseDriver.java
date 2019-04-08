@@ -266,6 +266,15 @@ public class DatabaseDriver {
 
 	}
 	
+	public static void updateRecipeIndices(ArrayList<Integer> recipeIds) throws Exception{
+		/*
+		 if the selected ids in the database is -1, then update all of indices to match the current
+		 what if the -1 -1 -1 -1 -1 1 -1
+		 */
+	}
 	
+	public static void updateRestaurantIndices(ArrayList<Integer> restaurantIds) throws Exception{
+		
+	}
 
 }
