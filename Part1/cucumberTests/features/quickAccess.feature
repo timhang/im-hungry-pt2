@@ -19,9 +19,6 @@ Scenario: S2 - Quickaccess
 	Then the Quickaccess should display "------ Quick Access ------"
     When I select "Tomato (17)" from Quickaccess
     Then I should see search results for "Tomato"
-
-
-
-
-
+	When I select "First" from Quickaccess
+	Then I should see search results for "Tomato"
 

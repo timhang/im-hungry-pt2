@@ -40,11 +40,11 @@ Then(/^I should see search results for "([^"]*)"$/) do |arg1|
 end
 
 Then(/^the Quickaccess should display "([^"]*)"$/) do |arg1|
-	expect(find('#quickAccess-dropdown')).to have_content arg1
+	expect(find('#quickAccess-table')).to have_content arg1
 end
 
 When(/^I select "([^"]*)" from Quickaccess$/) do |arg1|
-	select arg1, :from => "quickAccess-dropdown"
+	select arg1, :from => "quickAccess-table"
 end
 
 
