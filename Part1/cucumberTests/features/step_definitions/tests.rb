@@ -172,3 +172,55 @@ Then(/^test XSS/) do
 	end
 end
 
+# Change order
+
+Given(/^I am on favorites page$/) do
+	visit "http://localhost:8080/ImHungry/favorites.jsp"
+	# visit "http://food.hiddetek.com/sort"
+end
+
+When(/^move item "([^"]*)" to position "([^"]*)$/) do |arg1, arg2|
+	source = page.find("#item#{arg1}")
+	target = page.find("#item#{arg2}")
+	source.drag_to(target)
+end
+
+And("move item {string} down {string} position") do |arg1, arg2|
+	# source = page.find("##{arg1}")
+	# target = page.find("#item#{arg2}")
+	# source.drag_to(target)
+	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: #{arg2} });")
+	sleep(1)
+end
+
+Then("wait {string}") do |arg1|
+	puts arg1
+	sleep(5)
+end
+
+And("move item {string} up {string} position") do |arg1, arg2|
+	# source = page.find("##{arg1}")
+	# target = page.find("#item#{arg2}")
+	# source.drag_to(target)
+	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: -#{arg2} });")
+	sleep(1)
+end
+
+Then("item {string} should be in position {string}") do |arg1, arg2|
+	s = evaluate_script("$(\"#item#{arg1}\").index()")
+	
+	expect(s).to eq(arg2.to_i)
+	
+end
+
+And("refresh") do
+	refresh
+end
+
+Then("each restaurant must have {string} element") do |arg1|
+	# each div with class restaurant must have the radius element
+	page.all(:css, ".restaurant").each do |el|
+		expect(el).to have_content(arg1)
+	end
+
+end
