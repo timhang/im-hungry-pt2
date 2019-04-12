@@ -2,6 +2,7 @@
 # SEARCHPAGE RUBY TESTS
 Given(/^I am on searchPage$/) do
 	visit "http://localhost:8080/ImHungry/searchPage.html"
+	
 end
 
 When(/^I enter "([^"]*)" in the search box$/) do |arg1|
@@ -16,8 +17,16 @@ When(/^I press Im Hungry$/) do
 	find('#feedMeButton').click
 end
 
+When(/^I press "([^"]*)"$/) do |arg1|
+	find('#'+arg1).click
+end
+
 Then(/^I should see "([^"]*)" search results for "([^"]*)"$/) do |arg1, arg2|
-	expect(page).to have_content("Address", count: arg1)
+	expect(page).to have_content(arg1, count: arg1)
+end
+
+Then(/^I should see "([^"]*)" in the page$/) do |arg1|
+	expect(page).to have_content(arg1)
 end
 
 When(/^I navigate to "([^"]*)"$/) do |arg1|
