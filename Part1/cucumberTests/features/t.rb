@@ -1,11 +1,20 @@
 # i = 1
-# File.readlines("features/xss.txt").each do |line|
+# File.readlines("food.txt").each do |line|
 
-    
-#     string = "\tScenario: S#{i} XSS Test #{i}\n\n\t" 
-#     string += "\tWhen I enter \"" + line.gsub('"', '\"').sub("\n", "") + "\" in the search box\n\t"
-#     string += "\tAnd I press Im Hungry\n\t"
-#     string += "\tThen I should see \"1\" search results for \"Invalid\"\n\n"
+#     food = line.gsub('"', '\"').sub("\n", "")
+#     string = "
+#     Scenario: S#{i}a - Search for food
+
+#         When I enter \"#{food}\" in the search box
+#         When I enter \"17\" in the integer box
+#         And I press Im Hungry
+#         Then I should see search results for \"#{food}\"
+
+#     Scenario: S#{i}b - Ensure item appears on Quickaccess
+
+#         When I select \"#{food} (17)\" from Quickaccess
+#         Then I should see search results for \"#{food}\"
+#     "
 #     puts string
 #     i += 1
 # end

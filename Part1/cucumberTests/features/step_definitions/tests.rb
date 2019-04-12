@@ -53,7 +53,8 @@ Then(/^the Quickaccess should display "([^"]*)"$/) do |arg1|
 end
 
 When(/^I select "([^"]*)" from Quickaccess$/) do |arg1|
-	select arg1, :from => "quickAccess-dropdown"
+	first('option', :text => arg1).select_option
+	# select arg1, :from => "quickAccess-dropdown"
 end
 
 
