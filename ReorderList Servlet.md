@@ -8,7 +8,7 @@
 
 ``` javascript
 {
-  list: favorites
+  list: favorites or toExplore or doNotShow
 }
 ```
 
