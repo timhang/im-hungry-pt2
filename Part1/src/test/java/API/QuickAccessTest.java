@@ -17,9 +17,15 @@ public class QuickAccessTest {
 	@Test
 	public void testGetQuickAccess() throws IOException {
 		//fail("Not yet implemented");
+		
+		// Existing class
 		QuickAccess testObj = new QuickAccess();
+		
+		// mock a server request 
         HttpServletRequest request = mock(HttpServletRequest.class);      
         request.setAttribute("a", testObj);
+        
+        // mock a server response
         HttpServletResponse response = mock(HttpServletResponse.class); 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
