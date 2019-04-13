@@ -10,6 +10,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class DatabaseDriver {
+	static enum lists{
+		favorites,
+		toExplore,
+		doNotShow
+	}
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
@@ -266,11 +271,66 @@ public class DatabaseDriver {
 
 	}
 	
-	public static void updateRecipeIndices(ArrayList<Integer> recipeIds) throws Exception{
+	public static int GetInsertionIndex(Connection connection, lists listName) throws SQLException {
+		String arg = "";
+		if(listName == lists.favorites) {
+			arg = "favoriteListOrder";
+		} else if (listName == lists.toExplore) {
+			arg = "exploreListOrder";
+		} else if (listName == lists.doNotShow) {
+			arg = "doNotShowListOrder";
+		} else if (listName == null) {
+			return -1;
+		}
+		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index1 FROM Recipe AND Recipe WHERE favoriteListOrder!=-1");
+		rs = ps.executeQuery();
+		rs.first();
+		int index1 = rs.getInt("index1");
+		
+		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index2 FROM Recipe AND Restaurant WHERE favoriteListOrder!=-1");
+		rs = ps.executeQuery();
+		rs.first();
+		int index2 = rs.getInt("index1");
+		
+		return (index1+index2);
+	}
+	
+	private static void print(String x) {
+		System.out.println(x);
+	}
+	
+	public static void AddRecipeToList(int recipeIds, lists listName) throws Exception{
 		/*
 		 if the selected ids in the database is -1, then update all of indices to match the current
 		 what if the -1 -1 -1 -1 -1 1 -1
 		 */
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			int index = GetInsertionIndex(conn, listName);
+			
+			print(Integer.toString(index)); 			 
+		    
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		            ps.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		    	  se2.printStackTrace();
+		      }
+		      try {
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+		
+		
 	}
 	
 	public static void updateRestaurantIndices(ArrayList<Integer> restaurantIds) throws Exception{
