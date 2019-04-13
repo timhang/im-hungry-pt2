@@ -34,7 +34,7 @@ public class ReorderList extends HttpServlet {
 		// TODO Auto-generated method stub
 		String listName = request.getParameter("list");
 		JSONArray newArray = new JSONArray();
-		String name;
+		String name = "empty";
 		if(listName.equals("favorites")) {
 			name = "favorites";
 		} else if (listName.equals("toExplore")) {
@@ -43,29 +43,38 @@ public class ReorderList extends HttpServlet {
 			name = "doNotShow";
 		}
 			
-		
-		"id": 21,
-		  "type": "recipe",
-		  "name": "pizza",
-		  "starRating": "5",
-		  "prepTime": "3 min",
-		  "cookTime": "3h",
-		  "link": "inai",
+
 		
 
 		// JSONObject;
 		// int count = rs.getInt("count");
-		String searchTerm;
-		int numResults;
+
 		
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("id", 1234);
-		jsonObj.put("type", "recipe");
+		JSONObject jsonObj1 = new JSONObject();
+		jsonObj1.put("id", 1234);
+		jsonObj1.put("type", "recipe");
+		jsonObj1.put("name", name);
+		jsonObj1.put("starRating", "5");
+		jsonObj1.put("prepTime", "24");
+		jsonObj1.put("cookTime", "5");
+		jsonObj1.put("link", "inai");
 		
-		jsonObj.put("starRating", "5");
+		JSONObject jsonObj2 = new JSONObject();
+		jsonObj2.put("id", 1235);
+		jsonObj2.put("type", "restaurant");
+		jsonObj2.put("name", name);
+		jsonObj2.put("starRating", "4");
+		jsonObj2.put("prepTime", "25");
+		jsonObj2.put("cookTime", "5");
+		jsonObj2.put("link", "inai");
 		
-		newArray.put(jsonObj);
-		return newArray;
+		newArray.put(jsonObj1);
+		newArray.put(jsonObj2);
+		String json = newArray.toString();
+		
+		response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(json);
 
 	}
 
