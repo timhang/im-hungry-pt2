@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minimalistic Sortable - Default functionality</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
 
 
   <style>
@@ -36,6 +37,7 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="sort.js"></script>
   <script>
     /** adapted from https://jqueryui.com/sortable/ by Alex Reyes **/
     $(function () {
@@ -46,7 +48,6 @@
       $("#sortable").on("sortupdate", function (event, ui) {
         e = event;
         u = ui;
-        console.log($("#" + ui.item.attr("id")).index());
 
         json = {
           id: ui.item.attr("id"),
@@ -54,11 +55,147 @@
         };
 
         console.log(json);
-
       });
 
       $("#sortable").disableSelection();
+
     });  
+  </script>
+
+  <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+  <script>
+    // test
+    $(function () {
+      var delay = 200;
+      var elements = 4;
+
+      // check item order
+      QUnit.test("initial-order", initial);
+      //
+      // move item1
+      QUnit.test("Move items", function (assert) {
+
+        // item to move
+        var item = 0;
+
+        // number of positions to move
+        var n = 1;
+
+        // move item 1 down 
+        $("#item" + item).simulateDragSortable({ move: 1 });
+
+        // for asynchronicity
+        var done = assert.async();
+
+        setTimeout(function () {
+          assert.equal($("#item0").index(), 1, "item0 index");
+          assert.equal($("#item1").index(), 0, "item1 index");
+          assert.equal($("#item2").index(), 2, "item2 index");
+          assert.equal($("#item3").index(), 3, "item3 index");
+
+          $("#item0").simulateDragSortable({ move: -1 });
+
+          setTimeout(function () {
+
+            initial(assert);
+
+            n = 2;
+            $("#item0").simulateDragSortable({ move: n });
+            setTimeout(function () {
+              /**
+              * this loop is equivalent to testing as follows
+              *
+              assert.equal( $("#item0").index(), 2, "item0 index" );
+              assert.equal( $("#item1").index(), 0, "item1 index" );
+              assert.equal( $("#item2").index(), 1, "item2 index" );
+              assert.equal( $("#item3").index(), 3, "item3 index" );
+              * **/
+
+              for (var i = 0; i < elements; i++) {
+
+                var currentIndex = i == 0 ? n :
+                  i > n ? i : i - 1;
+
+                assert.equal($("#item" + i).index(), currentIndex,
+                  "item" + i + " index");
+              }
+
+              $("#item0").simulateDragSortable({ move: -n });
+
+
+              /***** TWO ***/
+              var item = 1;
+              n = 1;
+
+              // move item 1 down 
+              $("#item" + item).simulateDragSortable({ move: n });
+
+
+              setTimeout(function () {
+                /**
+                * this loop is equivalent to testing as follows
+                *
+                assert.equal( $("#item0").index(), 0, "item0 index" );
+                assert.equal( $("#item1").index(), 2, "item1 index" );
+                assert.equal( $("#item2").index(), 1, "item2 index" );
+                assert.equal( $("#item3").index(), 3, "item3 index" );
+                 */
+
+                // test programmatically
+                for (var i = 0; i < elements; i++) {
+
+                  // initial value
+                  var currentIndex = 0;
+
+                  // calculate current index based on type
+                  if (i == item) {
+
+                    currentIndex = item + n;
+                  }
+                  else if (i > item && i <= item + n) {
+
+                    currentIndex = i - 1;
+                  }
+                  else {
+                    currentIndex = i;
+                  }
+
+
+                  // assertion
+                  assert.equal(
+                    $("#item" + i).index(), currentIndex,
+                    "item" + i + " index");
+                }
+
+
+                $("#item" + item).simulateDragSortable({ move: -1 });
+                done();
+
+              }, delay);
+
+              done();
+            }, delay);
+
+          }, delay);
+        }, delay);
+      });
+      //
+      // move item1 two steps down
+      function initial(assert) {
+
+        for (var i = 0; i < elements; i++) {
+
+          assert.equal($("#item" + i).index(), i,
+            "item" + i + " initial");
+        }
+      }
+
+      function saveLoop() {
+      }
+
+
+    });
+
   </script>
 
 </head>
@@ -66,12 +203,13 @@
 <body>
 
   <ul id="sortable">
+    <li id="item0">Item 0</li>
     <li id="item1">Item 1</li>
     <li id="item2">Item 2</li>
     <li id="item3">Item 3</li>
-    <li id="item4">Item 4</li>
   </ul>
-
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
 
 </body>
 
