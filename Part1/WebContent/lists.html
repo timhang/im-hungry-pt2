@@ -9,6 +9,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="sort.js"></script>
 <link rel="stylesheet" type="text/css" href="favorites.css" />
 
 <style>
@@ -29,9 +32,19 @@ body {
 			<!-- Column for list of restaurants and recipes -->
 			<div class="col-lg-7">
 			<h2 style = "font-weight: bold;" id="title">Favorites</h2>
+
+				<ul id="sortable">
+					<li id="item0">Item 0</li>
+					<li id="item1">Item 1</li>
+					<li id="item2">Item 2</li>
+					<li id="item3">Item 3</li>
+				</ul>
+
 				<div class="listTable">
 					<table style="width: 100%">
 						<tbody>
+
+							
 
 							<%
 								// Loop through all of the restauraunts and display based on true/false boolean
@@ -199,7 +212,7 @@ body {
 				"list": "favorites"
 			})
 			.done(function(data){
-				console.log("It works!\n " + e);
+				s = data;
 			})
 			.fail(function(e){
 				console.log("Error: " + e);
