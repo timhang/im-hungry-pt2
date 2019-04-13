@@ -222,5 +222,49 @@ Then("each restaurant must have {string} element") do |arg1|
 	page.all(:css, ".restaurant").each do |el|
 		expect(el).to have_content(arg1)
 	end
-
 end
+
+# grocery list
+help = Set[]
+Given("I click first recipe") do
+	first('.recipe').click
+	page.all(:css, "ul li").each do |el|
+		help.add( el.text )
+	end
+	
+end
+
+
+Then("I should see the ingredients in the recipe list") do
+	list = Set[]
+	page.all(:css, "ul li").each do |el|
+		list.add( el.text )
+	end
+
+	# check that all elements on help an in this list
+	expect(list).to eq(help)
+end
+
+When("I click recipe {string}") do |arg|
+	counter = 1
+	page.all(".recipe").each do |recipe|
+		
+		# if this is the one we want
+		if counter == arg.to_i
+			# recipe click
+			recipe.click
+
+			# add elements to list
+			page.all(:css, "ul li").each do |el|
+				help.add( el.text )
+			end
+
+			# exit this loop
+			break
+		end
+
+		counter += 1
+	end
+	sleep(1)
+end
+
