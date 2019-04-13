@@ -21,13 +21,7 @@ body {
 </head>
 <body>
 	<!-- this function populates favorite list data -->
-	<%
-		HashMap<Integer, Recipe> recipeMap = RecipeAPI.getRecipeMap();
-		HashMap<Integer, Restaurant> restMap = RestAPI.getRestaurantMap();
-
-		ArrayList<Integer> recipeInList = RecipeAPI.getFavorites();
-		ArrayList<Integer> restInList = RestAPI.getFavorites();
-	%>
+	
 	<div class="container-fluid">
 		
 		<div class="row" style = "padding: 60px 0px;">
@@ -170,6 +164,8 @@ body {
 	<script>
 	
 		jQuery(document).ready(function($) {
+			requests();
+
 			$(".clickable-row").click(function() {
 				window.location = $(this).data("href");
 			});
@@ -192,6 +188,32 @@ body {
 				window.location.href = 'doNotShow.jsp';
 			}
 		}
+
+
+		/*** WRITTEN BY ALEX ***/
+		function requests() {
+			
+			// Initial request to populate the table
+			$.post("ReorderList", 
+			{	
+				"list": "favorites"
+			})
+			.done(function(data){
+				console.log("It works!\n " + e);
+			})
+			.fail(function(e){
+				console.log("Error: " + e);
+			});
+
+			
+
+			// render the table 
+
+
+		}
+
+		/*** END ALEX SCRIPT ***/
+
 	</script>
 	<script>
 		// Button toggle (hide/show)
