@@ -49,9 +49,9 @@ Front end FE lets the Backend BE know what elements have changed of position
 "data": [{
     "id": 21,
     "type": "restaurant",
-    "newIndex: 0
+    "newIndex": 0
   }, 
-   {
+  {
     "id": 21,
     "type": "recipe",
     "newIndex": 1
