@@ -116,23 +116,54 @@ body {
 
 
 		/*** WRITTEN BY ALEX ***/
+
+		// to keep track of the list that we are seeing (fav as default)
+		var list = "fav";
+
 		function requests() {
+
+			// related to appearance
+			style();
 
 			// ui to sort things
 			sorting();
+
+			// getListName
+			getListName();
+
+			// populate list
+			populate();
+		}
+
+		function getListName() {
 			
+			let param = new URLSearchParams(window.location.search);
+			
+			// if the parameter exists
+			if(param.has("q")) {
+				
+				let listParam = param.get("q");
+
+				// change only if it predef list
+				if(listParam == "fav" || listParam == "toExplore" || listParam == "doNotShow" ) {
+					list = listParam;
+				}
+			}
+		}
+
+		function populate(){
 			// Initial request to populate the table
-			$.post("ReorderList", 
-			{	
-				"list": "favorites"
-			})
-			.done(function(data){
-				s = data;
-				render(data);
-			})
-			.fail(function(e){
-				console.log("Error: " + e);
-			});
+			$.post("ReorderList",
+				{
+					"list": "favorites"
+				})
+				.done(function (data) {
+					s = data;
+					render(data);
+				})
+				.fail(function (e) {
+					console.log("Error: " + e);
+				});
 		}
 
 		// renders data from backend to populate rows
@@ -148,61 +179,71 @@ body {
 
 				// if restaurant
 				if (element.type == "restaurant") {
-					console.log(element);
 
 					// create restaurant
-					string = `<li id="item${counter}" apiId="${element.id}" type="${element.type}">\
-						<div>
-							<input type="checkbox" name="checkbox" class="checkbox" \
-								id="checkboxRest" style="display: none;" \
-								value="${element.restId}"> \
-						</div> \
-						<div style="font-weight: bold; font-size: 20px;"> \
-							<a href="${element.link}"> ${element.name} </a> \
-						</div > \
-						<div style="float: left; width: 70%;"> \
-							Address: ${element.address}</div> \
-						<div style="float: right; text-align: right; width: 30%">\
-							$${element.priceRange}</div>\
-						<div>\
-							Rating: ${element.rating}</div>\
-						<div>\
-							Driving Time: ${element.travelTime}</div>\
+					string = `<li id="item${counter}" apiId="${element.id}" type="${element.type}">
+						<div class="row">
+							<div class="col-sm-1">
+								<input type="checkbox" name="checkbox" class="checkbox" 
+									id="checkboxRest"
+									value="${element.id}"> 
+							</div> 
+							<div class="col-sm-11">
+								<div style="font-weight: bold; font-size: 20px;"> 
+									<a href="${element.link}"> ${element.name} </a> 
+								</div > 
+								<div style="float: left; width: 70%;"> 
+									Address: ${element.address}</div> 
+								<div style="float: right; text-align: right; width: 30%">
+									$${element.priceRange}</div>\
+								<div>
+									Rating: ${element.rating}</div>\
+								<div>
+									Driving Time: ${element.travelTime}
+								</div>
+							</div>
+						</div>
 						</li>`;
 				}
 				else {
 					// create recipe
 					string = `
 					<li id="item${counter}" apiId="${element.id}" type="${element.type}">
-						<div>
-							<input
-								type="checkbox" name="checkbox" class="checkbox"
-								id="checkboxRecipe" style="display: none;"
-								value="${element.recipeId}">
-						</div>
-						<div>
-							<div style="font-weight: bold; font-size: 20px;">
-								<a href="${element.link}">${element.name} </a>
+						<div class="row">
+							<div class="col-sm-1">
+								<input
+									type="checkbox" name="checkbox" class="checkbox"
+									id="checkboxRecipe"	
+									value="${element.id}">
+						
 							</div>
+						
+							<div class="col-sm-10">
+								<div style="font-weight: bold; font-size: 20px;">
+									<a href="${element.link}">${element.name} </a>
+								</div>
 
-							<div>
-								Rating: ${element.starRating}
+								<div>
+									Rating: ${element.starRating}
+								</div>
+								
+								<div style="float: left; width: 30%;">
+									Prep time: ${element.prepTime} mins
+								</div>
+								
+								<div style="float: right; width: 70%;">
+									Cook time: ${element.cookTime} mins
+								</div>
 							</div>
-							
-							<div style="float: left; width: 30%;">
-								Prep time: ${element.prepTime} mins
-							</div>
-							
-							<div style="float: right; width: 70%;">
-								Cook time: ${element.cookTime} mins
-							</div>
-						</div>
 					</li>`;
 				}
 				counter++;
 
 				// append
 				$("#sortable").append(string);
+
+				// hide checkboxes
+				$(".checkbox").hide();
 			});
 
 			
@@ -223,7 +264,7 @@ body {
 				e = event;
 				u = ui;
 
-				informBackend();				
+				reportNewOrder();				
 			});
 
 			$("#sortable").disableSelection();
@@ -231,7 +272,7 @@ body {
 			
 		}
 
-		function informBackend() {
+		function reportNewOrder() {
 			array = [];
 
 			// get the index of each element
@@ -248,6 +289,7 @@ body {
 			// construct json
 			var json = {
 				"mode": "update",
+				"list": list,
 				"data": array
 			};
 
@@ -255,6 +297,10 @@ body {
 
 			// inform backend
 			$.post("ReorderList", json);
+		}
+
+		function style() {
+			$(".checkbox").hide();
 		}
 
 		/*** END ALEX SCRIPT ***/
@@ -269,6 +315,8 @@ body {
 		var restCheck = document.getElementById("checkboxRest");
 		var recipeCheck = document.getElementById("checkboxRecipe");
 		var checkBoxes = document.getElementsByClassName("checkbox");
+
+		
 
 		editButton.onclick = function() {
 			if (editButton.value === "Edit") {
@@ -291,16 +339,8 @@ body {
 			} else {
 				moveButton.style.visibility = "hidden";
 			}
-			for (i = 0; i < checkBoxes.length; i++) {
-				console.log(checkBoxes[i].id);
-				console.log(checkBoxes[i].value);
-				console.log(checkBoxes[i].checked);
-				if (checkBoxes[i].style.visibility === "hidden") {
-					checkBoxes[i].style.visibility = "visible";
-				} else {
-					checkBoxes[i].style.visibility = "hidden";
-				}
-			}
+
+			$(".checkbox").toggle();
 		}
 
 		deleteButton.onclick = function() {

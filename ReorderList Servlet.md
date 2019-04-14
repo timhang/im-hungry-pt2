@@ -9,7 +9,7 @@
 ``` javascript
 {
   "mode": "request",
-  "list": "favorites" // or toExplore or doNotShow
+  "list": "fav" // or toExplore or doNotShow
 }
 ```
 
@@ -46,6 +46,7 @@ Front end FE lets the Backend BE know what elements have changed of position
 ```JSON
 {
 "mode": "update",
+"list": "fav", // or "toExplore" or "doNotShow"
 "data": [{
     "id": 21,
     "type": "restaurant",
