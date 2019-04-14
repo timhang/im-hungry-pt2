@@ -155,7 +155,7 @@ body {
 			// Initial request to populate the table
 			$.post("ReorderList",
 				{
-					"list": "favorites"
+					"list": list
 				})
 				.done(function (data) {
 					s = data;
@@ -362,7 +362,7 @@ body {
 			console.log(linkRest);
 			console.log(linkRecipe);
 			xhttp.open("GET", "DeleteItem?restIds=" + linkRest + "&recipeIds="
-					+ linkRecipe + "&list=fav", true);
+					+ linkRecipe + "&list="+list, true);
 			xhttp.onreadystatechange = function() {
 				//window.location.reload(true);
 
@@ -395,7 +395,7 @@ body {
 				console.log(linkRest);
 				console.log(linkRecipe);
 				xhttp.open("GET", "MoveItem?restIds=" + linkRest
-						+ "&recipeIds=" + linkRecipe + "&list=fav&to="
+						+ "&recipeIds=" + linkRecipe + "&list="+list+"&to="
 						+ moveDropdown.selectedIndex, true);
 				xhttp.onreadystatechange = function() {
 
