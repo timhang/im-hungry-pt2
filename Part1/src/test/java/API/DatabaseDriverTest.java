@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
+import API.DatabaseDriver.lists;
+
 import org.json.*;
 
 public class DatabaseDriverTest {
@@ -43,8 +45,9 @@ public class DatabaseDriverTest {
 //		
 //		dbdriver.insertRecipe(1, testObj1);
 //		dbdriver.insertRestaurant(1, testObj2);
-		JSONArray newArray = dbdriver.getSessions();
-		System.out.println(newArray.toString());
+		//JSONArray newArray = dbdriver.getSessions();
+		dbdriver.AddRecipeToList(12345, lists.favorites);
+		//System.out.println(newArray.toString());
 	}
 
 }

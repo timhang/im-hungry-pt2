@@ -18,7 +18,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "welcometousc";
+	static final String PASS = "1234";
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
@@ -282,15 +282,15 @@ public class DatabaseDriver {
 		} else if (listName == null) {
 			return -1;
 		}
-		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index1 FROM Recipe AND Recipe WHERE favoriteListOrder!=-1");
+		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index1 FROM Recipe WHERE favoriteListOrder!=-1");
 		rs = ps.executeQuery();
 		rs.first();
 		int index1 = rs.getInt("index1");
 		
-		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index2 FROM Recipe AND Restaurant WHERE favoriteListOrder!=-1");
+		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index2 FROM Restaurant WHERE favoriteListOrder!=-1");
 		rs = ps.executeQuery();
 		rs.first();
-		int index2 = rs.getInt("index1");
+		int index2 = rs.getInt("index2");
 		
 		return (index1+index2);
 	}
