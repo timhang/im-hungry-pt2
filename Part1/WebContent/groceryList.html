@@ -3,7 +3,7 @@
 <head><title>Grocery List</title></head>
 <body>
 
-    <ul>
+    <ul id="ingredients">
         <li>pizza dough</li>
         <li>olive oil</li>
         <li>shredded mozzarella cheese</li>
@@ -28,4 +28,22 @@
     <button id="backBtn" onclick="location.href='resultsPage.jsp'">Back</button>
     
 </body>
+<script>
+
+$(function(){
+
+    // get ingredient list from backend
+    $.post("Ingredients", 
+    {
+        "mode": "get"
+    })
+    done(function(response){
+        // append each element in the response
+        response.data.forEach(element => {
+            $("#ingredients").append(`<li>${element}</li>`);
+        });
+    })
+});
+
+</script>
 </html>
