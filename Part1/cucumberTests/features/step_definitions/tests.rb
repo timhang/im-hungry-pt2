@@ -175,7 +175,7 @@ end
 # Change order
 
 Given(/^I am on favorites page$/) do
-	visit "http://localhost:8080/ImHungry/favorites.jsp"
+	visit "http://localhost:8080/ImHungry/lists.html"
 	# visit "http://food.hiddetek.com/sort"
 end
 
@@ -186,9 +186,6 @@ When(/^move item "([^"]*)" to position "([^"]*)$/) do |arg1, arg2|
 end
 
 And("move item {string} down {string} position") do |arg1, arg2|
-	# source = page.find("##{arg1}")
-	# target = page.find("#item#{arg2}")
-	# source.drag_to(target)
 	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: #{arg2} });")
 	sleep(1)
 end
@@ -199,9 +196,6 @@ Then("wait {string}") do |arg1|
 end
 
 And("move item {string} up {string} position") do |arg1, arg2|
-	# source = page.find("##{arg1}")
-	# target = page.find("#item#{arg2}")
-	# source.drag_to(target)
 	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: -#{arg2} });")
 	sleep(1)
 end
