@@ -68,9 +68,9 @@
 				<div>
 					<select id="mySelect">
 						<option>------ Select List ------</option>
-						<option value="favorites.jsp">Favorites</option>
-						<option value="toExplore.jsp">To Explore</option>
-						<option value="doNotShow.jsp">Do Not Show</option>
+						<option value="lists.html?q=fav">Favorites</option>
+						<option value="lists.html?q=toExplore">To Explore</option>
+						<option value="lists.html?q=doNotShow">Do Not Show</option>
 					</select>
 				</div>
 				<br>
@@ -202,11 +202,11 @@
 		function manageList() {
 			var link = document.getElementById("mySelect").selectedIndex;
 			if (link == "1") {
-				window.location.href = 'favorites.jsp';
+				window.location.href = 'lists.html?q=fav';
 			} else if (link == "2") {
-				window.location.href = 'toExplore.jsp';
+				window.location.href = 'lists.html?q=toExplore';
 			} else if (link == "3") {
-				window.location.href = 'doNotShow.jsp';
+				window.location.href = 'lists.html?q=doNotShow';
 			}
 		}
 		

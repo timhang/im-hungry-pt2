@@ -106,11 +106,11 @@ body {
 		function manageList() {
 			var link = document.getElementById("mySelect").selectedIndex;
 			if (link == "1") {
-				window.location.href = 'favorites.jsp';
+				window.location.href = 'lists.html?q=fav';
 			} else if (link == "2") {
-				window.location.href = 'toExplore.jsp';
+				window.location.href = 'lists.html?q=toExplore';
 			} else if (link == "3") {
-				window.location.href = 'doNotShow.jsp';
+				window.location.href = 'lists.html?q=doNotShow';
 			}
 		}
 
@@ -148,6 +148,15 @@ body {
 				if(listParam == "fav" || listParam == "toExplore" || listParam == "doNotShow" ) {
 					list = listParam;
 				}
+
+				// update name of the list
+				var listNames = {
+					"fav": "Favorites", 
+					"toExplore": "To Explore", 
+					"doNotShow": "Do Not Show"
+				}
+
+				$("#title").text(listNames[list]);
 			}
 		}
 
