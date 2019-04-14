@@ -62,8 +62,50 @@ Front end FE lets the Backend BE know what elements have changed of position
 
 ###### Response 
 
-```
+```JSON
 {
   "response": "success"
 }
 ```
+
+# Ingredients Servlet
+This servlet keeps track of the ingredients for the grocery list
+
+*Adding Elements*
+
+###### Request 
+
+```JSON
+{
+"mode": "add",
+"data": [
+  "tomatos", "onions", "pepperoni"
+  ]
+}
+```
+
+###### Response 
+
+```JSON
+{
+  "response": "success"
+}
+
+*Requesting Elements*
+
+###### Request 
+
+```JSON
+{
+"mode": "get"
+}
+```
+
+###### Response 
+
+```JSON
+{
+  "data": [
+    "tomatos", "onions", "pepperoni"
+  ]
+}
