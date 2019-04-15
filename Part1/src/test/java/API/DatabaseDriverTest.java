@@ -15,7 +15,7 @@ public class DatabaseDriverTest {
 
 	@Test
 	public void test() throws Exception {
-		DatabaseDriver dbdriver = new DatabaseDriver();
+		//DatabaseDriver dbdriver = new DatabaseDriver();
 //		Recipe testObj1 = new Recipe(101041);
 //		testObj1.setStarRating(3.85f);
 //		testObj1.setName("pizza");
@@ -46,7 +46,69 @@ public class DatabaseDriverTest {
 //		dbdriver.insertRecipe(1, testObj1);
 //		dbdriver.insertRestaurant(1, testObj2);
 		//JSONArray newArray = dbdriver.getSessions();
-		dbdriver.AddRecipeToList(12345, lists.favorites);
+		
+		
+		DatabaseDriver.AddRecipeToList(220834, lists.favorites);
+		DatabaseDriver.AddRecipeToList(220834, lists.favorites);
+		DatabaseDriver.AddRecipeToList(220834, lists.toExplore);
+		DatabaseDriver.AddRecipeToList(220834, lists.toExplore);
+		DatabaseDriver.AddRecipeToList(220834, lists.toExplore);
+		DatabaseDriver.AddRecipeToList(220834, lists.toExplore);
+		
+		DatabaseDriver.AddRestaurantToList(16819485, lists.favorites);
+		DatabaseDriver.AddRestaurantToList(16819485, lists.toExplore);
+		DatabaseDriver.AddRestaurantToList(16819485, lists.doNotShow);
+		
+		DatabaseDriver.AddRecipeToList(212133, lists.favorites);
+		DatabaseDriver.AddRecipeToList(212133, lists.toExplore);
+		DatabaseDriver.AddRecipeToList(212133, lists.doNotShow);
+		DatabaseDriver.AddRecipeToList(212133, lists.doNotShow);
+		DatabaseDriver.AddRecipeToList(212133, lists.doNotShow);
+		
+		DatabaseDriver.AddRestaurantToList(16813257, lists.favorites);
+		DatabaseDriver.AddRestaurantToList(16813257, lists.toExplore);
+		DatabaseDriver.AddRestaurantToList(16813257, lists.doNotShow);
+		DatabaseDriver.AddRestaurantToList(16813257, lists.favorites);
+		DatabaseDriver.AddRestaurantToList(16813257, lists.toExplore);
+		DatabaseDriver.AddRestaurantToList(16813257, lists.doNotShow);
+		
+		DatabaseDriver.AddRecipeToList(630293, lists.favorites);
+		DatabaseDriver.AddRecipeToList(630293, lists.toExplore);
+		DatabaseDriver.AddRecipeToList(630293, lists.doNotShow);
+		
+		DatabaseDriver.AddRecipeToList(820172, lists.favorites);
+		DatabaseDriver.AddRecipeToList(820172, lists.toExplore);
+		DatabaseDriver.AddRecipeToList(820172, lists.doNotShow);
+		
+		DatabaseDriver.AddRecipeToList(220834, null);
+		DatabaseDriver.AddRecipeToList(220834, null);
+		DatabaseDriver.AddRecipeToList(212133, null);
+		DatabaseDriver.AddRecipeToList(212133, null);
+		DatabaseDriver.AddRecipeToList(212133, null);
+		DatabaseDriver.AddRecipeToList(212133, null);
+		
+		DatabaseDriver.AddRecipeToList(342, null);
+		DatabaseDriver.AddRecipeToList(234, null);
+		DatabaseDriver.AddRecipeToList(423, null);
+		DatabaseDriver.AddRecipeToList(234, null);
+		DatabaseDriver.AddRecipeToList(234, null);
+		DatabaseDriver.AddRecipeToList(234, null);
+		
+		DatabaseDriver.AddRestaurantToList(16819485, null);
+		DatabaseDriver.AddRestaurantToList(16813257, null);
+		DatabaseDriver.AddRestaurantToList(16819485, null);
+		DatabaseDriver.AddRestaurantToList(16813257, null);
+		DatabaseDriver.AddRestaurantToList(16813257, null);
+		DatabaseDriver.AddRestaurantToList(16813257, null);
+		
+		DatabaseDriver.AddRestaurantToList(1234, null);
+		DatabaseDriver.AddRestaurantToList(123, null);
+		DatabaseDriver.AddRestaurantToList(4321, null);
+		DatabaseDriver.AddRestaurantToList(4321, null);
+		DatabaseDriver.AddRestaurantToList(12344, null);
+		DatabaseDriver.AddRestaurantToList(1233, null);
+		
+		
 		//System.out.println(newArray.toString());
 	}
 
