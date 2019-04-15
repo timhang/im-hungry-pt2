@@ -65,7 +65,7 @@
 				<div class="row">
 					<!-- Two columns of ingredients -->
 					<div class="col-lg-4">
-						<ul>
+						<ul id="ingredients">
 							<%	
 								//First half of the ingredients list
 						    	for(int i = 0; i < ingredients.size()/2; i++) {
@@ -196,7 +196,7 @@
 				let array = [];
 
 				// extract ingredients
-				$("#RecipeContent li").each(function (i, e) {
+				$("#ingredients li").each(function (i, e) {
 					array.push( $(this).text() );
 				});
 
