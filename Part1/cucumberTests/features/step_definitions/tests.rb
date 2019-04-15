@@ -2,6 +2,7 @@
 # SEARCHPAGE RUBY TESTS
 Given(/^I am on searchPage$/) do
 	visit "http://localhost:8080/ImHungry/searchPage.html"
+	
 end
 
 When(/^I enter "([^"]*)" in the search box$/) do |arg1|
@@ -16,8 +17,16 @@ When(/^I press Im Hungry$/) do
 	find('#feedMeButton').click
 end
 
+When(/^I press "([^"]*)"$/) do |arg1|
+	find('#'+arg1).click
+end
+
 Then(/^I should see "([^"]*)" search results for "([^"]*)"$/) do |arg1, arg2|
-	expect(page).to have_content("Address", count: arg1)
+	expect(page).to have_content(arg1, count: arg1)
+end
+
+Then(/^I should see "([^"]*)" in the page$/) do |arg1|
+	expect(page).to have_content(arg1)
 end
 
 When(/^I navigate to "([^"]*)"$/) do |arg1|
@@ -44,7 +53,8 @@ Then(/^the Quickaccess should display "([^"]*)"$/) do |arg1|
 end
 
 When(/^I select "([^"]*)" from Quickaccess$/) do |arg1|
-	select arg1, :from => "quickAccess-table"
+	first('option', :text => arg1).select_option
+	# select arg1, :from => "quickAccess-dropdown"
 end
 
 
@@ -160,5 +170,95 @@ Then(/^test XSS/) do
 		fill_in "searchText", :with=> line
 		find("#feedMeButton").click
 	end
+end
+
+# Change order
+
+Given(/^I am on favorites page$/) do
+	visit "http://localhost:8080/ImHungry/lists.html"
+	# visit "http://food.hiddetek.com/sort"
+end
+
+When(/^move item "([^"]*)" to position "([^"]*)$/) do |arg1, arg2|
+	source = page.find("#item#{arg1}")
+	target = page.find("#item#{arg2}")
+	source.drag_to(target)
+end
+
+And("move item {string} down {string} position") do |arg1, arg2|
+	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: #{arg2} });")
+	sleep(1)
+end
+
+Then("wait {string}") do |arg1|
+	puts arg1
+	sleep(5)
+end
+
+And("move item {string} up {string} position") do |arg1, arg2|
+	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: -#{arg2} });")
+	sleep(1)
+end
+
+Then("item {string} should be in position {string}") do |arg1, arg2|
+	s = evaluate_script("$(\"#item#{arg1}\").index()")
+	
+	expect(s).to eq(arg2.to_i)
+	
+end
+
+And("refresh") do
+	refresh
+end
+
+Then("each restaurant must have {string} element") do |arg1|
+	# each div with class restaurant must have the radius element
+	page.all(:css, ".restaurant").each do |el|
+		expect(el).to have_content(arg1)
+	end
+end
+
+# grocery list
+help = Set[]
+Given("I click first recipe") do
+	first('.recipe').click
+	page.all(:css, "ul li").each do |el|
+		help.add( el.text )
+	end
+	
+end
+
+
+Then("I should see the ingredients in the recipe list") do
+	list = Set[]
+	page.all(:css, "ul li").each do |el|
+		list.add( el.text )
+	end
+
+	# check that all elements on help an in this list
+	expect(list).to eq(help)
+end
+
+When("I click recipe {string}") do |arg|
+	counter = 1
+	page.all(".recipe").each do |recipe|
+		
+		# if this is the one we want
+		if counter == arg.to_i
+			# recipe click
+			recipe.click
+
+			# add elements to list
+			page.all(:css, "ul li").each do |el|
+				help.add( el.text )
+			end
+
+			# exit this loop
+			break
+		end
+
+		counter += 1
+	end
+	sleep(1)
 end
 

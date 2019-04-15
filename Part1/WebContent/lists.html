@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Favorites</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="sort.js"></script>
+<link rel="stylesheet" type="text/css" href="favorites.css" />
+
+<style>
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+body {
+	/*background: #C6FFDD;*/  /* fallback for old browsers */
+	height: 100%;
+	background-image: -webkit-linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background-image: linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+}
+</style>
+
+</head>
+<body>
+	<!-- this function populates favorite list data -->
+	
+	<div class="container-fluid">
+		
+		<div class="row" style = "padding: 60px 0px;">
+		<div class="col-lg-1"></div>
+			<!-- Column for list of restaurants and recipes -->
+			<div class="col-lg-7">
+			<h2 style = "font-weight: bold;" id="title">Favorites</h2>
+
+				<ul id="sortable">
+					
+				</ul>
+
+				<div class="listTable">
+					<table style="width: 100%">
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-lg-1"></div>
+			<!-- Column for dropwdown and buttons -->
+			<div class="col-lg-3">
+			<br>
+				<select id="mySelect">
+					<option></option>
+					<option value="favorites.jsp">Favorites</option>
+					<option value="toExplore.jsp">To Explore</option>
+					<option value="doNotShow.jsp">Do Not Show</option>
+				</select><br>
+				<br>
+
+				<button type="button" onclick="manageList()"><div id="ButtonText">Manage List</div></button>
+				<br>
+				<br>
+				<button onclick="returnToResults()"><div id="ButtonText">Return to Results Page</div></button>
+				<br>
+				<br>
+				<button onclick="returnToSearch()"><div id="ButtonText">Return to Search Page</div></button>
+				<br>
+			</div>
+		</div>
+		<!-- Row for the edit button -->
+		<div class="row text-center">
+			<input type="button" value="Edit" class="styled-button-2"
+				id="editButton"> <input type="button" value="Delete"
+				class="styled-button-2" id="deleteButton"
+				style="visibility: hidden;"> <select id="moveDropdown"
+				style="visibility: hidden;">
+				<option></option>
+				<option value="favorites.jsp">Favorites</option>
+				<option value="toExplore.jsp">To Explore</option>
+				<option value="doNotShow.jsp">Do Not Show</option>
+			</select><br>
+			<br> <input type="button" value="Move" class="styled-button-2"
+				id="moveButton" style="visibility: hidden;">
+
+
+		</div>
+	</div>
+
+	<script>
+	
+		jQuery(document).ready(function($) {
+			requests();
+
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
+
+		// Page Redirection
+		function returnToSearch() {
+			window.location.href = 'searchPage.html';
+		}
+		function returnToResults() {
+			window.location.href = 'resultsPage.jsp';
+		}
+		function manageList() {
+			var link = document.getElementById("mySelect").selectedIndex;
+			if (link == "1") {
+				window.location.href = 'lists.html?q=fav';
+			} else if (link == "2") {
+				window.location.href = 'lists.html?q=toExplore';
+			} else if (link == "3") {
+				window.location.href = 'lists.html?q=doNotShow';
+			}
+		}
+
+
+		/*** WRITTEN BY ALEX ***/
+
+		// to keep track of the list that we are seeing (fav as default)
+		var list = "fav";
+
+		function requests() {
+
+			// related to appearance
+			style();
+
+			// ui to sort things
+			sorting();
+
+			// getListName
+			getListName();
+
+			// populate list
+			populate();
+		}
+
+		function getListName() {
+			
+			let param = new URLSearchParams(window.location.search);
+			
+			// if the parameter exists
+			if(param.has("q")) {
+				
+				let listParam = param.get("q");
+
+				// change only if it predef list
+				if(listParam == "fav" || listParam == "toExplore" || listParam == "doNotShow" ) {
+					list = listParam;
+				}
+
+				// update name of the list
+				var listNames = {
+					"fav": "Favorites", 
+					"toExplore": "To Explore", 
+					"doNotShow": "Do Not Show"
+				}
+
+				$("#title").text(listNames[list]);
+			}
+		}
+
+		function populate(){
+			// Initial request to populate the table
+			$.post("ReorderList",
+				{
+					"list": list
+				})
+				.done(function (data) {
+					s = data;
+					render(data);
+				})
+				.fail(function (e) {
+					console.log("Error: " + e);
+				});
+		}
+
+		// renders data from backend to populate rows
+		function render(data) {
+
+			// keep track of number of elements
+			let counter = 0;
+
+			// for each element
+			data.forEach(element => {
+
+				let string;
+
+				// if restaurant
+				if (element.type === "restaurant") {
+
+					// create restaurant
+					string = `<li id="item${counter}" apiId="${element.id}" type="${element.type}">
+						<div class="row">
+							<div class="col-sm-1">
+								<input type="checkbox" name="checkbox" class="checkbox" 
+									id="checkboxRest"
+									value="${element.id}"> 
+							</div> 
+							<div class="col-sm-11">
+								<div style="font-weight: bold; font-size: 20px;"> 
+									<a href="${element.link}"> ${element.name} </a> 
+								</div > 
+								<div style="float: left; width: 70%;"> 
+									Address: ${element.address}</div> 
+								<div style="float: right; text-align: right; width: 30%">
+									$${element.priceRange}</div>\
+								<div>
+									Rating: ${element.rating}</div>\
+								<div>
+									Driving Time: ${element.travelTime}
+								</div>
+							</div>
+						</div>
+						</li>`;
+				}
+				else {
+					// create recipe
+					string = `
+					<li id="item${counter}" apiId="${element.id}" type="${element.type}">
+						<div class="row">
+							<div class="col-sm-1">
+								<input
+									type="checkbox" name="checkbox" class="checkbox"
+									id="checkboxRecipe"	
+									value="${element.id}">
+						
+							</div>
+						
+							<div class="col-sm-10">
+								<div style="font-weight: bold; font-size: 20px;">
+									<a href="${element.link}">${element.name} </a>
+								</div>
+
+								<div>
+									Rating: ${element.starRating}
+								</div>
+								
+								<div style="float: left; width: 30%;">
+									Prep time: ${element.prepTime} mins
+								</div>
+								
+								<div style="float: right; width: 70%;">
+									Cook time: ${element.cookTime} mins
+								</div>
+							</div>
+					</li>`;
+				}
+				counter++;
+
+				// append
+				$("#sortable").append(string);
+
+				// hide checkboxes
+				$(".checkbox").hide();
+			});
+
+			
+			
+		}
+
+		/** adapted from https://jqueryui.com/sortable/ by Alex Reyes **/
+		// enables sorting
+		function sorting() {
+			 
+			// trigger method when updating
+			$("#sortable").sortable({
+				update: function (event, ui) { }
+			});
+
+			// on update
+			$("#sortable").on("sortupdate", function (event, ui) {
+				e = event;
+				u = ui;
+
+				reportNewOrder();				
+			});
+
+			$("#sortable").disableSelection();
+
+			
+		}
+
+		function reportNewOrder() {
+			array = [];
+
+			// get the index of each element
+			$("#sortable li").each(function (i, d) {
+
+				// add to array
+				array.push({
+					"id": $("#" + d.id).attr("apiId"),
+					"type": $("#" + d.id).attr("type"),
+					"newIndex": $("#" + d.id).index()
+				})
+			});
+
+			// construct json
+			var json = {
+				"mode": "update",
+				"list": list,
+				"data": array
+			};
+
+			console.log(json);
+
+			// inform backend
+			$.post("ReorderList", json);
+		}
+
+		function style() {
+			$(".checkbox").hide();
+		}
+
+		/*** END ALEX SCRIPT ***/
+
+	</script>
+	<script>
+		// Button toggle (hide/show)
+		var editButton = document.getElementById("editButton");
+		var deleteButton = document.getElementById("deleteButton");
+		var moveDropdown = document.getElementById("moveDropdown");
+		var moveButton = document.getElementById("moveButton");
+		var restCheck = document.getElementById("checkboxRest");
+		var recipeCheck = document.getElementById("checkboxRecipe");
+		var checkBoxes = document.getElementsByClassName("checkbox");
+
+		
+
+		editButton.onclick = function() {
+			if (editButton.value === "Edit") {
+				editButton.value = "Done";
+			} else {
+				editButton.value = "Edit";
+			}
+			if (deleteButton.style.visibility === "hidden") {
+				deleteButton.style.visibility = "visible";
+			} else {
+				deleteButton.style.visibility = "hidden";
+			}
+			if (moveDropdown.style.visibility === "hidden") {
+				moveDropdown.style.visibility = "visible";
+			} else {
+				moveDropdown.style.visibility = "hidden";
+			}
+			if (moveButton.style.visibility === "hidden") {
+				moveButton.style.visibility = "visible";
+			} else {
+				moveButton.style.visibility = "hidden";
+			}
+
+			$(".checkbox").toggle();
+		}
+
+		deleteButton.onclick = function() {
+			var xhttp = new XMLHttpRequest();
+			var linkRest = "1";
+			var linkRecipe = "2";
+			var checked = false;
+			for (i = 0; i < checkBoxes.length; i++) {
+				if (checkBoxes[i].checked === true) {
+					checked = true;
+					if (checkBoxes[i].id === "checkboxRest") {
+						linkRest = linkRest + "," + checkBoxes[i].value;
+					}
+					if (checkBoxes[i].id === "checkboxRecipe") {
+						linkRecipe = linkRecipe + "," + checkBoxes[i].value;
+					}
+				}
+			}
+			console.log(linkRest);
+			console.log(linkRecipe);
+			xhttp.open("GET", "DeleteItem?restIds=" + linkRest + "&recipeIds="
+					+ linkRecipe + "&list="+list, true);
+			xhttp.onreadystatechange = function() {
+				//window.location.reload(true);
+
+			}
+			xhttp.send();
+			if (checked === true) {
+				location.reload();
+				//window.location.href = "deleteItem.jsp?restIds=" + linkRest + "&recipeIds=" + linkRecipe + "&list=fav";
+			}
+		}
+		moveButton.onclick = function() {
+			if (moveDropdown.selectedIndex != "0"
+					&& moveDropdown.selectedIndex != "1") {
+
+				var xhttp = new XMLHttpRequest();
+				var linkRest = "1";
+				var linkRecipe = "2";
+				var checked = false;
+				for (i = 0; i < checkBoxes.length; i++) {
+					if (checkBoxes[i].checked === true) {
+						checked = true;
+						if (checkBoxes[i].id === "checkboxRest") {
+							linkRest = linkRest + "," + checkBoxes[i].value;
+						}
+						if (checkBoxes[i].id === "checkboxRecipe") {
+							linkRecipe = linkRecipe + "," + checkBoxes[i].value;
+						}
+					}
+				}
+				console.log(linkRest);
+				console.log(linkRecipe);
+				xhttp.open("GET", "MoveItem?restIds=" + linkRest
+						+ "&recipeIds=" + linkRecipe + "&list="+list+"&to="
+						+ moveDropdown.selectedIndex, true);
+				xhttp.onreadystatechange = function() {
+
+				}
+				xhttp.send();
+				if (checked === true) {
+					location.reload();
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>

@@ -189,6 +189,25 @@
 
 				}
 			}
+
+			$(function(){
+
+				// array to send 
+				let array = [];
+
+				// extract ingredients
+				$("#RecipeContent li").each(function (i, e) {
+					array.push( $(this).text() );
+				});
+
+				// sending ingredients to backend
+				$.post("Ingredients", {
+					"data": array
+				})
+				.done(function(response) {
+					alert(`Data sent! ${response}`);
+				})
+			});
 			
 		</script>
 

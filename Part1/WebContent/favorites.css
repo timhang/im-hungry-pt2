@@ -83,3 +83,21 @@ button {
 	/* background-image: linear-gradient(to bottom right, #FBD786, #FBD786);  */
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#sortable li {
+  margin: 0 3px 3px 3px;
+  padding: 20px 20px 40px 20px;
+  min-height: 18px;
+  background-image: linear-gradient(to bottom right, #f7797d, #FBD786);
+}
+
+#sortable li span {
+  position: absolute;
+  margin-left: -1.3em;
+}
