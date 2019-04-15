@@ -159,3 +159,8 @@ button {
 	padding-left: 25px;
 	padding-top: 65px;
 }
+
+.pagination {
+	font-size: 40px;
+	margin-left: 500px;
+}

@@ -13,6 +13,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/jquery.easyPaginate.js"></script>
+	
 <link rel="stylesheet" type="text/css" href="resultsPage.css" />
 <!-- Image styling for photo collage -->
 <style>
@@ -97,7 +101,7 @@
 								.getItem('searchText');
 					</script>
 					<div class="resultsTable" align="center">
-						<table style="width: 95%">
+						<table id="paginateTable" style="width: 95%">
 							<tr>
 								<th style="font-size: 30px;">Restaurant</th>
 								<th style="font-size: 30px;">Recipe</th>
@@ -196,6 +200,28 @@
 		</div>
 	</div>
 
+								
+								
+								<%-- <div class="pagination">
+									<a href="#">&laquo;</a>
+									<%for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { %>
+										<a href="#"><%=i+1%> </a> 
+									<%
+									  }
+									%>
+									<a href="#">&raquo;</a>
+								</div> --%>
+								
+								
+								<script>
+								$('#paginateTable').easyPaginate({
+								    paginateElement: 'tr',
+								    elementsPerPage: 5,
+								    effect: 'climb'
+								});
+								</script>
+								
+								
 								<div id=quickAccessWrapper> 
 									<h2 id=quickAccessText> QUICK ACCESS</h2>
 								</div>
@@ -245,11 +271,9 @@
 									
 									
 								</script>
-								
 
-								
-								
-								
+							
+
 
 
 	<script>
