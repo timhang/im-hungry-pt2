@@ -104,7 +104,13 @@
 							</tr>
 							
 							<%
-								int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+								int pageNumber;
+								if(request.getParameter("pageNumber")==null){
+									pageNumber = 1;
+								} else {
+									pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+								}
+								
 								int startIndex = (pageNumber)*5 -5;
 								int endIndex = startIndex+5;
 								ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
