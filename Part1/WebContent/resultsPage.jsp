@@ -276,16 +276,12 @@
 									
 									function paginate(selectedPage){
 										if(selectedPage != "0"){
-											var xhttp = new XMLHttpRequest();
 											var url_string = window.location.href;
 									        var url = new URL(url_string);
 									        var searchText = sessionStorage.getItem('searchText');
 									        var numberType = sessionStorage.getItem('intNum');
 									        var pageNumber = selectedPage;
 
-											xhttp.open("POST", "resultsPage.jsp?searchText="+searchText+"&numberType="+numberType+"&pageNumber="+pageNumber, false);
-											console.log("resultsPage.jsp?searchText="+searchText+"&numberType="+numberType+"&pageNumber="+pageNumber);
-											xhttp.send();
 											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
 										}
 									}
