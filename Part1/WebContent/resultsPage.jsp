@@ -64,7 +64,7 @@
 
 			<!-- Button column -->
 			<div class="col-lg-3">
-			<br>
+				<br>
 				<div>
 					<select id="mySelect">
 						<option>------ Select List ------</option>
@@ -74,126 +74,223 @@
 					</select>
 				</div>
 				<br>
-				<button type="button" onclick="manageList()"><div id = "ButtonText">Manage List</div></button>
-				<br>
-				<br>
-				<button onclick="returnToSearch()"><div id = "ButtonText">Return to Search Page</div></button>
+				<button type="button" onclick="manageList()">
+					<div id="ButtonText">Manage List</div>
+				</button>
+				<br> <br>
+				<button onclick="returnToSearch()">
+					<div id="ButtonText">Return to Search Page</div>
+				</button>
 			</div>
 		</div>
 		<!-- Row for Restaurant and Recipe table -->
-		<br><br>
+		<br> <br>
 		<div class="row">
 			<div class="col-lg-12">
-			<div class="card">
-			<br>
-				<h1 id="title">
-					Results For "<span id="searchText"></span>"
-				</h1>
-				<script type='text/javascript'>
-					document.getElementById('searchText').innerHTML = sessionStorage
-							.getItem('searchText');
-				</script>
-				<div class="resultsTable" align="center">
-					<table style="width: 95%">
-						<tr>
-							<th style="font-size: 30px;">Restaurant</th>
-							<th style="font-size: 30px;">Recipe</th>
-						</tr>
-						<%
-							ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
-								request.getParameter("numberType"));
-							ArrayList<Integer> restIDs = RestAPI.resultsPageList(request.getParameter("searchText"),
-									request.getParameter("numberType"));
+				<div class="card">
+					<br>
+					<h1 id="title">
+						Results For "<span id="searchText"></span>"
+					</h1>
+					<script type='text/javascript'>
+						document.getElementById('searchText').innerHTML = sessionStorage
+								.getItem('searchText');
+					</script>
+					<div class="resultsTable" align="center">
+					<table  style="width: 95%">
+							<tr>
+								<th style="font-size: 30px;">Restaurant</th>
+								<th style="font-size: 30px;">Recipe</th>
+							</tr>
 							
-							HashMap<Integer, Recipe> allRecipes = RecipeAPI.getRecipeMap();
-							HashMap<Integer, Restaurant> allRestaurants = RestAPI.getRestaurantMap();
+							<%
+								int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+								int startIndex = (pageNumber)*5 -5;
+								int endIndex = startIndex+5;
+								ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
+										request.getParameter("numberType"));
+								ArrayList<Integer> restIDs = RestAPI.resultsPageList(request.getParameter("searchText"),
+										request.getParameter("numberType"));
+
+								HashMap<Integer, Recipe> allRecipes = RecipeAPI.getRecipeMap();
+								HashMap<Integer, Restaurant> allRestaurants = RestAPI.getRestaurantMap();
+
+								int size = Math.max(restIDs.size(), recipeIds.size());
+								for (int i = startIndex; i < endIndex; i++) {
+								//for (int i = 0; i < size; i++) {
+									if (i < restIDs.size()) {
+										int restId = restIDs.get(i);
+										String name = allRestaurants.get(restId).getName();
+										String address = allRestaurants.get(restId).getAddress();
+										double priceRange = allRestaurants.get(restId).getPriceRange();
+										double rating = allRestaurants.get(restId).getRating();
+										String travelTime = allRestaurants.get(restId).getTravelTime();
+										String link = "restPage.jsp?restaurantId=" + restId;
+							%>
+
+							<tr>
+								<td class='clickable-row' data-href=<%=link%>><div>
+										<div style="font-weight: bold; font-size: 17px;">
+											<%=name%>
+										</div>
+										<div style="float: left; width: 70%;">
+											Address:
+											<%=address%></div>
+										<div style="float: right; text-align: right; width: 30%;">
+											$<%=priceRange%></div>
+										<div>
+											Rating:
+											<%=rating%>
+										</div>
+										<div>
+											Driving Time:
+											<%=travelTime%></div>
+									</div></td>
+								<%
+									} else {
+								%>
 							
+							<tr>
+								<td><div></div></td>
+								<%
+									}
 
-							int size = Math.max(restIDs.size(), recipeIds.size());
-
-							for (int i = 0; i < size; i++) {
-								if (i < restIDs.size()) {
-									int restId = restIDs.get(i);
-									String name = allRestaurants.get(restId).getName();
-									String address = allRestaurants.get(restId).getAddress();
-									double priceRange = allRestaurants.get(restId).getPriceRange();
-									double rating = allRestaurants.get(restId).getRating();
-									String travelTime = allRestaurants.get(restId).getTravelTime();
-									String link = "restPage.jsp?restaurantId=" + restId;
-						%>
-
-						<tr>
-							<td class='clickable-row' data-href=<%=link%>><div>
-									<div style="font-weight: bold; font-size: 17px;">
-										<%=name%>
-									</div>
-									<div style="float: left; width: 70%;">
-										Address:
-										<%=address%></div>
-									<div style="float: right; text-align: right; width: 30%;">
-										$<%=priceRange%></div>
-									<div>
-										Rating:
-										<%=rating%>
-									</div>
-									<div>
-										Driving Time:
-										<%=travelTime%></div>
-								</div></td>
+										if (i < recipeIds.size()) {
+											int recipeId = recipeIds.get(i);
+											String name = allRecipes.get(recipeId).getName();
+											float rating = allRecipes.get(recipeId).getStarRating();
+											int prepTime = allRecipes.get(recipeId).getPrepTime();
+											int cookTime = allRecipes.get(recipeId).getCookTime();
+											String link = "recipePage.jsp?recipeId=" + recipeId;
+								%>
+								<td class='clickable-row' data-href=<%=link%>><div>
+										<div style="font-weight: bold; font-size: 17px;">
+											<%=name%>
+										</div>
+										<div>
+											Rating:
+											<%=rating%></div>
+										<div style="float: left; width: 50%;">
+											Prep time:
+											<%=prepTime%>
+											mins
+										</div>
+										<div style="float: right; width: 50%">
+											Cook time:
+											<%=cookTime%>
+											mins
+										</div>
+									</div></td>
+							</tr>
 							<%
 								} else {
 							%>
-						
-						<tr>
 							<td><div></div></td>
+							</tr>
 							<%
 								}
 
-									if (i < recipeIds.size()) {
-										int recipeId = recipeIds.get(i);
-										String name = allRecipes.get(recipeId).getName();
-										float rating = allRecipes.get(recipeId).getStarRating();
-										int prepTime = allRecipes.get(recipeId).getPrepTime();
-										int cookTime = allRecipes.get(recipeId).getCookTime();
-										String link = "recipePage.jsp?recipeId=" + recipeId;
+								}
 							%>
-							<td class='clickable-row' data-href=<%=link%>><div>
-									<div style="font-weight: bold; font-size: 17px;">
-										<%=name%>
-									</div>
-									<div>
-										Rating:
-										<%=rating%></div>
-									<div style="float: left; width: 50%;">
-										Prep time:
-										<%=prepTime%>
-										mins
-									</div>
-									<div style="float: right; width: 50%">
-										Cook time:
-										<%=cookTime%>
-										mins
-									</div>
-								</div></td>
-						</tr>
-						<%
-							} else {
-						%>
-						<td><div></div></td>
-						</tr>
-						<%
-							}
 
-							}
-						%>
-
-					</table>
-				</div>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
+								
+								
+<!-- 								<form method = "POST" onsubmit="return myFunction()" action="resultsPage.jsp">
+ -->									<!-- <button>&laquo;</button> -->
+ 									<div id=pageNumberDiv>
+
+									<%for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { %>
+										<div onclick="paginate(<%=i+1%>)" id = "pageNumber"><%=i+1%> </div> 
+									<%
+									  }
+									%>
+									
+									 </div>
+									<!-- <a href="#">&raquo;</a> -->
+								<!-- </form> -->
+								
+								
+<!-- 								<script>
+								$('#paginateTable').easyPaginate({
+								    paginateElement: 'tr',
+								    elementsPerPage: 5,
+								    effect: 'climb'
+								});
+								</script> -->
+								
+								
+								<div id=quickAccessWrapper> 
+									<h2 id=quickAccessText> QUICK ACCESS</h2>
+								</div>
+
+								<script>
+									var xhttp = new XMLHttpRequest();
+									xhttp.open("GET", "QuickAccess", false);	//What should QUICKACCESS be?
+									xhttp.send();
+									var obj = JSON.parse(xhttp.responseText);
+							
+									//console.log("obj:" + obj);
+									
+									for(let i = 0; i < obj.length; i++){
+										var quickAccessDiv = document.createElement("DIV");
+										quickAccessDiv.setAttribute("id", "searchTerm" + i);
+										quickAccessDiv.setAttribute("class", "searchTermClass");
+										quickAccessDiv.addEventListener('click', function(){
+											quickAccessReloadPage(obj[i].searchTerm, obj[i].integer);
+										})
+										
+										var textDiv = document.createElement("h1");
+										textDiv.setAttribute("class", "searchTermText");
+										textDiv.textContent = obj[i].searchTerm + " (" + obj[i].integer + ")";
+										quickAccessDiv.appendChild(textDiv);
+										document.getElementById("quickAccessWrapper").appendChild(quickAccessDiv);
+									}
+									
+									
+									
+									function quickAccessReloadPage (searchTerm, integer) {	//make POST request that passes the searchTerm and integer
+										console.log("clicked on " + searchTerm + " " + integer);			
+										
+										$.ajax({
+										    type: "POST",
+										    url: "resultsPage.jsp",
+										    data: searchTerm, integer,
+										    success: function() {    
+										        console.log("POST searchTerm: " + searchTerm);
+										        console.log("POST integer: " + integer);
+										        window.location.reload();
+
+										    }
+										});
+									
+										
+									}
+									
+									
+									function paginate(selectedPage){
+										if(selectedPage != "0"){
+											var url_string = window.location.href;
+									        var url = new URL(url_string);
+									        var searchText = sessionStorage.getItem('searchText');
+									        var numberType = sessionStorage.getItem('intNum');
+									        var pageNumber = selectedPage;
+
+											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
+										}
+									}
+								</script>
+
+							
+
+
+
 	<script>
 		// Page redirection for buttons
 		function returnToSearch() {
@@ -209,20 +306,18 @@
 				window.location.href = 'lists.html?q=doNotShow';
 			}
 		}
-		
+
 		jQuery(document).ready(function($) {
-		    $(".clickable-row").click(function() {
-		        window.location = $(this).data("href");
-		    });
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
 		});
 	</script>
 	<script>
-	
 		/* this is the function that generates 10 random angles to rotate teh pictures */
 		$("#insideImg:nth-of-type(n+1)").css("max-width",
 				window.innerWidth / 9 + "px");
 		var number = Math.floor((Math.random() * 90) - 45);
-		console.log("Number" + number);
 		$("#img1:nth-of-type(n+1)").css("transform",
 				"rotate(" + Math.floor((Math.random() * 90) - 45) + "deg)");
 		$("#img2:nth-of-type(n+1)").css("transform",

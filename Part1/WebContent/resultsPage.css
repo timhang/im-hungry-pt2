@@ -122,3 +122,57 @@ button {
 	/* background-image: linear-gradient(to bottom right, #FBD786, #FBD786);  */
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+
+#quickAccessText{
+	color: yellow;
+	font-size: 50px;
+	margin-left: 50px;
+}
+
+#quickAccessWrapper{
+	margin-top: 50px;
+	background-color:green; 
+	width: 100%; 
+	overflow-x: scroll;
+	
+	display: inline-block;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
+
+.searchTermClass{
+	background-color: white;
+	margin-top: 30px;
+	width: 250px;
+	height: 200px;
+	margin-left: 50px;
+	display: inline-block;
+	overflow-x: scroll;	
+}
+
+
+.searchTermText{
+	color: purple;
+	font-size: 30px;
+	padding-left: 25px;
+	padding-top: 65px;
+}
+
+.pagination {
+	font-size: 40px;
+	margin-left: 500px;
+}
+
+#pageNumber {
+	display: inline-block;
+	font-size: 30px;
+}
+#pageNumber:hover {
+	text-decoration: underline;
+	background-color: #d1b284;
+}
+#pageNumberDiv {
+	text-align: center;
+}
