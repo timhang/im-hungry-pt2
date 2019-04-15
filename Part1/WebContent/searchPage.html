@@ -27,6 +27,7 @@
 								placeholder="Enter Food"> <input id="integerBox"
 								title="Number of items to show in results" name="numberType"
 								min="1">
+								<input id="pageNumber" name = "pageNumber" style = "visibility:hidden;" value = 1>
 						</div>
 						<br>
 						<br>
@@ -120,7 +121,8 @@
 		function myFunction() {
 			var searchText = document.getElementById('searchText').value;
 			var intNum = document.getElementById('integerBox').value;
-
+			var pageNumber = 1;
+			console.log(document.getElementById('pageNumber').value);
 			if (searchText === "" || searchText === null) {
 				//alert("Please enter dish name");
 				return false;
@@ -138,6 +140,7 @@
 					.setAttribute("id", "smiley");
 
 			sessionStorage.setItem('searchText', searchText);
+			sessionStorage.setItem('intNum', document.getElementById('integerBox').value);
 
 			return true;
 		}

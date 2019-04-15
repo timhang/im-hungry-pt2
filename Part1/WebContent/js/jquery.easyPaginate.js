@@ -30,13 +30,13 @@ $.fn.easyPaginate = function (options) {
         effect: 'default',
         slideOffset: 200,
         firstButton: true,
-        firstButtonText: '<<',
+        firstButtonText: ' << ',
         lastButton: true,
-        lastButtonText: '>>',        
+        lastButtonText: ' >> ',        
         prevButton: true,
-        prevButtonText: '<',        
+        prevButtonText: ' < ',        
         nextButton: true,
-        nextButtonText: '>'
+        nextButtonText: ' > '
     }
         
     return this.each (function (instance) {        

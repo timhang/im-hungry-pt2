@@ -13,10 +13,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/jquery.easyPaginate.js"></script>
-	
 <link rel="stylesheet" type="text/css" href="resultsPage.css" />
 <!-- Image styling for photo collage -->
 <style>
@@ -101,12 +97,16 @@
 								.getItem('searchText');
 					</script>
 					<div class="resultsTable" align="center">
-						<table id="paginateTable" style="width: 95%">
+					<table  style="width: 95%">
 							<tr>
 								<th style="font-size: 30px;">Restaurant</th>
 								<th style="font-size: 30px;">Recipe</th>
 							</tr>
+							
 							<%
+								int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+								int startIndex = (pageNumber)*5 -5;
+								int endIndex = startIndex+5;
 								ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
 										request.getParameter("numberType"));
 								ArrayList<Integer> restIDs = RestAPI.resultsPageList(request.getParameter("searchText"),
@@ -116,8 +116,8 @@
 								HashMap<Integer, Restaurant> allRestaurants = RestAPI.getRestaurantMap();
 
 								int size = Math.max(restIDs.size(), recipeIds.size());
-
-								for (int i = 0; i < size; i++) {
+								for (int i = startIndex; i < endIndex; i++) {
+								//for (int i = 0; i < size; i++) {
 									if (i < restIDs.size()) {
 										int restId = restIDs.get(i);
 										String name = allRestaurants.get(restId).getName();
@@ -202,24 +202,28 @@
 
 								
 								
-								<%-- <div class="pagination">
-									<a href="#">&laquo;</a>
+<!-- 								<form method = "POST" onsubmit="return myFunction()" action="resultsPage.jsp">
+ -->									<!-- <button>&laquo;</button> -->
+ 									<div id=pageNumberDiv>
+
 									<%for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { %>
-										<a href="#"><%=i+1%> </a> 
+										<div onclick="paginate(<%=i+1%>)" id = "pageNumber"><%=i+1%> </div> 
 									<%
 									  }
 									%>
-									<a href="#">&raquo;</a>
-								</div> --%>
+									
+									 </div>
+									<!-- <a href="#">&raquo;</a> -->
+								<!-- </form> -->
 								
 								
-								<script>
+<!-- 								<script>
 								$('#paginateTable').easyPaginate({
 								    paginateElement: 'tr',
 								    elementsPerPage: 5,
 								    effect: 'climb'
 								});
-								</script>
+								</script> -->
 								
 								
 								<div id=quickAccessWrapper> 
@@ -270,6 +274,21 @@
 									}
 									
 									
+									function paginate(selectedPage){
+										if(selectedPage != "0"){
+											var xhttp = new XMLHttpRequest();
+											var url_string = window.location.href;
+									        var url = new URL(url_string);
+									        var searchText = sessionStorage.getItem('searchText');
+									        var numberType = sessionStorage.getItem('intNum');
+									        var pageNumber = selectedPage;
+
+											xhttp.open("POST", "resultsPage.jsp?searchText="+searchText+"&numberType="+numberType+"&pageNumber="+pageNumber, false);
+											console.log("resultsPage.jsp?searchText="+searchText+"&numberType="+numberType+"&pageNumber="+pageNumber);
+											xhttp.send();
+											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
+										}
+									}
 								</script>
 
 							

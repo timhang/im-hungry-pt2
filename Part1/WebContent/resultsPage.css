@@ -164,3 +164,15 @@ button {
 	font-size: 40px;
 	margin-left: 500px;
 }
+
+#pageNumber {
+	display: inline-block;
+	font-size: 30px;
+}
+#pageNumber:hover {
+	text-decoration: underline;
+	background-color: #d1b284;
+}
+#pageNumberDiv {
+	text-align: center;
+}
