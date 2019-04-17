@@ -21,7 +21,8 @@ CREATE TABLE Restaurant(
     webURL VARCHAR(250) DEFAULT 'No Web URL',
     stars DOUBLE(5,0) NOT NULL,
 
-    price DOUBLE(5,1) NOT NULL
+    price DOUBLE(5,1) NOT NULL,
+    tableType VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE Recipe(
@@ -36,7 +37,8 @@ CREATE TABLE Recipe(
     imageURL TEXT NOT NULL,
     stars DOUBLE(5,0) NOT NULL,
     ingredients TEXT NOT NULL,
-    instructions TEXT NOT NULL
+    instructions TEXT NOT NULL,
+    tableType VARCHAR(10) NOT NULL
     
 );
 
