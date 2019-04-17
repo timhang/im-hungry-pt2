@@ -33,8 +33,14 @@ public class ChangeOrderTest {
 		RecipeAPI.setRecipeMap(RecipeMap);
 		RestAPI.setRestaurantMap(RestaurantMap);
 
-		addToList.add("restaurant", 1, "fav");
-		addToList.add("recipe", 3, "fav");
+		try {
+			addToList.add("restaurant", 1, "fav");
+			addToList.add("recipe", 3, "fav");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		// TODO: ensure items are in the correct order
 		assertEquals("Checking if restaurant1 is still in list", true,

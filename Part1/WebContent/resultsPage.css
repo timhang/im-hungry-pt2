@@ -165,11 +165,11 @@ button {
 	margin-left: 500px;
 }
 
-#pageNumber {
+.pageNumber {
 	display: inline-block;
 	font-size: 30px;
 }
-#pageNumber:hover {
+.pageNumber:hover {
 	text-decoration: underline;
 	background-color: #d1b284;
 }

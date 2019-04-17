@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import API.DatabaseDriver.lists;
+
 /**
  * Servlet implementation class AddToList
  */
@@ -15,7 +17,7 @@ public class AddToList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-	public void add(String type, int idInt, String listName) {
+	public void add(String type, int idInt, String listName) throws Exception {
 		
 		if (type.equals("recipe")) {
 			System.out.println("true");
@@ -27,12 +29,17 @@ public class AddToList extends HttpServlet {
 			System.out.println(recipe.getName());
 			if (listName.equals("fav")) {
 				recipe.setFavorite(true);
+				DatabaseDriver.AddRecipeToList(idInt, lists.favorites);
 				System.out.println("Added to Favorite List");
 			} else if (listName.equals("exp")) {
 				recipe.setToExplore(true);
+				DatabaseDriver.AddRecipeToList(idInt, lists.toExplore);
+
 				System.out.println("Added to To Explore List");
 			} else if (listName.equals("dns")) {
 				recipe.setDoNotShow(true);
+				DatabaseDriver.AddRecipeToList(idInt, lists.doNotShow);
+
 				System.out.println("Added to Do No Show List");
 			}
 		} else if (type.equals("restaurant")) {
@@ -40,12 +47,15 @@ public class AddToList extends HttpServlet {
 			System.out.println(restaurant.getName());
 			if (listName.equals("fav")) {
 				restaurant.setFavorite(true);
+				DatabaseDriver.AddRestaurantToList(idInt, lists.favorites);
 				System.out.println("Added to Favorite List");
 			} else if (listName.equals("exp")) {
 				restaurant.setToExplore(true);
+				DatabaseDriver.AddRestaurantToList(idInt, lists.toExplore);
 				System.out.println("Added to To Explore List");
 			} else if (listName.equals("dns")) {
 				restaurant.setDoNotShow(true);
+				DatabaseDriver.AddRestaurantToList(idInt, lists.doNotShow);
 				System.out.println("Added to Do No Show List");
 			}
 		}
@@ -61,7 +71,12 @@ public class AddToList extends HttpServlet {
 
 		System.out.println(id + "::" + listName + "::idInt " + idInt + "::type " + type);
 		
-		add(type, idInt, listName);
+		try {
+			add(type, idInt, listName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

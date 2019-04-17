@@ -213,7 +213,7 @@
  									<div id=pageNumberDiv>
 
 									<%for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { %>
-										<div onclick="paginate(<%=i+1%>)" id = "pageNumber"><%=i+1%> </div> 
+										<div onclick="paginate(<%=i+1%>)" class = "pageNumber" id = "pageNumber<%=i+1%>"><%=i+1%> </div> 
 									<%
 									  }
 									%>
@@ -271,7 +271,13 @@
 										    success: function() {    
 										        console.log("POST searchTerm: " + searchTerm);
 										        console.log("POST integer: " + integer);
-										        window.location.reload();
+										        
+
+										        sessionStorage.setItem('searchText', searchTerm);
+												sessionStorage.setItem('intNum', integer);
+
+												window.location.href = 'resultsPage.jsp?searchText='+searchTerm+'&numberType='+integer+'&pageNumber='+1;
+										        //window.location.reload();
 
 										    }
 										});

@@ -142,6 +142,8 @@
 						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div id="ButtonText">Add
 						to List</div></button>
 					<br>
+					<br>
+					<button onclick="AddToGrocery()" id="AddToRL">Add To Grocery List</button>
 				</div>
 			</div>
 		</div>
@@ -150,9 +152,14 @@
 
 	<script>
 			// Page Redirection
+			function AddToGrocery() {
+				window.location.href = 'groceryList.html';
+			}	
+			
+			// Page Redirection
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
-			}			
+			}		
 			// Printable View function displays and hides buttons on page
 			function printableView() {
 				var x = document.getElementById("togglePrint");
