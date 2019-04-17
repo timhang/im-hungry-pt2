@@ -25,6 +25,11 @@ Then(/^I should see "([^"]*)" search results for "([^"]*)"$/) do |arg1, arg2|
 	expect(page).to have_content(arg1, count: arg1)
 end
 
+Then(/^I should see "([^"]*)" pages for "([^"]*)"$/) do |arg1, arg2|
+	expect(find('#pageNumberDiv')).to have_content('3', count: 1)
+# 	expect(find('#searchText')).to have_content arg1
+end
+
 Then(/^I should see "([^"]*)" in the page$/) do |arg1|
 	expect(page).to have_content(arg1)
 end
