@@ -125,7 +125,7 @@
 					<button onclick="printableView()"><div id="ButtonText">Printable View</div></button>
 					<br>
 					<br>
-					<button onclick="backToResults()"><div id="ButtonText">Back to Results</div></button>
+					<button onclick="backToResults()"><div id="backBtn">Back to Results</div></button>
 					<br>
 					<br>
 					<div class="dropdown">
@@ -141,7 +141,9 @@
 					<button
 						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div id="ButtonText">Add
 						to List</div></button>
-					<br>
+					<br><br><br><br>
+
+					<button id="AddToRL">Add to grocery List</button>
 				</div>
 			</div>
 		</div>
