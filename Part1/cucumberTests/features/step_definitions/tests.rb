@@ -262,3 +262,17 @@ When("I click recipe {string}") do |arg|
 	sleep(1)
 end
 
+
+# LOG IN PAGE
+Given(/^I am on login page$/) do
+	visit "http://localhost:8080/ImHungry/login.html"
+	
+end
+
+When("I enter {string} in the {string} field") do |arg1, arg2|
+	fill_in arg2, :with=> arg1
+end
+
+Then("I should be in {string}") do |arg1|
+	URI.parse(current_url) == arg1
+end
