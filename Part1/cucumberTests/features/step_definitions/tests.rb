@@ -242,11 +242,14 @@ end
 When("I click recipe {string}") do |arg|
 	counter = 1
 	page.all(".recipe").each do |recipe|
+
+		puts counter
 		
 		# if this is the one we want
 		if counter == arg.to_i
 			# recipe click
 			recipe.click
+			
 
 			# add elements to list
 			page.all(:css, "ul li").each do |el|
@@ -259,7 +262,7 @@ When("I click recipe {string}") do |arg|
 
 		counter += 1
 	end
-	sleep(1)
+	
 end
 
 

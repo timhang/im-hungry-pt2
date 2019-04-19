@@ -190,7 +190,7 @@
 				}
 			}
 
-			$(function(){
+			$("#AddToRL").click(function(){
 
 				// array to send 
 				let array = [];
