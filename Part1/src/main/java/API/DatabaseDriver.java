@@ -18,11 +18,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-<<<<<<< HEAD
-	static final String PASS = "welcometousc";
-=======
-	static final String PASS = "password";
->>>>>>> 9c2317fd55f06519c6e22ceb49a2302b6a95ca7f
+	static final String PASS = helper.name;
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
