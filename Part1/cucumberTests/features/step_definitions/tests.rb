@@ -242,8 +242,6 @@ end
 When("I click recipe {string}") do |arg|
 	counter = 1
 	page.all(".recipe").each do |recipe|
-
-		puts counter
 		
 		# if this is the one we want
 		if counter == arg.to_i
@@ -278,4 +276,17 @@ end
 
 Then("I should be in {string}") do |arg1|
 	URI.parse(current_url) == arg1
+end
+
+# pagination
+Then("I should see page button {string} in the page") do |arg1|
+  find('button', :text => arg1)
+end
+
+Then("I should not see page button {string} in the page") do |arg1|
+	expect(find('#searchText')).to have_no_content arg1
+end
+
+When("I press page button {string}") do |arg1|
+	find('button', :text => arg1).click
 end
