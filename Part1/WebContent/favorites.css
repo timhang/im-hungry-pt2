@@ -61,16 +61,18 @@ td:hover{
 	background-color: #d1b284;
 }
 button {
+	background-color: transparent;
+	outline:none;
+	border: none;
+}
+.ButtonText{
+	font-size: 14px;
+	padding: 4px;
+	font-weight: bold;
 	border-radius: 8px;
 	background-color: #FBD786;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border: none;
-}
-#ButtonText{
-	font-size: 14px;
-	padding: 4px;
-	font-weight: bold;
-	
 }
 
 #mySelect{

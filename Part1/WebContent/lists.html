@@ -67,21 +67,23 @@ body {
 				</select><br>
 				<br>
 
-				<button type="button" onclick="manageList()"><div id="ButtonText">Manage List</div></button>
+				<button type="button" onclick="manageList()"><div class="ButtonText">Manage List</div></button>
 				<br>
 				<br>
-				<button onclick="returnToResults()"><div id="ButtonText">Return to Results Page</div></button>
+				<button onclick="returnToResults()"><div class="ButtonText">Return to Results Page</div></button>
 				<br>
 				<br>
-				<button onclick="returnToSearch()"><div id="ButtonText">Return to Search Page</div></button>
+				<button onclick="returnToSearch()"><div class="ButtonText">Return to Search Page</div></button>
 				<br>
+				<br>
+				<button onclick="groceryList()"><div class="ButtonText">Grocery List</div></button>
 			</div>
 		</div>
 		<!-- Row for the edit button -->
 		<div class="row text-center">
-			<input type="button" value="Edit" class="styled-button-2"
+			<input type="button" value="Edit" class="ButtonText"
 				id="editButton"> <input type="button" value="Delete"
-				class="styled-button-2" id="deleteButton"
+				class="ButtonText" id="deleteButton"
 				style="visibility: hidden;"> <select id="moveDropdown"
 				style="visibility: hidden;">
 				<option></option>
@@ -89,7 +91,7 @@ body {
 				<option value="toExplore.jsp">To Explore</option>
 				<option value="doNotShow.jsp">Do Not Show</option>
 			</select><br>
-			<br> <input type="button" value="Move" class="styled-button-2"
+			<br> <input type="button" value="Move" class="ButtonText"
 				id="moveButton" style="visibility: hidden;">
 
 
@@ -107,6 +109,9 @@ body {
 		});
 
 		// Page Redirection
+		function groceryList() {
+			window.location.href = 'groceryList.html';
+		}
 		function returnToSearch() {
 			window.location.href = 'searchPage.html';
 		}
