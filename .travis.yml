@@ -5,4 +5,8 @@ script:
   - mvn clean install
 
 
+# safelist
+branches:
+  only:
+  - master
 
