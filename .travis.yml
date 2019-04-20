@@ -1,24 +1,16 @@
-language: java
 language: ruby
-
-jdk:
-  - oraclejdk8
-
-script: mvn build
-
-# Use JDK 8u45. The above line just causes the use of a minor version of Java 8.
+sudo: required
 addons:
-  apt:
-    packages:
-    - oracle-java8-installer
-
-# safelist
-branches:
-  only:
-  - master
+ chrome: stable
 
 before_install:
-  - cd Part1/
-  - gem install bundler
-
-
+ - gem update --system
+ - gem install cucumber capybara selenium rspec 'selenium-webdriver'
+ - wget http://chromedriver.storage.googleapis.com/73.0.3683.68/chromedriver_linux64.zip
+ - unzip chromedriver_linux64.zip
+ - rm chromedriver_linux64.zip
+ - sudo mv -f chromedriver /usr/local/bin/
+ - sudo chmod +x /usr/local/bin/chromedriver
+ - google-chrome-stable --headless --no-sandbox
+ - export DISPLAY=:99.0
+ - sh -e /etc/init.d/xvfb start
