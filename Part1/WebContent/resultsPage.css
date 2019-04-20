@@ -176,3 +176,7 @@ button {
 #pageNumberDiv {
 	text-align: center;
 }
+
+.vcenter {
+    padding-top: 65px;
+}

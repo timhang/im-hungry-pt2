@@ -60,9 +60,9 @@
 			
 			
 				<div id="togglePrint">
-					<button onclick="printableView()"><div id="ButtonText">Printable View</div></button>
+					<button onclick="printableView()"><div class="ButtonText">Printable View</div></button>
 					<br> <br>
-					<button onclick="backToResults()"><div id="ButtonText">Back to Results</div></button>
+					<button onclick="backToResults()"><div class="ButtonText">Back to Results</div></button>
 					<br> <br>
 					<div class="dropdown">
 						<select id="listSelect">
@@ -74,9 +74,11 @@
 					</div>
 					<br>
 					<button
-						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div id="ButtonText">Add
+						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div class="ButtonText">Add
 						to List</div></button>
 					<br>
+					<br>
+					<button onclick="groceryList()"><div class="ButtonText">Grocery List</div></button>
 				</div>
 			</div>
 		</div>
@@ -84,6 +86,9 @@
 
 	<script>
 		// Page Redirection
+		function groceryList() {
+			window.location.href = 'groceryList.html';
+		}
 		function backToResults() {
 			window.location.href = 'resultsPage.jsp';
 		}

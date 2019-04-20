@@ -63,11 +63,11 @@
 			</div>
 
 			<!-- Button column -->
-			<div class="col-lg-3">
+			<div class="col-lg-3 vcenter">
 				<br>
 				<div>
 					<select id="mySelect">
-						<option>------ Select List ------</option>
+						<option>------------------- Select List -------------------</option>
 						<option value="lists.html?q=fav">Favorites</option>
 						<option value="lists.html?q=toExplore">To Explore</option>
 						<option value="lists.html?q=doNotShow">Do Not Show</option>
@@ -80,6 +80,10 @@
 				<br> <br>
 				<button onclick="returnToSearch()">
 					<div id="ButtonText">Return to Search Page</div>
+				</button>
+				<br> <br>
+				<button onclick="groceryList()">
+					<div id="ButtonText">Grocery List</div>
 				</button>
 			</div>
 		</div>
@@ -305,6 +309,9 @@
 
 	<script>
 		// Page redirection for buttons
+		function groceryList() {
+			window.location.href = 'groceryList.html';
+		}
 		function returnToSearch() {
 			window.location.href = 'searchPage.html';
 		}
