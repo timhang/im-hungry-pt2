@@ -165,14 +165,43 @@ button {
 	margin-left: 500px;
 }
 
-#pageNumber {
-	display: inline-block;
+
+
+.pageNumbersClass {
 	font-size: 30px;
-}
-#pageNumber:hover {
-	text-decoration: underline;
-	background-color: #d1b284;
+	font-weight: light;
+	margin: 10px;
+	display: inline-block;
+	
 }
 #pageNumberDiv {
 	text-align: center;
+}
+#innerPageNumberDiv {
+	display: inline-block;
+}
+#prevButton {
+	font-size: 30px;
+	margin-right: 15px;
+	display: inline-block;
+}
+#nextButton {
+	font-size: 30px;
+	margin-left: 15px;
+	display: inline-block;
+}
+
+
+
+.pageNumber:hover {
+	text-decoration: underline;
+	background-color: #d1b284;
+}
+#prevButton:hover {
+	text-decoration: underline;
+	background-color: #d1b284;
+}
+#nextButton:hover {
+	text-decoration: underline;
+	background-color: #d1b284;
 }

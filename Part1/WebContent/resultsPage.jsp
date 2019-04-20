@@ -107,6 +107,7 @@
 								int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 								int startIndex = (pageNumber)*5 -5;
 								int endIndex = startIndex+5;
+								
 								ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
 										request.getParameter("numberType"));
 								ArrayList<Integer> restIDs = RestAPI.resultsPageList(request.getParameter("searchText"),
@@ -204,26 +205,108 @@
 								
 <!-- 								<form method = "POST" onsubmit="return myFunction()" action="resultsPage.jsp">
  -->									<!-- <button>&laquo;</button> -->
- 									<div id=pageNumberDiv>
+ 									
+ 									
 
-									<%for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { %>
-										<div onclick="paginate(<%=i+1%>)" id = "pageNumber"><%=i+1%> </div> 
-									<%
-									  }
-									%>
-									
+ 	
+ 									<div id=pageNumberDiv>
+										<div id=prevButton onclick="paginatePrev(currPageGlobal)"> previous </div>
+										<div id=innerPageNumberDiv></div>
+										<div id=nextButton onclick="paginateNext(currPageGlobal)"> next </div>
 									 </div>
-									<!-- <a href="#">&raquo;</a> -->
-								<!-- </form> -->
-								
-								
-<!-- 								<script>
-								$('#paginateTable').easyPaginate({
-								    paginateElement: 'tr',
-								    elementsPerPage: 5,
-								    effect: 'climb'
-								});
-								</script> -->
+									 
+									 
+									 
+									 <script>
+	 									var numPages = <%=(int)Math.ceil((double)size / 5)%>;
+	 															
+	 									<% int numPagesJava = (int)Math.ceil((double)size / 5); %>
+	 																 															
+	 									
+	 									if( numPages < 6){	/* <!-- less than 5 pages, print all pages --> */
+
+											<% 
+											for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { 
+											%>
+												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
+												 
+											<%
+												if(i+1 == pageNumber){
+											%>	
+													
+														$('#pageNumber<%=pageNumber%>').css({
+														    'font-weight': 'bold',
+														    'text-decoration': 'underline',
+														});
+												
+											<%	
+												}
+											  }
+											%>
+	 									}
+	 									
+										else if (<%=pageNumber%> < 4){	<!-- print first 5 -->
+										
+											<% 
+											for(int i = 0; i < 5; i++) { 
+											%>
+												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
+												 
+											<%
+												if(i+1 == pageNumber){
+											%>	
+									
+														$('#pageNumber<%=pageNumber%>').css({
+														    'font-weight': 'bold',
+														    'text-decoration': 'underline',
+														});
+												
+											<%	
+												}
+											  }
+											%>
+										}
+	 									
+										else if (<%=pageNumber%> > numPages-3) { <!-- print last 5 -->
+										
+											<% for(int i = numPagesJava-5; i < numPagesJava; i++) {  %>
+												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
+												 
+											<%  	if(i+1 == pageNumber){  %>	
+									
+														$('#pageNumber<%=pageNumber%>').css({
+														    'font-weight': 'bold',
+														    'text-decoration': 'underline',
+														});
+												
+											<%	
+													}
+											    }
+											%>
+										}
+	 									
+										else {	<!-- -2 -1 pageNumber +1 +2 -->
+										
+										<% 
+										for(int i = pageNumber-3; i < pageNumber+2; i++) { 
+											%>
+												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
+												 
+											<%
+												if(i+1 == pageNumber){
+											%>	
+									
+														$('#pageNumber<%=pageNumber%>').css({
+														    'font-weight': 'bold',
+														    'text-decoration': 'underline',
+														});
+												
+											<%	
+												}
+											  }
+											%>
+										}
+ 									</script>
 								
 								
 								<div id=quickAccessWrapper> 
@@ -272,8 +355,13 @@
 									
 										
 									}
+								
+								</script>
+									
+									<script>var currPageGlobal = <%=Integer.parseInt(request.getParameter("pageNumber"))%></script>
 									
 									
+								<script>
 									function paginate(selectedPage){
 										if(selectedPage != "0"){
 											var url_string = window.location.href;
@@ -281,14 +369,60 @@
 									        var searchText = sessionStorage.getItem('searchText');
 									        var numberType = sessionStorage.getItem('intNum');
 									        var pageNumber = selectedPage;
-
+									        currPageGlobal = selectedPage;
+	
 											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
 										}
 									}
+								</script>	
+									
+									
+								<script>
+									function paginatePrev(currPage){
+																	console.log("got into paginatePrev. currPage = " + currPage);
+										if(currPage > 1){
+											var url_string = window.location.href;
+									        var url = new URL(url_string);
+									        var searchText = sessionStorage.getItem('searchText');
+									        var numberType = sessionStorage.getItem('intNum');
+									        var pageNumber = currPage-1;
+									        currPageGlobal = pageNumber;
+																	console.log("pageNumber: " + pageNumber + " currPageGlobal: " + currPageGlobal);
+											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
+										}
+										else {
+											alert("You are already on the first page. Cannot go previous.")
+										}
+									}
+								</script>	
+									
+								<script>
+									function paginateNext(currPage){
+																console.log("got into paginateNext. currPageGlobal = " + currPageGlobal);
+										if(currPage < <%=(int) Math.ceil((double)size / 5)%>){
+											var url_string = window.location.href;
+									        var url = new URL(url_string);
+									        var searchText = sessionStorage.getItem('searchText');
+									        var numberType = sessionStorage.getItem('intNum');
+									        var pageNumber = currPage+1;
+									        currPageGlobal = pageNumber;
+																	console.log("pageNumber: " + pageNumber + " currPageGlobal: " + currPageGlobal);
+								
+											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
+										}
+										else {
+											alert("You are already on the last page. Cannot go forward.")
+										}
+									}
+								
 								</script>
+									
+									
+									
+								
 
 							
-
+ 
 
 
 	<script>
