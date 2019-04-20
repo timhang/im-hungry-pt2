@@ -19,5 +19,6 @@ branches:
 
 before_install:
   - cd Part1/
+  - gem install bundler
 
 
