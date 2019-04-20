@@ -63,14 +63,14 @@
 			</div>
 
 			<!-- Button column -->
-			<div class="col-lg-3">
+			<div class="col-lg-3 vcenter">
 				<br>
 				<div>
 					<select id="mySelect">
-						<option>------ Select List ------</option>
-						<option value="favorites.jsp">Favorites</option>
-						<option value="toExplore.jsp">To Explore</option>
-						<option value="doNotShow.jsp">Do Not Show</option>
+						<option>------------------- Select List -------------------</option>
+						<option value="lists.html?q=fav">Favorites</option>
+						<option value="lists.html?q=toExplore">To Explore</option>
+						<option value="lists.html?q=doNotShow">Do Not Show</option>
 					</select>
 				</div>
 				<br>
@@ -80,6 +80,10 @@
 				<br> <br>
 				<button onclick="returnToSearch()">
 					<div id="ButtonText">Return to Search Page</div>
+				</button>
+				<br> <br>
+				<button onclick="groceryList()">
+					<div id="ButtonText">Grocery List</div>
 				</button>
 			</div>
 		</div>
@@ -104,7 +108,13 @@
 							</tr>
 							
 							<%
-								int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+								int pageNumber;
+								if(request.getParameter("pageNumber")==null){
+									pageNumber = 1;
+								} else {
+									pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+								}
+								
 								int startIndex = (pageNumber)*5 -5;
 								int endIndex = startIndex+5;
 								
@@ -224,7 +234,6 @@
 	 																 															
 	 									
 	 									if( numPages < 6){	/* <!-- less than 5 pages, print all pages --> */
-
 											<% 
 											for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { 
 											%>
@@ -348,7 +357,13 @@
 										    success: function() {    
 										        console.log("POST searchTerm: " + searchTerm);
 										        console.log("POST integer: " + integer);
-										        window.location.reload();
+										        
+
+										        sessionStorage.setItem('searchText', searchTerm);
+												sessionStorage.setItem('intNum', integer);
+
+												window.location.href = 'resultsPage.jsp?searchText='+searchTerm+'&numberType='+integer+'&pageNumber='+1;
+										        //window.location.reload();
 
 										    }
 										});
@@ -427,17 +442,20 @@
 
 	<script>
 		// Page redirection for buttons
+		function groceryList() {
+			window.location.href = 'groceryList.html';
+		}
 		function returnToSearch() {
 			window.location.href = 'searchPage.html';
 		}
 		function manageList() {
 			var link = document.getElementById("mySelect").selectedIndex;
 			if (link == "1") {
-				window.location.href = 'favorites.jsp';
+				window.location.href = 'lists.html?q=fav';
 			} else if (link == "2") {
-				window.location.href = 'toExplore.jsp';
+				window.location.href = 'lists.html?q=toExplore';
 			} else if (link == "3") {
-				window.location.href = 'doNotShow.jsp';
+				window.location.href = 'lists.html?q=doNotShow';
 			}
 		}
 

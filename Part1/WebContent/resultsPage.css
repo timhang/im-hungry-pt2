@@ -166,7 +166,6 @@ button {
 }
 
 
-
 .pageNumbersClass {
 	font-size: 30px;
 	font-weight: light;
@@ -190,9 +189,6 @@ button {
 	margin-left: 15px;
 	display: inline-block;
 }
-
-
-
 .pageNumber:hover {
 	text-decoration: underline;
 	background-color: #d1b284;
@@ -204,4 +200,8 @@ button {
 #nextButton:hover {
 	text-decoration: underline;
 	background-color: #d1b284;
+}
+
+.vcenter {
+    padding-top: 65px;
 }

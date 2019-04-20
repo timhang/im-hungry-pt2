@@ -1,10 +1,10 @@
-Feature: Searchpage testing
+Feature: Quick access testing
 
 Background:
 
 	Given I am on searchPage
 
-# Scenario: S1 - Search for 1 with blank text
+Scenario: S0a - Search for 1 with blank text
 
 	When I enter "Tomato" in the search box
 	When I enter "17" in the integer box
@@ -12,13 +12,23 @@ Background:
 	Then I should see search results for "Tomato"
 
 
-Scenario: S2 - Quickaccess
-
-	When I click the "Return to Search Page" button
-	Then I should be taken back to "localhost:8080/ImHungry/searchPage.html"
-	Then the Quickaccess should display "------ Quick Access ------"
+Scenario: S0b - Quickaccess
     When I select "Tomato (17)" from Quickaccess
     Then I should see search results for "Tomato"
-	When I select "First" from Quickaccess
-	Then I should see search results for "Tomato"
 
+
+    Scenario: S1a - Search for food
+
+        When I enter "aroma" in the search box
+        When I enter "17" in the integer box
+        And I press Im Hungry
+        Then I should see search results for "aroma"
+
+    Scenario: S1b - Ensure item appears on Quickaccess
+
+        When I select "aroma (17)" from Quickaccess
+        Then I should see search results for "aroma"
+    
+
+
+    

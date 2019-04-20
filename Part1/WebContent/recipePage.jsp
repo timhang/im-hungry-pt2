@@ -64,33 +64,38 @@
 				<!-- Row for ingredients and instructions -->
 				<div class="row">
 					<!-- Two columns of ingredients -->
-					<div class="col-lg-4">
+					<div class="col-lg-6">
 						<ul>
 							<%	
 								//First half of the ingredients list
 						    	for(int i = 0; i < ingredients.size()/2; i++) {
+						    		String ingredient = ingredients.get(i);
 						    	
 						    %>
-							<li><%= ingredients.get(i) %></li>
+						    <!-- Each ingredient has an Add To Grocery List button next to it that calls AddToGrocery() -->
+							<li><%= ingredient %><br/>
+								<button onclick="AddToGrocery()" class="ButtonText" id="ingredient<%= i %>">Add To Grocery List</button>
+							</li>
 							<%
 		    				}
 							%>
 						</ul>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-6">
 						<ul>
 							<%
 								//Second half of the ingredients list
 						    	for(int i = ingredients.size()/2; i < ingredients.size(); i++) {
 						    	
 						    %>
-							<li><%= ingredients.get(i) %></li>
+							<li><%= ingredients.get(i) %><br/>
+								<button onclick="AddToGrocery()" class="ButtonText" id="ingredient<%= i %>">Add To Grocery List</button>
+							</li>
 							<%
 		    					}
 							%>
 						</ul>
 					</div>
-					<div class="col-lg-4"></div>
 				</div>
 				</div>
 				</div>
@@ -122,10 +127,10 @@
 			<div class="col-lg-3">
 				<div id="togglePrint">
 				<br>
-					<button onclick="printableView()"><div id="ButtonText">Printable View</div></button>
+					<button onclick="printableView()"><div class="ButtonText">Printable View</div></button>
 					<br>
 					<br>
-					<button onclick="backToResults()"><div id="ButtonText">Back to Results</div></button>
+					<button onclick="backToResults()"><div class="ButtonText">Back to Results</div></button>
 					<br>
 					<br>
 					<div class="dropdown">
@@ -139,9 +144,11 @@
 					
 					<br>
 					<button
-						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div id="ButtonText">Add
+						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div class="ButtonText">Add
 						to List</div></button>
 					<br>
+					<br>
+					<button onclick="groceryList()"><div class="ButtonText">Grocery List</div></button>
 				</div>
 			</div>
 		</div>
@@ -150,9 +157,17 @@
 
 	<script>
 			// Page Redirection
+			function groceryList() {
+			window.location.href = 'groceryList.html';
+			}
+			function AddToGrocery() {
+				window.location.href = 'groceryList.html';
+			}	
+			
+			// Page Redirection
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
-			}			
+			}		
 			// Printable View function displays and hides buttons on page
 			function printableView() {
 				var x = document.getElementById("togglePrint");
@@ -189,6 +204,25 @@
 
 				}
 			}
+
+			$(function(){
+
+				// array to send 
+				let array = [];
+
+				// extract ingredients
+				$("#RecipeContent li").each(function (i, e) {
+					array.push( $(this).text() );
+				});
+
+				// sending ingredients to backend
+				$.post("Ingredients", {
+					"data": array
+				})
+				.done(function(response) {
+					alert(`Data sent! ${response}`);
+				})
+			});
 			
 		</script>
 

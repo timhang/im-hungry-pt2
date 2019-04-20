@@ -1,0 +1,15 @@
+language: java
+
+script: 
+  - cd Part1
+  - mvn clean install
+
+
+services:
+  - mysql
+
+# safelist
+branches:
+  only:
+  - master
+
