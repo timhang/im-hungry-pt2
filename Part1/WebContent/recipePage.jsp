@@ -18,7 +18,7 @@
 </head>
 <body>
 	<!-- this function populates recipe data -->
-	<% 
+	<%
 		int recipeId = Integer.valueOf(request.getParameter("recipeId"));
 		Recipe currRecipe = RecipeAPI.getRecipeMap().get(recipeId);
 		String name = currRecipe.getName();
@@ -27,14 +27,14 @@
 		int cookTime = 	currRecipe.getCookTime();
 		ArrayList<String> ingredients = currRecipe.getIngredients();
 		ArrayList<String> instructions = currRecipe.getInstructions();
-		
-	
+
+
 	%>
 	<!-- Information of Recipe -->
 	<div class="container-fluid">
-		
+
 		<div class="row" style = "padding: 60px 0px;">
-		
+
 			<div class="col-lg-1"></div>
 			<div class="col-lg-6">
 			<div class="card" style = "font-weight: bold; padding: 0px 12px 12px 12px;">
@@ -65,12 +65,12 @@
 				<div class="row">
 					<!-- Two columns of ingredients -->
 					<div class="col-lg-6">
-						<ul>
-							<%	
+						<ul id="ingredients">
+							<%
 								//First half of the ingredients list
 						    	for(int i = 0; i < ingredients.size()/2; i++) {
 						    		String ingredient = ingredients.get(i);
-						    	
+
 						    %>
 						    <!-- Each ingredient has an Add To Grocery List button next to it that calls AddToGrocery() -->
 							<li><%= ingredient %><br/>
@@ -86,7 +86,7 @@
 							<%
 								//Second half of the ingredients list
 						    	for(int i = ingredients.size()/2; i < ingredients.size(); i++) {
-						    	
+
 						    %>
 							<li><%= ingredients.get(i) %><br/>
 								<button onclick="AddToGrocery()" class="ButtonText" id="ingredient<%= i %>">Add To Grocery List</button>
@@ -101,15 +101,15 @@
 				</div>
 				<br>
 				<br>
-				
+
 				<div class = "card">
 				<div id = "InsideCard">
 				<!-- List of Instructions -->
 				<p style = "font-weight: bold;">Instructions:</p>
 				<ol type="1">
-					<%	
+					<%
 							//Instructions
-						    for(int i = 0; i < instructions.size(); i++) {	
+						    for(int i = 0; i < instructions.size(); i++) {
 						%>
 					<li><%= instructions.get(i) %></li><br>
 					<%
@@ -121,7 +121,7 @@
 				</div>
 
 			</div>
-			
+
 			<div class="col-lg-2"></div>
 			<!-- Redirection buttons -->
 			<div class="col-lg-3">
@@ -130,7 +130,7 @@
 					<button onclick="printableView()"><div class="ButtonText">Printable View</div></button>
 					<br>
 					<br>
-					<button onclick="backToResults()"><div class="ButtonText">Back to Results</div></button>
+					<button onclick="backToResults()"><div class="ButtonText" id="backBtn">Back to Results</div></button>
 					<br>
 					<br>
 					<div class="dropdown">
@@ -141,14 +141,14 @@
 							<option value="doNotShow">Do Not Show</option>
 						</select>
 					</div>
-					
+
 					<br>
 					<button
 						onclick="addToList(document.getElementById('listSelect').selectedIndex)"><div class="ButtonText">Add
 						to List</div></button>
 					<br>
 					<br>
-					<button onclick="groceryList()"><div class="ButtonText">Grocery List</div></button>
+					<button onclick="groceryList()"><div class="ButtonText" id="AddToRL">Grocery List</div></button>
 				</div>
 			</div>
 		</div>
@@ -162,12 +162,12 @@
 			}
 			function AddToGrocery() {
 				window.location.href = 'groceryList.html';
-			}	
-			
+			}
+
 			// Page Redirection
 			function backToResults() {
 				window.location.href = 'resultsPage.jsp';
-			}		
+			}
 			// Printable View function displays and hides buttons on page
 			function printableView() {
 				var x = document.getElementById("togglePrint");
@@ -177,14 +177,14 @@
 				   x.style.display = "none";
 				 }
 				 window.print();
-				 
+
 				 if (x.style.display === "none") {
 					   x.style.display = "block";
 					 } else {
 					   x.style.display = "none";
 					 }
 			}
-			
+
 			function addToList(selectedIndex){
 				if(selectedIndex != "0"){
 					var xhttp = new XMLHttpRequest();
@@ -193,7 +193,7 @@
 			        var id = parseFloat(url.searchParams.get("recipeId"));
 					if(selectedIndex == "1"){
 						xhttp.open("GET", "AddToList?type=recipe&id="+id+"&list=fav", false);
-					}	
+					}
 					else if(selectedIndex == "2"){
 						xhttp.open("GET", "AddToList?type=recipe&id="+id+"&list=exp", false);
 					}
@@ -205,13 +205,13 @@
 				}
 			}
 
-			$(function(){
+			$("#AddToRL").click(function(){
 
-				// array to send 
+				// array to send
 				let array = [];
 
 				// extract ingredients
-				$("#RecipeContent li").each(function (i, e) {
+				$("#ingredients li").each(function (i, e) {
 					array.push( $(this).text() );
 				});
 
@@ -223,7 +223,7 @@
 					alert(`Data sent! ${response}`);
 				})
 			});
-			
+
 		</script>
 
 </body>

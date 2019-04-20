@@ -15,11 +15,10 @@ public class DatabaseDriver {
 		toExplore,
 		doNotShow
 	}
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "root";
-
+	static final String PASS = helper.name;
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
@@ -42,8 +41,8 @@ public class DatabaseDriver {
 	        ps.setString(12, String.join(",", recipe.getInstructions()));
 	        ps.setString(13,"recipe");
 	        ps.execute();
-				    			 
-		    
+
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -62,13 +61,13 @@ public class DatabaseDriver {
 		      }
 		   }
 	}
-	
+
 	public static void insertRestaurant(int sessionID, Restaurant restaurant) {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
-			
+
 			ps = conn.prepareStatement("INSERT INTO Restaurant (restaurantID, sessionID, restaurantName, favoriteListOrder, exploreListOrder, doNotShowListOrder, address, driveTime, phoneNumber, webURL, stars, price, tableType) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 	        ps.setInt(1, restaurant.getID());
 	        ps.setInt(2, sessionID);
@@ -84,8 +83,8 @@ public class DatabaseDriver {
 	        ps.setDouble(12, restaurant.getPriceRange());
 	        ps.setString(13,"restaurant");
 	        ps.execute();
-					 
-		    
+
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -104,7 +103,7 @@ public class DatabaseDriver {
 		      }
 		   }
 	}
-	
+
 	public static void createSession(String searchTerm, int numResults) {
 		Connection conn = null;
 		try {
@@ -114,13 +113,13 @@ public class DatabaseDriver {
 	        ps.setString(1, searchTerm);
 	        ps.setInt(2, numResults);
 	        ps.execute();
-			
+
 //			stmt = conn.createStatement();
 //		    String insertSQL = "INSERT INTO Sessions VALUES ";
-//		    insertSQL += "('" + searchTerm + "'," + 
+//		    insertSQL += "('" + searchTerm + "'," +
 //		    			 Integer.toString(numResults) + ")";
-//		    stmt.executeUpdate(insertSQL);		    			 
-		    
+//		    stmt.executeUpdate(insertSQL);
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -139,7 +138,7 @@ public class DatabaseDriver {
 		      }
 		   }
 	}
-	
+
 	public static JSONArray getSessions() throws Exception{
 		Connection conn = null;
 		try {
@@ -164,13 +163,13 @@ public class DatabaseDriver {
 					jsonObj.put("searchTerm", searchTerm);
 					jsonObj.put("integer", Integer.toString(numResults));
 					newArray.put(jsonObj);
-					
+
 
 				} while(rs.next());
 				return newArray;
 			}
-	        	    			 
-		    
+
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -190,7 +189,7 @@ public class DatabaseDriver {
 		   }
 		return null;
 	}
-	
+
 	public static void sessionRecipes(ArrayList<Integer> recipeIds) throws Exception{
 		Connection conn = null;
 		try {
@@ -200,17 +199,17 @@ public class DatabaseDriver {
 			rs = ps.executeQuery();
 			rs.first();
 			int sessionId = rs.getInt("sessionID");
-			
+
 			for(int i = 0; i<recipeIds.size(); i++) {
 				ps = conn.prepareStatement("INSERT INTO RecipeRelations (sessionFkID, recipeFkID) VALUES (?,?)");
 				ps.setInt(1,sessionId);
 				ps.setInt(2,recipeIds.get(i));
 		        ps.execute();
-	        
+
 			}
-	        
-	        	    			 
-		    
+
+
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -230,7 +229,7 @@ public class DatabaseDriver {
 		   }
 
 	}
-	
+
 	public static void sessionRestaurants(ArrayList<Integer> restaurantIds) throws Exception{
 		Connection conn = null;
 		try {
@@ -241,17 +240,17 @@ public class DatabaseDriver {
 			rs = ps.executeQuery();
 			rs.first();
 			int sessionId = rs.getInt("sessionID");
-			
+
 			for(int i = 0; i<restaurantIds.size(); i++) {
 				ps = conn.prepareStatement("INSERT INTO RestaurantRelations (sessionFkID, restaurantFkID) VALUES (?,?)");
 				ps.setInt(1,sessionId);
 				ps.setInt(2,restaurantIds.get(i));
 		        ps.execute();
-	        
+
 			}
-	        
-	        	    			 
-		    
+
+
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -271,26 +270,26 @@ public class DatabaseDriver {
 		   }
 
 	}
-	
+
 	public static int GetInsertionIndex(Connection connection, String arg) throws SQLException {
 
 		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index1 FROM Recipe WHERE "+arg+"!=-1");
 		rs = ps.executeQuery();
 		rs.first();
 		int index1 = rs.getInt("index1");
-		
+
 		ps = connection.prepareStatement("SELECT COUNT(" + arg + ") as index2 FROM Restaurant WHERE "+arg+"!=-1");
 		rs = ps.executeQuery();
 		rs.first();
 		int index2 = rs.getInt("index2");
-		
+
 		return (index1+index2);
 	}
-	
+
 	private static void print(String x) {
 		System.out.println(x);
 	}
-	
+
 	public static void AddRecipeToList(int recipeId, lists listName) throws Exception{
 		/*
 		 if the selected ids in the database is -1, then update all of indices to match the current
@@ -318,16 +317,16 @@ public class DatabaseDriver {
 			if(newInt == -1) {
 				//only when the item had not been previously inserted
 				int index = GetInsertionIndex(conn, arg);
-				
-				
-				
+
+
+
 				ps = conn.prepareStatement("UPDATE Recipe SET " + arg +" = (?) WHERE recipeID = (?)");
-				print(Integer.toString(index)); 
+				print(Integer.toString(index));
 				ps.setInt(1, index);
 				ps.setInt(2, recipeId);
 				ps.execute();
 			}
-		    
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -345,10 +344,10 @@ public class DatabaseDriver {
 		         se.printStackTrace();
 		      }
 		   }
-		
-		
+
+
 	}
-	
+
 	public static void AddRestaurantToList(int restId, lists listName) throws Exception{
 		/*
 		 if the selected ids in the database is -1, then update all of indices to match the current
@@ -376,16 +375,16 @@ public class DatabaseDriver {
 			if(newInt== -1) {
 				//only when the item had not been previously inserted
 				int index = GetInsertionIndex(conn, arg);
-				
-				
-				
+
+
+
 				ps = conn.prepareStatement("UPDATE Restaurant SET " + arg +" = (?) WHERE restaurantID = (?)");
-				print(Integer.toString(index)); 
+				print(Integer.toString(index));
 				ps.setInt(1, index);
 				ps.setInt(2, restId);
 				ps.execute();
 			}
-		    
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -403,11 +402,11 @@ public class DatabaseDriver {
 		         se.printStackTrace();
 		      }
 		   }
-		
-		
+
+
 	}
-	
-	
+
+
 	public static JSONArray GetList(lists listName) throws Exception{
 		Connection conn = null;
 		try {
@@ -469,20 +468,20 @@ public class DatabaseDriver {
 						jsonObj.put("link", link);
 						jsonObj.put("travelTime", travelTime);
 						jsonObj.put("priceRange", priceRange);
-						
+
 					}
-					
-					
-					
-					
+
+
+
+
 					newArray.put(jsonObj);
-					
+
 
 				} while(rs.next());
 				return newArray;
 			}
-	        	    			 
-		    
+
+
 		} catch(SQLException se){
 		      se.printStackTrace();
 		   } catch(Exception e){
@@ -502,9 +501,9 @@ public class DatabaseDriver {
 		   }
 		return null;
 	}
-	
+
 	public static void updateRestaurantIndices(ArrayList<Integer> restaurantIds) throws Exception{
-		
+
 	}
 
 }

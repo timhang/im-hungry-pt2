@@ -106,7 +106,7 @@
 								<th style="font-size: 30px;">Restaurant</th>
 								<th style="font-size: 30px;">Recipe</th>
 							</tr>
-							
+
 							<%
 								int pageNumber;
 								if(request.getParameter("pageNumber")==null){
@@ -114,7 +114,7 @@
 								} else {
 									pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 								}
-								
+
 								int startIndex = (pageNumber)*5 -5;
 								int endIndex = startIndex+5;
 								ArrayList<Integer> recipeIds = RecipeAPI.resultsPageList(request.getParameter("searchText"),
@@ -159,7 +159,7 @@
 								<%
 									} else {
 								%>
-							
+
 							<tr>
 								<td><div></div></td>
 								<%
@@ -210,113 +210,113 @@
 		</div>
 	</div>
 
-								
-								
+
+
 <div id=pageNumberDiv>
 										<div id=prevButton onclick="paginatePrev(currPageGlobal)"> previous </div>
 										<div id=innerPageNumberDiv></div>
 										<div id=nextButton onclick="paginateNext(currPageGlobal)"> next </div>
 									 </div>
-									 
-									 
-									 
+
+
+
 									 <script>
 	 									var numPages = <%=(int)Math.ceil((double)size / 5)%>;
-	 															
+
 	 									<% int numPagesJava = (int)Math.ceil((double)size / 5); %>
-	 																 															
-	 									
+
+
 	 									if( numPages < 6){	/* <!-- less than 5 pages, print all pages --> */
-											<% 
-											for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) { 
+											<%
+											for(int i = 0; i < (int) Math.ceil((double)size / 5); i++) {
 											%>
 												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
-												 
+
 											<%
 												if(i+1 == pageNumber){
-											%>	
-													
+											%>
+
 														$('#pageNumber<%=pageNumber%>').css({
 														    'font-weight': 'bold',
 														    'text-decoration': 'underline',
 														});
-												
-											<%	
+
+											<%
 												}
 											  }
 											%>
 	 									}
-	 									
+
 										else if (<%=pageNumber%> < 4){	<!-- print first 5 -->
-										
-											<% 
-											for(int i = 0; i < 5; i++) { 
+
+											<%
+											for(int i = 0; i < 5; i++) {
 											%>
 												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
-												 
+
 											<%
 												if(i+1 == pageNumber){
-											%>	
-									
+											%>
+
 														$('#pageNumber<%=pageNumber%>').css({
 														    'font-weight': 'bold',
 														    'text-decoration': 'underline',
 														});
-												
-											<%	
+
+											<%
 												}
 											  }
 											%>
 										}
-	 									
+
 										else if (<%=pageNumber%> > numPages-3) { <!-- print last 5 -->
-										
+
 											<% for(int i = numPagesJava-5; i < numPagesJava; i++) {  %>
 												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
-												 
-											<%  	if(i+1 == pageNumber){  %>	
-									
+
+											<%  	if(i+1 == pageNumber){  %>
+
 														$('#pageNumber<%=pageNumber%>').css({
 														    'font-weight': 'bold',
 														    'text-decoration': 'underline',
 														});
-												
-											<%	
+
+											<%
 													}
 											    }
 											%>
 										}
-	 									
+
 										else {	<!-- -2 -1 pageNumber +1 +2 -->
-										
-										<% 
-										for(int i = pageNumber-3; i < pageNumber+2; i++) { 
+
+										<%
+										for(int i = pageNumber-3; i < pageNumber+2; i++) {
 											%>
 												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
-												 
+
 											<%
 												if(i+1 == pageNumber){
-											%>	
-									
+											%>
+
 														$('#pageNumber<%=pageNumber%>').css({
 														    'font-weight': 'bold',
 														    'text-decoration': 'underline',
 														});
-												
-											<%	
+
+											<%
 												}
 											  }
 											%>
 										}
  									</script>
-								
-								
-								
-								
-								
-								
-								
-								<div id=quickAccessWrapper> 
+
+
+
+
+
+
+
+								<div id=quickAccessWrapper>
 									<h2 id=quickAccessText> QUICK ACCESS</h2>
 								</div>
 
@@ -325,9 +325,9 @@
 									xhttp.open("GET", "QuickAccess", false);	//What should QUICKACCESS be?
 									xhttp.send();
 									var obj = JSON.parse(xhttp.responseText);
-							
+
 									//console.log("obj:" + obj);
-									
+
 									for(let i = 0; i < obj.length; i++){
 										var quickAccessDiv = document.createElement("DIV");
 										quickAccessDiv.setAttribute("id", "searchTerm" + i);
@@ -335,27 +335,27 @@
 										quickAccessDiv.addEventListener('click', function(){
 											quickAccessReloadPage(obj[i].searchTerm, obj[i].integer);
 										})
-										
+
 										var textDiv = document.createElement("h1");
 										textDiv.setAttribute("class", "searchTermText");
 										textDiv.textContent = obj[i].searchTerm + " (" + obj[i].integer + ")";
 										quickAccessDiv.appendChild(textDiv);
 										document.getElementById("quickAccessWrapper").appendChild(quickAccessDiv);
 									}
-									
-									
-									
+
+
+
 									function quickAccessReloadPage (searchTerm, integer) {	//make POST request that passes the searchTerm and integer
-										console.log("clicked on " + searchTerm + " " + integer);			
-										
+										console.log("clicked on " + searchTerm + " " + integer);
+
 										$.ajax({
 										    type: "POST",
 										    url: "resultsPage.jsp",
 										    data: searchTerm, integer,
-										    success: function() {    
+										    success: function() {
 										        console.log("POST searchTerm: " + searchTerm);
 										        console.log("POST integer: " + integer);
-										        
+
 
 										        sessionStorage.setItem('searchText', searchTerm);
 												sessionStorage.setItem('intNum', integer);
@@ -365,14 +365,14 @@
 
 										    }
 										});
-									
-										
+
+
 									}
 									</script>
 
 								<script>var currPageGlobal = <%=pageNumber%></script>
-									
-									
+
+
 								<script>
 									function paginate(selectedPage){
 										if(selectedPage != "0"){
@@ -382,13 +382,13 @@
 									        var numberType = sessionStorage.getItem('intNum');
 									        var pageNumber = selectedPage;
 									        currPageGlobal = selectedPage;
-	
+
 											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
 										}
 									}
-								</script>	
-									
-									
+								</script>
+
+
 								<script>
 									function paginatePrev(currPage){
 																	console.log("got into paginatePrev. currPage = " + currPage);
@@ -406,8 +406,8 @@
 											alert("You are already on the first page. Cannot go previous.")
 										}
 									}
-								</script>	
-									
+								</script>
+
 								<script>
 									function paginateNext(currPage){
 																console.log("got into paginateNext. currPageGlobal = " + currPageGlobal);
@@ -419,18 +419,18 @@
 									        var pageNumber = currPage+1;
 									        currPageGlobal = pageNumber;
 																	console.log("pageNumber: " + pageNumber + " currPageGlobal: " + currPageGlobal);
-								
+
 											window.location.href = 'resultsPage.jsp?searchText='+searchText+'&numberType='+numberType+'&pageNumber='+pageNumber;
 										}
 										else {
 											alert("You are already on the last page. Cannot go forward.")
 										}
 									}
-								
-								</script>	
-								
 
-							
+								</script>
+
+
+
 
 
 

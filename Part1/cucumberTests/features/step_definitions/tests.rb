@@ -252,6 +252,7 @@ When("I click recipe {string}") do |arg|
 		if counter == arg.to_i
 			# recipe click
 			recipe.click
+			
 
 			# add elements to list
 			page.all(:css, "ul li").each do |el|
@@ -264,6 +265,33 @@ When("I click recipe {string}") do |arg|
 
 		counter += 1
 	end
-	sleep(1)
+	
 end
 
+
+# LOG IN PAGE
+Given(/^I am on login page$/) do
+	visit "http://localhost:8080/ImHungry/login.html"
+	
+end
+
+When("I enter {string} in the {string} field") do |arg1, arg2|
+	fill_in arg2, :with=> arg1
+end
+
+Then("I should be in {string}") do |arg1|
+	URI.parse(current_url) == arg1
+end
+
+# pagination
+Then("I should see page button {string} in the page") do |arg1|
+  find('button', :text => arg1)
+end
+
+Then("I should not see page button {string} in the page") do |arg1|
+	expect(find('#searchText')).to have_no_content arg1
+end
+
+When("I press page button {string}") do |arg1|
+	find('button', :text => arg1).click
+end
