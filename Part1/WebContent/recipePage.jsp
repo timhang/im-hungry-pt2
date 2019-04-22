@@ -158,10 +158,10 @@
 	<script>
 			// Page Redirection
 			function groceryList() {
-			window.location.href = 'groceryList.html';
+			window.location.href = 'groceryList.jsp';
 			}
 			function AddToGrocery() {
-				window.location.href = 'groceryList.html';
+				window.location.href = 'groceryList.jsp';
 			}
 
 			// Page Redirection

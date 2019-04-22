@@ -1,7 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <title>Grocery List</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -10,9 +12,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="restPage.css" />
-
 </head>
-
 <body>
 
 	<div class="container-fluid">
@@ -28,7 +28,23 @@
 					</div>
 					<!-- Dynamically generated in script tag  -->
 					<ul id="ingredients">
-			
+						<%
+							//Second half of the ingredients list
+							for (int i = 0; i < 10; i++) {
+						%>
+						<div class="row">
+							<div class="col-lg-6">
+								<li>ingredient</li>
+								<br />
+							</div>
+							<div class="col-lg-6">
+								<button onclick="removeGrocery()" class="ButtonText"
+									id="ingredient<%=i%>">Remove</button>
+							</div>
+						</div>
+						<%
+							}
+						%>
 					</ul>
 				</div>
 			</div>
@@ -50,18 +66,15 @@
 	</div>
 </body>
 
-<script>
-	for(var i= 0; i<10; i++){
-		var node = document.createElement("LI");
-		var textnode = document.createTextNode("ingredient");
-		node.appendChild(textnode);
-		document.getElementById("ingredients").appendChild(node);
-	}
-</script>
+
 
 <script>
 
 //Page Redirection
+function removeGrocery() {
+	
+}
+
 function backToResults() {
 	window.location.href = 'resultsPage.jsp';
 }		

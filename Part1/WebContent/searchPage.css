@@ -1,8 +1,6 @@
 @charset "ISO-8859-1";
 
 body {
-	
-	
 	font-family: font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; ; 	
 }
 
@@ -68,6 +66,13 @@ body {
 	border-radius: 8px;
 	padding: 8px;
 }
+#radius{
+	width: 60px; 
+	height: 40px;
+	border: none;
+	border-radius: 8px;
+	padding: 8px;
+}
 
 #feedMeButton {
 	font-size: 35px;
@@ -95,17 +100,17 @@ body {
 	text-align: center;
 }
 
-#quickAccess-dropdown {
+/* #quickAccess-dropdown {
 	margin-top: 275px;
 	border: none;
 	height: 32px;
 	font-size: 14px;
 	font-weight: bold;
 	padding: 4px;
-	/* background-image: linear-gradient(to bottom right, #FBD786, #FBD786);  */
+	background-image: linear-gradient(to bottom right, #FBD786, #FBD786); 
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+ */
 
 .rainbow {
   color: #FBD786;
