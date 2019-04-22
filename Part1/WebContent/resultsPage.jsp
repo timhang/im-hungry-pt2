@@ -317,7 +317,7 @@
 
 
 								<div id=quickAccessWrapper>
-									<h2 id=quickAccessText> QUICK ACCESS</h2>
+									<h2 id=quickAccessText> Quick Access</h2>
 								</div>
 
 								<script>
@@ -437,7 +437,7 @@
 	<script>
 		// Page redirection for buttons
 		function groceryList() {
-			window.location.href = 'groceryList.html';
+			window.location.href = 'groceryList.jsp';
 		}
 		function returnToSearch() {
 			window.location.href = 'searchPage.html';

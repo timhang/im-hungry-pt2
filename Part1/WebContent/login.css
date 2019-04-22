@@ -1,0 +1,36 @@
+@charset "ISO-8859-1";
+body {
+	background-color: #efd6b1;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 20px; 
+	background: #C6FFDD;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background: linear-gradient(to bottom right, #f7797d, #FBD786, #C6FFDD); 
+	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+  	height:100%;
+}
+.title {
+	text-align: center;
+	padding: 70px 0;
+	font-weight: bold;	
+	font-size: 90px;
+	font-family: font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; ;
+	color: #FBD786;
+	text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+}
+
+
+.container {
+	text-align: center;
+}
+
+#submit{
+    border-radius: 8px;
+	background-color: #FBD786;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border: none;
+	font-size: 25px;
+	padding: 4px;
+}
