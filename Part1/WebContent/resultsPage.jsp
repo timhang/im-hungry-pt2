@@ -11,6 +11,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="html2canvas.min.js"></script>
+<script src="html2canvas.js"></script>
+
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resultsPage.css" />
@@ -34,7 +38,7 @@
 			<br>
 			<!-- Photo collage column -->
 			<div class="col-lg-1"></div>
-			<div class="col-lg-8 text-center">
+			<div id="collage" class="col-lg-8 text-center" value='<%=request.getParameter("searchText")%>' >
 
 				<%
 					ArrayList<String> imgArr = ImageAPI.getImagesToDisplay(request.getParameter("searchText"));
@@ -194,6 +198,18 @@
 		</div>
 	</div>
 	
+	<script type="text/javascript">
+		html2canvas($('#collage'), 
+	    {
+	      onrendered: function (canvas) {
+	        var a = document.createElement('a');
+	        a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+	        a.download = document.getElementById('collage').value;
+	        a.click();
+	      }
+	    });
+	</script>
+
 	<script>
 		// Page redirection for buttons
 		function returnToSearch() {
