@@ -18,7 +18,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "root";
+	static final String PASS = "1234";
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
@@ -532,6 +532,80 @@ public class DatabaseDriver {
 		         se.printStackTrace();
 		      }
 		   }
+	}
+	
+	public static void removeGroceryItem(String itemName) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			ps = conn.prepareStatement("DELETE FROM GroceryList WHERE groceryItem='"+ itemName+ "'");
+	        ps.execute();
+
+
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		            ps.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		    	  se2.printStackTrace();
+		      }
+		      try {
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+	}
+	public static ArrayList<String> GetGroceryList() throws Exception{
+		Connection conn = null;
+		ArrayList<String> newArray = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			ps = conn.prepareStatement("SELECT * FROM GroceryList");
+	        rs = ps.executeQuery();
+	        
+	        if(rs.next()==false) {
+
+				return newArray;
+				//System.out.println("login state: "+ state);
+			} else {
+				do {
+					//JSONObject;
+					//int count = rs.getInt("count");
+					String itemName;
+					itemName = rs.getString("groceryItem");
+					newArray.add(itemName);
+
+
+				} while(rs.next());
+				return newArray;
+			}
+
+
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		            ps.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		    	  se2.printStackTrace();
+		      }
+		      try {
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+		return newArray;
 	}
 
 }

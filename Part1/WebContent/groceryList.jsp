@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"
+	import="API.*, java.util.*, org.json.*, javax.servlet.http.HttpServlet, javax.servlet.http.HttpServletRequest"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,20 +30,23 @@
 					<!-- Dynamically generated in script tag  -->
 					<ul id="ingredients">
 						<%
-							//Second half of the ingredients list
-							for (int i = 0; i < 10; i++) {
+							ArrayList<String> groceryList = new ArrayList<String>(); 
+							groceryList = DatabaseDriver.GetGroceryList();
+							if(!groceryList.isEmpty() && groceryList!=null){
+							for (int i = 0; i < groceryList.size(); i++) {
 						%>
 						<div class="row">
 							<div class="col-lg-6">
-								<li>ingredient</li>
-								<br />
+								<li><%=groceryList.get(i) %></li>
+								<br>
 							</div>
 							<div class="col-lg-6">
-								<button onclick="removeGrocery()" class="ButtonText"
+								<button onclick="removeGrocery(this.value)" value="<%=groceryList.get(i)%>" class="ButtonText"
 									id="ingredient<%=i%>">Remove</button>
 							</div>
 						</div>
 						<%
+							}
 							}
 						%>
 					</ul>
@@ -88,8 +92,13 @@
 <script>
 
 //Page Redirection
-function removeGrocery() {
-	
+function removeGrocery(ingredient) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "RemoveFromGroceryList?itemName="+ingredient, false);
+
+	xhttp.send();
+	alert("Removed item from grocery list.");
+	location.reload();
 }
 
 function returnToSearch() {

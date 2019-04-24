@@ -74,7 +74,7 @@
 						    %>
 						    <!-- Each ingredient has an Add To Grocery List button next to it that calls AddToGrocery() -->
 							<li><%= ingredient %><br/>
-								<button onclick="AddToGrocery()" class="ButtonText" id="ingredient<%= i %>">Add To Grocery List</button>
+								<button onclick="AddToGrocery(this.value)" class="ButtonText" value="<%= ingredient %>" id="ingredient<%= i %>">Add To Grocery List</button>
 							</li>
 							<%
 		    				}
@@ -89,7 +89,7 @@
 
 						    %>
 							<li><%= ingredients.get(i) %><br/>
-								<button onclick="AddToGrocery()" class="ButtonText" id="ingredient<%= i %>">Add To Grocery List</button>
+								<button onclick="AddToGrocery(this.value)" class="ButtonText" value="<%= ingredients.get(i) %>" id="ingredient<%= i %>">Add To Grocery List</button>
 							</li>
 							<%
 		    					}
@@ -158,10 +158,14 @@
 	<script>
 			// Page Redirection
 			function groceryList() {
-			window.location.href = 'groceryList.jsp';
-			}
-			function AddToGrocery() {
 				window.location.href = 'groceryList.jsp';
+			}
+			function AddToGrocery(ingredient) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.open("GET", "AddToGroceryList?itemName="+ingredient, false);
+
+				xhttp.send();
+				alert("Added item to grocery list.");
 			}
 
 			// Page Redirection
@@ -201,6 +205,15 @@
 						xhttp.open("GET", "AddToList?type=recipe&id="+id+"&list=dns", false);
 					}
 					xhttp.send();
+					if(selectedIndex == "1"){
+						alert("Added item to favorites list!");
+					}
+					else if(selectedIndex == "2"){
+						alert("Added item to to explore list!");
+					}
+					else if(selectedIndex == "3"){
+						alert("Added item to do not show list!");
+					}
 
 				}
 			}
