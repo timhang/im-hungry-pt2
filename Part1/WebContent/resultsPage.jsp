@@ -268,8 +268,8 @@
 											  }
 											%>
 										}
-
-										else if (<%=pageNumber%> > numPages-3) { <!-- print last 5 -->
+										//<!-- print last 5 -->
+										else if (<%=pageNumber%> > numPages-3) { 
 
 											<% for(int i = numPagesJava-5; i < numPagesJava; i++) {  %>
 												$('#innerPageNumberDiv').append('<div onclick="paginate(<%=i+1%>)" class="pageNumbersClass" id="pageNumber<%=i+1%>"><%=i+1%> </div>');
@@ -286,8 +286,8 @@
 											    }
 											%>
 										}
-
-										else {	<!-- -2 -1 pageNumber +1 +2 -->
+										// <!-- -2 -1 pageNumber +1 +2 -->
+										else {	
 
 										<%
 										for(int i = pageNumber-3; i < pageNumber+2; i++) {

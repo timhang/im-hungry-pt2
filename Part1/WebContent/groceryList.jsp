@@ -57,6 +57,23 @@
 						<div class="ButtonText">Printable View</div>
 					</button>
 					<br> <br>
+					<div>
+					<select id="listSelect">
+						<option>------------ Select List ------------</option>
+						<option value="lists.html?q=fav">Favorites</option>
+						<option value="lists.html?q=toExplore">To Explore</option>
+						<option value="lists.html?q=doNotShow">Do Not Show</option>
+					</select>
+				</div>
+				<br>
+				<button type="button" onclick="manageList()">
+					<div class="ButtonText">Manage List</div>
+				</button>
+				<br> <br>
+				<button onclick="returnToSearch()">
+					<div class="ButtonText">Return to Search Page</div>
+				</button>
+				<br> <br>
 					<button onclick="backToResults()">
 						<div class="ButtonText">Back to Results</div>
 					</button>
@@ -73,6 +90,20 @@
 //Page Redirection
 function removeGrocery() {
 	
+}
+
+function returnToSearch() {
+	window.location.href = 'searchPage.html';
+}
+function manageList() {
+	var link = document.getElementById("mySelect").selectedIndex;
+	if (link == "1") {
+		window.location.href = 'lists.html?q=fav';
+	} else if (link == "2") {
+		window.location.href = 'lists.html?q=toExplore';
+	} else if (link == "3") {
+		window.location.href = 'lists.html?q=doNotShow';
+	}
 }
 
 function backToResults() {
