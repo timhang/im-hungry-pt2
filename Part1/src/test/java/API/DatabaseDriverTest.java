@@ -107,7 +107,7 @@ public class DatabaseDriverTest {
 //		DatabaseDriver.AddRestaurantToList(4321, null);
 //		DatabaseDriver.AddRestaurantToList(12344, null);
 //		DatabaseDriver.AddRestaurantToList(1233, null);
-		
+		DatabaseDriver.insertGroceryItem("Onion");
 		
 		//System.out.println(newArray.toString());
 	}

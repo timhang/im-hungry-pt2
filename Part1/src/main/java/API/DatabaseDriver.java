@@ -505,5 +505,33 @@ public class DatabaseDriver {
 	public static void updateRestaurantIndices(ArrayList<Integer> restaurantIds) throws Exception{
 
 	}
+	public static void insertGroceryItem(String itemName) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			ps = conn.prepareStatement("INSERT INTO GroceryList (groceryItem) VALUES (?)");
+	        ps.setString(1, itemName);
+	        ps.execute();
+
+
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		            ps.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		    	  se2.printStackTrace();
+		      }
+		      try {
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+	}
 
 }

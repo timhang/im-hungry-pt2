@@ -55,3 +55,8 @@ CREATE TABLE RecipeRelations(
     FOREIGN KEY (sessionFkID) REFERENCES Sessions(sessionID),
     FOREIGN KEY (recipeFkID) REFERENCES Recipe(recipeID)
 );
+
+CREATE TABLE GroceryList(
+	groceryItem VARCHAR(30) NOT NULL
+
+)
