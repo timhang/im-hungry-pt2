@@ -18,7 +18,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "1234";
+	static final String PASS = "password";
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
@@ -356,9 +356,9 @@ public class DatabaseDriver {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			String arg = "";
-			if(listName == lists.favorites) {
+			if (listName == lists.favorites) {
 				arg = "favoriteListOrder";
 			} else if (listName == lists.toExplore) {
 				arg = "exploreListOrder";
@@ -367,41 +367,39 @@ public class DatabaseDriver {
 			} else {
 				return;
 			}
-			ps = conn.prepareStatement("SELECT "+arg+" AS listName FROM Restaurant WHERE restaurantID = "+restId);
+			ps = conn.prepareStatement("SELECT " + arg + " AS listName FROM Restaurant WHERE restaurantID = " + restId);
 			rs = ps.executeQuery();
 			rs.first();
 			int newInt = rs.getInt("listName");
-			print("listOrder: "+ newInt);
-			if(newInt== -1) {
-				//only when the item had not been previously inserted
+			print("listOrder: " + newInt);
+			if (newInt == -1) {
+				// only when the item had not been previously inserted
 				int index = GetInsertionIndex(conn, arg);
 
-
-
-				ps = conn.prepareStatement("UPDATE Restaurant SET " + arg +" = (?) WHERE restaurantID = (?)");
+				ps = conn.prepareStatement("UPDATE Restaurant SET " + arg + " = (?) WHERE restaurantID = (?)");
 				print(Integer.toString(index));
 				ps.setInt(1, index);
 				ps.setInt(2, restId);
 				ps.execute();
 			}
 
-		} catch(SQLException se){
-		      se.printStackTrace();
-		   } catch(Exception e){
-		      e.printStackTrace();
-		   } finally{
-		      try{
-		            ps.close();
-		      } catch(SQLException se2){
-		    	// nothing we can do
-		    	  se2.printStackTrace();
-		      }
-		      try {
-		            conn.close();
-		      } catch(SQLException se){
-		         se.printStackTrace();
-		      }
-		   }
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException se2) {
+				// nothing we can do
+				se2.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
 
 
 	}
@@ -502,8 +500,56 @@ public class DatabaseDriver {
 		return null;
 	}
 
-	public static void updateRestaurantIndices(ArrayList<Integer> restaurantIds) throws Exception{
+	public static void updateListIndices(lists listName, int uniqueId, int newIndex, String type) throws Exception{
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			String arg = "";
+			if (listName == lists.favorites) {
+				arg = "favoriteListOrder";
+			} else if (listName == lists.toExplore) {
+				arg = "exploreListOrder";
+			} else if (listName == lists.doNotShow) {
+				arg = "doNotShowListOrder";
+			} else {
+				return;
+			}
 
+			// only when the item had not been previously inserted
+			if (type == null) {
+				return;
+			} else if (type.equals("recipe")) {
+				ps = conn.prepareStatement("UPDATE Recipe SET " + arg + " = (?) WHERE recipeID = (?)");
+			} else if (type.equals("restaurant")) {
+				ps = conn.prepareStatement("UPDATE Restaurant SET " + arg + " = (?) WHERE restaurantID = (?)");
+			} else {
+				return;
+			}
+
+			print(Integer.toString(newIndex));
+			ps.setInt(1, newIndex);
+			ps.setInt(2, uniqueId);
+			ps.execute();
+
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException se2) {
+				// nothing we can do
+				se2.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
 	}
 	public static void insertGroceryItem(String itemName) {
 		Connection conn = null;

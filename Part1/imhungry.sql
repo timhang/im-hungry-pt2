@@ -57,6 +57,6 @@ CREATE TABLE RecipeRelations(
 );
 
 CREATE TABLE GroceryList(
-	groceryItem VARCHAR(30) NOT NULL
+	groceryItem VARCHAR(30) UNIQUE NOT NULL
 
 )

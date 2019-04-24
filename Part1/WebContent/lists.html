@@ -217,7 +217,7 @@ body {
 									<a href="${element.link}"> ${element.name} </a> 
 								</div > 
 								<div style="float: left; width: 70%;"> 
-									Address: ${element.address}</div> 
+									Address: "${element.address}"</div> 
 								<div style="float: right; text-align: right; width: 30%">
 									$${element.priceRange}</div>\
 								<div>
@@ -314,7 +314,7 @@ body {
 			var json = {
 				"mode": "update",
 				"list": list,
-				"data": array
+				"data": JSON.stringify(array)
 			};
 
 			console.log(json);
