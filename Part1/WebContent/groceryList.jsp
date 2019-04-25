@@ -26,6 +26,7 @@
 					style="font-weight: bold; padding: 0px 12px 12px 12px;">
 					<div id="InsideCard">
 						<h2 style="font-weight: bold;" id="title">Grocery List</h2>
+						<h3 id="message" style="color: red; font-style: bold">Removed item from grocery list.</h3>
 					</div>
 					<!-- Dynamically generated in script tag  -->
 					<ul id="ingredients">
@@ -91,14 +92,23 @@
 
 <script>
 
+	$("#message").hide();
+
 //Page Redirection
 function removeGrocery(ingredient) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", "RemoveFromGroceryList?itemName="+ingredient, false);
 
 	xhttp.send();
-	alert("Removed item from grocery list.");
-	location.reload();
+
+	// alert("Removed item from grocery list.");
+	$("#message").show("slow");
+	
+	setTimeout(function () { $("#message").hide("slow"); }, 2000);
+	
+	setTimeout(function () { location.reload(); }, 2010);
+
+	
 }
 
 function returnToSearch() {

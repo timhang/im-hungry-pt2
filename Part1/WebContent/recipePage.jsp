@@ -65,6 +65,7 @@
 				<div class="row">
 					<!-- Two columns of ingredients -->
 					<div class="col-lg-6">
+						<h3 id="message" style="color: red; font-style: bold">Added item to grocery list.</h3>
 						<ul id="ingredients">
 							<%
 								//First half of the ingredients list
@@ -156,6 +157,8 @@
 
 
 	<script>
+			$("#message").hide();
+
 			// Page Redirection
 			function groceryList() {
 				window.location.href = 'groceryList.jsp';
@@ -165,7 +168,9 @@
 				xhttp.open("GET", "AddToGroceryList?itemName="+ingredient, false);
 
 				xhttp.send();
-				alert("Added item to grocery list.");
+				// alert("Added item to grocery list.");
+				$("#message").show("slow");
+				setTimeout(function() {$("#message").hide("slow");}, 2000);
 			}
 
 			// Page Redirection

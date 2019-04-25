@@ -83,7 +83,7 @@
 				</button>
 				<br> <br>
 				<button onclick="groceryList()">
-					<div id="ButtonText">Grocery List</div>
+					<div id="GroceryList" class="ButtonText">Grocery List</div>
 				</button>
 			</div>
 		</div>
@@ -173,7 +173,7 @@
 											int cookTime = allRecipes.get(recipeId).getCookTime();
 											String link = "recipePage.jsp?recipeId=" + recipeId;
 								%>
-								<td class='clickable-row' data-href=<%=link%>><div>
+								<td class='clickable-row recipe' data-href=<%=link%>><div>
 										<div style="font-weight: bold; font-size: 17px;">
 											<%=name%>
 										</div>
