@@ -18,7 +18,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "1234";
+	static final String PASS = "password";
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
@@ -109,6 +109,13 @@ public class DatabaseDriver {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			//First remove Duplicates
+			ps = conn.prepareStatement("DELETE FROM Sessions WHERE searchQuery = (?) AND numberResults = (?)");
+			ps.setString(1, searchTerm);
+			ps.setInt(2, numResults);
+			ps.execute();
+			
+			//Then insert at the end the current session
 			ps = conn.prepareStatement("INSERT INTO Sessions (sessionID, searchQuery, numberResults) VALUES (DEFAULT,?,?)");
 	        ps.setString(1, searchTerm);
 	        ps.setInt(2, numResults);
@@ -144,7 +151,7 @@ public class DatabaseDriver {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
-			ps = conn.prepareStatement("SELECT * FROM Sessions");
+			ps = conn.prepareStatement("SELECT * FROM Sessions ORDER BY sessionID DESC");
 	        rs = ps.executeQuery();
 	        JSONArray newArray = new JSONArray();
 	        if(rs.next()==false) {
@@ -166,6 +173,8 @@ public class DatabaseDriver {
 
 
 				} while(rs.next());
+				//Removing the latest session from display
+				newArray.remove(0);
 				return newArray;
 			}
 

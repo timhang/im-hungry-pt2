@@ -337,7 +337,8 @@
 
 									for(let i = 0; i < obj.length; i++){
 										var quickAccessDiv = document.createElement("DIV");
-										quickAccessDiv.setAttribute("id", obj[i].searchTerm);
+										var id = obj[i].searchTerm + obj[i].integer;
+										quickAccessDiv.setAttribute("id", id);
 										quickAccessDiv.setAttribute("class", "searchTermClass");
 										quickAccessDiv.addEventListener('click', function(){
 											quickAccessReloadPage(obj[i].searchTerm, obj[i].integer);
@@ -345,7 +346,7 @@
 
 										var textDiv = document.createElement("h1");
 										textDiv.setAttribute("class", "searchTermText");
-										textDiv.textContent = obj[i].searchTerm + " (" + obj[i].integer + ")";
+										textDiv.textContent = obj[i].searchTerm;
 										textDiv.style.left = 20
 
 										var myDiv = document.createElement("div");
@@ -479,13 +480,14 @@
 			newNode.innerHTML = html;
 			return newNode;
 		} 
-		var xhttp = new XMLHttpRequest();
+		/* var xhttp = new XMLHttpRequest();
 		xhttp.open("GET", "QuickAccess", false);
 		xhttp.send();
-		var obj = JSON.parse(xhttp.responseText);
+		var obj = JSON.parse(xhttp.responseText); */
 		for(let i = 0; i < obj.length; i++){
+			var id1 = obj[i].searchTerm + obj[i].integer;
 			var node = createCollage(obj[i].searchTerm);
-			document.getElementById(obj[i].searchTerm).prepend(node)
+			document.getElementById(id1).prepend(node)
 		}
 
 	</script>
