@@ -27,7 +27,6 @@ end
 
 Then(/^I should see "([^"]*)" pages for "([^"]*)"$/) do |arg1, arg2|
 	expect(find('#pageNumberDiv')).to have_content('3', count: 1)
-# 	expect(find('#searchText')).to have_content arg1
 end
 
 Then(/^I should see "([^"]*)" in the page$/) do |arg1|
@@ -233,16 +232,50 @@ Given("I click first recipe") do
 	
 end
 
+ingredient = ""
+When("I click add to grocery list on ingredient {string}") do |i|
+	
+	find("#ingredient#{i}").click
+	help.add( find("#ingredient#{i}").value )
+	ingredient = find("#ingredient#{i}").value
+
+end
+
 
 Then("I should see the ingredients in the recipe list") do
 	list = Set[]
 	page.all(:css, "ul li").each do |el|
 		list.add( el.text )
 	end
-
+	
 	# check that all elements on help an in this list
-	expect(list).to eq(help)
+	expect(list).to include(ingredient)
 end
+
+Then("I should not see the ingredient in the recipe list") do
+	
+	list = Set[]
+	page.all(:css, "ul li").each do |el|
+		list.add( el.text )
+	end
+	
+	# check that all elements on help an in this list
+	expect(list).to include(ingredient)
+	
+end
+
+# Then("I should not see the ingredient in the recipe list") do
+# 	list = Set[]
+# 	page.all(:css, "ul li").each do |el|
+# 		list.add( el.text )
+# 	end
+	
+# 	# check that all elements on help an in this list
+# 	help.each do |item|
+# 		expect(list).not_to include(item)
+# 	end
+# end
+
 
 When("I click recipe {string}") do |arg|
 	counter = 1
@@ -253,20 +286,26 @@ When("I click recipe {string}") do |arg|
 			# recipe click
 			recipe.click
 			
-
+			
 			# add elements to list
 			page.all(:css, "ul li").each do |el|
-				help.add( el.text )
+				help.add( el.value )
 			end
-
+			
 			# exit this loop
 			break
 		end
-
+		
 		counter += 1
 	end
 	
 end
+
+When("I press the button {string}") do |arg1|
+	find('button', :text => arg1)
+end
+
+
 
 
 # LOG IN PAGE

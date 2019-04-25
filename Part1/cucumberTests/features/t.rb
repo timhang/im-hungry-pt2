@@ -67,3 +67,46 @@
 # #     puts string
 # #     i += 1
 # # end
+################################################
+# Grocery list
+
+# str = ""
+# for j in 1..4 
+#     for i in 1..6
+#         str += "
+#         Scenario: S#{i+ (j-1)*6} - Adding a single ingredient to the GL
+#             And I enter \"Pizza\" in the search box
+#             And I enter \"7\" in the integer box
+#             And I press Im Hungry
+
+
+#             When I click recipe \"#{j}\"
+#             And I click add to grocery list on ingredient \"#{i}\"
+#             Then I should see \"Added item to grocery list.\" in the page
+
+#             When I press \"AddToRL\"
+#             Then I should see the ingredients in the recipe list
+        
+#         "
+#     end
+# end
+# puts str
+
+# str = ""
+
+# for i in 1..16
+#     str += "
+#     Scenario: S#{i+25} - Remove ingredient to the GL
+#         And I enter \"Pizza\" in the search box
+#         And I enter \"7\" in the integer box
+#         And I press Im Hungry
+
+
+#         When I press \"GroceryList\"
+#         And I click add to grocery list on ingredient \"#{16-i}\"
+#         Then I should not see the ingredient in the recipe list
+    
+#     "
+# end
+
+# puts str

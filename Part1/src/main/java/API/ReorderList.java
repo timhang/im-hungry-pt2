@@ -23,7 +23,7 @@ public class ReorderList extends HttpServlet {
 	 * @throws Exception 
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public String reorder(String listName) throws Exception {
+	public String getList(String listName) throws Exception {
 		lists list = lists.favorites;
 		if(listName == null || listName.equals("")) {
 			return null;
@@ -45,7 +45,34 @@ public class ReorderList extends HttpServlet {
 		String json = newArray.toString();
 		return json;
 	}
-
+	
+	public void reorder(String listName, JSONArray newList) throws Exception {
+		lists list = lists.favorites;
+		if(listName == null || listName.equals("")) {
+			return;
+		} else if(listName.equals("fav")) {
+			list = lists.favorites;
+			System.out.println("inside favorites");
+		} else if (listName.equals("toExplore")) {
+			System.out.println("inside toExplore");
+			list = lists.toExplore;
+		} else if (listName.equals("doNotShow")) {
+			list = lists.doNotShow;
+			System.out.println("inside doNotShow");
+		} else {
+			return;
+		}
+		for(int i = 0; i<newList.length(); i++) {
+			JSONObject tempObject = newList.getJSONObject(i);
+			int id = Integer.parseInt(tempObject.getString("id"));
+			String type = tempObject.getString("type");
+			int newIndex = tempObject.getInt("newIndex");
+			DatabaseDriver.updateListIndices(list, id, newIndex, type);
+		}
+		
+		//DatabaseDriver.updateListIndices(list, );
+		
+	}
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -55,17 +82,44 @@ public class ReorderList extends HttpServlet {
 		// TODO Auto-generated method stub
 		String listName = request.getParameter("list");
 		System.out.println(listName);
+		if(request.getParameter("mode")!=null) {
+			//Update
+			System.out.println("Mode: "+request.getParameter("mode"));
+			JSONArray newList = new JSONArray(request.getParameter("data"));
+			//String jsonString = newList.put(request.getParameter("data")).toString();
+			//newList = new JSONArray();
+			//JSONObject newObject = new JSONObject(request.getParameter("data"));
+			//newList.put(request.getParameter("data"));
+
+			
+			
+//			System.out.println("Inside Update1: "+request.getParameter("data"));
+//			System.out.println("Inside Update2: "+newList.toString());
+			try {
+				reorder(listName, newList);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else {
+		
+		
+		
 		
 
 		
-		String json = null;
-		try {
-			json = reorder(listName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String json = null;
+			try {
+				json = getList(listName);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
 		}
-
 		
 
 		// JSONObject;
@@ -94,9 +148,7 @@ public class ReorderList extends HttpServlet {
 //		newArray.put(jsonObj2);
 		
 		
-		response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		
 
 	}
 
