@@ -14,7 +14,41 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="restPage.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type='text/javascript'>
+		verifyLogin();
+		function verifyLogin() {
 
+			// construct json
+			var json = {
+				"username" : sessionStorage.getItem("username"),
+				"password" : sessionStorage.getItem("password"),
+			};
+
+			console.log(json);
+
+			// inform backend
+			//$.post("Login", json);
+			var isLogged = false;
+			$.ajax({
+				async : false,
+				type : "POST",
+				url : "Login",
+				data : json,
+				success : function(resp) {
+					isLogged = (resp == "0");
+					console.log(isLogged);
+					if (isLogged == false) {
+						document.location.href = 'login.html';
+					}
+
+				}
+			});
+
+			return isLogged;
+		}
+	</script>
 </head>
 <body>
 	<!-- this function populates recipe data -->
