@@ -26,7 +26,7 @@
 					style="font-weight: bold; padding: 0px 12px 12px 12px;">
 					<div id="InsideCard">
 						<h2 style="font-weight: bold;" id="title">Grocery List</h2>
-						<h3 id="message" style="color: red; font-style: bold">Removed item from grocery list.</h3>
+						<h3 id="message">Removed item from grocery list.</h3>
 					</div>
 					<!-- Dynamically generated in script tag  -->
 					<ul id="ingredients">

@@ -57,3 +57,8 @@ button {
 /* #RecipeContent{
 	display:inline-block;
 } */
+
+#message {
+	color: red;
+	font-style: bold;
+}

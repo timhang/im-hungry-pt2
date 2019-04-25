@@ -92,21 +92,21 @@
 # end
 # puts str
 
-str = ""
+# str = ""
 
-for i in 1..16
-    str += "
-    Scenario: S#{i+25} - Remove ingredient to the GL
-        And I enter \"Pizza\" in the search box
-        And I enter \"7\" in the integer box
-        And I press Im Hungry
+# for i in 1..16
+#     str += "
+#     Scenario: S#{i+25} - Remove ingredient to the GL
+#         And I enter \"Pizza\" in the search box
+#         And I enter \"7\" in the integer box
+#         And I press Im Hungry
 
 
-        When I press \"GroceryList\"
-        And I click add to grocery list on ingredient \"#{16-i}\"
-        Then I should not see the ingredient in the recipe list
+#         When I press \"GroceryList\"
+#         And I click add to grocery list on ingredient \"#{16-i}\"
+#         Then I should not see the ingredient in the recipe list
     
-    "
-end
+#     "
+# end
 
-puts str
+# puts str
