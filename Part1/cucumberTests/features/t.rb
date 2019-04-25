@@ -138,27 +138,27 @@
 # end
 # puts string
 
-string = ""
-counter = 1
+# string = ""
+# counter = 1
 
-File.readlines("food.txt").each do |line|
+# File.readlines("food.txt").each do |line|
 
-    food = line.gsub('"', '\"').sub("\n", "")
+#     food = line.gsub('"', '\"').sub("\n", "")
 
-    for i in 1..20
+#     for i in 1..20
 
-        string += "
-    Scenario: S#{counter} - radius
-        When I enter \"#{food}\" in the search box
-        When I enter \"20\" in the integer box
-        When I enter \"#{5 * i}\" in the radius box
-        And I press Im Hungry
+#         string += "
+#     Scenario: S#{counter} - radius
+#         When I enter \"#{food}\" in the search box
+#         When I enter \"20\" in the integer box
+#         When I enter \"#{5 * i}\" in the radius box
+#         And I press Im Hungry
 
-        Then each restaurant must have \"radius\" element
-        Then radius must be less than \"#{5 * i}\"
-        "
+#         Then each restaurant must have \"radius\" element
+#         Then radius must be less than \"#{5 * i}\"
+#         "
 
-        counter += 1
-    end
-end
-puts string
+#         counter += 1
+#     end
+# end
+# puts string

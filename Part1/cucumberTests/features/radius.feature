@@ -3,7 +3,7 @@ Feature: Radius Tests
     Background:
         Given I am on searchPage
 
-	Scenario: S1 - 1 page
+	Scenario: S0 - 1 radius
         When I enter "Pizza" in the search box
         When I enter "20" in the integer box
         When I enter "20" in the radius box
@@ -11,6 +11,7 @@ Feature: Radius Tests
 
         Then each restaurant must have "radius" element
         Then radius must be less than "20"
+        
     Scenario: S1 - radius
         When I enter "aroma" in the search box
         When I enter "20" in the integer box
