@@ -61,6 +61,78 @@ When(/^I select "([^"]*)" from Quickaccess$/) do |arg1|
 	# select arg1, :from => "quickAccess-dropdown"
 end
 
+################################
+
+Then(/^Quickaccess index for "([^"]*)" should be "([^"]*)"$/) do |itemName, index|
+# Then("Quickaccess index for {string} should be {string}") do |index, itemName|
+
+	counter = 0
+
+	page.all(".searchTermText").each do |arg|
+		
+		# if this is the one we want
+		if counter == index.to_i
+			
+			expect(arg.text).to eq(itemName)
+			
+			# exit this loop
+			break
+		end
+		
+		counter += 1
+	end
+end
+
+Then(/^Quickaccess should not have "([^"]*)"$/) do |itemName|
+	
+	page.all(".searchTermText").each do |arg|	
+		expect(arg.text).not_to eq(itemName)
+	end
+end
+
+When("I click Quickaccess index {string}") do |index|
+	counter = 0
+
+	page.all(".searchTermText").each do |arg|
+		
+		# if this is the one we want
+		if counter == index.to_i
+
+			arg.click
+			
+			# exit this loop
+			break
+		end
+		
+		counter += 1
+	end
+end
+
+Then("I should see Quickaccess item {string}") do |itemName|
+
+	help = []
+	page.all(".searchTermText").each do |arg|
+		help.push(arg.text)
+	end
+
+	expect(help).to include(itemName)
+end
+
+Then("I should see Quickaccess item {string} only once") do |itemName|
+	  
+	counter = 0
+	help = []
+
+	page.all(".searchTermText").each do |arg|
+		if arg.text == itemName
+			counter += 1
+		end
+	end
+
+	expect(counter).to eq(1)
+end
+
+
 
 # RESULTS PAGE RUBY TESTS
 Given(/^I navigated to the results page$/) do
@@ -217,8 +289,19 @@ end
 
 Then("each restaurant must have {string} element") do |arg1|
 	# each div with class restaurant must have the radius element
-	page.all(:css, ".restaurant").each do |el|
+
+	page.all(".restaurant").each do |el|
+		
 		expect(el).to have_content(arg1)
+	end
+end
+
+Then("radius must be less than {string}") do |arg1|
+	# each div with class restaurant must have the radius element
+
+	page.all(".radius").each do |el|
+		
+		expect(el.text).to be <= arg1.to_i
 	end
 end
 
@@ -333,4 +416,10 @@ end
 
 When("I press page button {string}") do |arg1|
 	find('button', :text => arg1).click
+end
+
+
+#radius
+When(/^I enter "([^"]*)" in the radius box$/) do |arg1|
+	fill_in 'radius', :with=> arg1
 end

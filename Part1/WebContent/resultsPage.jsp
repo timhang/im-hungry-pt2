@@ -139,7 +139,7 @@
 							%>
 
 							<tr>
-								<td class='clickable-row' data-href=<%=link%>><div>
+								<td class='clickable-row restaurant' data-href=<%=link%>><div>
 										<div style="font-weight: bold; font-size: 17px;">
 											<%=name%>
 										</div>
@@ -155,6 +155,9 @@
 										<div>
 											Driving Time:
 											<%=travelTime%></div>
+										<div class="radius">
+											Radius:
+											</div>
 									</div></td>
 								<%
 									} else {
