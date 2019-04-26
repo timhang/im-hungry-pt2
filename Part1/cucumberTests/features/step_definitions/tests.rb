@@ -413,7 +413,7 @@ end
 
 # pagination
 Then("I should see page button {string} in the page") do |arg1|
-  find('button', :text => arg1)
+  find("#pageNumber#{arg1}", :text => arg1)
 end
 
 Then("I should not see page button {string} in the page") do |arg1|
@@ -421,7 +421,7 @@ Then("I should not see page button {string} in the page") do |arg1|
 end
 
 When("I press page button {string}") do |arg1|
-	find('button', :text => arg1).click
+	find("#pageNumber#{arg1}", :text => arg1).click
 end
 
 
