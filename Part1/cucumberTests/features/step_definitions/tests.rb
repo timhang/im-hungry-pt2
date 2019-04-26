@@ -76,7 +76,7 @@ Then(/^Quickaccess index for "([^"]*)" should be "([^"]*)"$/) do |itemName, inde
 		# if this is the one we want
 		if counter == index.to_i
 			
-			expect(arg.text).to eq(itemName)
+			expect(arg.id).to eq(itemName)
 			
 			# exit this loop
 			break
