@@ -251,13 +251,13 @@
 					}
 					xhttp.send();
 					if(selectedIndex == "1"){
-						alert("Added item to favorites list!");
+						//alert("Added item to favorites list!");
 					}
 					else if(selectedIndex == "2"){
-						alert("Added item to to explore list!");
+						//alert("Added item to to explore list!");
 					}
 					else if(selectedIndex == "3"){
-						alert("Added item to do not show list!");
+						//alert("Added item to do not show list!");
 					}
 
 				}
@@ -278,7 +278,7 @@
 					"data": array
 				})
 				.done(function(response) {
-					alert(`Data sent! ${response}`);
+					//alert(`Data sent! ${response}`);
 				})
 			});
 
