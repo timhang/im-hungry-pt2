@@ -25,7 +25,10 @@ When(/^I press "([^"]*)"$/) do |arg1|
 end
 
 Then(/^I should see "([^"]*)" search results for "([^"]*)"$/) do |arg1, arg2|
-	expect(page).to have_content(arg1, count: arg1)
+	# expect(page).to have_content(arg1, count: arg1)
+	
+
+	expect(find("#searchText").text).to eq(arg2)
 end
 
 Then(/^I should see "([^"]*)" pages for "([^"]*)"$/) do |arg1, arg2|
@@ -71,12 +74,12 @@ Then(/^Quickaccess index for "([^"]*)" should be "([^"]*)"$/) do |itemName, inde
 
 	counter = 0
 
-	page.all(".searchTermText").each do |arg|
+	page.all(".searchTermClass").each do |arg|
 		
 		# if this is the one we want
 		if counter == index.to_i
 			
-			expect(arg.id).to eq(itemName)
+			expect(arg[:id]).to eq(itemName)
 			
 			# exit this loop
 			break
@@ -114,8 +117,8 @@ end
 Then("I should see Quickaccess item {string}") do |itemName|
 
 	help = []
-	page.all(".searchTermText").each do |arg|
-		help.push(arg.text)
+	page.all(".searchTermClass").each do |arg|
+		help.push(arg[:id])
 	end
 
 	expect(help).to include(itemName)
@@ -126,8 +129,8 @@ Then("I should see Quickaccess item {string} only once") do |itemName|
 	counter = 0
 	help = []
 
-	page.all(".searchTermText").each do |arg|
-		if arg.text == itemName
+	page.all(".searchTermClass").each do |arg|
+		if arg[:id] == itemName
 			counter += 1
 		end
 	end
