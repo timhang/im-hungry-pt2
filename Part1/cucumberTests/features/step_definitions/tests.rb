@@ -458,3 +458,10 @@ end
 When(/^I enter "([^"]*)" in the radius box$/) do |arg1|
 	fill_in 'radius', :with=> arg1
 end
+
+# SSL
+Then("Verify I am in SSL") do
+	visit "https://localhost:8443/ImHungry/login.html"
+	
+	fill_in 'email', :with=> "Barack"
+end
