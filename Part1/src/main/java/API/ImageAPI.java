@@ -9,7 +9,8 @@ public class ImageAPI {
 	
 	//Insert your own Google Search API key after key=
 	//This is the base URL without the search terms
-	private static String key = "AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM";
+	// private static String key = "AIzaSyAe0O88NJ9UnjIdEzc_24QdD2hqVhbhcPM";
+	private static String key = "AIzaSyDsQhtnoJkGDqZrj06iughM3h3AnxVTvDc";
 	
 	private static final String baseImageURL = "https://www.googleapis.com/customsearch/v1?key="+ key +"&cx=015413150496605702069:vfrlyji0v9m&searchType=image&callback=hndlr&q=";
 	private static Boolean state = false;
