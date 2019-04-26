@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,7 +20,7 @@ public class DatabaseDriver {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/imhungry?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static final String USER = "root";
-	static final String PASS = "welcometousc";
+	static final String PASS = "1234";
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 	public static void insertRecipe(int sessionID, Recipe recipe) {
@@ -109,6 +111,13 @@ public class DatabaseDriver {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			//First remove Duplicates
+			ps = conn.prepareStatement("DELETE FROM Sessions WHERE searchQuery = (?) AND numberResults = (?)");
+			ps.setString(1, searchTerm);
+			ps.setInt(2, numResults);
+			ps.execute();
+			
+			//Then insert at the end the current session
 			ps = conn.prepareStatement("INSERT INTO Sessions (sessionID, searchQuery, numberResults) VALUES (DEFAULT,?,?)");
 	        ps.setString(1, searchTerm);
 	        ps.setInt(2, numResults);
@@ -138,13 +147,110 @@ public class DatabaseDriver {
 		      }
 		   }
 	}
+	
+	private static String hash(String input) throws NoSuchAlgorithmException {
+//		int hash = 7;
+//		for (int i = 0; i < input.length(); i++) {
+//		    hash = hash*31 + input.charAt(i);
+//		}
+//		return hash;
+		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+		messageDigest.update(input.getBytes());
+		String encryptedString = new String(messageDigest.digest());
+		System.out.println("Encrypted: "+encryptedString.getBytes());
+		return encryptedString;
+	}
+	
+	public static void createUser(String username, String password) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			String hashed = hash(password);
+			ps = conn.prepareStatement("INSERT INTO Users (userID, username, userpass, isLogged) VALUES (DEFAULT,?,?,?)");
+			ps.setString(1, username);
+			ps.setString(2, hashed);
+			ps.setInt(3, 0);
+	        ps.execute();
+	        
 
+
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		            ps.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		    	  se2.printStackTrace();
+		      }
+		      try {
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+	}
+	
+	public static String verifyLogin(String username, String password) {
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			ps = conn.prepareStatement("SELECT username, userpass FROM Users WHERE BINARY username = (?);");
+			ps.setString(1, username);
+	        rs = ps.executeQuery();
+	        
+	        if(rs.next()==false) {
+	        	//No account in database
+				return "2";
+				//System.out.println("login state: "+ state);
+			} else {
+				do {
+					//JSONObject;
+					//int count = rs.getInt("count");
+					String st = rs.getString("userpass");
+					String hashed = hash(password);
+					if(st.equals(hashed)) {
+						return "0"; //Login Successful
+					} else { //username match but password wrong
+						return "1";
+					}
+
+
+
+				} while(rs.next());
+			}
+
+
+		} catch(SQLException se){
+		      se.printStackTrace();
+		   } catch(Exception e){
+		      e.printStackTrace();
+		   } finally{
+		      try{
+		            ps.close();
+		      } catch(SQLException se2){
+		    	// nothing we can do
+		    	  se2.printStackTrace();
+		      }
+		      try {
+		            conn.close();
+		      } catch(SQLException se){
+		         se.printStackTrace();
+		      }
+		   }
+		return "2";
+	}
+	
 	public static JSONArray getSessions() throws Exception{
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
-			ps = conn.prepareStatement("SELECT * FROM Sessions");
+			ps = conn.prepareStatement("SELECT * FROM Sessions ORDER BY sessionID DESC");
 	        rs = ps.executeQuery();
 	        JSONArray newArray = new JSONArray();
 	        if(rs.next()==false) {
@@ -166,6 +272,8 @@ public class DatabaseDriver {
 
 
 				} while(rs.next());
+				//Removing the latest session from display
+				newArray.remove(0);
 				return newArray;
 			}
 

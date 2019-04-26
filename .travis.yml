@@ -10,6 +10,7 @@ services:
 
 # safelist
 branches:
-  only:
   - master
+  - driver
+  - backend
 

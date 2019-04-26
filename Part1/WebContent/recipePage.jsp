@@ -14,7 +14,41 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="restPage.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type='text/javascript'>
+		verifyLogin();
+		function verifyLogin() {
 
+			// construct json
+			var json = {
+				"username" : sessionStorage.getItem("username"),
+				"password" : sessionStorage.getItem("password"),
+			};
+
+			console.log(json);
+
+			// inform backend
+			//$.post("Login", json);
+			var isLogged = false;
+			$.ajax({
+				async : false,
+				type : "POST",
+				url : "Login",
+				data : json,
+				success : function(resp) {
+					isLogged = (resp == "0");
+					console.log(isLogged);
+					if (isLogged == false) {
+						document.location.href = 'login.html';
+					}
+
+				}
+			});
+
+			return isLogged;
+		}
+	</script>
 </head>
 <body>
 	<!-- this function populates recipe data -->
@@ -69,6 +103,7 @@
 						<ul id="ingredients">
 							<%
 								//First half of the ingredients list
+							if(ingredients!=null){
 						    	for(int i = 0; i < ingredients.size()/2; i++) {
 						    		String ingredient = ingredients.get(i);
 
@@ -78,13 +113,15 @@
 								<button onclick="AddToGrocery(this.value)" class="ButtonText" value="<%= ingredient %>" id="ingredient<%= i %>">Add To Grocery List</button>
 							</li>
 							<%
-		    				}
+		    					}
+							}
 							%>
 						</ul>
 					</div>
 					<div class="col-lg-6">
 						<ul>
 							<%
+							if(ingredients!=null){
 								//Second half of the ingredients list
 						    	for(int i = ingredients.size()/2; i < ingredients.size(); i++) {
 
@@ -94,6 +131,7 @@
 							</li>
 							<%
 		    					}
+							}
 							%>
 						</ul>
 					</div>
@@ -109,12 +147,14 @@
 				<p style = "font-weight: bold;">Instructions:</p>
 				<ol type="1">
 					<%
+						if(instructions!=null){	
 							//Instructions
 						    for(int i = 0; i < instructions.size(); i++) {
 						%>
 					<li><%= instructions.get(i) %></li><br>
 					<%
 						 	}
+						}
 						%>
 				</ol>
 				</div>

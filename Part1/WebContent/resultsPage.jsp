@@ -11,6 +11,14 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="js/html2canvas.min.js"></script>
+<script src="js/html2canvas.js"></script>
+
+<script src="js/dom-to-image.min.js"></script>
+<script src="js/dom-to-image.js"></script>
+
+
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resultsPage.css" />
@@ -25,37 +33,72 @@
 	display: inline-block;
 }
 </style>
+
 </head>
 
 <body>
+	<script type='text/javascript'>
+		verifyLogin();
+		function verifyLogin() {
+
+			// construct json
+			var json = {
+				"username" : sessionStorage.getItem("username"),
+				"password" : sessionStorage.getItem("password"),
+			};
+
+			console.log(json);
+
+			// inform backend
+			//$.post("Login", json);
+			var isLogged = false;
+			$.ajax({
+				async : false,
+				type : "POST",
+				url : "Login",
+				data : json,
+				success : function(resp) {
+					isLogged = (resp == "0");
+					console.log(isLogged);
+					if (isLogged == false) {
+						document.location.href = 'login.html';
+					}
+
+				}
+			});
+
+			return isLogged;
+		}
+	</script>
 	<div class="container-fluid">
 		<!-- Row for photo collage and buttons -->
 		<div class="row">
 			<br>
 			<!-- Photo collage column -->
 			<div class="col-lg-1"></div>
-			<div class="col-lg-8 text-center">
 
-				<%
-					ArrayList<String> imgArr = ImageAPI.getImagesToDisplay(request.getParameter("searchText"));
-				%>
+			<div id="collage" class="col-lg-8 text-center" value='<%=request.getParameter("searchText")%>' >
+
+				<%ArrayList<String> imgArr = ImageAPI.getImagesToDisplay(request.getParameter("searchText"));%>
 				<!-- First row of images -->
 				<div class='row'>
 					<div class='col-lg-12'>
 						<%
-							for (int i = 0; i < imgArr.size() / 2; i++) {
-								out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
-										+ imgArr.get(i) + "></div>");
-							}
+							if(imgArr != null){
+								for (int i = 0; i < imgArr.size() / 2; i++) {
+									out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
+											+ imgArr.get(i) + "></div>");
+								}
 						%>
 					</div>
 				</div>
 				<!-- Second row of images -->
 				<div class='row'>
 					<%
-						for (int i = imgArr.size() / 2; i < imgArr.size(); i++) {
-							out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
-									+ imgArr.get(i) + "></div>");
+							for (int i = imgArr.size() / 2; i < imgArr.size(); i++) {
+								out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
+										+ imgArr.get(i) + "></div>");
+							}
 						}
 					%>
 				</div>
@@ -75,11 +118,11 @@
 				</div>
 				<br>
 				<button type="button" onclick="manageList()">
-					<div id="ButtonText">Manage List</div>
+					<div class="ButtonText">Manage List</div>
 				</button>
 				<br> <br>
 				<button onclick="returnToSearch()">
-					<div id="ButtonText">Return to Search Page</div>
+					<div class="ButtonText">Return to Search Page</div>
 				</button>
 				<br> <br>
 				<button onclick="groceryList()">
@@ -323,7 +366,7 @@
 									<h2 id=quickAccessText> Quick Access</h2>
 								</div>
 
-								<script>
+								<script type="text/javascript">
 									var xhttp = new XMLHttpRequest();
 									xhttp.open("GET", "QuickAccess", false);	//What should QUICKACCESS be?
 									xhttp.send();
@@ -333,7 +376,8 @@
 
 									for(let i = 0; i < obj.length; i++){
 										var quickAccessDiv = document.createElement("DIV");
-										quickAccessDiv.setAttribute("id", "searchTerm" + i);
+										var id = obj[i].searchTerm + obj[i].integer;
+										quickAccessDiv.setAttribute("id", id);
 										quickAccessDiv.setAttribute("class", "searchTermClass");
 										quickAccessDiv.addEventListener('click', function(){
 											quickAccessReloadPage(obj[i].searchTerm, obj[i].integer);
@@ -341,7 +385,13 @@
 
 										var textDiv = document.createElement("h1");
 										textDiv.setAttribute("class", "searchTermText");
-										textDiv.textContent = obj[i].searchTerm + " (" + obj[i].integer + ")";
+										textDiv.textContent = obj[i].searchTerm;
+										textDiv.style.left = 20
+
+										var myDiv = document.createElement("div");
+										myDiv.innerHTML = '<br/>';
+
+										quickAccessDiv.appendChild(myDiv);
 										quickAccessDiv.appendChild(textDiv);
 										document.getElementById("quickAccessWrapper").appendChild(quickAccessDiv);
 									}
@@ -436,6 +486,50 @@
 
 
 
+	
+	<script type="text/javascript">
+
+		function createCollage(searchTerm) {
+
+			var html = "<div class='col-lg-8 text-center'>";
+			html += "<div class='row'> <div class='col-lg-12'>";
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "ImageAPIEndpoint?searchTerm="+searchTerm, false);
+			xhttp.send();
+			var images = xhttp.responseText;
+			images = images.replace("[", "");
+			images = images.replace("]", "");
+			images = images.split(",");
+
+			for(let i = 0; i < images.length / 2; i++){
+				html += "<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg height=30 width=30 src = "+ images[i] + "></div>";
+			}
+
+			html += "</div></div>";
+			html += "<div class='row'> <div class='col-lg-12'>";
+
+			for(let i = images.length / 2; i < images.length; i++){
+				html += "<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg height=30 width=30 src = "+ images[i] + "></div>";
+			}
+
+			html += "</div></div>";
+			html += "</div>";
+			var newNode = document.createElement('div');
+			newNode.innerHTML = html;
+			return newNode;
+		} 
+		/* var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "QuickAccess", false);
+		xhttp.send();
+		var obj = JSON.parse(xhttp.responseText); */
+		for(let i = 0; i < obj.length; i++){
+			var id1 = obj[i].searchTerm + obj[i].integer;
+			var node = createCollage(obj[i].searchTerm);
+			document.getElementById(id1).prepend(node)
+		}
+
+	</script>
 
 	<script>
 		// Page redirection for buttons

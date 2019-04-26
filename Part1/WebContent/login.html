@@ -15,11 +15,89 @@
 <body>
     <div class="container">
         <h1 class="title">I'm Hungry</h1>
-        <input type="text" id="email" placeholder="email"> </br><br>
-        <input type="password" id="password" placeholder="password"></br><br>
-
-        <button id="submit">Login</button>
+       	<div id = "message"></div>
+        <form onsubmit="return verifyLogin()" action="searchPage.html">
+	        <input type="text" id="email" placeholder="email"> </br><br>
+	        <input type="password" id="password" placeholder="password"></br><br>
+	
+	        <button type="submit" id="submit">Login</button>
+        </form>
     </div>
+	<script>
+		// Page redirection for buttons
+		function verifyLogin() {
 
+			// construct json
+			var json = {
+				"username": $("#email").val(),
+				"password": $("#password").val(),
+			};
+
+			console.log(json);
+			sessionStorage.setItem('username', $("#email").val());
+			sessionStorage.setItem('password', $("#password").val());
+			// inform backend
+			//$.post("Login", json);
+			var isLogged = false;
+        	$.ajax({
+        		type: "POST",
+			    url: "Login",
+			    data: json,
+			    success: function(resp) {
+			        isLogged = (resp == "0");
+			        console.log(isLogged);
+			        
+			        if(isLogged == true){
+			        	
+		        		document.location.href='searchPage.html';
+		        	} else {
+		        		$("#message").show("slow");
+		        		$("#message").text("Error: Login Failed.");
+		        		setTimeout(function(){ $("#message").hide("slow"); }, 2000);
+		        	}
+
+			    }
+        	});
+        	
+        	return isLogged;
+		}
+		
+		/* function checkAuth() {
+	    	var logged = (function() {
+	        	var isLogged = null;
+	        	$.ajax({
+	            	'async': false,
+	            	'global': false,
+	            	'url': 'Login',
+	            	'success': function(resp) {
+	                	isLogged = (resp === "0");
+	            	}
+	        	});
+	        	return isLogged;
+	    	})();
+	    	return logged;
+		} */
+		
+		function returnToSearch() {
+			window.location.href = 'searchPage.html';
+		}
+		
+		function manageList() {
+			var link = document.getElementById("mySelect").selectedIndex;
+			if (link == "1") {
+				window.location.href = 'lists.html?q=fav';
+			} else if (link == "2") {
+				window.location.href = 'lists.html?q=toExplore';
+			} else if (link == "3") {
+				window.location.href = 'lists.html?q=doNotShow';
+			}
+		}
+
+		jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
+	</script>
 </body>
 </html>
