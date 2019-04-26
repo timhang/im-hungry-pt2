@@ -15,9 +15,10 @@
 <body>
     <div class="container">
         <h1 class="title">I'm Hungry</h1>
+       	<div id = "message"></div>
         <form onsubmit="return verifyLogin()" action="searchPage.html">
 	        <input type="text" id="email" placeholder="email"> </br><br>
-	        <input type="password" id="password" placeholder="password" minlength="8" required></br><br>
+	        <input type="password" id="password" placeholder="password"></br><br>
 	
 	        <button type="submit" id="submit">Login</button>
         </form>
@@ -49,6 +50,10 @@
 			        if(isLogged == true){
 			        	
 		        		document.location.href='searchPage.html';
+		        	} else {
+		        		$("#message").show("slow");
+		        		$("#message").text("Error: Login Failed.");
+		        		setTimeout(function(){ $("#message").hide("slow"); }, 2000);
 		        	}
 
 			    }

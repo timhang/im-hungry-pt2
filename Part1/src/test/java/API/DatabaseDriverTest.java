@@ -109,16 +109,16 @@ public class DatabaseDriverTest {
 //		DatabaseDriver.AddRestaurantToList(1233, null);
 		//DatabaseDriver.insertGroceryItem("Onion");
 		
-		DatabaseDriver.createUser("Barack", "password");
-		DatabaseDriver.createUser("Obama", "pass1234");
-		String a = DatabaseDriver.verifyLogin("Barack", "password");
-		String b = DatabaseDriver.verifyLogin("Obama", "passfasd");
-		String c = DatabaseDriver.verifyLogin("Obama", "pass1234");
-		String d = DatabaseDriver.verifyLogin("Oasdfbama", "asdffasd");
-		System.out.println("login status a: " + a);
-		System.out.println("login status b: " + b);
-		System.out.println("login status c: " + c);
-		System.out.println("login status d: " + d);
+//		DatabaseDriver.createUser("Barack", "password");
+//		DatabaseDriver.createUser("Obama", "pass1234");
+//		String a = DatabaseDriver.verifyLogin("Barack", "password");
+//		String b = DatabaseDriver.verifyLogin("Obama", "passfasd");
+//		String c = DatabaseDriver.verifyLogin("Obama", "pass1234");
+//		String d = DatabaseDriver.verifyLogin("Oasdfbama", "asdffasd");
+//		System.out.println("login status a: " + a);
+//		System.out.println("login status b: " + b);
+//		System.out.println("login status c: " + c);
+//		System.out.println("login status d: " + d);
 		//System.out.println(newArray.toString());
 	}
 

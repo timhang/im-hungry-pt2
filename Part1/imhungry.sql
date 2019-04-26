@@ -57,7 +57,7 @@ CREATE TABLE RecipeRelations(
 CREATE TABLE GroceryList(
 	groceryItem VARCHAR(30) UNIQUE NOT NULL
 
-)
+);
 
 CREATE TABLE Users (
 	userID int(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,

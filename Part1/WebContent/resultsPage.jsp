@@ -118,11 +118,11 @@
 				</div>
 				<br>
 				<button type="button" onclick="manageList()">
-					<div id="ButtonText">Manage List</div>
+					<div class="ButtonText">Manage List</div>
 				</button>
 				<br> <br>
 				<button onclick="returnToSearch()">
-					<div id="ButtonText">Return to Search Page</div>
+					<div class="ButtonText">Return to Search Page</div>
 				</button>
 				<br> <br>
 				<button onclick="groceryList()">
