@@ -110,3 +110,55 @@
 # end
 
 # puts str
+
+# counter = 0
+# string = ""
+
+# File.readlines("food.txt").each do |line|
+
+#     food = line.gsub('"', '\"').sub("\n", "")
+#     string += "
+#     Scenario: QA#{counter} Quick Access queue properly updating
+
+#         When I enter \"Tomato\" in the search box
+#         When I enter \"17\" in the integer box
+#         And I press Im Hungry
+        
+#         And I click the \"Return to Search Page\" button
+
+#         And I enter \"#{food}\" in the search box
+#         When I enter \"5\" in the integer box
+#         And I press Im Hungry
+
+#         Then Quickaccess index for \"Tomato (16)\" should be \"0\"
+#         Then Quickaccess should not have \"#{food} (5)\"
+# "
+#     counter +=1
+
+# end
+# puts string
+
+# string = ""
+# counter = 1
+
+# File.readlines("food.txt").each do |line|
+
+#     food = line.gsub('"', '\"').sub("\n", "")
+
+#     for i in 1..20
+
+#         string += "
+#     Scenario: S#{counter} - radius
+#         When I enter \"#{food}\" in the search box
+#         When I enter \"20\" in the integer box
+#         When I enter \"#{5 * i}\" in the radius box
+#         And I press Im Hungry
+
+#         Then each restaurant must have \"radius\" element
+#         Then radius must be less than \"#{5 * i}\"
+#         "
+
+#         counter += 1
+#     end
+# end
+# puts string
