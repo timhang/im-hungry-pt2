@@ -8,7 +8,7 @@ Background:
     ########## REPRESENTATIVE CASES ###########
 
 
-    Scenario: QA# A new search from the Search Page should not appear on the QA list until we make another search (in other words, when we leave the results page)
+    Scenario: QA# A new search from the Search Page should not appear on the QA list until we make another searchin other words, when we leave the results page
         When I enter "Tomato" in the search box
         When I enter "17" in the integer box
         And I press Im Hungry
@@ -18,8 +18,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "Pizza (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "Pizza5"
 
 
     Scenario: Clicking on an item from the QA list should put that item at the top of the QA list
@@ -41,38 +41,38 @@ Background:
         And I press Im Hungry
 
         Then I should see "3" search results for "soup"
-        Then Quickaccess index for "apple (2)" should be "0"
-        Then Quickaccess index for "Avocado (3)" should be "1"
+        Then Quickaccess index for "apple2" should be "0"
+        Then Quickaccess index for "Avocado3" should be "1"
         
         And I click Quickaccess index "0"
         Then I should see "2" search results for "apple"
-        Then Quickaccess index for "soup (3)" should be "0"
-        Then Quickaccess index for "Avocado (3)" should be "1"
+        Then Quickaccess index for "soup3" should be "0"
+        Then Quickaccess index for "Avocado3" should be "1"
 
         And I click Quickaccess index "0"
         Then I should see "3" search results for "soup"
-        Then Quickaccess index for "apple (2)" should be "0"
-        Then Quickaccess index for "Avocado (3)" should be "1"
+        Then Quickaccess index for "apple2" should be "0"
+        Then Quickaccess index for "Avocado3" should be "1"
 
         And I click Quickaccess index "1"
         Then I should see "3" search results for "Avocado"
-        Then Quickaccess index for "soup (3)" should be "0"
-        Then Quickaccess index for "apple (2)" should be "1"
+        Then Quickaccess index for "soup3" should be "0"
+        Then Quickaccess index for "apple2" should be "1"
         
 
         And I click Quickaccess index "1"
         Then I should see "2" search results for "apple"
-        Then Quickaccess index for "Avocado (3)" should be "0"
-        Then Quickaccess index for "soup (3)" should be "1"
+        Then Quickaccess index for "Avocado3" should be "0"
+        Then Quickaccess index for "soup3" should be "1"
 
         And I click Quickaccess index "1"
         Then I should see "3" search results for "soup"
-        Then Quickaccess index for "apple (2)" should be "0"
-        Then Quickaccess index for "Avocado (3)" should be "1"
+        Then Quickaccess index for "apple2" should be "0"
+        Then Quickaccess index for "Avocado3" should be "1"
 
     
 
-    Scenario: Pizza (5 results) and Pizza (1 result) should both appear as different searches in QA list
+    Scenario: Pizza5 results and Pizza1 result should both appear as different searches in QA list
 
         When I enter "Pizza" in the search box
         When I enter "1" in the integer box
@@ -96,18 +96,12 @@ Background:
         When I enter "4" in the integer box
         And I press Im Hungry
 
-        Then I should see Quickaccess item "Pizza (1)"
-        Then I should see Quickaccess item "Pizza (2)"
-        Then I should see Quickaccess item "Pizza (3)"
+        Then I should see Quickaccess item "Pizza1"
+        Then I should see Quickaccess item "Pizza2"
+        Then I should see Quickaccess item "Pizza3"
 
 
-    Scenario: No duplicate searches in the QA list (i.e. Pizza (5) and Pizza (5) )
-
-        When I enter "Pizza" in the search box
-        When I enter "1" in the integer box
-        And I press Im Hungry
-
-        And I click the "Return to Search Page" button
+    Scenario: No duplicate searches in the QA listi.e. Pizza5 and Pizza5 
 
         When I enter "Pizza" in the search box
         When I enter "1" in the integer box
@@ -125,7 +119,13 @@ Background:
         When I enter "1" in the integer box
         And I press Im Hungry
 
-        Then I should see Quickaccess item "Pizza (1)" only once
+        And I click the "Return to Search Page" button
+
+        When I enter "Pizza" in the search box
+        When I enter "1" in the integer box
+        And I press Im Hungry
+
+        Then I should see Quickaccess item "Pizza1" only once
 
 
 
@@ -147,8 +147,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "aroma (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "aroma5"
 
     Scenario: QA1 Quick Access queue properly updating
 
@@ -162,8 +162,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "bagel (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "bagel5"
 
     Scenario: QA2 Quick Access queue properly updating
 
@@ -177,8 +177,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "batter (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "batter5"
 
     Scenario: QA3 Quick Access queue properly updating
 
@@ -192,8 +192,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "beans (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "beans5"
 
     Scenario: QA4 Quick Access queue properly updating
 
@@ -207,8 +207,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "beer (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "beer5"
 
     Scenario: QA5 Quick Access queue properly updating
 
@@ -222,8 +222,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "biscuit (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "biscuit5"
 
     Scenario: QA6 Quick Access queue properly updating
 
@@ -237,8 +237,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "bread (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "bread5"
 
     Scenario: QA7 Quick Access queue properly updating
 
@@ -252,8 +252,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "broth (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "broth5"
 
     Scenario: QA8 Quick Access queue properly updating
 
@@ -267,8 +267,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "burger (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "burger5"
 
     Scenario: QA9 Quick Access queue properly updating
 
@@ -282,8 +282,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "butter (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "butter5"
 
     Scenario: QA10 Quick Access queue properly updating
 
@@ -297,8 +297,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cake (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cake5"
 
     Scenario: QA11 Quick Access queue properly updating
 
@@ -312,8 +312,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "candy (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "candy5"
 
     Scenario: QA12 Quick Access queue properly updating
 
@@ -327,8 +327,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "caramel (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "caramel5"
 
     Scenario: QA13 Quick Access queue properly updating
 
@@ -342,8 +342,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "caviar (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "caviar5"
 
     Scenario: QA14 Quick Access queue properly updating
 
@@ -357,8 +357,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cheese (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cheese5"
 
     Scenario: QA15 Quick Access queue properly updating
 
@@ -372,8 +372,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "chili (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "chili5"
 
     Scenario: QA16 Quick Access queue properly updating
 
@@ -387,8 +387,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "chocolate (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "chocolate5"
 
     Scenario: QA17 Quick Access queue properly updating
 
@@ -402,8 +402,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cider (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cider5"
 
     Scenario: QA18 Quick Access queue properly updating
 
@@ -417,8 +417,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cobbler (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cobbler5"
 
     Scenario: QA19 Quick Access queue properly updating
 
@@ -432,8 +432,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cocoa (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cocoa5"
 
     Scenario: QA20 Quick Access queue properly updating
 
@@ -447,8 +447,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "coffee (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "coffee5"
 
     Scenario: QA21 Quick Access queue properly updating
 
@@ -462,8 +462,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cookie (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cookie5"
 
     Scenario: QA22 Quick Access queue properly updating
 
@@ -477,8 +477,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cream (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cream5"
 
     Scenario: QA23 Quick Access queue properly updating
 
@@ -492,8 +492,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "croissant (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "croissant5"
 
     Scenario: QA24 Quick Access queue properly updating
 
@@ -507,8 +507,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "crumble (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "crumble5"
 
     Scenario: QA25 Quick Access queue properly updating
 
@@ -522,8 +522,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "cuisine (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "cuisine5"
 
     Scenario: QA26 Quick Access queue properly updating
 
@@ -537,8 +537,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "curd (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "curd5"
 
     Scenario: QA27 Quick Access queue properly updating
 
@@ -552,8 +552,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "dessert (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "dessert5"
 
     Scenario: QA28 Quick Access queue properly updating
 
@@ -567,8 +567,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "dish (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "dish5"
 
     Scenario: QA29 Quick Access queue properly updating
 
@@ -582,8 +582,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "drink (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "drink5"
 
     Scenario: QA30 Quick Access queue properly updating
 
@@ -597,8 +597,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "eggs (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "eggs5"
 
     Scenario: QA31 Quick Access queue properly updating
 
@@ -612,8 +612,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "entree (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "entree5"
 
     Scenario: QA32 Quick Access queue properly updating
 
@@ -627,8 +627,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "filet (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "filet5"
 
     Scenario: QA33 Quick Access queue properly updating
 
@@ -642,8 +642,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "fish (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "fish5"
 
     Scenario: QA34 Quick Access queue properly updating
 
@@ -657,8 +657,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "flour (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "flour5"
 
     Scenario: QA35 Quick Access queue properly updating
 
@@ -672,8 +672,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "foie gras (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "foie gras5"
 
     Scenario: QA36 Quick Access queue properly updating
 
@@ -687,8 +687,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "food (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "food5"
 
     Scenario: QA37 Quick Access queue properly updating
 
@@ -702,8 +702,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "glaze (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "glaze5"
 
     Scenario: QA38 Quick Access queue properly updating
 
@@ -717,8 +717,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "grill (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "grill5"
 
     Scenario: QA39 Quick Access queue properly updating
 
@@ -732,8 +732,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "hamburger (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "hamburger5"
 
     Scenario: QA40 Quick Access queue properly updating
 
@@ -747,8 +747,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "ice (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "ice5"
 
     Scenario: QA41 Quick Access queue properly updating
 
@@ -762,8 +762,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "juice (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "juice5"
 
     Scenario: QA42 Quick Access queue properly updating
 
@@ -777,8 +777,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "ketchup (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "ketchup5"
 
     Scenario: QA43 Quick Access queue properly updating
 
@@ -792,8 +792,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "kitchen (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "kitchen5"
 
     Scenario: QA44 Quick Access queue properly updating
 
@@ -807,8 +807,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "lard (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "lard5"
 
     Scenario: QA45 Quick Access queue properly updating
 
@@ -822,8 +822,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "liquor (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "liquor5"
 
     Scenario: QA46 Quick Access queue properly updating
 
@@ -837,8 +837,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "margarine (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "margarine5"
 
     Scenario: QA47 Quick Access queue properly updating
 
@@ -852,8 +852,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "marinade (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "marinade5"
 
     Scenario: QA48 Quick Access queue properly updating
 
@@ -867,8 +867,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "mayo (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "mayo5"
 
     Scenario: QA49 Quick Access queue properly updating
 
@@ -882,8 +882,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "mayonnaise (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "mayonnaise5"
 
     Scenario: QA50 Quick Access queue properly updating
 
@@ -897,8 +897,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "meat (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "meat5"
 
     Scenario: QA51 Quick Access queue properly updating
 
@@ -912,8 +912,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "milk (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "milk5"
 
     Scenario: QA52 Quick Access queue properly updating
 
@@ -927,8 +927,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "mousse (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "mousse5"
 
     Scenario: QA53 Quick Access queue properly updating
 
@@ -942,8 +942,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "muffin (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "muffin5"
 
     Scenario: QA54 Quick Access queue properly updating
 
@@ -957,8 +957,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "mushroom (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "mushroom5"
 
     Scenario: QA55 Quick Access queue properly updating
 
@@ -972,8 +972,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "noodle (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "noodle5"
 
     Scenario: QA56 Quick Access queue properly updating
 
@@ -987,8 +987,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "nut (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "nut5"
 
     Scenario: QA57 Quick Access queue properly updating
 
@@ -1002,8 +1002,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "oil (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "oil5"
 
     Scenario: QA58 Quick Access queue properly updating
 
@@ -1017,8 +1017,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "olive (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "olive5"
 
     Scenario: QA59 Quick Access queue properly updating
 
@@ -1032,8 +1032,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "omelette (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "omelette5"
 
     Scenario: QA60 Quick Access queue properly updating
 
@@ -1047,8 +1047,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "pan (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "pan5"
 
     Scenario: QA61 Quick Access queue properly updating
 
@@ -1062,8 +1062,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "pasta (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "pasta5"
 
     Scenario: QA62 Quick Access queue properly updating
 
@@ -1077,8 +1077,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "paste (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "paste5"
 
     Scenario: QA63 Quick Access queue properly updating
 
@@ -1092,8 +1092,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "pastry (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "pastry5"
 
     Scenario: QA64 Quick Access queue properly updating
 
@@ -1107,8 +1107,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "pie (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "pie5"
 
     Scenario: QA65 Quick Access queue properly updating
 
@@ -1122,8 +1122,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "pizza (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "pizza5"
 
     Scenario: QA66 Quick Access queue properly updating
 
@@ -1137,8 +1137,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "plate (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "plate5"
 
     Scenario: QA67 Quick Access queue properly updating
 
@@ -1152,8 +1152,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "pot (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "pot5"
 
     Scenario: QA68 Quick Access queue properly updating
 
@@ -1167,8 +1167,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "poutine (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "poutine5"
 
     Scenario: QA69 Quick Access queue properly updating
 
@@ -1182,8 +1182,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "pudding (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "pudding5"
 
     Scenario: QA70 Quick Access queue properly updating
 
@@ -1197,8 +1197,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "raclette (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "raclette5"
 
     Scenario: QA71 Quick Access queue properly updating
 
@@ -1212,8 +1212,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "recipe (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "recipe5"
 
     Scenario: QA72 Quick Access queue properly updating
 
@@ -1227,8 +1227,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "rice (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "rice5"
 
     Scenario: QA73 Quick Access queue properly updating
 
@@ -1242,8 +1242,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "salad (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "salad5"
 
     Scenario: QA74 Quick Access queue properly updating
 
@@ -1257,8 +1257,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "salsa (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "salsa5"
 
     Scenario: QA75 Quick Access queue properly updating
 
@@ -1272,8 +1272,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "sandwich (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "sandwich5"
 
     Scenario: QA76 Quick Access queue properly updating
 
@@ -1287,8 +1287,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "sauce (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "sauce5"
 
     Scenario: QA77 Quick Access queue properly updating
 
@@ -1302,8 +1302,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "seasoning (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "seasoning5"
 
     Scenario: QA78 Quick Access queue properly updating
 
@@ -1317,8 +1317,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "skillet (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "skillet5"
 
     Scenario: QA79 Quick Access queue properly updating
 
@@ -1332,8 +1332,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "soda (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "soda5"
 
     Scenario: QA80 Quick Access queue properly updating
 
@@ -1347,8 +1347,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "soup (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "soup5"
 
     Scenario: QA81 Quick Access queue properly updating
 
@@ -1362,8 +1362,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "soy (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "soy5"
 
     Scenario: QA82 Quick Access queue properly updating
 
@@ -1377,8 +1377,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "spice (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "spice5"
 
     Scenario: QA83 Quick Access queue properly updating
 
@@ -1392,8 +1392,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "steak (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "steak5"
 
     Scenario: QA84 Quick Access queue properly updating
 
@@ -1407,8 +1407,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "stew (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "stew5"
 
     Scenario: QA85 Quick Access queue properly updating
 
@@ -1422,8 +1422,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "syrup (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "syrup5"
 
     Scenario: QA86 Quick Access queue properly updating
 
@@ -1437,8 +1437,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "tartar (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "tartar5"
 
     Scenario: QA87 Quick Access queue properly updating
 
@@ -1452,8 +1452,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "taste (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "taste5"
 
     Scenario: QA88 Quick Access queue properly updating
 
@@ -1467,8 +1467,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "tea (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "tea5"
 
     Scenario: QA89 Quick Access queue properly updating
 
@@ -1482,8 +1482,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "toast (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "toast5"
 
     Scenario: QA90 Quick Access queue properly updating
 
@@ -1497,8 +1497,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "vinegar (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "vinegar5"
 
     Scenario: QA91 Quick Access queue properly updating
 
@@ -1512,8 +1512,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "waffle (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "waffle5"
 
     Scenario: QA92 Quick Access queue properly updating
 
@@ -1527,8 +1527,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "water (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "water5"
 
     Scenario: QA93 Quick Access queue properly updating
 
@@ -1542,8 +1542,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "wheat (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "wheat5"
 
     Scenario: QA94 Quick Access queue properly updating
 
@@ -1557,8 +1557,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "wine (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "wine5"
 
     Scenario: QA95 Quick Access queue properly updating
 
@@ -1572,8 +1572,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "wok (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "wok5"
 
     Scenario: QA96 Quick Access queue properly updating
 
@@ -1587,8 +1587,8 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "yeast (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "yeast5"
 
     Scenario: QA97 Quick Access queue properly updating
 
@@ -1602,5 +1602,5 @@ Background:
         When I enter "5" in the integer box
         And I press Im Hungry
 
-        Then Quickaccess index for "Tomato (16)" should be "0"
-        Then Quickaccess should not have "yogurt (5)"
+        Then Quickaccess index for "Tomato16" should be "0"
+        Then Quickaccess should not have "yogurt5"
