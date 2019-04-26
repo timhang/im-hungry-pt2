@@ -72,7 +72,18 @@ public class RestAPI {
 	public static ArrayList<Integer> getCurrentRestIds() {
 		return currentRestIds;
 	}
-
+	
+	public static ArrayList<Integer> afterRadius(ArrayList<Integer> beforeRadius, String radius){
+		double radiusD = Double.parseDouble(radius);
+		ArrayList<Integer> resultsList = new ArrayList<Integer>();
+		for(int i = 0; i < beforeRadius.size(); i++) {
+			if(allRestaurants.get(beforeRadius.get(i)).getDistance()<=radiusD){
+				resultsList.add(beforeRadius.get(i));
+			}
+		}
+		return resultsList;
+	}
+	
 	public static ArrayList<Integer> listInclusions(int num) {
 		//Items to include in the list to be displayed on resultsPage
 		ArrayList<Integer> resultsList = new ArrayList<Integer>();
@@ -194,7 +205,8 @@ public class RestAPI {
 		}
 	}
 
-	private static String travelTime(double lat1, double lon1, double lat2, double lon2, String key) throws Exception {
+	private static Restaurant travelTime(double lat1, double lon1, double lat2, double lon2, String key) throws Exception {
+		Restaurant tempRest = new Restaurant(1);
 		
 		//API call to Google Map to get driving time between two coordinates
 		String link = "https://maps.googleapis.com/maps/api/directions/json?origin=";
@@ -218,11 +230,53 @@ public class RestAPI {
 
 		String travelTime = myResponse.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0)
 				.getJSONObject("duration").getString("text");
-		System.out.println(travelTime);
-
-		return travelTime;
+		String distance = myResponse.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0)
+				.getJSONObject("distance").getString("text");
+		tempRest.setTravelTime(travelTime);
+		try {
+			String[] splitStr = distance.trim().split("\\s+");
+			double dist = Double.parseDouble(splitStr[0]);
+			tempRest.setDistance(dist);
+			System.out.println("Distance: " + dist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//System.out.println(travelTime);
+		
+		return tempRest;
 	}
-
+	
+//	private static String distrance(double lat1, double lon1, double lat2, double lon2, String key) throws Exception {
+//		
+//		//API call to Google Map to get driving time between two coordinates
+//		String link = "https://maps.googleapis.com/maps/api/directions/json?origin=";
+//		URL obj = new URL(link + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&key=" + key);
+//		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//		con.setRequestMethod("GET");
+//		int responseCode = con.getResponseCode();
+//
+//		System.out.println("\nSending 'GET' request to URL : " + link + lat1 + "," + lon1 + "&destination=" + lat2 + ","
+//				+ lon2 + "&key=" + key);
+//		System.out.println("Response Code : " + responseCode);
+//
+//		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//		String inputLine;
+//		StringBuffer response = new StringBuffer();
+//		while ((inputLine = in.readLine()) != null) {
+//			response.append(inputLine);
+//		}
+//		in.close();
+//		JSONObject myResponse = new JSONObject(response.toString());
+//
+//		String travelTime = myResponse.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0)
+//				.getJSONObject("duration").getString("text");
+//		System.out.println(travelTime);
+//
+//		return travelTime;
+//	}
+	
+	
+	
 	public static HashMap<Integer, Restaurant> call_me(String searchTerm, int resultLimit) throws Exception {
 		//This is the API call where we search restaurant closest to Tommy Trojan using the search query and 
 		//Display information such as name rating, time, and address etc.
@@ -283,12 +337,13 @@ public class RestAPI {
 
 			//Calling Google Map API to get driving time between two coordinates
 			//Use your own google map API key for the key parameter in travelTime()
-			String newTravelTime = travelTime(34.0224, -118.2851, newRest.getLatitude(), newRest.getLongitude(),
+			Restaurant tempRest = travelTime(34.0224, -118.2851, newRest.getLatitude(), newRest.getLongitude(),
 					"AIzaSyA8VQVUyJJIhDwm2hKITkLeCqUqyiL9Y1w");
 
 
-			newRest.setTravelTime(newTravelTime);
-			
+			newRest.setTravelTime(tempRest.getTravelTime());
+			newRest.setDistance(tempRest.getDistance());
+
 			//Adding to map
 			newRests.put(test2.getInt("id"), newRest);
 			newRestIDs.add(test2.getInt("id"));

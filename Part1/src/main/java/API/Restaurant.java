@@ -64,6 +64,10 @@ public class Restaurant {
 		this.travelTime = travelTime;
 	}
 
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	
 	public int getID() {
 		return this.id;
 	}
@@ -115,6 +119,10 @@ public class Restaurant {
 	public Boolean getToExplore() {
 		return toExplore;
 	}
+	
+	public double getDistance() {
+		return distance;
+	}
 
 	private int id;
 	private String travelTime;
@@ -122,6 +130,7 @@ public class Restaurant {
 	private double latitude;
 	private double longitude;
 	private double priceRange;
+	private double distance;
 	private String name;
 	private String address;
 	private String url;

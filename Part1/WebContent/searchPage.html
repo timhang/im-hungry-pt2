@@ -159,6 +159,7 @@
 		function myFunction() {
 			var searchText = document.getElementById('searchText').value;
 			var intNum = document.getElementById('integerBox').value;
+			var radius = document.getElementById('radius').value;
 			var pageNumber = 1;
 			console.log(document.getElementById('integerBox').value);
 			if (searchText === "" || searchText === null) {
@@ -174,19 +175,31 @@
 				//alert("Please enter an integer value greater than 0");
 				return false;
 			}
+			if (radius === "" || radius === null || radius === "0" || radius === 0) {
+				sessionStorage.setItem('radius',null);
+			} else {
+				sessionStorage.setItem('radius', radius);
+			}
+			
+			
 
 			document.getElementById('feedMeButton')
 					.setAttribute("id", "smiley");
 
 			sessionStorage.setItem('searchText', searchText);
 			sessionStorage.setItem('intNum', document.getElementById('integerBox').value);
+			
 
 			return true;
 		}
 		setInputFilter(document.getElementById("integerBox"), function(value) {
 			return /^\d*$/.test(value);
 		});
-		/* function that responses to user input */
+		
+		setInputFilter(document.getElementById("radius"), function(value) {
+			return /^\d*$/.test(value);
+		});
+		/* responses to user input */
 		function setInputFilter(textbox, inputFilter) {
 			[ "input", "keydown", "keyup", "mousedown", "mouseup", "select",
 					"contextmenu", "drop" ].forEach(function(event) {

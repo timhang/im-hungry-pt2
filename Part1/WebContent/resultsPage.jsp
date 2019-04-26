@@ -167,7 +167,12 @@
 
 								HashMap<Integer, Recipe> allRecipes = RecipeAPI.getRecipeMap();
 								HashMap<Integer, Restaurant> allRestaurants = RestAPI.getRestaurantMap();
-
+								if(request.getParameter("radius")!=null){
+									if(!request.getParameter("radius").isEmpty()){
+										System.out.println("RADIUS: "+request.getParameter("radius"));
+										restIDs = RestAPI.afterRadius(restIDs, request.getParameter("radius"));
+									}
+								}
 								int size = Math.max(restIDs.size(), recipeIds.size());
 								for (int i = startIndex; i < endIndex; i++) {
 								//for (int i = 0; i < size; i++) {
@@ -179,6 +184,7 @@
 										double rating = allRestaurants.get(restId).getRating();
 										String travelTime = allRestaurants.get(restId).getTravelTime();
 										String link = "restPage.jsp?restaurantId=" + restId;
+										double distance = allRestaurants.get(restId).getDistance();
 							%>
 
 							<tr>
@@ -199,7 +205,8 @@
 											Driving Time:
 											<%=travelTime%></div>
 										<div class="radius">
-											Radius:
+											Distance: 
+											<%=distance%> mi
 											</div>
 									</div></td>
 								<%
