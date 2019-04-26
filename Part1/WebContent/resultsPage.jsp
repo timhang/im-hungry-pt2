@@ -33,9 +33,43 @@
 	display: inline-block;
 }
 </style>
+
 </head>
 
 <body>
+	<script type='text/javascript'>
+		verifyLogin();
+		function verifyLogin() {
+
+			// construct json
+			var json = {
+				"username" : sessionStorage.getItem("username"),
+				"password" : sessionStorage.getItem("password"),
+			};
+
+			console.log(json);
+
+			// inform backend
+			//$.post("Login", json);
+			var isLogged = false;
+			$.ajax({
+				async : false,
+				type : "POST",
+				url : "Login",
+				data : json,
+				success : function(resp) {
+					isLogged = (resp == "0");
+					console.log(isLogged);
+					if (isLogged == false) {
+						document.location.href = 'login.html';
+					}
+
+				}
+			});
+
+			return isLogged;
+		}
+	</script>
 	<div class="container-fluid">
 		<!-- Row for photo collage and buttons -->
 		<div class="row">
@@ -50,19 +84,21 @@
 				<div class='row'>
 					<div class='col-lg-12'>
 						<%
-							for (int i = 0; i < imgArr.size() / 2; i++) {
-								out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
-										+ imgArr.get(i) + "></div>");
-							}
+							if(imgArr != null){
+								for (int i = 0; i < imgArr.size() / 2; i++) {
+									out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
+											+ imgArr.get(i) + "></div>");
+								}
 						%>
 					</div>
 				</div>
 				<!-- Second row of images -->
 				<div class='row'>
 					<%
-						for (int i = imgArr.size() / 2; i < imgArr.size(); i++) {
-							out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
-									+ imgArr.get(i) + "></div>");
+							for (int i = imgArr.size() / 2; i < imgArr.size(); i++) {
+								out.println("<div style = display:inline-block id = img" + (i + 1) + "><img id = insideImg src = "
+										+ imgArr.get(i) + "></div>");
+							}
 						}
 					%>
 				</div>
@@ -340,7 +376,8 @@
 
 									for(let i = 0; i < obj.length; i++){
 										var quickAccessDiv = document.createElement("DIV");
-										quickAccessDiv.setAttribute("id", obj[i].searchTerm);
+										var id = obj[i].searchTerm + obj[i].integer;
+										quickAccessDiv.setAttribute("id", id);
 										quickAccessDiv.setAttribute("class", "searchTermClass");
 										quickAccessDiv.addEventListener('click', function(){
 											quickAccessReloadPage(obj[i].searchTerm, obj[i].integer);
@@ -348,7 +385,7 @@
 
 										var textDiv = document.createElement("h1");
 										textDiv.setAttribute("class", "searchTermText");
-										textDiv.textContent = obj[i].searchTerm + " (" + obj[i].integer + ")";
+										textDiv.textContent = obj[i].searchTerm;
 										textDiv.style.left = 20
 
 										var myDiv = document.createElement("div");
@@ -482,13 +519,14 @@
 			newNode.innerHTML = html;
 			return newNode;
 		} 
-		var xhttp = new XMLHttpRequest();
+		/* var xhttp = new XMLHttpRequest();
 		xhttp.open("GET", "QuickAccess", false);
 		xhttp.send();
-		var obj = JSON.parse(xhttp.responseText);
+		var obj = JSON.parse(xhttp.responseText); */
 		for(let i = 0; i < obj.length; i++){
+			var id1 = obj[i].searchTerm + obj[i].integer;
 			var node = createCollage(obj[i].searchTerm);
-			document.getElementById(obj[i].searchTerm).prepend(node)
+			document.getElementById(id1).prepend(node)
 		}
 
 	</script>

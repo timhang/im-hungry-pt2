@@ -44,19 +44,24 @@ CREATE TABLE Recipe(
 
 CREATE TABLE RestaurantRelations(
 	sessionFkID INT (11) NOT NULL,
-    restaurantFkID INT (11) NOT NULL,
-    FOREIGN KEY (sessionFkID) REFERENCES Sessions(sessionID),
-    FOREIGN KEY (restaurantFkID) REFERENCES Restaurant(restaurantID)
+    restaurantFkID INT (11) NOT NULL
+    
 );
 
 CREATE TABLE RecipeRelations(
 	sessionFkID INT (11) NOT NULL,
-    recipeFkID INT (11) NOT NULL,
-    FOREIGN KEY (sessionFkID) REFERENCES Sessions(sessionID),
-    FOREIGN KEY (recipeFkID) REFERENCES Recipe(recipeID)
+    recipeFkID INT (11) NOT NULL
+    
 );
 
 CREATE TABLE GroceryList(
 	groceryItem VARCHAR(30) UNIQUE NOT NULL
 
+)
+
+CREATE TABLE Users (
+	userID int(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	username VARCHAR(50) UNIQUE NOT NULL,
+	userpass VARCHAR(260) NOT NULL,
+	isLogged INT(3) NOT NULL
 )

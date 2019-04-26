@@ -35,7 +35,39 @@ body {
 </head>
 <body>
 	<!-- this function populates favorite list data -->
-	
+		<script type='text/javascript'>
+		verifyLogin();
+		function verifyLogin() {
+
+			// construct json
+			var json = {
+				"username" : sessionStorage.getItem("username"),
+				"password" : sessionStorage.getItem("password"),
+			};
+
+			console.log(json);
+
+			// inform backend
+			//$.post("Login", json);
+			var isLogged = false;
+			$.ajax({
+				async : false,
+				type : "POST",
+				url : "Login",
+				data : json,
+				success : function(resp) {
+					isLogged = (resp == "0");
+					console.log(isLogged);
+					if (isLogged == false) {
+						document.location.href = 'login.html';
+					}
+
+				}
+			});
+
+			return isLogged;
+		}
+	</script>
 	<div class="container-fluid">
 		
 		<div class="row" style = "padding: 60px 0px;">
