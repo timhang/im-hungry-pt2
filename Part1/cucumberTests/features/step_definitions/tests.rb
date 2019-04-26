@@ -1,7 +1,10 @@
 
 # SEARCHPAGE RUBY TESTS
 Given(/^I am on searchPage$/) do
-	visit "http://localhost:8080/ImHungry/searchPage.html"
+	visit "http://localhost:8080/ImHungry/login.html"
+	fill_in 'email', :with=> "Barack"
+	fill_in 'password', :with=> "password"
+	find('#submit').click
 	
 end
 
