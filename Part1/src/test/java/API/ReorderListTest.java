@@ -28,7 +28,6 @@ public class ReorderListTest {
 			assertEquals("First item not match", jsonArr1.getJSONObject(0).getInt("id"),559251);
 			assertEquals("Second item not match", jsonArr1.getJSONObject(1).getInt("id"),222869);
 			assertEquals("Third item not match", jsonArr1.getJSONObject(2).getInt("id"),16836104);
-			assertEquals("Fourth item not match", jsonArr1.getJSONObject(3).getInt("id"),16819485);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -45,7 +44,6 @@ public class ReorderListTest {
 			assertEquals("First item not match", jsonArr1.getJSONObject(0).getInt("id"),559251);
 			assertEquals("Second item not match", jsonArr1.getJSONObject(1).getInt("id"),222869);
 			assertEquals("Third item not match", jsonArr1.getJSONObject(2).getInt("id"),16836104);
-			assertEquals("Fourth item not match", jsonArr1.getJSONObject(3).getInt("id"),16819485);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -62,7 +60,6 @@ public class ReorderListTest {
 			assertEquals("First item not match", jsonArr1.getJSONObject(0).getInt("id"),559251);
 			assertEquals("Second item not match", jsonArr1.getJSONObject(1).getInt("id"),222869);
 			assertEquals("Third item not match", jsonArr1.getJSONObject(2).getInt("id"),16836104);
-			assertEquals("Fourth item not match", jsonArr1.getJSONObject(3).getInt("id"),16819485);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -115,7 +112,7 @@ public class ReorderListTest {
 			// testObj.getQuickAccess().isEmpty());
 			String json = testObj.getList("fav");
 			JSONArray jsonArr = new JSONArray(json);
-			assertEquals("Mismatch on fav list", jsonArr.length(), 5);
+			assertEquals("Mismatch on fav list", jsonArr.length(), 4);
 			
 			
 		} catch (Exception e) {
@@ -126,7 +123,7 @@ public class ReorderListTest {
 		try {
 			String json = testObj.getList("toExplore");
 			JSONArray jsonArr = new JSONArray(json);
-			assertEquals("Mismatch on to explore list", jsonArr.length(), 5);
+			assertEquals("Mismatch on to explore list", jsonArr.length(), 4);
 			
 			
 		} catch (Exception e) {
@@ -136,7 +133,7 @@ public class ReorderListTest {
 		try {
 			String json = testObj.getList("doNotShow");
 			JSONArray jsonArr = new JSONArray(json);
-			assertEquals("Mismatch on do not show list", jsonArr.length(), 5);
+			assertEquals("Mismatch on do not show list", jsonArr.length(), 4);
 			
 			
 		} catch (Exception e) {
