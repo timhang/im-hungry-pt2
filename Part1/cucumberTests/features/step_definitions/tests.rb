@@ -161,6 +161,8 @@ When(/^I click the dropdown$/) do
 end
 
 When(/^I click the dropdown in the page$/) do
+	puts "HI"
+	sleep(10)
 	find('#listSelect').click
 end
 
@@ -257,8 +259,23 @@ end
 # Change order
 
 Given(/^I am on favorites page$/) do
-	visit "http://localhost:8080/ImHungry/lists.html"
-	# visit "http://food.hiddetek.com/sort"
+	visit "http://localhost:8080/ImHungry/login.html"
+	fill_in 'email', :with=> "Barack"
+	fill_in 'password', :with=> "password"
+	find('#submit').click
+
+	fill_in "searchText", :with=> "pizza"
+	find("#feedMeButton").click
+
+
+	
+	find('#mySelect').click
+	first('option', :text => "Favorites").select_option
+	find('#mySelect').click
+	find('button', :text => "Manage List").click
+
+	# visit "http://localhost:8080/ImHungry/lists.html?q=fav"
+	
 end
 
 When(/^move item "([^"]*)" to position "([^"]*)$/) do |arg1, arg2|
@@ -268,8 +285,13 @@ When(/^move item "([^"]*)" to position "([^"]*)$/) do |arg1, arg2|
 end
 
 And("move item {string} down {string} position") do |arg1, arg2|
+	
 	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: #{arg2} });")
-	sleep(1)
+	
+	sleep(5)
+	s = evaluate_script("$(\"#item#{arg1}\").index()")
+	puts s
+	
 end
 
 Then("wait {string}") do |arg1|
@@ -279,7 +301,7 @@ end
 
 And("move item {string} up {string} position") do |arg1, arg2|
 	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: -#{arg2} });")
-	sleep(1)
+	sleep(5)
 end
 
 Then("item {string} should be in position {string}") do |arg1, arg2|
@@ -291,6 +313,8 @@ end
 
 And("refresh") do
 	refresh
+	sleep(2)
+	visit("http://localhost:8080/ImHungry/lists.html?q=fav")
 end
 
 Then("each restaurant must have {string} element") do |arg1|
@@ -327,6 +351,8 @@ When("I click add to grocery list on ingredient {string}") do |i|
 	find("#ingredient#{i}").click
 	help.add( find("#ingredient#{i}").value )
 	ingredient = find("#ingredient#{i}").value
+
+	sleep(10)
 
 end
 
