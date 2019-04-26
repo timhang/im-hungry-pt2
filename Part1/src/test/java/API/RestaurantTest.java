@@ -20,11 +20,14 @@ public class RestaurantTest {
 		assertEquals("Mismatch on rest name", testObj2.getName(), "Top Restaurant");
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testSetAddress() {
 		Restaurant testObj3 = new Restaurant(3);
 		testObj3.setAddress("1234");
+		testObj3.setDistance(5);
 		assertEquals("Mismatch on address", testObj3.getAddress(), "1234");
+		assertEquals("Mismatch on address",(testObj3.getDistance()), 5);
 	}
 
 	@Test
@@ -47,5 +50,6 @@ public class RestaurantTest {
 		Assert.assertEquals("Mismatch on latitude", testObj5.getLatitude(), 1.0, 0.0);
 		Assert.assertEquals("Mismatch on longitude", testObj5.getLongitude(), 2.0, 0.0);
 	}
-
 }
+	
+
