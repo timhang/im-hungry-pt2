@@ -112,7 +112,7 @@ public class ReorderListTest {
 			// testObj.getQuickAccess().isEmpty());
 			String json = testObj.getList("fav");
 			JSONArray jsonArr = new JSONArray(json);
-			assertEquals("Mismatch on fav list", jsonArr.length(), 4);
+			assertEquals("Mismatch on fav list", jsonArr.length(), 5);
 			
 			
 		} catch (Exception e) {
@@ -123,7 +123,7 @@ public class ReorderListTest {
 		try {
 			String json = testObj.getList("toExplore");
 			JSONArray jsonArr = new JSONArray(json);
-			assertEquals("Mismatch on to explore list", jsonArr.length(), 4);
+			assertEquals("Mismatch on to explore list", jsonArr.length(), 5);
 			
 			
 		} catch (Exception e) {
@@ -133,7 +133,7 @@ public class ReorderListTest {
 		try {
 			String json = testObj.getList("doNotShow");
 			JSONArray jsonArr = new JSONArray(json);
-			assertEquals("Mismatch on do not show list", jsonArr.length(), 4);
+			assertEquals("Mismatch on do not show list", jsonArr.length(), 5);
 			
 			
 		} catch (Exception e) {

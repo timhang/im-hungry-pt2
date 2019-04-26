@@ -66,41 +66,6 @@ Feature: Radius Tests
         Then each restaurant must have "radius" element
         Then radius must be less than "30"
         
-    Scenario: S7 - radius
-        When I enter "aroma" in the search box
-        When I enter "20" in the integer box
-        When I enter "35" in the radius box
-        And I press Im Hungry
 
-        Then each restaurant must have "radius" element
-        Then radius must be less than "35"
-        
-    Scenario: S8 - radius
-        When I enter "aroma" in the search box
-        When I enter "20" in the integer box
-        When I enter "40" in the radius box
-        And I press Im Hungry
-
-        Then each restaurant must have "radius" element
-        Then radius must be less than "40"
-        
-    Scenario: S9 - radius
-        When I enter "aroma" in the search box
-        When I enter "20" in the integer box
-        When I enter "45" in the radius box
-        And I press Im Hungry
-
-        Then each restaurant must have "radius" element
-        Then radius must be less than "45"
-        
-    Scenario: S10 - radius
-        When I enter "aroma" in the search box
-        When I enter "20" in the integer box
-        When I enter "50" in the radius box
-        And I press Im Hungry
-
-        Then each restaurant must have "radius" element
-        Then radius must be less than "50"
-        
 
         

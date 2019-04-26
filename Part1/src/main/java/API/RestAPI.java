@@ -14,7 +14,8 @@ import org.json.JSONObject;
 
 public class RestAPI {
 	//Register for a free Zomato API key on their website
-	private static final String apiKey = "f8d9f9d39a43e6ec63538a5356043b36";
+	//private static final String apiKey = "f8d9f9d39a43e6ec63538a5356043b36";
+	private static final String apiKey = "55baa8b34fff1bd16e4127f326bbae56";
 	
 	//This is the Zomato API we are calling to get restaurant informations
 	private static final String bulkURL = "https://developers.zomato.com/api/v2.1/search?entity_id=195071&entity_type=landmark";

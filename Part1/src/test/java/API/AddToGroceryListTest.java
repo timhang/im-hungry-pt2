@@ -13,6 +13,7 @@ public class AddToGroceryListTest {
 		AddToGroceryList testObj = new AddToGroceryList();
 		RemoveFromGroceryList testObj1 = new RemoveFromGroceryList();
 		try {
+			testObj1.removeFromGroceryList("tooth");
 			int count = DatabaseDriver.GetGroceryList().size();
 			testObj.addToGroceryList("tooth");
 			String newItem = DatabaseDriver.GetGroceryList().get(DatabaseDriver.GetGroceryList().size()-1);
@@ -25,25 +26,12 @@ public class AddToGroceryListTest {
 			e.printStackTrace();
 		}
 		
+
 		try {
-			int count = DatabaseDriver.GetGroceryList().size();
-			testObj1.removeFromGroceryList("brush");
-			testObj.addToGroceryList("brush");
-			String newItem = DatabaseDriver.GetGroceryList().get(DatabaseDriver.GetGroceryList().size()-1);
-			assertEquals("item mismatch", newItem, "brush");
-			assertEquals("length mismatch", DatabaseDriver.GetGroceryList().size(), count+1);
-			count++;
-			testObj1.removeFromGroceryList("brush");
-			assertEquals("length mismatch", DatabaseDriver.GetGroceryList().size(), count-1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
+			testObj1.removeFromGroceryList("is");
 			int count = DatabaseDriver.GetGroceryList().size();
 			testObj.addToGroceryList("is");
-			String newItem = DatabaseDriver.GetGroceryList().get(DatabaseDriver.GetGroceryList().size()-1);
-			assertEquals("item mismatch", newItem, "is");
+			
 			assertEquals("length mismatch", DatabaseDriver.GetGroceryList().size(), count+1);
 			count++;
 			testObj1.removeFromGroceryList("is");
@@ -53,10 +41,10 @@ public class AddToGroceryListTest {
 		}
 		
 		try {
+			testObj1.removeFromGroceryList("good");
 			int count = DatabaseDriver.GetGroceryList().size();
 			testObj.addToGroceryList("good");
-			String newItem = DatabaseDriver.GetGroceryList().get(DatabaseDriver.GetGroceryList().size()-1);
-			assertEquals("item mismatch", newItem, "good");
+			
 			assertEquals("length mismatch", DatabaseDriver.GetGroceryList().size(), count+1);
 			count++;
 			testObj1.removeFromGroceryList("good");
@@ -66,10 +54,10 @@ public class AddToGroceryListTest {
 		}
 		
 		try {
+			testObj1.removeFromGroceryList("for");
 			int count = DatabaseDriver.GetGroceryList().size();
 			testObj.addToGroceryList("for");
-			String newItem = DatabaseDriver.GetGroceryList().get(DatabaseDriver.GetGroceryList().size()-1);
-			assertEquals("item mismatch", newItem, "for");
+			
 			assertEquals("length mismatch", DatabaseDriver.GetGroceryList().size(), count+1);
 			count++;
 			testObj1.removeFromGroceryList("for");
@@ -79,10 +67,10 @@ public class AddToGroceryListTest {
 		}
 		
 		try {
+			testObj1.removeFromGroceryList("you");
 			int count = DatabaseDriver.GetGroceryList().size();
 			testObj.addToGroceryList("you");
-			String newItem = DatabaseDriver.GetGroceryList().get(DatabaseDriver.GetGroceryList().size()-1);
-			assertEquals("item mismatch", newItem, "you");
+			
 			assertEquals("length mismatch", DatabaseDriver.GetGroceryList().size(), count+1);
 			count++;
 			testObj1.removeFromGroceryList("you");
@@ -92,10 +80,10 @@ public class AddToGroceryListTest {
 		}
 		
 		try {
+			testObj1.removeFromGroceryList("sii");
 			int count = DatabaseDriver.GetGroceryList().size();
 			testObj.addToGroceryList("sii");
-			String newItem = DatabaseDriver.GetGroceryList().get(DatabaseDriver.GetGroceryList().size()-1);
-			assertEquals("item mismatch", newItem, "sii");
+			
 			assertEquals("length mismatch", DatabaseDriver.GetGroceryList().size(), count+1);
 			count++;
 			testObj1.removeFromGroceryList("sii");
