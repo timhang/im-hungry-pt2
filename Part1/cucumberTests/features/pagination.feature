@@ -11,6 +11,8 @@ Feature: Pagination of results
 
 		Then I should see page button "1" in the page
 
+		And I click the "Return to Search Page" button
+
         When I enter "pizza" in the search box
         And I enter "11" in the integer box
         And I press Im Hungry
@@ -216,206 +218,206 @@ Feature: Pagination of results
 		Then I should see page button "6" in the page
 		Then I should see page button "7" in the page
 
-	Scenario: S8 - 8 pages
+	# Scenario: S8 - 8 pages
 
-		When I enter "pizza" in the search box
-		And I enter "40" in the integer box
-		And I press Im Hungry
+	# 	When I enter "pizza" in the search box
+	# 	And I enter "40" in the integer box
+	# 	And I press Im Hungry
 
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "2"
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	When I press page button "2"
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "3"
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	When I press page button "3"
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "4"
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
+	# 	When I press page button "4"
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
 
-		When I press page button "5"
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
+	# 	When I press page button "5"
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
 
-		When I press page button "6"
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
+	# 	When I press page button "6"
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
 
-		When I press page button "7"
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
+	# 	When I press page button "7"
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
 
-		When I press page button "8"
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
+	# 	When I press page button "8"
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
 
-	Scenario: S9 - 9 pages
+	# Scenario: S9 - 9 pages
 
-		When I enter "pizza" in the search box
-		And I enter "45" in the integer box
-		And I press Im Hungry
+	# 	When I enter "pizza" in the search box
+	# 	And I enter "45" in the integer box
+	# 	And I press Im Hungry
 
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "2"
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	When I press page button "2"
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "3"
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	When I press page button "3"
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "4"
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
+	# 	When I press page button "4"
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
 
-		When I press page button "5"
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
+	# 	When I press page button "5"
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
 
-		When I press page button "6"
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
+	# 	When I press page button "6"
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
 
-		When I press page button "7"
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
-		Then I should see page button "9" in the page
+	# 	When I press page button "7"
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
+	# 	Then I should see page button "9" in the page
 
-		When I press page button "8"
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
-		Then I should see page button "9" in the page
+	# 	When I press page button "8"
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
+	# 	Then I should see page button "9" in the page
 
-		When I press page button "9"
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
-		Then I should see page button "9" in the page
+	# 	When I press page button "9"
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
+	# 	Then I should see page button "9" in the page
 
-	Scenario: S10 - 10 pages
+	# Scenario: S10 - 10 pages
 
-		When I enter "pizza" in the search box
-		And I enter "50" in the integer box
-		And I press Im Hungry
+	# 	When I enter "pizza" in the search box
+	# 	And I enter "50" in the integer box
+	# 	And I press Im Hungry
 
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "2"
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	When I press page button "2"
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "3"
-		Then I should see page button "1" in the page
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
+	# 	When I press page button "3"
+	# 	Then I should see page button "1" in the page
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
 
-		When I press page button "4"
-		Then I should see page button "2" in the page
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
+	# 	When I press page button "4"
+	# 	Then I should see page button "2" in the page
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
 
-		When I press page button "5"
-		Then I should see page button "3" in the page
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
+	# 	When I press page button "5"
+	# 	Then I should see page button "3" in the page
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
 
-		When I press page button "6"
-		Then I should see page button "4" in the page
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
+	# 	When I press page button "6"
+	# 	Then I should see page button "4" in the page
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
 
-		When I press page button "7"
-		Then I should see page button "5" in the page
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
-		Then I should see page button "9" in the page
+	# 	When I press page button "7"
+	# 	Then I should see page button "5" in the page
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
+	# 	Then I should see page button "9" in the page
 
-		When I press page button "8"
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
-		Then I should see page button "9" in the page
-		Then I should see page button "10" in the page
+	# 	When I press page button "8"
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
+	# 	Then I should see page button "9" in the page
+	# 	Then I should see page button "10" in the page
 
-		When I press page button "9"
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
-		Then I should see page button "9" in the page
-		Then I should see page button "10" in the page
+	# 	When I press page button "9"
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
+	# 	Then I should see page button "9" in the page
+	# 	Then I should see page button "10" in the page
 
-		When I press page button "10"
-		Then I should see page button "6" in the page
-		Then I should see page button "7" in the page
-		Then I should see page button "8" in the page
-		Then I should see page button "9" in the page
-		Then I should see page button "10" in the page
+	# 	When I press page button "10"
+	# 	Then I should see page button "6" in the page
+	# 	Then I should see page button "7" in the page
+	# 	Then I should see page button "8" in the page
+	# 	Then I should see page button "9" in the page
+	# 	Then I should see page button "10" in the page
