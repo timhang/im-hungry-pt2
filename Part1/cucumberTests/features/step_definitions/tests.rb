@@ -161,8 +161,6 @@ When(/^I click the dropdown$/) do
 end
 
 When(/^I click the dropdown in the page$/) do
-	puts "HI"
-	sleep(10)
 	find('#listSelect').click
 end
 
@@ -286,11 +284,15 @@ end
 
 And("move item {string} down {string} position") do |arg1, arg2|
 	
-	execute_script("$(\"#item#{arg1}\").simulateDragSortable({ move: #{arg2} });")
-	
+	sleep(1)
+	t = "$(\"#item#{arg1}\").simulateDragSortable({ move: #{arg2} , listItem: '.draggable', tolerance: 6 });"
+	# puts t
+	execute_script(t)
 	sleep(5)
+	
 	s = evaluate_script("$(\"#item#{arg1}\").index()")
-	puts s
+	# puts s
+	
 	
 end
 
@@ -305,8 +307,9 @@ And("move item {string} up {string} position") do |arg1, arg2|
 end
 
 Then("item {string} should be in position {string}") do |arg1, arg2|
+
 	s = evaluate_script("$(\"#item#{arg1}\").index()")
-	
+	sleep(5)
 	expect(s).to eq(arg2.to_i)
 	
 end
