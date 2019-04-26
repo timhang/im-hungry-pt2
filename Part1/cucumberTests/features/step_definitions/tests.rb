@@ -325,7 +325,8 @@ Then("each restaurant must have {string} element") do |arg1|
 
 	page.all(".restaurant").each do |el|
 		
-		expect(el).to have_content(arg1)
+		# expect(el).to have_content(:css, ".#{arg1}")
+		el.should have_css('span.radius')
 	end
 end
 
@@ -333,8 +334,7 @@ Then("radius must be less than {string}") do |arg1|
 	# each div with class restaurant must have the radius element
 
 	page.all(".radius").each do |el|
-		
-		expect(el.text).to be <= arg1.to_i
+		expect(el.text.to_f).to be <= arg1.to_f
 	end
 end
 
