@@ -204,9 +204,9 @@
 										<div>
 											Driving Time:
 											<%=travelTime%></div>
-										<div class="radius">
+										<div>
 											Distance: 
-											<%=distance%> mi
+											<span class="radius"><%=distance%></span> mi
 											</div>
 									</div></td>
 								<%
