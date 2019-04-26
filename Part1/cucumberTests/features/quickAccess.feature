@@ -40,53 +40,36 @@ Background:
         When I enter "3" in the integer box
         And I press Im Hungry
 
+        Then I should see "3" search results for "soup"
         Then Quickaccess index for "apple (2)" should be "0"
         Then Quickaccess index for "Avocado (3)" should be "1"
         
         And I click Quickaccess index "0"
-        Then Quickaccess index for "apple (2)" should be "0"
-        Then Quickaccess index for "soup (3)" should be "1"
-        Then Quickaccess index for "Avocado (3)" should be "2"
-
-        And I click Quickaccess index "0"
-        Then Quickaccess index for "apple (2)" should be "0"
-        Then Quickaccess index for "soup (3)" should be "1"
-        Then Quickaccess index for "Avocado (3)" should be "2"
-
-        And I click Quickaccess index "1"
-        Then Quickaccess index for "soup (3)" should be "0"
-        Then Quickaccess index for "apple (2)" should be "1"
-        Then Quickaccess index for "Avocado (3)" should be "2"
-
-        And I click Quickaccess index "1"
-        Then Quickaccess index for "apple (2)" should be "0"
-        Then Quickaccess index for "soup (3)" should be "1"
-        Then Quickaccess index for "Avocado (3)" should be "2"
-
-        And I click Quickaccess index "1"
-        Then Quickaccess index for "soup (3)" should be "0"
-        Then Quickaccess index for "apple (2)" should be "1"
-        Then Quickaccess index for "Avocado (3)" should be "2"
-
-        And I click Quickaccess index "2"
-        Then Quickaccess index for "Avocado (3)" should be "0"
-        Then Quickaccess index for "apple (2)" should be "1"
-        Then Quickaccess index for "soup (3)" should be "2"
-
-        And I click Quickaccess index "2"
+        Then I should see "2" search results for "apple"
         Then Quickaccess index for "soup (3)" should be "0"
         Then Quickaccess index for "Avocado (3)" should be "1"
-        Then Quickaccess index for "apple (2)" should be "2"
 
-        And I click Quickaccess index "2"
+        And I click Quickaccess index "0"
+        Then I should see "3" search results for "soup"
         Then Quickaccess index for "apple (2)" should be "0"
-        Then Quickaccess index for "soup (3)" should be "1"
-        Then Quickaccess index for "Avocado (3)" should be "2"
+        Then Quickaccess index for "Avocado (3)" should be "1"
 
-        And I click Quickaccess index "2"
+        And I click Quickaccess index "1"
+        Then I should see "3" search results for "Avocado"
+        Then Quickaccess index for "soup (3)" should be "0"
+        Then Quickaccess index for "apple (2)" should be "1"
+        
+
+        And I click Quickaccess index "1"
+        Then I should see "2" search results for "apple"
         Then Quickaccess index for "Avocado (3)" should be "0"
         Then Quickaccess index for "soup (3)" should be "1"
-        Then Quickaccess index for "apple (2)" should be "2"
+
+        And I click Quickaccess index "1"
+        Then I should see "3" search results for "soup"
+        Then Quickaccess index for "apple (2)" should be "0"
+        Then Quickaccess index for "Avocado (3)" should be "1"
+
     
 
     Scenario: Pizza (5 results) and Pizza (1 result) should both appear as different searches in QA list
